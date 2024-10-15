@@ -11,6 +11,10 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
 };
 
+// router
+const indexRouter = require("./routes/index.js");
+const apiRouter = require("./routes/api/api.js");
+
 // react
 app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
@@ -19,6 +23,10 @@ app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// routing
+app.use("/", indexRouter);
+app.use("/api", apiRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
