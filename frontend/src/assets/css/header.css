@@ -6,7 +6,6 @@
     font-weight: 400;
     font-style: normal;
 }
-
 /*=========================================================
 	Header
 =========================================================*/
@@ -24,7 +23,8 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	padding-top: 1%;
+	padding-top: 1.5%;
+	margin: 0 10% 0 10%;
 }
 
 .header-container{
@@ -35,6 +35,8 @@
 .header-container a{
 	text-decoration: none;
 	color: inherit;
+	margin-right: 2%;
+	font-size: 1.3em;
 }
 
 .header-container:after{
@@ -51,13 +53,14 @@
 .menu-list{
 	/* margin-top: 0; */
 	padding-left: 0;
-	padding-top: 1.5%;
+	padding-top: 1.2%;
 }
 
 .menu-list li{
 	display: inline;
-	margin-left: 5%;
+	margin-left: 3%;
 	font-family: 'Pretendard-Regular';
+	font-size: 1.3em;
 }
 .menu-container{
 	align-items: center;
@@ -292,7 +295,7 @@
 	content:"";
 	width:186px;
 	height:3px;
-	/* background-image:url(../../images/bg/bg_underline.png); */
+	background-image:url(../images/bg_underline.png);
 	background-size:100% 3px;
 	display:block;
 }
@@ -307,24 +310,31 @@
 	}
 }
 
+#userFont{
+	margin-right: 5%;
+}
+
 .SiteFamily-text{
-	/* padding:8px 30px 8px 0; */
+	font-family: 'Pretendard-Regular';;
+	padding:8px 30px 8px 0;
 	display:block;
 	overflow:hidden;
 	white-space:nowrap;
 	text-overflow:ellipsis;
-	font-size:15px;
-	line-height:1.4em;
+	font-size:1rem;
+	/* line-height:1.4em; */
 	color:#000;
 	font-weight:500;
 	position:relative;
+	text-decoration: none;
+	width: 8.5vw;
 }
 
 .SiteFamily-text:after{
 	content:"";
 	width:10px;
 	height:5px;
-	/* background-image:url(../../images/icon/ico_family-arrow.svg); */
+	background-image:url(../images/ico_family-arrow.svg);
 	background-size:10px 5px;
 	position:absolute;
 	top:50%;
@@ -337,10 +347,13 @@
 	margin-top:15px;
 	padding: 20px 17px;
     background: #fff;
-	left:0;
+	/* left:0; */
 	right:0;
-	display:none;
-	border:2px solid #000;
+	display : none;
+	border:2.5px solid #000;
+	width: 8.5vw;
+	list-style-type: none;
+	cursor: pointer;
 }
 
 .SiteFamilySelect-link{
@@ -348,6 +361,7 @@
 	line-height:1.4em;
 	color:#000;
 	display:block;
+	text-decoration: none;
 }
 
 .is-Current .SiteFamilySelect-link{
