@@ -52,16 +52,48 @@
 
 .menu-list{
 	/* margin-top: 0; */
+	position:relative;
 	padding-left: 0;
-	padding-top: 1.2%;
+	padding-top: 2.5%;
 }
 
 .menu-list li{
 	display: inline;
-	margin-left: 3%;
+	margin-left: 2%;
 	font-family: 'Pretendard-Regular';
-	font-size: 1.3em;
+	font-size: 1em;
+
+	opacity: 0;
+	transform: translateX(-20px); /* 왼쪽에서 오른쪽으로 이동 */
+	animation: fadeInRight 0.5s ease forwards;
 }
+
+/* 왼쪽에서 오른쪽으로 이동하는 애니메이션 */
+.menu-list li:nth-child(1) {
+	animation-delay: 0.1s;
+  }
+  .menu-list li:nth-child(2) {
+	animation-delay: 0.2s;
+  }
+  .menu-list li:nth-child(3) {
+	animation-delay: 0.3s;
+  }
+  .menu-list li:nth-child(4) {
+	animation-delay: 0.4s;
+  }
+
+  @keyframes fadeInRight {
+	0% {
+	  opacity: 0;
+	  transform: translateX(-20px); /* 왼쪽에서 시작 */
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateX(0); /* 제자리로 */
+	}
+  }
+/*  end  */
+
 .menu-container{
 	align-items: center;
 	width: 50vw;
@@ -281,6 +313,7 @@
 	z-index:5;
 }
 
+
 .SiteFamily-bar{
 	position:absolute;
 	bottom:0;
@@ -314,6 +347,7 @@
 	margin-right: 5%;
 }
 
+
 .SiteFamily-text{
 	font-family: 'Pretendard-Regular';;
 	padding:8px 30px 8px 0;
@@ -327,7 +361,7 @@
 	font-weight:500;
 	position:relative;
 	text-decoration: none;
-	width: 8.5vw;
+	width: 9vw;
 }
 
 .SiteFamily-text:after{
@@ -351,17 +385,18 @@
 	right:0;
 	display : none;
 	border:2.5px solid #000;
-	width: 8.5vw;
+	width: 9vw;
 	list-style-type: none;
-	cursor: pointer;
 }
 
+/* 마이페이지 아래 토글에 속성 적용할 경우 아래에 작성 */
 .SiteFamilySelect-link{
 	font-size:15px;
 	line-height:1.4em;
 	color:#000;
 	display:block;
 	text-decoration: none;
+	font-family: 'Pretendard-Regular';
 }
 
 .is-Current .SiteFamilySelect-link{
@@ -371,11 +406,46 @@
 
 .SiteFamilySelect-item{
 	margin-top:11px;
+	animation: fadeInSlide 0.5s forwards;
 }
 
 .SiteFamilySelect-item:first-child{
 	margin-top:0;
 }
+
+/* li 태그가 순차적으로 나타나는 애니메이션 */
+@keyframes fadeInSlide {
+	from {
+	  opacity: 0;
+	  transform: translateY(-20px); /* 위에서 아래로 */
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0); /* 원래 위치 */
+	}
+  }
+
+/* 순차적으로 나타나도록 애니메이션 딜레이 추가 */
+.SiteFamilySelect-item:nth-child(1) {
+	animation-delay: 0.1s;
+  }
+  
+  .SiteFamilySelect-item:nth-child(2) {
+	animation-delay: 0.2s;
+  }
+  
+  .SiteFamilySelect-item:nth-child(3) {
+	animation-delay: 0.3s;
+  }
+  
+  .SiteFamilySelect-item:nth-child(4) {
+	animation-delay: 0.4s;
+  }
+  
+  .SiteFamilySelect-item:nth-child(5) {
+	animation-delay: 0.5s;
+  }
+/* end  */
 
 /* Mobile Menu
 =========================================================*/

@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 /*=========================================================
 	Main
 =========================================================*/
@@ -28,23 +35,26 @@
 	clear:both;
 }
 
-.MainTopBanner .Main-container{
-	/* height:100%; */
-}
+/* .MainTopBanner .Main-container{
+	height:100%;
+} */
 
+/* 큰 글자들에 적용되는 부분 */
 .MainSwipe{
 	position:absolute;
-	top:calc(50% + 450px);
+	top:calc(50% + 400px);
 	left:50%;
 	transform:translate(-50%, -50%);
 }
 
 .MainSwipeTitle{
+	font-family: 'Montserrat Alternates';
 	white-space:nowrap;
 	font-size:140px;
 	line-height:1em;
 	color:#000;
-	font-weight:500;
+	transform: scale(0.85, 1);
+	font-weight:700;
 	text-align:center;
 	z-index:10;
 	position:relative;
@@ -54,8 +64,9 @@
 	width:100%;
 	max-width:676px;
 	padding:0 50px;
-	margin:16px auto;
+	margin:0 auto;
 	position:relative;
+	overflow: hidden;
 }
 
 .MainSwipeThumb:before{
@@ -85,13 +96,13 @@
 .MainSwipeThumbSlide{
 	position:relative;
 	width:468px;
-	margin:0 auto;
+	margin : auto;
 }
 
 .MainSwipeThumbSlide:after{
 	content:"";
 	display:block;
-	padding-bottom:100%;
+	padding-bottom:80%;
 }
 
 .MainSwipeThumbSlide-img{
@@ -99,8 +110,8 @@
 	top:50%;
 	left:50%;
 	transform:translate(-50%, -50%);
-	width:100%;
-	display:none;
+	width:auto;
+	height: 100%;
 }
 
 .MainTopBannerScroll{
@@ -852,7 +863,7 @@
 	bottom: 30px;
 	left:80px;
 	z-index:10;
-	width:249px;
+	/* width:5vw; */
 	animation: FlotingCampaign 0.4s ease-in forwards;
 	animation-delay:0.3s;
 	transform:translateX(-150%);
@@ -881,6 +892,7 @@
 	font-weight:500;
 	margin-bottom:14px;
 	padding-right:20px;
+	font-family: 'Pretendard-Regular';
 }
 
 .FlotingCampaign-thumb{
@@ -898,7 +910,8 @@
 	position:absolute;
 	top:0;
 	left:0;
-	width:100%;
+	width:auto;
+	height: 100%;
 }
 
 .FlotingCampaign-thumb:before{
@@ -931,7 +944,7 @@
 .FlotingCampaignIco{
 	width:60px;
 	height:50px;
-	/* background-image:url(../../images/icon/ico_FlotingCampaign_arrow.svg); */
+	background-image:url(../images/ico_FlotingCampaign_arrow.svg);
 	background-size:60px 50px;
 	position:absolute;
 	top: 3px;
@@ -943,7 +956,7 @@
 	display:block;
 	width:24px;
 	height:17px;
-	/* background-image:url(../../images/icon/ico_event_go.png); */
+	background-image:url(../images/ico_event_go.png);
 	background-size:24px 17px;
 	position:absolute;
 	top: 9px;
@@ -1001,9 +1014,10 @@
 	}
 
 	.FlotingCampaign-title{
-		font-size:0.9375vw;
+		font-size:0.9em;
 		margin-bottom:0.729166vw;
 		padding-right:1.04166vw;
+		padding-left: 2vw;
 	}
 
 	.FlotingCampaign-thumb:before{
