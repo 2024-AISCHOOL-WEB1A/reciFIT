@@ -4,26 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
-  const [menuDisplay, setMenuDisplay] = useState('none'); 
+  const [menuDisplay, setMenuDisplay] = useState('true'); 
 
   const toggleMenu = () => {
-    setMenuDisplay(prevDisplay => (prevDisplay === 'none' ? 'block' : 'none'));
+    setMenuDisplay(prevState => !prevState);
   };
 
   return (
     <header>
       <div className='site-header'>
         <div className='header-container'>
-          <a href="/"><h1>reciFIT</h1></a>
+          <a href="/"><h1>𝓇ℯ𝒸𝒾ℱℐ𝒯</h1></a>
 
           {/* Navigation */}
           <nav id='site-navigation'>
             <div className='menu-container'>
               <ul className='menu-list'>
-                <li id='menu-item'>Home</li>
-                <li id='menu-item'>레시피 추천</li>
-                <li id='menu-item'>영수증 인식</li>
-                <li id='menu-item'>재고 관리</li>
+                <li id='menu-item'>홈</li>
+                <li id='menu-item'>레시피추천</li>
+                <li id='menu-item'>영수증</li>
+                <li id='menu-item'>재료관리</li>
               </ul>
             </div>
           </nav>
@@ -34,7 +34,7 @@ const Header = () => {
             <FontAwesomeIcon icon={faUser} id='userFont' /> 마이페이지
             <span className="SiteFamily-bar"></span>
           </a>
-          <ul className="SiteFamilySelect" style={{ display: menuDisplay }}>
+          <ul className="SiteFamilySelect" style={{ display: menuDisplay ? 'none' : 'block' }}>
             <li className='SiteFamilySelect-item'>
               <a href='http://blog.chungjungone.com/' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">회원정보 수정</a>
             </li>
