@@ -42,6 +42,10 @@
     opacity: 0;
 }
 
+.mediaQuery-slider{
+    width: 100%;
+    display: none;
+}
 
 
 /* 로그인_____________________ */
@@ -51,16 +55,64 @@
     /* height: 100%; */
     flex-direction: column;
     align-items: center;
-
+    justify-content: center
 }
 
-.login-logo{
-    margin: 10%;
-    width: 20%;
+.login-logo {
+    margin-top: 5%;
+    margin-bottom: 10%;
+    width: 30%;
     height: auto;
 }
 
-.login-text{
+.login-text {
     font-size: 2em;
     text-align: center;
 }
+
+.login-small-text{
+    font-size: 1em;
+    margin: 3%;
+}
+
+
+/* 미디어쿼리_____________________ */
+
+@media screen and (max-width: 900px) {
+    .container{
+        flex-direction: column;
+    }
+
+    .slider-container{
+        display: none;
+    }
+
+    .login{
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20%;
+        display: flex;
+        justify-content: flex-start
+    }
+
+    .query-slider-image {
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .mediaQuery-slider{
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3/2;
+    }
+    
+    .Query-container{
+        width: 100%;
+        display: flex;
+    }
+
+    .kakao-button{
+        
+    }
+} 
+
