@@ -7,6 +7,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*=========================================================
 	Main
 =========================================================*/
@@ -22,11 +29,16 @@
 	height:calc(100vh - 32px);
 }
 
+.MainTopBanner a{
+	scroll-behavior: smooth;
+}
+
 .Main-container{
 	max-width:1920px;
 	margin:0 auto;
 	position:relative;
 	padding:0 80px;
+	margin-bottom: 5%;
 }
 
 .Main-container:after{
@@ -257,7 +269,7 @@
 	}
 
 	.MainSwipeTitle{
-		font-size:14.2916vw;
+		font-size:11.2916vw;
 	}
 
 	.MainSwipeThumb{
@@ -279,7 +291,7 @@
 	}
 	
 	.MainSwipe{
-		top:calc(50% + 3.71875vw);
+		top:calc(50% + 35vh);
 	}
 
 	.MainSwipeThumbSlide{
@@ -331,7 +343,7 @@
 	.MainSwipeThumb{
 		max-width:70vw;
 		padding:0 5.60416vw;
-		margin:4.133vw auto;
+		margin:6.133vw auto;
 	}
 
 	.MainSwipeThumb:before{
@@ -347,11 +359,15 @@
 	}
 	
 	.MainSwipe{
-		top:calc(50% + 3.71875vw);
+		top:calc(50% + 35vh);
 	}
 
 	.MainSwipeThumbSlide{
 		width:46vw;
+	}
+
+	.MainTopBanner{
+		height:83vh;
 	}
 
 	.MainTopBannerScroll{
@@ -400,9 +416,11 @@
 	position:relative;
 	margin-top:15px;
 	overflow:hidden;
-	border-bottom:solid 1px #000;
+	/* border-bottom:solid 1px #000; */
 	transition-property:border-color; 
 	transition-duration: 1.3s;
+	border-radius: 15px;
+	box-shadow: 7px 7px 5px #33333361;
 }
 
 .MainBrandBanner-link{
@@ -437,7 +455,7 @@
 .MainBrandBannerBg-img{
 	display:block;
 	position:absolute;
-	top:-75%;
+	top:-55%;
 	left:0;
 	right:0;
 	height:170%;
@@ -452,13 +470,13 @@
 	left:0;
 	right:0;
 	bottom:0;
-	background-color:rgba(0,0,0,0.25);
+	background-color:rgba(0, 0, 0, 0.4);
 	z-index:2;
 }
 
 .is-Action .MainBrandBannerBg{
 	transform:scale(1);
-	transition-delay:0.1s;
+	transition-delay:0.1s; 
 }
 
 .MainBrandBannerLogo{
@@ -480,7 +498,7 @@
 .MainBrandBannerText{
 	position:absolute;
 	top:50%;
-	right:50px;
+	right:-3vw;
 	width:435px;
 	transform:translate(50%, -50%);
 	font-size:54px;
@@ -492,19 +510,20 @@
 	transition-property:transform, opacity; 
 	transition-duration: 1s;
 	transition-delay:0s;
+	font-family: 'BMJUA';
 }
 
 .is-Action .MainBrandBannerText{
 	transform:translate(0, -50%);
 	opacity:1;
-	transition-delay:0.4s;
+	transition-delay:0.1s;
 }
 
 .MainBrandBannerText:after{
 	content:"";
 	width:46px;
 	height:46px;
-	/* background-image:url(../../images/icon/ico_more.svg); */
+	background-image:url(../images/ico_more.svg);
 	background-size:46px 46px;
 	position:absolute;
 	bottom:0;
@@ -534,9 +553,9 @@
 	}
 
 	.MainBrandBannerText{
-		right:2.8125vw;
+		right:-5vw;
 		width:22.65625vw;
-		font-size:2.6041vw;
+		font-size:3.8em;
 		padding-bottom:3.64583vw;
 	}
 
@@ -544,6 +563,17 @@
 		width:2.39583vw;
 		height:2.39583vw;
 		background-size:2.39583vw 2.39583vw;
+	}
+
+	.is-Action .MainBrandBannerBg{
+		transform:scale(1);
+		transition-delay:0.1s; 
+	}
+	
+	.is-Action .MainBrandBannerText{
+		transform:translate(0, -50%);
+		opacity:1;
+		transition-delay:0.1s;
 	}
 }
 
@@ -581,6 +611,17 @@
 		height:2.39583vw;
 		background-size:2.39583vw 2.39583vw;
 	}
+
+	.is-Action .MainBrandBannerBg{
+		transform:scale(1);
+		transition-delay:0.1s; 
+	}
+	
+	.is-Action .MainBrandBannerText{
+		transform:translate(0, -50%);
+		opacity:1;
+		transition-delay:0.1s;
+	}
 }
 
 @media screen and (max-width: 767px) and (min-width: 1px) {
@@ -606,7 +647,7 @@
 	}
 
 	.MainBrandBannerText{
-		right:3.0541vw;
+		right:-10vw;
 		width: 32.27083vw;
 		font-size: 4.60416vw;
 		padding-bottom:6.44583vw;
@@ -886,18 +927,20 @@
 }
 
 .FlotingCampaign-title{
-	font-size:18px;
+	font-size:1em;
 	line-height:1.4em;
 	color:#000;
 	font-weight:500;
-	margin-bottom:14px;
-	padding-right:20px;
+	width: 11vw;
+	/* margin-bottom:14px; */
+	margin-right:5%;
 	font-family: 'Pretendard-Regular';
 }
 
 .FlotingCampaign-thumb{
 	position:relative;
 	overflow:hidden;
+	width: 15vw;
 }
 
 .FlotingCampaign-thumb:after{
@@ -910,8 +953,8 @@
 	position:absolute;
 	top:0;
 	left:0;
-	width:auto;
-	height: 100%;
+	width:8.5vw;
+	height:auto;
 }
 
 .FlotingCampaign-thumb:before{
@@ -942,7 +985,7 @@
 }
 
 .FlotingCampaignIco{
-	width:60px;
+	width:15vw;
 	height:50px;
 	background-image:url(../images/ico_FlotingCampaign_arrow.svg);
 	background-size:60px 50px;
@@ -950,6 +993,7 @@
 	top: 3px;
     right: -37px;
 	transform:rotate(-1deg);
+	margin-left: 1vw;
 }
 
 .FlotingCampaignIco-text{
@@ -1010,14 +1054,14 @@
 	.FlotingCampaign{
 		bottom: 1.5625vw;
 		left:4.16666vw;
-		width:12.96875vw;
+		width:8.96875vw;
 	}
 
 	.FlotingCampaign-title{
-		font-size:0.9em;
-		margin-bottom:0.729166vw;
+		font-size:1em;
+		/* margin-bottom:0.729166vw; */
 		padding-right:1.04166vw;
-		padding-left: 2vw;
+		padding-left: 1.8vw;
 	}
 
 	.FlotingCampaign-thumb:before{
@@ -1031,7 +1075,8 @@
 		height:2.60416vw;
 		background-size:3.125vw 2.60416vw;
 		top: 0.15625vw;
-		right: -1.92708vw;
+		/* right: -1.92708vw; */
+		/* padding-left: 1vw; */
 	}
 
 	.FlotingCampaignIco-text{		
