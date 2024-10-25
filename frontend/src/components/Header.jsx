@@ -30,8 +30,8 @@ const Header = () => {
         </div>
 
         <div className='siteFamily'>
-          <a href="#" className="SiteFamily-text" onClick={toggleMenu}>
-            <FontAwesomeIcon icon={faUser} id='userFont' /> 마이페이지
+          <a href="/" className="SiteFamily-text" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faUser} id='userFont' /> 로그인
             <span className="SiteFamily-bar"></span>
           </a>
           <ul className="SiteFamilySelect" style={{ display: menuDisplay ? 'none' : 'block' }}>

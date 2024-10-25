@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// import App from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import App from './pages/JoinInfo.jsx'
+// import App from './pages/JoinInfo.jsx'
 
 import { Provider } from "react-redux"
 import { BrowserRouter } from 'react-router-dom'
