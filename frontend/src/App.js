@@ -21,7 +21,8 @@ function App() {
         <Route path='/join' element={<Join/>}></Route>
         <Route path='/joinInfo' element={<JoinInfo/>}></Route>
       </Routes>
-      {/* <Footer></Footer> */}
+
+      {location.pathname !== '/join' && <Footer/>}
     </div>
   );
 }
