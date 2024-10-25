@@ -57,12 +57,12 @@
     align-items: center;
     justify-content: center
 }
-
-.login-logo {
+.login a{
     margin-top: 5%;
     margin-bottom: 10%;
     width: 30%;
     height: auto;
+    text-align: center;
 }
 
 .login-text {
@@ -118,6 +118,7 @@
     .login-text{
         margin-top: 15%;
     }
+
 
 } 
 

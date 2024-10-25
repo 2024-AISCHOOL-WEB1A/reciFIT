@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../assets/css/join.css'
+import { Link } from 'react-router-dom';
 
 
 
@@ -56,9 +57,10 @@ const Join = () => {
                 />
             </div>
 
+
             <div className='login'>
-                <a href="/"><img src={`${process.env.PUBLIC_URL}/img/login_pic/logo.png`}
-                    alt="로고" className='login-logo' /></a>
+                <Link to = '/'><img src={`${process.env.PUBLIC_URL}/img/login_pic/logo.png`}
+                    alt="로고"/></Link>
 
                 <h3 className='login-small-text'> sns 로그인으로 간편하게
                     <br />레시핏 서비스를 즐겨보세요</h3>
