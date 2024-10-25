@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../assets/css/header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom'; 
 
 const Header = () => {
   const [menuDisplay, setMenuDisplay] = useState('true'); 
@@ -14,41 +15,41 @@ const Header = () => {
     <header>
       <div className='site-header'>
         <div className='header-container'>
-          <a href="/"><h1>𝓇ℯ𝒸𝒾ℱℐ𝒯</h1></a>
+          <Link to="/"><img src="/img/logo.png" className='headerLogo' /></Link>
 
           {/* Navigation */}
           <nav id='site-navigation'>
             <div className='menu-container'>
               <ul className='menu-list'>
-                <li id='menu-item'>홈</li>
-                <li id='menu-item'>레시피추천</li>
-                <li id='menu-item'>영수증</li>
-                <li id='menu-item'>재료관리</li>
+                <li><Link to="/">홈</Link></li>
+                <li><Link to="/recipes">레시피추천</Link></li> 
+                <li><Link to="/receipts">영수증</Link></li>
+                <li><Link to="/ingredients">재료관리</Link></li>
               </ul>
             </div>
           </nav>
         </div>
 
         <div className='siteFamily'>
-          <a href="/" className="SiteFamily-text" onClick={toggleMenu}>
+          <Link to="/" className="SiteFamily-text" onClick={toggleMenu}>
             <FontAwesomeIcon icon={faUser} id='userFont' /> 로그인
             <span className="SiteFamily-bar"></span>
-          </a>
+          </Link>
           <ul className="SiteFamilySelect" style={{ display: menuDisplay ? 'none' : 'block' }}>
             <li className='SiteFamilySelect-item'>
-              <a href='http://blog.chungjungone.com/' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">회원정보 수정</a>
+              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">회원정보 수정</Link>
             </li>
             <li className='SiteFamilySelect-item'>
-              <a href='http://www.jongga.co.kr' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">추가 정보 입력/수정</a>
+              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">추가 정보 입력/수정</Link>
             </li>
             <li className='SiteFamilySelect-item'>
-              <a href='http://www.daesang.com/' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">나의 레시피 조회</a>
+              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">나의 레시피 조회</Link>
             </li>
             <li className='SiteFamilySelect-item'>
-              <a href='http://www.jungoneshop.com/' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">현재 재고 관리</a>
+              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">현재 재고 관리</Link>
             </li>
             <li className='SiteFamilySelect-item'>
-              <a href='http://www.wellife.co.kr/' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">영수증 조회 및 관리</a>
+              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">영수증 조회 및 관리</Link>
             </li>
           </ul>
         </div>

@@ -59,13 +59,18 @@
 
 .menu-list li{
 	display: inline;
-	margin-left: 2%;
+	margin-left: 0.5%;
 	font-family: 'Pretendard-Regular';
-	font-size: 1em;
+	font-size: 0.95em;
 
 	opacity: 0;
 	transform: translateX(-20px); /* 왼쪽에서 오른쪽으로 이동 */
 	animation: fadeInRight 0.5s ease forwards;
+}
+
+.menu-list li a{
+	font-family: 'Pretendard-Regular';
+	font-size: 1.2em;
 }
 
 /* 왼쪽에서 오른쪽으로 이동하는 애니메이션 */
@@ -114,20 +119,9 @@
 
 /* Logo
 =========================================================*/
-.Logo{
-	position:absolute;
-	top:50%;
-	left:0;
-	transform:translateY(-50%);
-	z-index:5;
-}
-
-.Logo-link{
-	display:block;
-	width:104px;
-	height:44px;
-	/* background-image:url(../../images/logo/logo.svg); */
-	background-size:104px 44px;
+.headerLogo{
+	height: auto;
+	width: 5em;
 }
 
 /* Navi
