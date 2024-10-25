@@ -75,10 +75,14 @@
     margin: 3%;
 }
 
+.kakao-button{
+    margin: 3%;
+}
+
 
 /* 미디어쿼리_____________________ */
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 700px) {
     .container{
         flex-direction: column;
     }
@@ -111,8 +115,9 @@
         display: flex;
     }
 
-    .kakao-button{
-        
+    .login-text{
+        margin-top: 15%;
     }
+
 } 
 
