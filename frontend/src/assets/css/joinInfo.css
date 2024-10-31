@@ -1,0 +1,49 @@
+.container{
+    height: 100%;
+    width: 100%;
+    margin: 10%;
+    display: flex;
+}
+
+.input-area{
+    width: 100%;
+}
+
+.input{
+    width: 80%;
+}
+
+.text-area{
+    width: 100%;
+    display: 'flex';
+    flex-wrap: 'wrap';
+    gap: '10px'; 
+    margin-top: '20px'
+}
+
+.text{
+    display: 'flex';
+    align-items: 'center';
+    width: 70%;
+    padding: '5px 10px';
+    background-color: '#d1e7dd';
+    border-radius: '5px';
+    color: '#0f5132';
+    font-weight: 'bold';
+}
+
+.delete-button{
+    margin-left: '8px';
+    background-color: '#f8d7da';
+    border: 'none';
+    border-radius: '50%';
+    color: '#842029';
+    cursor: 'pointer';
+    width: '20px';
+    height: '20px';
+    display: 'flex';
+    align-items: 'center';
+    justify-content: 'center';
+    font-size: '12px';
+    font-weight: 'bold';
+}
