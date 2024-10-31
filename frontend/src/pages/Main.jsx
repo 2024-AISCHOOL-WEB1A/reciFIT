@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/css/page.css';
 import '../assets/css/component.css';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
   // 메인페이지 사진 깜빡임 애니메이션
@@ -18,6 +19,7 @@ const Main = () => {
   
   // 각각의 MainBrandBanner hover 상태를 관리하기 위한 useState
   const [hoveredIndex, setHoveredIndex] = useState(null);
+
 
   // 이미지 변경 인터벌
   useState(() => {
@@ -88,7 +90,7 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(0)}
                 onMouseLeave={handleMouseLeave}
               >
-                <a href="#" className="MainBrandBanner-link" target="_self">
+                <Link to="/recipeMain" className="MainBrandBanner-link" target="_self">
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
@@ -96,7 +98,7 @@ const Main = () => {
                     ></span>
                   </div>
                   <div className="MainBrandBannerText">레시피</div>
-                </a>
+                </Link>
               </div>
 
               {/* 두 번째 배너 */}
@@ -105,7 +107,7 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(1)}
                 onMouseLeave={handleMouseLeave}
               >
-                <a href="#" className="MainBrandBanner-link" target="_self">
+                <Link to="#" className="MainBrandBanner-link" target="_self">
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
@@ -113,7 +115,7 @@ const Main = () => {
                     ></span>
                   </div>
                   <div className="MainBrandBannerText">영수증 인식</div>
-                </a>
+                </Link>
               </div>
 
               {/* 세 번째 배너 */}
@@ -122,7 +124,7 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={handleMouseLeave}
               >
-                <a href="#" className="MainBrandBanner-link" target="_self">
+                <Link to="#" className="MainBrandBanner-link" target="_self">
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
@@ -130,7 +132,7 @@ const Main = () => {
                     ></span>
                   </div>
                   <div className="MainBrandBannerText">재료 관리</div>
-                </a>
+                </Link>
               </div>
 
               {/* 네 번째 배너 */}
@@ -139,7 +141,7 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(3)}
                 onMouseLeave={handleMouseLeave}
               >
-                <a href="#" className="MainBrandBanner-link" target="_self">
+                <Link to="#" className="MainBrandBanner-link" target="_self">
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
@@ -147,7 +149,7 @@ const Main = () => {
                     ></span>
                   </div>
                   <div className="MainBrandBannerText">환경 점수</div>
-                </a>
+                </Link>
               </div>
 
             </div>

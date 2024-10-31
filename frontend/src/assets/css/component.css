@@ -3503,3 +3503,33 @@ body .SocialSlide-container{
 		background-position: 88% center;
 	}
 }
+
+
+/* ------------------------------------- 메인페이지 글자 애니메이션 부분 ------------------------------------ */
+/* .MainSwipeTitle {
+	position: relative;
+	transition: transform 0.3s ease, font-size 0.3s ease;
+  }
+  
+  .MainSwipeTitle.First {
+	font-size: 7.4rem;
+	transform: translateX(0);
+  }
+  
+  .MainSwipeTitle.Last {
+	font-size: 7.4rem;
+	transform: translateX(0);
+  }
+  
+  .scroll-animate .MainSwipeTitle.First {
+	transform: translateX(-30%) scale(1.5);
+	font-size: 5rem;
+	color: #333232df;
+  }
+  
+  .scroll-animate .MainSwipeTitle.Last {
+	transform: translateX(30%) scale(1.5);
+	font-size: 5rem;
+	color: #333232df;
+  }
+   */
