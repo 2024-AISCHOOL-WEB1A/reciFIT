@@ -48,7 +48,7 @@ const Join = () => {
 
 
     return (
-        <div className='container'>
+        <div className='join-container'>
             <div className="slider-container">
                 <img
                     src={images[currentIndex]}
@@ -58,7 +58,7 @@ const Join = () => {
             </div>
 
 
-            <div className='login'>
+            <div className='join-login'>
                 <Link to = '/'><img src={`${process.env.PUBLIC_URL}/img/login_pic/logo.png`}
                     alt="로고"/></Link>
 
@@ -72,7 +72,7 @@ const Join = () => {
                         className={`query-slider-image ${fade ? 'fade-in' : 'fade-out'} mediaQuery-slider`}
                     />
                 </div>
-
+                
                 <h1 className='login-text'>로그인</h1>
                 {/* 카카오 */}
                 <img src={`${process.env.PUBLIC_URL}/img/login_pic/kakao_login_medium_wide.png`} alt="카카오로그인"

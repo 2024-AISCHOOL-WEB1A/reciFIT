@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
-import '../assets/css/page.css';
-import '../assets/css/component.css';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "../assets/css/page.css";
+import "../assets/css/component.css";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   // 메인페이지 사진 깜빡임 애니메이션
   const images = [
-    '/img/refrigerator.png',
-    '/img/salad.png',
-    '/img/tteokbokki.png',
-    '/img/text2.png',
-    '/img/grlledfish.png',
-    '/img/pepper.png',
-    '/img/text1.png'
+    "/img/refrigerator.png",
+    "/img/salad.png",
+    "/img/tteokbokki.png",
+    "/img/text2.png",
+    "/img/grlledfish.png",
+    "/img/pepper.png",
+    "/img/text1.png",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   // 각각의 MainBrandBanner hover 상태를 관리하기 위한 useState
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
 
   // 이미지 변경 인터벌
   useState(() => {
     const intervalId = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
     }, 700);
 
     return () => clearInterval(intervalId);
@@ -32,11 +33,11 @@ const Main = () => {
 
   // hover 시 애니메이션 트리거
   const handleMouseEnter = (index) => {
-    setHoveredIndex(index);  // 현재 hover된 index만 설정
+    setHoveredIndex(index); // 현재 hover된 index만 설정
   };
 
   const handleMouseLeave = () => {
-    setHoveredIndex(null);  // hover가 풀리면 null로 초기화
+    setHoveredIndex(null); // hover가 풀리면 null로 초기화
   };
 
   return (
@@ -52,10 +53,12 @@ const Main = () => {
                     {images.map((src, index) => (
                       <img
                         key={index}
-                        className='MainSwipeThumbSlide-img'
+                        className="MainSwipeThumbSlide-img"
                         src={src}
-                        alt=''
-                        style={{ display: currentIndex === index ? 'block' : 'none' }}
+                        alt=""
+                        style={{
+                          display: currentIndex === index ? "block" : "none",
+                        }}
                       />
                     ))}
                   </div>
@@ -63,19 +66,33 @@ const Main = () => {
                 <h2 className="MainSwipeTitle Last">For you Only</h2>
               </div>
             </div>
-            <a href="#targetSection" className="MainTopBannerScroll" rel="noopener noreferrer">
-              <span className="MainTopBannerScroll-ico"><span className="MainTopBannerScroll-bg"></span></span>
+            <a
+              href="#targetSection"
+              className="MainTopBannerScroll"
+              rel="noopener noreferrer"
+            >
+              <span className="MainTopBannerScroll-ico">
+                <span className="MainTopBannerScroll-bg"></span>
+              </span>
               <span className="MainTopBannerScroll-text"></span>
             </a>
 
             <div className="FlotingCampaign">
               <span className="FlotingCampaignIco">
                 <span className="FlotingCampaignIco-bg"></span>
-                <span className="FlotingCampaignIco-text"><span className="ab-text"></span></span>
+                <span className="FlotingCampaignIco-text">
+                  <span className="ab-text"></span>
+                </span>
               </span>
               <a href="#" className="FlotingCampaign-link">
                 <div className="FlotingCampaign-title">영수증 등록하기</div>
-                <div className="FlotingCampaign-thumb"><img src="/img/camera.png" className="FlotingCampaign-img" alt="" /></div>
+                <div className="FlotingCampaign-thumb">
+                  <img
+                    src="/img/camera.png"
+                    className="FlotingCampaign-img"
+                    alt=""
+                  />
+                </div>
               </a>
             </div>
           </div>
@@ -83,14 +100,20 @@ const Main = () => {
           {/* --------------------------- Main Selection -------------------------------------*/}
           <div className="MainSection">
             <div className="Main-container">
-
               {/* 첫 번째 배너 */}
-              <div id='targetSection'
-                className={`MainBrandBanner a-Action a-ParallaxUp ${hoveredIndex === 0 ? 'is-Action' : ''}`}
+              <div
+                id="targetSection"
+                className={`MainBrandBanner a-Action a-ParallaxUp ${
+                  hoveredIndex === 0 ? "is-Action" : ""
+                }`}
                 onMouseEnter={() => handleMouseEnter(0)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Link to="/recipeMain" className="MainBrandBanner-link" target="_self">
+                <Link
+                  to="/recipeMain"
+                  className="MainBrandBanner-link"
+                  target="_self"
+                >
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
@@ -103,7 +126,9 @@ const Main = () => {
 
               {/* 두 번째 배너 */}
               <div
-                className={`MainBrandBanner a-Action a-ParallaxUp ${hoveredIndex === 1 ? 'is-Action' : ''}`}
+                className={`MainBrandBanner a-Action a-ParallaxUp ${
+                  hoveredIndex === 1 ? "is-Action" : ""
+                }`}
                 onMouseEnter={() => handleMouseEnter(1)}
                 onMouseLeave={handleMouseLeave}
               >
@@ -120,7 +145,9 @@ const Main = () => {
 
               {/* 세 번째 배너 */}
               <div
-                className={`MainBrandBanner a-Action a-ParallaxUp ${hoveredIndex === 2 ? 'is-Action' : ''}`}
+                className={`MainBrandBanner a-Action a-ParallaxUp ${
+                  hoveredIndex === 2 ? "is-Action" : ""
+                }`}
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={handleMouseLeave}
               >
@@ -137,7 +164,9 @@ const Main = () => {
 
               {/* 네 번째 배너 */}
               <div
-                className={`MainBrandBanner a-Action a-ParallaxUp ${hoveredIndex === 3 ? 'is-Action' : ''}`}
+                className={`MainBrandBanner a-Action a-ParallaxUp ${
+                  hoveredIndex === 3 ? "is-Action" : ""
+                }`}
                 onMouseEnter={() => handleMouseEnter(3)}
                 onMouseLeave={handleMouseLeave}
               >
@@ -151,13 +180,12 @@ const Main = () => {
                   <div className="MainBrandBannerText">환경 점수</div>
                 </Link>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Main;
