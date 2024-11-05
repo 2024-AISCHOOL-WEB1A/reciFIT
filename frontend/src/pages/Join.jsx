@@ -72,7 +72,7 @@ const Join = () => {
                         className={`query-slider-image ${fade ? 'fade-in' : 'fade-out'} mediaQuery-slider`}
                     />
                 </div>
-
+                
                 <h1 className='login-text'>로그인</h1>
                 {/* 카카오 */}
                 <img src={`${process.env.PUBLIC_URL}/img/login_pic/kakao_login_medium_wide.png`} alt="카카오로그인"

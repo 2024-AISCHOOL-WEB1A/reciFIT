@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Join from './pages/Join'
 import JoinInfo from './pages/JoinInfo'
 import RecipeMain from './pages/RecipeMain';
+import Receipt from './pages/Receipt';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='/join' element={<Join/>}></Route>
         <Route path='/joinInfo' element={<JoinInfo/>}></Route>
         <Route path='/recipeMain' element={<RecipeMain/>}></Route>
+        <Route path='/receipts' element={<Receipt/>}></Route>
       </Routes>
 
       {location.pathname !== '/join' && <Footer/>}

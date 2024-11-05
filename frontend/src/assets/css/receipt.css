@@ -1,0 +1,35 @@
+/* @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+
+}
+
+.receipt{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 1%;
+    background-color: #f0f0f0; 
+    text-align: center;
+}
+
+.receipt-title{
+    font-family: 'Pretendard-Regular';
+    margin: 4% 0 2%;
+    padding-bottom: 4%;
+    border-bottom: dashed rgb(191, 191, 191);
+}
+
+.receipt-content{
+    
+} */
+
+

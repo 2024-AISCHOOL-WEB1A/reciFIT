@@ -59,21 +59,26 @@
 }
 .login a{
     margin-top: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 8%;
     width: 30%;
     height: auto;
     text-align: center;
 }
 
+
 .login-text {
+    font-family: 'Pretendard-Regular';
     font-size: 2em;
     text-align: center;
+    margin-top: 15%;
 }
 
 .login-small-text{
+    font-family: 'Pretendard-Regular';
     font-size: 1em;
     margin: 3%;
 }
+
 
 .kakao-button{
     margin: 3%;
@@ -115,9 +120,9 @@
         display: flex;
     }
 
-    .login-text{
+    /* .login-text{
         margin-top: 15%;
-    }
+    } */
 
 
 } 
