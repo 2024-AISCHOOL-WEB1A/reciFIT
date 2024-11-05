@@ -1,0 +1,53 @@
+/* 검색창 부분 
+    * SearchForm : 가장 큰 공간 => 위치를 가운데로 지정하기 위해
+    * searchBox : 아이콘과 input을 감싸는 div => 테두리 지정
+    * searchIcon : 검색 아이콘
+*/
+.SearchForm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+}
+
+.searchBox {
+    width: 13.5%;
+    border-bottom: 2px solid #1a1919d5;
+    /* border-radius: 5px; */
+    padding: 0.3em;
+}
+
+.searchBox input {
+    border: none;
+    outline: none;
+}
+
+#searchIcon {
+    margin-right: 1em;
+    color: #1a1919d5;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* ------------ youtube 동영상------------------- */
+.youtubeVideo {
+    position: relative;
+    width: 70%; 
+    padding-top: 56.25%; /* 16:9 비율을 유지 (9 / 16 = 0.5625) */
+    margin: 3em auto;
+    overflow: hidden;
+}
+
+.youtubeVideo iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* 가로 전체 채우기 */
+    height: 49%; /* 세로 전체 채우기 */
+}
