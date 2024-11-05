@@ -1,9 +1,24 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* -----------------=------------------------- */
+
 /* 검색창 부분 */
 .SearchForm {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 2em; /* 간격 조정 */
+    margin-top: 3em;
+    margin-bottom: 3em;
 }
 
 .searchBox {
@@ -27,15 +42,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 3em 0; /* 좌우 여백 제거 */
+    margin: 3em 0;
+    /* 좌우 여백 제거 */
 }
 
 /* ------------ youtube 동영상------------------- */
 .youtubeVideo {
     position: relative;
-    width: 70%; 
+    width: 70%;
     height: 25em;
-    margin-bottom: 2em; /* 검색창과의 간격 조정 */
+    margin-bottom: 2em;
+    /* 검색창과의 간격 조정 */
 }
 
 .youtubeVideo iframe {
@@ -44,4 +61,148 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+
+
+/* ------------------------ 레시피 슬라이드 부분 시작 -------------------- */
+/* 슬라이드 위 제목 부분 */
+/* 
+    * list_content : 가장 큰 div
+    * list_content_title : 목록 타이틀
+    * list_content_btn : 더보기 버튼
+*/
+.list_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 3.3em;
+    margin-bottom: 1.2em;
+}
+
+.list_content_title{
+    font-size: 1.45rem;
+    color: inherit;
+    font-family: 'SBAggroB';
+}
+
+.list_content_title span {
+    display: inline-block;
+    font-size: 1.45rem;
+    color: #685d5d;
+    font-family: 'SBAggroB';
+    padding: 0 0.1em;
+}
+
+/* 흑백요리사 글자에만 애니메이션 적용하기 */
+.list_content_title span span {
+    display: inline-block;
+    animation: bounce 0.6s ease-in-out infinite;
+}
+.list_content_title span span:nth-child(1) { animation-delay: 0s; }
+.list_content_title span span:nth-child(2) { animation-delay: 0.1s; }
+.list_content_title span span:nth-child(3) { animation-delay: 0.2s; }
+.list_content_title span span:nth-child(4) { animation-delay: 0.3s; }
+.list_content_title span span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* 전체보기 버튼 */
+.list_content_btn{
+    color: #685d5d;
+    font-size: 1em;
+    font-weight: 800;
+    font-family: 'Pretendard-Regular';
+    border: 2px solid #685d5d;
+    border-radius: 5px;
+    padding: 0.3em;
+    margin-right: 5em;
+}
+
+/* 슬라이드 내부 이미지 목록 */
+/* 
+    * slickList : 감싸고 있는 큰 ul 태그
+    * slide_list_link : 이미지 아래 a 태그
+    * slide_list_thumb : 이미지 부분
+    * slide_list_caption : 이미지 설명 부분
+    * > slide_list_caption_tit : 레시피 타이틀
+*/
+.recipeList-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.slickList {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.slide_list_li {
+    width: 18.5em;
+    margin-right: 1em;
+}
+
+.slide_list_link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.slide_list_thumb img {
+    width: 100%;
+    height: 147px;
+    object-fit: cover;
+}
+
+.slide_list_caption {
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.slide_list_caption_tit {
+    font-size: 1.2em;
+    line-height: 1.2;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: 'Pretendard-Regular';
+}
+
+/* 슬라이드 화살표 버튼 부분 */
+/* 
+    slide_btn_prev : 왼쪽 화살표
+    slide_btn_next : 오른쪽 화살표
+*/
+
+.slide_list_left,
+.slide_list_right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide_btn_prev,
+.slide_btn_next {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.slide_btn_prev span,
+.slide_btn_next span {
+    width: 3em;
+    height: 3em;
+    margin-right: 0.2em;
+    font-size: 5em;
+    color: #685d5d;
 }
