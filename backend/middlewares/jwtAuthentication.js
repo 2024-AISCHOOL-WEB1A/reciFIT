@@ -26,7 +26,7 @@ const authenticateAccessToken = (req, res, next) => {
   }
 
   // 토큰 정상 확인
-  req.userIdx = decoded.userIdx;
+  req.user = { userIdx: decoded.userIdx };
   return next();
 };
 

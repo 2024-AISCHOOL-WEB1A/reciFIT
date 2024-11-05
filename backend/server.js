@@ -3,7 +3,7 @@ require("dotenv").config();
 const path = require("path");
 const cors = require("cors");
 const passport = require("./config/passport.js");
-const scheduler = require("./jobs");
+const scheduler = require("./jobs/scheduler.js");
 
 const app = express();
 const PORT = process.env.PORT || 3001;

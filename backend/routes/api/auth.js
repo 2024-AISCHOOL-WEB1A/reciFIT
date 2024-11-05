@@ -2,8 +2,13 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const db = require("../../config/db");
+const s3 = require("../../config/s3");
 const jwtUtil = require("../../utils/jwtUtils");
 const jwtStoreUtil = require("../../utils/jwtStoreUtil");
+const { v4: uuidv4 } = require("uuid");
+const { PutObjectCommand } = require("@aws-sdk/client-s3");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
 
 // 카카오 로그인
 router.get(
@@ -290,5 +295,53 @@ router.post("/", async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+// S3 업로드 요청
+router.post(
+  "/upload-image/:type",
+  authenticateAccessToken,
+  async (req, res) => {
+    const { fileName, fileType } = req.body;
+    const { type } = req.params;
+
+    // 유효성 검사 1 : upload type 종류 제한
+    if (!["ingredients", "receipt"].includes(type)) {
+      return res.status(400).json({ message: "Invalid type" });
+    }
+
+    // 유효성 검사 2 : 파일 이름 / 파일 타입 null or undefined
+    if (!fileName || !fileType) {
+      return res.status(400).json({ message: "Invalid fileName or fileType" });
+    }
+
+    // 유효성 검사 3 : 파일 타입 확인
+    if (!["image/jpeg", "image/png"].includes(fileType)) {
+      return res.status(400).json({ message: "Unsupported file type" });
+    }
+
+    // S3 저장
+    const folder = `images/${type}`;
+    const uniqueFileName = `${uuidv4()}-${fileName}`;
+    const key = `${folder}/${uniqueFileName}`;
+
+    const command = new PutObjectCommand({
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: key,
+      ContentType: fileType,
+    });
+
+    try {
+      // Presigned URL 생성 (유효 시간: 5분)
+      const url = await getSignedUrl(s3, command, { expiresIn: 300 });
+      return res.status(200).json({
+        url,
+        key,
+      });
+    } catch (err) {
+      console.error("S3 Error:", err);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+);
 
 module.exports = router;
