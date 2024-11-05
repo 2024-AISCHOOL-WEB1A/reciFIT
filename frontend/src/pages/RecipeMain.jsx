@@ -21,16 +21,17 @@ const RecipeMain = () => {
     };
 
     return (
-        <div className='container'>
-            {/* <div className='SearchForm'>
+        <div className='recipeMain-container'>
+
+            <div className='youtubeVideo'>
+                <YouTube videoId='xsTFsunt6-8' opts={opts} onReady={onReady}/>
+            </div>
+            
+            <div className='SearchForm'>
                 <div className='searchBox'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} id='searchIcon' />
                     <input type="search" placeholder='재료명을 입력하여 검색' />
                 </div>
-            </div> */}
-
-            <div className='youtubeVideo'>
-                <YouTube videoId='xsTFsunt6-8' opts={opts} onReady={onReady}/>
             </div>
         </div>
     );
