@@ -45,6 +45,10 @@ const isValidMonth = (dateString) => {
   return year > 0 && month >= 1 && month <= 12;
 };
 
+const isStartDateBeforeEndDate = (start, end) => {
+  return new Date(start) <= new Date(end);
+};
+
 const isValidURL = (url) => {
   const urlPattern = new RegExp(
     "^(https?:\\/\\/)" + // protocol
@@ -151,6 +155,7 @@ module.exports = {
   isValidDate,
   isValidWeek,
   isValidMonth,
+  isStartDateBeforeEndDate,
   isValidURL,
   isValidEmail,
   isValidNickname,

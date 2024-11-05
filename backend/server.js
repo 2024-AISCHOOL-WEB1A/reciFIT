@@ -2,8 +2,8 @@ const express = require("express");
 require("dotenv").config();
 const path = require("path");
 const cors = require("cors");
-const passport = require("./config/passport.js");
-const scheduler = require("./jobs/scheduler.js");
+const passport = require("./config/passport");
+const scheduler = require("./jobs/scheduler");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,8 +14,8 @@ const corsOptions = {
 };
 
 // router
-const indexRouter = require("./routes/index.js");
-const apiRouter = require("./routes/api.js");
+const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api");
 
 // react
 app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
