@@ -4,7 +4,7 @@
 
 // const Receipt = () => {
 //     return (
-//         <div className='container'>
+//         <div className='receipt-container'>
 //             <div className='receipt'>
 //                 <div className='receipt-title'><h3>영수증 정보</h3></div>
 //                 <div className='receipt-content'>

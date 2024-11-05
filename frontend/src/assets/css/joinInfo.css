@@ -8,7 +8,7 @@
 
 /* 전체 컨테이너 */
 
-.container{
+.info-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,9 +20,8 @@
 
 /* 상단 텍스트 */
 
-.text{
+.info-text{
     font-family: 'Freesentation-9Black';
-
     display: flex;
     font-size: 2em;
     width: 95%;
@@ -43,17 +42,19 @@
 
 /* 텍스트박스 */
 
-.like, .dislike, .allergy{
+.info-like, .info-dislike, .info-allergy{
     width: 80%;
     height: 70%;
     margin: 1%;
     padding: 1%;
     border-radius: 20px;
+    border: 2px solid black; /* 단일 색상으로 통일 */
 }
 
 /* 왼쪽 텍스트 */
 .like-text, .dislike-text, .allergy-text{
     font-family: 'Freesentation-9Black';
+    padding-top: 5%;
     width: 10%;
     font-size: 1.5em;
     margin: 1%;
@@ -62,7 +63,7 @@
 
 /* 테두리색 */
 
-.like:focus, .dislike:focus, .allergy:focus{
-    border-color: rgb(255, 188, 17);
+.info-like:focus, .info-dislike:focus, .info-allergy:focus{
+    border-color: rgb(255, 190, 140);
     outline: none;
 }

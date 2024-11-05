@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.container{
+.receipt-container{
     display: flex;
     justify-content: flex-start;
     width: 100%;

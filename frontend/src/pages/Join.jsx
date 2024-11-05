@@ -48,7 +48,7 @@ const Join = () => {
 
 
     return (
-        <div className='container'>
+        <div className='join-container'>
             <div className="slider-container">
                 <img
                     src={images[currentIndex]}
@@ -58,7 +58,7 @@ const Join = () => {
             </div>
 
 
-            <div className='login'>
+            <div className='join-login'>
                 <Link to = '/'><img src={`${process.env.PUBLIC_URL}/img/login_pic/logo.png`}
                     alt="로고"/></Link>
 
