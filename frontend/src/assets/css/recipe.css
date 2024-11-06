@@ -125,6 +125,14 @@
     padding: 0.3em;
     margin-right: 5em;
 }
+.list_content_btn:hover {
+    background-color: #685d5d95;
+    color: #fff;
+}
+
+.list_content_btn_div{
+    padding-top: 1em;
+}
 
 /* 슬라이드 내부 이미지 목록 */
 /* 
@@ -144,12 +152,15 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    overflow: hidden;
 }
 
 .slide_list_li {
     width: 18.5em;
     margin-right: 1em;
+    transition: transform 0.3s ease; /* 부드럽게 확대 효과 */
+}
+.slide_list_li:hover {
+    transform: scale(1.1); /* 1.1배 확대 */
 }
 
 .slide_list_link {
@@ -159,8 +170,7 @@
 
 .slide_list_thumb img {
     width: 100%;
-    height: 147px;
-    object-fit: cover;
+    height: 9.15em;
 }
 
 .slide_list_caption {
@@ -205,4 +215,9 @@
     margin-right: 0.2em;
     font-size: 5em;
     color: #685d5d;
+}
+
+/* 오늘 뭐먹지 ? best 슬라이드 부분 */
+.second-listItem{
+    margin-top: 5em;
 }
