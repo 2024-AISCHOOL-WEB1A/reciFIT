@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../../config/db");
-const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
+const db = require("../../../config/db");
+const authenticateAccessToken = require("../../../Middlewares/jwtAuthentication");
 const {
   isValidDate,
   isStartDateBeforeEndDate,
-} = require("../../utils/validation");
+} = require("../../../utils/validation");
 
 // 유저의 전체 식재료 불러오기
 router.get("/", authenticateAccessToken, async (req, res) => {
@@ -190,9 +190,12 @@ router.post("/", authenticateAccessToken, async (req, res) => {
       .json({ message: "Either purchaseDate or expiredDate is required." });
   }
 
-  // quantity가 없으면 totalQuantity 값 사용
+  // quantity와 totalQuantity 중 1개가 없는 경우 서로 동일하게
   if (!quantity) {
     quantity = totalQuantity;
+  }
+  if (!totalQuantity) {
+    totalQuantity = quantity;
   }
 
   const query = `

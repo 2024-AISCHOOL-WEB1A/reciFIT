@@ -11,6 +11,7 @@ const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
 const getLeven = require("../../config/leven");
 const loadIngredients = require("../../utils/loadIngredients");
+const generateRandomNickname = require("../../utils/generateRandomNickname");
 
 // 카카오 로그인
 router.get(
@@ -96,7 +97,8 @@ router.get(
           "kakao",
           profile.id,
           profile._json.kakao_account.email,
-          profile.displayName,
+          generateRandomNickname(), // 닉네임 랜덤 생성
+          // profile.displayName, // 카카오 닉네임 가져오기
         ]);
         // 새로 생성된 user_idx 가져오기
         userIdx = insertResult.insertId;
@@ -217,7 +219,8 @@ router.get(
           "google",
           profile.id,
           profile.emails[0].value,
-          profile.displayName,
+          generateRandomNickname(), // 닉네임 랜덤 생성
+          // profile.displayName, // 구글 이름 가져오기
         ]);
 
         // 새로 생성된 user_idx 가져오기
@@ -255,16 +258,42 @@ router.get(
   }
 );
 
+// 로그아웃
+router.post("/logout", authenticateAccessToken, async (req, res) => {
+  const { refreshToken } = req.body;
+  const { userIdx, accessToken } = req.user;
+
+  // 유효성 검사 : null check (필요할까?)
+  // if (!refreshToken) {
+  //   return res.status(400).json({ message: "Refresh token is required" });
+  // }
+
+  // 토큰 삭제
+  try {
+    // access token 삭제
+    if (accessToken) {
+      await jwtStoreUtil.deleteAccessToken(userIdx, accessToken);
+    }
+
+    // refresh token 삭제
+    if (refreshToken) {
+      await jwtStoreUtil.deleteRefreshToken(userIdx, refreshToken);
+    }
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 // AccessToken 재발급
-router.post("/", async (req, res) => {
+router.post("/token", async (req, res) => {
   const { refreshToken } = req.body;
 
-  // null check
+  // 유효성 검사 1: null check
   if (!refreshToken) {
     return res.status(400).json({ message: "Refresh token is required" });
   }
 
-  // refresh token 유효성 검사 (decode)
+  // 유효성 검사 2: refresh token decode
   const { valid, expired, decoded } = jwtUtil.verifyRefreshToken(refreshToken);
   // 유효하지 않거나 만료된 경우
   if (!valid || expired) {
@@ -299,52 +328,48 @@ router.post("/", async (req, res) => {
 });
 
 // S3 업로드 요청
-router.post(
-  "/upload-image/:type",
-  authenticateAccessToken,
-  async (req, res) => {
-    const { fileName, fileType } = req.body;
-    const { type } = req.params;
+router.post("/upload/:type", authenticateAccessToken, async (req, res) => {
+  const { fileName, fileType } = req.body;
+  const { type } = req.params;
 
-    // 유효성 검사 1 : upload type 종류 제한
-    if (!["ingredients", "receipt"].includes(type)) {
-      return res.status(400).json({ message: "Invalid type" });
-    }
-
-    // 유효성 검사 2 : 파일 이름 / 파일 타입 null or undefined
-    if (!fileName || !fileType) {
-      return res.status(400).json({ message: "Invalid fileName or fileType" });
-    }
-
-    // 유효성 검사 3 : 파일 타입 확인
-    if (!["image/jpeg", "image/png"].includes(fileType)) {
-      return res.status(400).json({ message: "Unsupported file type" });
-    }
-
-    // S3 저장
-    const folder = `images/${type}`;
-    const uniqueFileName = `${uuidv4()}-${fileName}`;
-    const key = `${folder}/${uniqueFileName}`;
-
-    const command = new PutObjectCommand({
-      Bucket: process.env.S3_BUCKET_NAME,
-      Key: key,
-      ContentType: fileType,
-    });
-
-    try {
-      // Presigned URL 생성 (유효 시간: 5분)
-      const url = await getSignedUrl(s3, command, { expiresIn: 300 });
-      return res.status(200).json({
-        url,
-        key,
-      });
-    } catch (err) {
-      console.error("S3 Error:", err);
-      return res.status(500).json({ message: "Internal Server Error" });
-    }
+  // 유효성 검사 1 : upload type 종류 제한
+  if (!["ingredients", "receipt"].includes(type)) {
+    return res.status(400).json({ message: "Invalid type" });
   }
-);
+
+  // 유효성 검사 2 : 파일 이름 / 파일 타입 null or undefined
+  if (!fileName || !fileType) {
+    return res.status(400).json({ message: "Invalid fileName or fileType" });
+  }
+
+  // 유효성 검사 3 : 파일 타입 확인
+  if (!["image/jpeg", "image/png"].includes(fileType)) {
+    return res.status(400).json({ message: "Unsupported file type" });
+  }
+
+  // S3 저장
+  const folder = `images/${type}`;
+  const uniqueFileName = `${uuidv4()}-${fileName}`;
+  const key = `${folder}/${uniqueFileName}`;
+
+  const command = new PutObjectCommand({
+    Bucket: process.env.S3_BUCKET_NAME,
+    Key: key,
+    ContentType: fileType,
+  });
+
+  try {
+    // Presigned URL 생성 (유효 시간: 5분)
+    const url = await getSignedUrl(s3, command, { expiresIn: 300 });
+    return res.status(200).json({
+      url,
+      key,
+    });
+  } catch (err) {
+    console.error("S3 Error:", err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 router.get("/test", async (req, res) => {
   const ingredientName = "풋사과";
@@ -368,6 +393,10 @@ router.get("/test", async (req, res) => {
     console.log("?", {
       similarIngredients: similarIngredients.map((item) => item.name),
     });
+
+    for (let i = 0; i < 1; i++) {
+      console.log(await generateRandomNickname());
+    }
   } catch (err) {
     console.error(err);
   }
