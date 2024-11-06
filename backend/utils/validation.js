@@ -143,13 +143,20 @@ const isValidUserId = (userId) => {
   return pattern.test(userId);
 };
 
+// 닉네임 글자 수 조건 (2자 이상 20자 이하)
 const isValidNickname = (nickname) => {
-  // 닉네임 글자 수 조건 (2자 이상 20자 이하)
   if (nickname.length < 2 || nickname.length > 20) {
     return false;
   }
   return true;
 };
+
+// 재료 조건
+function isValidIngredientsFormat(ingredients) {
+  // 쉼표로 구분된 하나 이상의 항목이 있는지 확인
+  const formatRegex = /^[^,]+(, [^,]+)*$/;
+  return formatRegex.test(ingredients);
+}
 
 module.exports = {
   isValidDate,
@@ -162,4 +169,5 @@ module.exports = {
   isValidPassword,
   isValidUserId,
   isValidNickname,
+  isValidIngredientsFormat,
 };
