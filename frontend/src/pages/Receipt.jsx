@@ -11,9 +11,9 @@ const headers = [
 ];
 
 const initialItems = [
-    { name: '계란', quantity: '1', date: '2024.11.01' },
-    { name: '사과', quantity: '3', date: '2024.11.01' },
-    { name: '바나나', quantity: '1', date: '2024.11.01' }
+    { name: '계란', quantity: '1', date: '2024.11.01'},
+    { name: '모짜렐라치즈', quantity: '3', date: '2024.11.01'},
+    { name: '바나나', quantity: '1', date: '2024.11.01'}
 ];
 
 
@@ -22,6 +22,8 @@ const Receipt = () => {
     const [selection, setSelection] = useState([]);
     const [newItem, setNewItem] = useState({ name: '', quantity: '', date: '' });
     const [editData, setEditData] = useState({ name: '', quantity: '', date: '' }); // 수정할 데이터를 담을 상태
+
+
 
     useEffect(() => {
         if (selection.length === 1) {
@@ -87,18 +89,19 @@ const Receipt = () => {
             />
 
             {/* 삭제 버튼 */}
-            <button onClick={() => handleDelete(selection)} disabled={selection.length === 0}>
-                선택된 항목 삭제
+            <button className='receipt-delete'
+            onClick={() => handleDelete(selection)} disabled={selection.length === 0}>
+                삭제
             </button>
 
             {/* 수정 버튼 */}
-            <button onClick={() => handleUpdate(selection)} disabled={selection.length === 0}>
-                선택된 항목 수정
+            <button className='receipt-change'
+            onClick={() => handleUpdate(selection)} disabled={selection.length === 0}>
+                수정
             </button>
 
             {/* 새 항목 추가 입력 필드 */}
-            <div>
-                <h3>새 항목 추가</h3>
+            <div className='receipt-add'>
                 <input
                     type="text"
                     placeholder="상품명"
