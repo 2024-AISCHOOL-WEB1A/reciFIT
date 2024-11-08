@@ -6,7 +6,8 @@ const Receipt = () => {
     return (
         <div className='receipt-container'>
             <div className='receipt-pic'>
-                영수증 인식 완료 화면
+                <img src={`${process.env.PUBLIC_URL}/img/receipt_img/receipt1.jpg`} alt="" 
+                className='receipt-img'/>
             </div>
 
             <div className='receipt-text'>
@@ -14,7 +15,10 @@ const Receipt = () => {
             </div>
 
             <div className='receipt-CRUD'>
-                수정 / 삭제 / 추가 버튼
+                <button className='receipt-U'> 수정 </button>
+                <button className='receipt-C'> 추가 </button>
+                <button className='receipt-D'> 삭제 </button>
+                <button className='receipt-R'> 확인 </button>
             </div>
         </div>
     )

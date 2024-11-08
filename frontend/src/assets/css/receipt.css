@@ -1,19 +1,54 @@
+/* 전체 화면 */
 .receipt-container{
     display: flex;
     flex-direction: row;
     margin-top: 2%;
     width: 100%;
-    height: 100vh;
+    height: 80vh;
 }
 
+/* 영수증 사진 */
 .receipt-pic{
     width: 30%;
     height: 100%;
     overflow-y: auto;
+    margin: 0 3%;
+    padding: 1%;
+    border-right: dashed 1px black;
 }
 
+.receipt-img{
+width: 100%;
+height: auto;
+}
+
+/* 스크롤바 */
+
+body::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+body::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #217af4; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+/* 영수증 인식 텍스트 */
 .receipt-text{
-    width: 50%;
+    width: 30%;
     height: 100%;
     background-color: aliceblue;
+}
+
+/* 버튼 */
+.receipt-CRUD{
+    display: flex;
+    width: 10%;
+    padding: 1%;
 }
