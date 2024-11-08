@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../../config/db");
+const db = require("../../../config/db");
 const authenticateAccessToken = require("../../../Middlewares/jwtAuthentication");
 const {
   isValidNickname,
@@ -13,8 +13,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
 
   try {
     const [rows] = await db.query(
-      `
-      SELECT 
+      `SELECT 
         user_idx, 
         oauth_provider, 
         oauth_email, 
@@ -29,12 +28,12 @@ router.get("/", authenticateAccessToken, async (req, res) => {
       WHERE user_idx = ?`,
       [userIdx]
     );
+    const user = rows[0];
 
-    if (rows.length === 0) {
+    if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    return res.status(200).json(rows[0]);
+    return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }
