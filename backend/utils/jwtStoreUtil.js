@@ -81,6 +81,10 @@ const saveRefreshToken = async (userIdx, refreshToken, expiresIn) => {
 
 // Access Token 삭제
 const deleteAccessToken = async (userIdx, accessToken) => {
+  if (!accessToken) {
+    return;
+  }
+
   const query = `
       SELECT access_token FROM TB_USER_ACCESS_TOKEN
       WHERE user_idx = ?
@@ -108,6 +112,10 @@ const deleteAccessToken = async (userIdx, accessToken) => {
 
 // Refresh Token 삭제
 const deleteRefreshToken = async (userIdx, refreshToken) => {
+  if (!refreshToken) {
+    return;
+  }
+
   const query = `
       SELECT refresh_token FROM TB_USER_REFRESH_TOKEN
       WHERE user_idx = ?

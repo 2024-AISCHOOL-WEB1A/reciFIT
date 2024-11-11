@@ -49,19 +49,28 @@ const isStartDateBeforeEndDate = (start, end) => {
   return new Date(start) <= new Date(end);
 };
 
-const isValidURL = (url) => {
-  const urlPattern = new RegExp(
-    "^(https?:\\/\\/)" + // protocol
-      "((([a-zA-Z\\d]([a-zA-Z\\d-]*[a-zA-Z\\d])*)\\.?)+[a-zA-Z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?" + // port
-      "(\\/[-a-zA-Z\\d%@_.~+&:]*)*" + // path
-      "(\\?[;&a-zA-Z\\d%@_.,~+&:=-]*)?" + // query string
-      "(\\#[-a-zA-Z\\d_]*)?$", // fragment locator
-    "i" // case insensitive
-  );
+// const isValidURL = (url) => {
+//   const urlPattern = new RegExp(
+//     "^(https?:\\/\\/)" + // protocol
+//       "((([a-zA-Z\\d]([a-zA-Z\\d-]*[a-zA-Z\\d])*)\\.?)+[a-zA-Z]{2,}|" + // domain name
+//       "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+//       "(\\:\\d+)?" + // port
+//       "(\\/[-a-zA-Z\\d%@_.~+&:]*)*" + // path
+//       "(\\?[;&a-zA-Z\\d%@_.,~+&:=-]*)?" + // query string
+//       "(\\#[-a-zA-Z\\d_]*)?$", // fragment locator
+//     "i" // case insensitive
+//   );
 
-  return !!urlPattern.test(url);
+//   return !!urlPattern.test(url);
+// };
+
+const isValidURL = (string) => {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
 };
 
 const isValidEmail = (email) => {
@@ -143,13 +152,25 @@ const isValidUserId = (userId) => {
   return pattern.test(userId);
 };
 
+// 닉네임 글자 수 조건 (2자 이상 20자 이하)
 const isValidNickname = (nickname) => {
-  // 닉네임 글자 수 조건 (2자 이상 20자 이하)
   if (nickname.length < 2 || nickname.length > 20) {
     return false;
   }
   return true;
 };
+
+// 재료 조건
+const isValidIngredientsFormat = (ingredients) => {
+  // 쉼표로 구분된 하나 이상의 항목이 있는지 확인
+  const formatRegex = /^[^,]+(, [^,]+)*$/;
+  return formatRegex.test(ingredients);
+};
+
+// Idx 확인
+function isValidIdx(idx) {
+  return Number.isInteger(Number(idx)) && !isNaN(Number(idx));
+}
 
 module.exports = {
   isValidDate,
@@ -162,4 +183,6 @@ module.exports = {
   isValidPassword,
   isValidUserId,
   isValidNickname,
+  isValidIngredientsFormat,
+  isValidIdx,
 };

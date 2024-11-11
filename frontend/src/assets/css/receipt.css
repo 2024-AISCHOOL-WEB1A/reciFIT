@@ -1,35 +1,151 @@
-/* @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
+/* 전체 화면 */
 .receipt-container{
     display: flex;
-    justify-content: flex-start;
-    width: 100%;
+    flex-direction: column;
+    margin: 5% 3% 0 3%;
+}
+
+.receipt-bannercon{
+    display: flex;
+    justify-content: center;
 
 }
 
+.banner-overlay {
+    position: absolute; /* 오버레이를 위치시킵니다 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 검정색 배경에 50% 투명도 */
+    z-index: 1; /* 필요에 따라 z-index를 설정 */
+  }
+
+.receipt-banner{
+width: 80%;
+height: 20em;
+margin-bottom: 2%;
+border-radius: 10px;
+}
+
+/* 영수증 칸 */
 .receipt{
     display: flex;
+    flex-direction: row;
+    padding-top: 2%;
+    /* border-top: solid 5px gray; */
+}
+
+/* 영수증 사진 */
+.receipt-pic{
+    width: 30%;
+    height: 100%;
+    overflow-y: auto;
+    margin: 0 5% 0 10%;
+    padding: 6% 2% 2% 2% ;
+    background-color: #000000;
+    border-radius: 10px;
+}
+
+.receipt-img{
+width: 100%;
+height: auto;
+}
+
+/* 스크롤바 */
+body::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+body::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: black; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+/* 영수증 인식 텍스트 */
+.receipt-textContainer{
+    width: 30%;
+    height: 100%;
+    padding: 1% 1% 1% 0;
+}
+
+.receipt-top{
+    width: 100%;
+    object-fit: fill;
+}
+
+.receipt-box{
+    display: flex;
     flex-direction: column;
-    width: 40%;
-    padding: 1%;
-    background-color: #f0f0f0; 
+    background-color: #d9d9d9;
+    height: 100%;
+    width: 100%;
     text-align: center;
 }
 
-.receipt-title{
-    font-family: 'Pretendard-Regular';
-    margin: 4% 0 2%;
-    padding-bottom: 4%;
-    border-bottom: dashed rgb(191, 191, 191);
+.receipt-boxTitle{
+    width: 100%;
+    margin: 3% 0;
 }
 
-.receipt-content{
-    
-} */
+.receipt-subTitle{
+    display: flex;
+    flex-direction: row;
+    padding: 2% 0 5% 0;
+    border-bottom: dashed 3px rgb(255, 255, 255);
+}
 
+.receipt-boxMiddle{
+    display: flex;
+}
 
+.receipt-boxMiddle.selected {
+    background-color: #52aeff; /* 선택 시 배경색 */
+}
+
+.receipt-subname, .receipt-name{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 60%;
+    /* border-right: dashed 2px rgb(255, 255, 255); */
+    padding:  2% 0;
+}
+
+.receipt-subquantity, .receipt-quantity{
+    width: 40%;
+    padding:  2% 0;
+}
+
+.receipt-info{
+    padding: 5% 0;
+    background-color: rgb(241, 241, 241);
+}
+
+/* 버튼 */
+.receipt-CRUD{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 10%;
+    margin-left: 5%;
+    padding: 1%;
+}
+
+.receipt-R, .receipt-U, .receipt-C, .receipt-D{
+    height: 4em;
+    padding: 0.5em 1%;
+    background-color: rgb(132, 132, 132);
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.receipt-R:hover, .receipt-U:hover, .receipt-C:hover, .receipt-D:hover{
+    background-color: rgb(255, 190, 140);
+}
