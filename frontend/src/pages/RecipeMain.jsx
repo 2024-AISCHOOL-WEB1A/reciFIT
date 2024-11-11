@@ -9,42 +9,57 @@ import { Link } from 'react-router-dom';
 
 const RecipeMain = () => {
 
-    // youtube 동영상 재생
-    const opts = {
-        playerVars: {
-            autoplay: 1, // 페이지 로드 시 자동 재생
-            controls: 1, // 재생 컨트롤 표시 여부
-            mute: 1,     // 자동 재생 시 소리를 끔
-            loop: 1,     // 반복 재생
-            playlist: 'cUQzxhmYdGs' // 반복 재생할 비디오 ID
-        },
+    // 가장 상단의 배너
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+
+    const handleMouseEnter = (index) => {
+        setHoveredIndex(index); // 현재 hover된 index만 설정
+    };
+    const handleMouseLeave = () => {
+        setHoveredIndex(null); // hover가 풀리면 null로 초기화
     };
 
-    const onReady = (e) => {
-        e.target.mute(); // 자동 재생 시 음소거
-    };
 
     // 슬라이드 구현을 위한 부분
-    const [startIndex, setStartIndex] = useState(0);
+    // 첫 번째 슬라이드
+    const [firstSlideIndex, setFirstSlideIndex] = useState(0);
     const visibleItems = 4;
 
-    const handlePrev = () => {
-        if (startIndex > 0) {
-            setStartIndex(startIndex - 1);
+    const handlePrevFirst = () => {
+        if (firstSlideIndex > 0) {
+            setFirstSlideIndex(firstSlideIndex - 1);
+        }
+    };
+    const handleNextFirst = () => {
+        if (firstSlideIndex < data.blackRecipes.length - visibleItems) {
+            setFirstSlideIndex(firstSlideIndex + 1);
         }
     };
 
-    const handleNext = () => {
-        if (startIndex < data.blackRecipes.length - visibleItems) {
-            setStartIndex(startIndex + 1);
+    // 두 번째 슬라이드
+    const [secondSlideIndex, setSecondSlideIndex] = useState(0);
+
+    const handlePrevSecond = () => {
+        if (secondSlideIndex > 0) {
+            setSecondSlideIndex(secondSlideIndex - 1);
+        }
+    };
+    const handleNextSecond = () => {
+        if (secondSlideIndex < data.bestRecipes.length - visibleItems) {
+            setSecondSlideIndex(secondSlideIndex + 1);
         }
     };
 
     return (
         <div className='recipeMain-container'>
-
-            <div className='youtubeVideo'>
-                <YouTube videoId='xsTFsunt6-8' opts={opts} onReady={onReady} />
+            <div className='TopBanner'>
+                <Link to="#">
+                    <div className="TopBannerImgBg"></div>
+                    <div className="TopBannerText">
+                        <span>레시피 검색</span>
+                        <img src="/img/camera_img.png" alt="" />
+                    </div>
+                </Link>
             </div>
 
             <div className='SearchForm'>
@@ -68,12 +83,12 @@ const RecipeMain = () => {
                     </div>
                     <div className='recipeList-container'>
                         <div className="slide_list_left">
-                            <button type="button" className="slide_btn_prev" onClick={handlePrev} disabled={startIndex === 0}>
+                            <button type="button" className="slide_btn_prev" onClick={handlePrevFirst} disabled={firstSlideIndex === 0}>
                                 <span><FontAwesomeIcon icon={faChevronLeft} /></span>
                             </button>
                         </div>
                         <ul className="slickList">
-                            {data.blackRecipes.slice(startIndex, startIndex + visibleItems).map(blackRecipes => (
+                            {data.blackRecipes.slice(firstSlideIndex, firstSlideIndex + visibleItems).map(blackRecipes => (
                                 <li key={blackRecipes.rcp_idx} className="slide_list_li">
                                     <Link to={`/recipe/${blackRecipes.rcp_idx}`} className="slide_list_link" tabIndex="-1">
                                         <div className="slide_list_thumb">
@@ -87,7 +102,7 @@ const RecipeMain = () => {
                             ))}
                         </ul>
                         <div className="slide_list_right">
-                            <button type="button" className="slide_btn_next" onClick={handleNext} disabled={startIndex >= data.blackRecipes.length - visibleItems}>
+                            <button type="button" className="slide_btn_next" onClick={handleNextFirst} disabled={firstSlideIndex >= data.blackRecipes.length - visibleItems}>
                                 <span><FontAwesomeIcon icon={faChevronRight} /></span>
                             </button>
                         </div>
@@ -97,7 +112,7 @@ const RecipeMain = () => {
                 <div className='second-listItem'>
                     <div className='list_content'>
                         <h3 className='list_content_title'>
-                            오늘 뭐 먹지? BEST 
+                            오늘 뭐 먹지? BEST
                             <span><span>요</span><span>리</span><span>필</span><span>살</span><span>기</span></span>✨
                         </h3>
                         <div className='list_content_btn_div'>
@@ -106,12 +121,12 @@ const RecipeMain = () => {
                     </div>
                     <div className='recipeList-container'>
                         <div className="slide_list_left">
-                            <button type="button" className="slide_btn_prev" onClick={handlePrev} disabled={startIndex === 0}>
+                            <button type="button" className="slide_btn_prev" onClick={handlePrevSecond} disabled={secondSlideIndex === 0}>
                                 <span><FontAwesomeIcon icon={faChevronLeft} /></span>
                             </button>
                         </div>
                         <ul className="slickList">
-                            {data.bestRecipes.slice(startIndex, startIndex + visibleItems).map(bestRecipes => (
+                            {data.bestRecipes.slice(secondSlideIndex, secondSlideIndex + visibleItems).map(bestRecipes => (
                                 <li key={bestRecipes.rcp_idx} className="slide_list_li">
                                     <Link to={`/recipe/${bestRecipes.rcp_idx}`} className="slide_list_link" tabIndex="-1">
                                         <div className="slide_list_thumb">
@@ -125,7 +140,7 @@ const RecipeMain = () => {
                             ))}
                         </ul>
                         <div className="slide_list_right">
-                            <button type="button" className="slide_btn_next" onClick={handleNext} disabled={startIndex >= data.bestRecipes.length - visibleItems}>
+                            <button type="button" className="slide_btn_next" onClick={handleNextSecond} disabled={secondSlideIndex >= data.bestRecipes.length - visibleItems}>
                                 <span><FontAwesomeIcon icon={faChevronRight} /></span>
                             </button>
                         </div>
