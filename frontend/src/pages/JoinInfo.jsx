@@ -5,7 +5,7 @@ import '../assets/css/joinInfo.css'
 
 const JoinInfo = () => {
   return (
-    <div>
+    <form>
       <div className='info-container'>
 
         <div className='info-text'>추가정보 입력</div>
@@ -18,7 +18,8 @@ const JoinInfo = () => {
 
         <div className='dislike-box'>
           <div className='dislike-text'>비선호</div>
-          <input type="text" className='info-dislike' />
+          <input type="text" className='info-dislike'
+            placeholder='해당 재료가 포함된 레시피를 비교적 적게 추천합니다!' />
         </div>
 
         <div className='allergy-box'>
@@ -28,8 +29,10 @@ const JoinInfo = () => {
         </div>
       </div>
 
-      <button type='submit'>확인</button>
-    </div>
+      <div className='info-submitContainer'>
+        <button type='submit' className='info-submit'><span className='info-submitText'>확인</span></button>
+      </div>
+    </form>
   )
 }
 
