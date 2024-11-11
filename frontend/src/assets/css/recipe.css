@@ -4,12 +4,14 @@
     font-weight: 400;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'SBAggroB';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
 /* -----------------=------------------------- */
 
 /* 검색창 부분 */
@@ -72,7 +74,12 @@
     * list_content_title : 목록 타이틀
     * list_content_btn : 더보기 버튼
 */
-.list_content{
+
+.first-listItem {
+    margin-bottom: 4em;
+}
+
+.list_content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -80,7 +87,7 @@
     margin-bottom: 1.2em;
 }
 
-.list_content_title{
+.list_content_title {
     font-size: 1.45rem;
     color: inherit;
     font-family: 'SBAggroB';
@@ -99,23 +106,41 @@
     display: inline-block;
     animation: bounce 0.6s ease-in-out infinite;
 }
-.list_content_title span span:nth-child(1) { animation-delay: 0s; }
-.list_content_title span span:nth-child(2) { animation-delay: 0.1s; }
-.list_content_title span span:nth-child(3) { animation-delay: 0.2s; }
-.list_content_title span span:nth-child(4) { animation-delay: 0.3s; }
-.list_content_title span span:nth-child(5) { animation-delay: 0.4s; }
+
+.list_content_title span span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.list_content_title span span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.list_content_title span span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.list_content_title span span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.list_content_title span span:nth-child(5) {
+    animation-delay: 0.4s;
+}
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-5px);
     }
 }
 
 /* 전체보기 버튼 */
-.list_content_btn{
+.list_content_btn {
     color: #685d5d;
     font-size: 1em;
     font-weight: 800;
@@ -125,12 +150,13 @@
     padding: 0.3em;
     margin-right: 5em;
 }
+
 .list_content_btn:hover {
     background-color: #685d5d95;
     color: #fff;
 }
 
-.list_content_btn_div{
+.list_content_btn_div {
     padding-top: 1em;
 }
 
@@ -157,10 +183,13 @@
 .slide_list_li {
     width: 18.5em;
     margin-right: 1em;
-    transition: transform 0.3s ease; /* 부드럽게 확대 효과 */
+    transition: transform 0.3s ease;
+    /* 부드럽게 확대 효과 */
 }
+
 .slide_list_li:hover {
-    transform: scale(1.1); /* 1.1배 확대 */
+    transform: scale(1.1);
+    /* 1.1배 확대 */
 }
 
 .slide_list_link {
@@ -218,109 +247,135 @@
 }
 
 /* 오늘 뭐먹지 ? best 슬라이드 부분 */
-.second-listItem{
+.second-listItem {
     margin-top: 5em;
 }
 
 
-/* 가장 상단의 배너 부분 */
-
-/* 기본 스타일 */
-.TopBanner {
-    width: 70%;
-    height: 18em;
-    /* margin-bottom: 2em; */
-    position: relative;
-    overflow: hidden; /* 이미지가 영역을 벗어나지 않도록 */
-}
-
-.TopBannerImgBg {
+/* 카테고리 분류 부분 */
+.cate_cont {
+    height: auto;
     width: 100%;
-    height: 100%;
-    background-image: url('../images/recipe_bg.jpg');
-    background-size: cover;
-    background-position: center;
-    transition: transform 1s; /* 이미지 확대 애니메이션 */
-    filter: brightness(55%);
 }
 
-.TopBannerText{
-    position: absolute;
-    top: 25%;
-    /* right: 30%; */
-    /* transform: translate(50%, -50%); */
-    color: #fff;
-    /* z-index: 5; */
-    /* opacity: 0; */
-    /* transition: transform 1s, opacity 1s; */
+.cate_cont ul {
+    display: table;
+    width: 100%;
+}
+
+.cate_cont li {
+    display: table-cell;
+}
+
+.cate_cont li a {
+    text-decoration: none;
+    color: black;
+}
+
+.cate_cont li img {
+    width: auto;
+    height: 6em;
+    margin-bottom: 5px;
+}
+
+.s_list_ul_arrow {
+    padding-top: 12px;
+}
+
+.slick-arrow {
+    display: inline-block;
+}
+
+.recipeCategory-container {
+    margin-left: 3%;
+    margin-right: 5%;
+}
+
+.recipe-category {
+    width: 64%;
+    height: 16vh;
+}
+
+.category-items a {
     display: flex;
     flex-direction: column;
-}
-.TopBannerText span{
-    width: 435px;
-    font-size: 54px;
-    line-height: 1.2em;
-    padding-bottom: 5px;
-    font-family: 'BMJUA';
+    align-items: center;
 }
 
-.TopBannerText img {
-    width: 2em;
-    height: 2em;
-    margin-left: 2em;
+.category-items span {
+    font-family: 'Pretendard-Regular';
+    font-size: 1.15em;
 }
 
-/* 이미지 및 텍스트 애니메이션 효과 */
-/* .TopBanner:hover .TopBannerImgBg {
-    transform: scale(1.05);
+
+/* 검색창 */
+@use postcss-color-function;
+@use postcss-nested;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+
+.search__container {
+    width: 30em;
+    margin-top: 0;
+    margin-bottom: 3em;
+    font-family: 'Raleway', sans-serif;
 }
 
-.TopBanner:hover .TopBannerText {
-    transform: translate(0, -50%);
-    opacity: 1;
-} */
+.search__input {
+    width: 100%;
+    padding: 12px 24px;
 
-/* 반응형 스타일 */
-@media screen and (max-width: 1920px) and (min-width: 1025px) {
-    .TopBanner {
-        height: 13vw;
+    background-color: transparent;
+    transition: transform 250ms ease-in-out;
+    font-size: 14px;
+    line-height: 18px;
+
+    color: #575756;
+    background-color: transparent;
+    /*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
+
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-position: 95% center;
+    border-radius: 50px;
+    border: 3px solid #f4b057;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+
+    &::placeholder {
+        color: color(#575756 a(0.8));
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-family: 'Pretendard-Regular';
+        font-size: 1.15em;
     }
 
-    .TopBannerText {
-        right: 1vw;
-        width: 18.65625vw;
-        font-size: 2.2em;
-        margin-bottom: 1em;
-    }
-
-    .TopBannerText span {
-        width: 15vw;
-        font-size: 1.2em;
+    &:hover,
+    &:focus {
+        padding: 12px 0;
+        outline: 0;
+        border: 1px solid transparent;
+        border-bottom: 3px solid #f4b057;
+        border-radius: 0;
+        background-position: 100% center;
     }
 }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
-    .TopBanner {
-        height: 22.7916vw;
+.search {
+    &::placeholder {
+        color: color(#575756 a(0.8));
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
     }
 
-    .TopBannerText {
-        right: 3.8541vw;
-        width: 25.27083vw;
-        font-size: 2.9166vw;
-        /* padding-bottom: 3.64583vw; */
-    }
-}
-
-@media screen and (max-width: 767px) and (min-width: 1px) {
-    .TopBanner {
-        height: 34.2916vw;
-    }
-
-    .TopBannerText {
-        right: -10vw;
-        width: 32.27083vw;
-        font-size: 4.60416vw;
-        /* padding-bottom: 6.44583vw; */
+    &:hover,
+    &:focus {
+        padding: 12px 0;
+        outline: 0;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #575756;
+        border-radius: 0;
+        background-position: 100% center;
     }
 }
