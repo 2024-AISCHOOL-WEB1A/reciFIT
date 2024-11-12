@@ -48,9 +48,11 @@ const RecipeMain = () => {
         <div className='recipeMain-container'>
             {/* 검색 폼 */}
             <div className="search__container">
-                <p className="search__title">
-                </p>
-                <input className="search__input" type="text" placeholder="당신만의 재료로 완벽한 요리법을 찾아보세요 🍜" />
+                <p className="search__title"></p>
+                <div className='search__input__container'>
+                    <input className="search__input" type="text" placeholder="당신만의 재료로 완벽한 요리법을 찾아보세요 🍜" />
+                    <button className='searchBtn'></button>
+                </div>
             </div>
 
             <div className='first-listItem'>
