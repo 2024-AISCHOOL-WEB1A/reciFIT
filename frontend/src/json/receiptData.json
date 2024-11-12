@@ -1,16 +1,50 @@
 [{
     "name":"바닐라라떼",
     "price":"5000",
-    "quantity":"1"
+    "quantity":"1",
+    "unit":"500ml",
+    "date":"2024-11-12"
 },
 {
-    "name":"아이스아메리카노",
+    "name":"아메리카노",
     "price":"1500",
-    "quantity":"1"
+    "quantity":"1",
+    "unit":"500ml",
+    "date":"2024-11-12"
 },
 {
-    "name":"오뚜기 순후추병",
+    "name":"후추",
     "price":"1900",
-    "quantity":"1"
+    "quantity":"1",
+    "unit":"500ml",
+    "date":"2024-11-12"
+},
+{
+    "name":"고추장",
+    "price":"7980",
+    "quantity":"1",
+    "unit":"500ml",
+    "date":"2024-11-12"
+},
+{
+    "name":"고조이 간식",
+    "price":"100000",
+    "quantity":"100",
+    "unit":"500ml",
+    "date":"2024-11-12"
+},
+{
+    "name":"이사랑 오뎅꼬치",
+    "price":"2100000",
+    "quantity":"100",
+    "unit":"500ml",
+    "date":"2024-11-12"
+},
+{
+    "name":"사람밥",
+    "price":"500",
+    "quantity":"1",
+    "unit":"500ml",
+    "date":"2024-11-12"
 }
 ]

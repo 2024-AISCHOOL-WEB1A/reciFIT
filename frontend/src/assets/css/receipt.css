@@ -1,86 +1,94 @@
+/* 체크박스 스타일 */
+.edit-checkbox {
+    margin: 0 10px 0 5%;
+}
+
+/* 이름 입력 필드 스타일 */
+.receipt-name-input {
+    width: 50%;
+    height: 3vh;
+    padding: 0.2em;
+    margin: 0.2em 5% 0 0;
+    border-radius: 8px;
+    border: solid 1px gray;
+}
+
+/* 수량 조절 버튼 스타일 */
+.quantity-button {
+    padding: 0.2em 0.5em;
+    margin: 0 0.2em;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quantity-button:hover {
+    background-color: rgb(255, 197, 158);
+}
+
+.receipt-quantity-container {
+    display: flex;
+    align-items: center;
+}
+
+
 /* 전체 화면 */
-.receipt-container{
+.receipt-container {
     display: flex;
     flex-direction: column;
     margin: 5% 3% 0 3%;
 }
 
-.receipt-bannercon{
-    display: flex;
-    justify-content: center;
-
-}
-
-.banner-overlay {
-    position: absolute; /* 오버레이를 위치시킵니다 */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 검정색 배경에 50% 투명도 */
-    z-index: 1; /* 필요에 따라 z-index를 설정 */
-  }
-
-.receipt-banner{
-width: 80%;
-height: 20em;
-margin-bottom: 2%;
-border-radius: 10px;
-}
-
 /* 영수증 칸 */
-.receipt{
+.receipt {
     display: flex;
     flex-direction: row;
-    padding-top: 2%;
-    /* border-top: solid 5px gray; */
 }
 
-/* 영수증 사진 */
-.receipt-pic{
+/* 영수증 업로드 사진 */
+.receipt-pic {
     width: 30%;
     height: 100%;
     overflow-y: auto;
     margin: 0 5% 0 10%;
-    padding: 6% 2% 2% 2% ;
+    padding: 2% 2% 2% 2%;
     background-color: #000000;
     border-radius: 10px;
+    text-align: center;
 }
 
-.receipt-img{
-width: 100%;
-height: auto;
+.receipt-img {
+    width: 100%;
+    height: auto;
 }
 
-/* 스크롤바 */
-body::-webkit-scrollbar {
-    width: 8px;  /* 스크롤바의 너비 */
-}
-
-body::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: black; /* 스크롤바의 색상 */
-    
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-track {
-    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+.receipt-arrow{
+    height: 20%;
+    width: auto;
 }
 
 /* 영수증 인식 텍스트 */
-.receipt-textContainer{
+/* .receipt-right{
+    display: inline-block;
     width: 30%;
     height: 100%;
     padding: 1% 1% 1% 0;
+    justify-content: center;
 }
 
-.receipt-top{
-    width: 100%;
-    object-fit: fill;
+.receipt-door{
+    position: relative;
+    width: 110%;
+    height: 1em;
+    background-color: rgb(0, 0, 0);
+    border: solid 5px rgb(152, 152, 152);
+    border-radius: 10px;
+    z-index: -1;
 }
 
-.receipt-box{
+
+.receipt-illustration{
     display: flex;
     flex-direction: column;
     background-color: #d9d9d9;
@@ -88,48 +96,206 @@ body::-webkit-scrollbar-track {
     width: 100%;
     text-align: center;
 }
+ */
 
-.receipt-boxTitle{
-    width: 100%;
-    margin: 3% 0;
+.receipt-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+    padding: 1% 1% 1% 0;
+    justify-content: center;
+    position: relative;
 }
 
-.receipt-subTitle{
+.receipt-door {
+    width: 110%;
+    height: 1em;
+    background-color: rgb(0, 0, 0);
+    border: solid 5px rgb(152, 152, 152);
+    border-radius: 10px;
+    z-index: -1;
+
+    /* animation */
+    /* animation-name: door-width;
+    animation-duration: 1s; */
+}
+
+/* @keyframes door-width {
+    0% {
+        width: 10px;
+    }
+
+    100% {
+        width: 110%;
+    }
+} */
+
+.receipt-arrow{
+    display: flex;
+    height: 100%;
+    ;
+}
+
+.receipt-illustration {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    background-color: #eaeaea;
+    height: max-content;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 1400%;
+
+    /* animation */
+    /* animation-name: receipt-height;
+    animation-duration: 2s;
+    animation-delay: 0.5s; */
+}
+
+
+/* @keyframes receipt-height {
+    0% {
+        display: block;
+        height: 0px;
+        opacity: 0;
+    }
+
+    100% {
+        height: 100%;
+        opacity: 1;
+    }
+} */
+
+
+/* 스크롤바 */
+.receipt-illustration::-webkit-scrollbar {
+    width: 8px;
+    /* 스크롤바의 너비 */
+}
+
+.receipt-illustration::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: rgb(114, 114, 114);
+    /* 스크롤바의 색상 */
+
+    border-radius: 10px;
+}
+
+.receipt-illustration::-webkit-scrollbar-track {
+    background: #eaeaea;
+    /*스크롤바 뒷 배경 색상*/
+}
+
+
+.receipt-title {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10% 0 5%;
+    align-items: center;
+}
+
+.receipt-subTitle {
     display: flex;
     flex-direction: row;
-    padding: 2% 0 5% 0;
-    border-bottom: dashed 3px rgb(255, 255, 255);
+    padding-bottom: 2%;
+    margin-bottom: 2%;
+    border-bottom: dashed 1px rgb(124, 124, 124);
+    padding: 4% 0;
 }
 
-.receipt-boxMiddle{
+.receipt-nick {
+    width: 60%;
+    padding-right: 25%;
+}
+
+.receipt-date {
+    width: 40%;
+    padding-left: 10%;
+}
+
+.receipt-boxMiddle {
     display: flex;
+    padding: 4% 0;
 }
 
-.receipt-boxMiddle.selected {
-    background-color: #52aeff; /* 선택 시 배경색 */
+.receipt-boxMiddle:hover {
+    background-color: rgb(251, 251, 251);
 }
 
-.receipt-subname, .receipt-name{
+.receipt-subname, .receipt-name,
+.receipt-subquantity, .receipt-quantity, .receipt-quantity-container,
+.receipt-subunit,
+.receipt-subExpiration{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 60%;
-    /* border-right: dashed 2px rgb(255, 255, 255); */
-    padding:  2% 0;
+    width: 25%;
 }
 
-.receipt-subquantity, .receipt-quantity{
-    width: 40%;
-    padding:  2% 0;
+.receipt-checkbox {
+    margin-left: 2%;
 }
 
-.receipt-info{
+.receipt-info {
+    width: 100%;
     padding: 5% 0;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 197, 158);
 }
+
+/* 모달 창 오버레이 스타일 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* 모달 내용 스타일 */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #555;
+}
+
 
 /* 버튼 */
-.receipt-CRUD{
+.receipt-button {
     display: flex;
     flex-direction: column-reverse;
     width: 10%;
@@ -137,15 +303,17 @@ body::-webkit-scrollbar-track {
     padding: 1%;
 }
 
-.receipt-R, .receipt-U, .receipt-C, .receipt-D{
+.receipt-R,
+.receipt-U {
     height: 4em;
     padding: 0.5em 1%;
-    background-color: rgb(132, 132, 132);
+    background-color: rgb(238, 238, 238);
     border: none;
     border-radius: 10px;
-    margin-bottom: 2%;
+    margin-bottom: 4%;
 }
 
-.receipt-R:hover, .receipt-U:hover, .receipt-C:hover, .receipt-D:hover{
+.receipt-R:hover,
+.receipt-U:hover {
     background-color: rgb(255, 190, 140);
 }
