@@ -6,8 +6,10 @@ const startTokenCleanupJob = () => {
   cron.schedule("0 0 * * *", async () => {
     console.log("Running token cleanup...");
     try {
-      await jwtStoreUtil.deleteExpiredAccessTokens();
-      await jwtStoreUtil.deleteExpiredRefreshTokens();
+      await Promise.all([
+        jwtStoreUtil.deleteExpiredAccessTokens(),
+        jwtStoreUtil.deleteExpiredRefreshTokens(),
+      ]);
     } catch (err) {
       console.error("Error during token cleanup:", err);
     }

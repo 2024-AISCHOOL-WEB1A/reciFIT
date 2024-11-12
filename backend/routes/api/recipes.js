@@ -121,12 +121,10 @@ router.get("/", authenticateAccessToken, async (req, res) => {
 
     // FastAPI 서버로 사진을 보내서 have 추출
     try {
-      const response = await axios.post(
-        `${process.env.FASTAPI_SERVER_HOST}:${process.env.FASTAPI_SERVER_PORT}/api/ingredients-detection`,
-        {
-          image_url: photoUrl,
-        }
-      );
+      const ingredientFastApiServerUrl = `${process.env.YOLO_FASTAPI_SERVER_HOST}:${process.env.YOLO_FASTAPI_SERVER_PORT}/api/ingredients-detection`;
+      const response = await axios.post(ingredientFastApiServerUrl, {
+        image_url: photoUrl,
+      });
 
       // have를 사진에서 추출 (have가 있는 경우와 없는 경우로 분리)
       const extractedNames = response.data.ingredients_names;
@@ -145,6 +143,31 @@ router.get("/", authenticateAccessToken, async (req, res) => {
 
   // 조회 최대값 MAX_RECIPE_FETCH_LIMIT
   count = Math.min(parseInt(count), MAX_RECIPE_FETCH_LIMIT);
+
+  // 유저의 개인 정보에서 재료 추가 조회 전에 만료되지 않은 재료와 유효한 수량 확인해서 have에 추가
+  if (!have || have.trim() === "") {
+    try {
+      const [ingredientRows] = await db.query(
+        `SELECT i.ingre_name
+       FROM TB_USER_INGREDIENT ui
+       JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
+       WHERE ui.user_idx = ? 
+         AND (ui.expired_date IS NULL OR ui.expired_date > CURDATE())
+         AND ui.quantity > 0`,
+        [userIdx]
+      );
+
+      const validIngredientNames = ingredientRows
+        .map((row) => row.ingre_name)
+        .join(", ");
+      if (validIngredientNames) {
+        have = validIngredientNames;
+      }
+    } catch (err) {
+      console.error("Error fetching valid ingredients:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  }
 
   // 유저의 개인 정보에서 재료 추가 조회
   try {
@@ -215,25 +238,28 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   const dislikeWeight = -0.5;
   let ingredientsQueryString = "";
   let orderByQueryString = "ORDER BY score DESC, RAND()";
+  const params = [];
 
   // 각 재료별 쿼리문 제작
   if (haveIngredients.length > 0) {
-    for (let i = 0; i < haveIngredients.length; i++) {
-      if (i > 0) {
-        ingredientsQueryString += " + ";
-      }
-      ingredientsQueryString += `(ck_ingredients LIKE '%${haveIngredients[i]}%') * ${haveWeight}`;
-    }
+    ingredientsQueryString += haveIngredients
+      .map(() => `(ck_ingredients LIKE ?) * ${haveWeight}`)
+      .join(" + ");
+    params.push(...haveIngredients.map((item) => `%${item}%`));
   }
+
   if (preferIngredients.length > 0) {
-    for (let i = 0; i < preferIngredients.length; i++) {
-      ingredientsQueryString += ` + (ck_ingredients LIKE '%${preferIngredients[i]}%') * ${preferWeight}`;
-    }
+    ingredientsQueryString += preferIngredients
+      .map(() => ` + (ck_ingredients LIKE ?) * ${preferWeight}`)
+      .join("");
+    params.push(...preferIngredients.map((item) => `%${item}%`));
   }
+
   if (dislikeIngredients.length > 0) {
-    for (let i = 0; i < dislikeIngredients.length; i++) {
-      ingredientsQueryString += ` + (ck_ingredients LIKE '%${dislikeIngredients[i]}%') * ${dislikeWeight}`;
-    }
+    ingredientsQueryString += dislikeIngredients
+      .map(() => ` + (ck_ingredients LIKE ?) * ${dislikeWeight}`)
+      .join("");
+    params.push(...dislikeIngredients.map((item) => `%${item}%`));
   }
 
   // score 쿼리
@@ -245,7 +271,6 @@ router.get("/", authenticateAccessToken, async (req, res) => {
 
   // 추가 정보
   const updates = [];
-  const params = [];
 
   // 요리양
   if (amount) {
@@ -394,8 +419,13 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   // nonConsumableIngredients 조건 추가
   if (nonConsumableIngredients.length > 0) {
     const exclusionConditions = nonConsumableIngredients
-      .map((item) => `ck_ingredients NOT LIKE '%${item}%'`)
+      .map(() => `ck_ingredients NOT LIKE ?`)
       .join(" AND ");
+
+    nonConsumableIngredients.forEach((item) => {
+      params.push(`%${item}%`);
+    });
+
     updates.push(exclusionConditions);
   }
 
@@ -406,7 +436,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
     whereClause += " AND " + updates.join(" AND ");
   }
 
-  // TODO : 테이블에 따라 쿼리문 변경할 것
+  // 쿼리
   const query = `
   SELECT
     rcp_idx,
