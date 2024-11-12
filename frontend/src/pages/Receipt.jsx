@@ -44,7 +44,7 @@ const Receipt = () => {
                     <img src={`${process.env.PUBLIC_URL}/img/receipt_img/receipt2.png`} alt="" className='receipt-img' />
                 </div>
 
-                <img src={`${process.env.PUBLIC_URL}/img/receipt_img/arrow.png`} alt="" className='receipt-arrow'/>
+                <div className='receipt-arrow'><img src={`${process.env.PUBLIC_URL}/img/receipt_img/arrow.png`} alt="" /></div>
 
                 <div className='receipt-right'>
                     <div className='receipt-door'></div>
@@ -61,6 +61,10 @@ const Receipt = () => {
                         <div className='receipt-subTitle'>
                             <div className='receipt-subname'><h3>상품명</h3></div>
                             <div className='receipt-subquantity'><h3>수량</h3></div>
+                            <div className='receipt-subunit'><h3>단위</h3></div>
+                            <div className='receipt-subExpiration'><h3>유통기한</h3></div>
+
+
                         </div>
 
                         {editData.map((item, index) => (
