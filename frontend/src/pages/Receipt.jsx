@@ -43,11 +43,9 @@ const Receipt = () => {
                                 <div className='receipt-name'>{item.name}</div>
                                 <div className='receipt-quantity'>{item.quantity}</div>
                             </div>
-                        ),
-
-                        )}
+                        ))}
+                        <div className='receipt-info'>영양분 정보</div>
                     </div>
-                    <div className='receipt-info'>영양분 정보</div>
                 </div>
 
                 <div className='receipt-CRUD'>

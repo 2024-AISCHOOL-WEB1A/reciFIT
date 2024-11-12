@@ -1,3 +1,70 @@
+/* 초기 상태에서 receipt-illustration과 receipt-pic을 숨김 */
+.receipt-illustration, .receipt-pic {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+/* receipt-door가 중앙에 표시되도록 */
+.receipt-door {
+    width: 110%;
+    height: 1em;
+    background-color: rgb(0, 0, 0);
+    border: solid 5px rgb(152, 152, 152);
+    border-radius: 10px;
+    z-index: -1;
+    animation: doorPulse 2s ease-in-out infinite;
+}
+
+/* receipt-illustration이 가운데에서 나타나는 애니메이션 */
+.show-illustration {
+    visibility: visible;
+    opacity: 1;
+    animation: fadeInCenter 1.5s ease-in-out;
+}
+
+/* receipt-pic이 왼쪽에서 슬라이드하는 애니메이션 */
+.show-pic {
+    visibility: visible;
+    opacity: 1;
+    animation: slideInLeft 1.5s ease-in-out;
+}
+
+/* 페이드 인 및 가운데로 등장하는 애니메이션 */
+@keyframes fadeInCenter {
+    0% {
+        opacity: 0;
+        transform: translateY(-20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* receipt-pic 왼쪽에서 부드럽게 나타나는 애니메이션 */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* door가 맥박처럼 서서히 커졌다 작아지는 애니메이션 */
+@keyframes doorPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+
 /* 전체 화면 */
 .receipt-container{
     display: flex;
@@ -112,7 +179,7 @@ height: auto;
 
 .receipt-title{
     width: 100%;
-    margin: 3% 0;
+    margin-top: 5%;
 }
 
 .receipt-subTitle{
@@ -158,6 +225,7 @@ height: auto;
     margin-left: 2%;
 }
 .receipt-info{
+    width: 100%;
     padding: 5% 0;
     background-color: rgb(255, 197, 158);
 }
