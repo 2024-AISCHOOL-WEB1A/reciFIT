@@ -22,7 +22,7 @@ const Header = () => {
             <div className='menu-container'>
               <ul className='menu-list'>
                 <li><Link to="/">홈</Link></li>
-                <li><Link to="/recipeMain">레시피추천</Link></li> 
+                <li><Link to="/recipe">레시피추천</Link></li> 
                 <li><Link to="/receipts">영수증</Link></li>
                 <li><Link to="/ingredients">재료관리</Link></li>
               </ul>
@@ -31,7 +31,7 @@ const Header = () => {
         </div>
 
         <div className='siteFamily'>
-          <Link to="/" className="SiteFamily-text" onClick={toggleMenu}>
+          <Link to="/mypage" className="SiteFamily-text" onClick={toggleMenu}>
             <FontAwesomeIcon icon={faUser} id='userFont' /> 로그인
             <span className="SiteFamily-bar"></span>
           </Link>

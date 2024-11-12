@@ -59,7 +59,7 @@ const Join = () => {
 
 
             <div className='join-login'>
-                <Link to = '/'><img src={`${process.env.PUBLIC_URL}/img/login_pic/logo.png`}
+                <Link to = '/'><img src={`${process.env.PUBLIC_URL}/img/logo.png`}
                     alt="로고"/></Link>
 
                 <h3 className='login-small-text'> sns 로그인으로 간편하게

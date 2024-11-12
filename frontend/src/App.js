@@ -9,33 +9,36 @@ import JoinInfo from "./pages/JoinInfo";
 import RecipeMain from "./pages/RecipeMain";
 import Receipt from "./pages/Receipt";
 import NotFoundPage from "./pages/NotFoundPage";
+import RecipeDetail from "./pages/RecipeDetail";
+import Mypage from "./pages/Mypage";
 
 function App() {
   const location = useLocation();
-  const isNoHeaderFooter = ![
-    "/",
-    "/joinInfo",
-    "/recipeMain",
-    "/receipts",
-  ].includes(location.pathname);
+
+  const isNoHeaderFooter = 
+    ["/", "/joinInfo", "/receipts", '/recipe', '/mypage'].includes(location.pathname) ||
+    location.pathname.startsWith("/recipe/");
 
   return (
     <div>
+      {console.log(isNoHeaderFooter)}
       {/* Join 페이지에서는 Header가 보이지 않도록 설정 */}
-      {!isNoHeaderFooter && <Header />}
+      {isNoHeaderFooter && <Header />}
 
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/join" element={<Join />}></Route>
         <Route path="/joinInfo" element={<JoinInfo />}></Route>
-        <Route path="/recipeMain" element={<RecipeMain />}></Route>
+        <Route path="/recipe" element={<RecipeMain />}></Route>
         <Route path="/receipts" element={<Receipt />}></Route>
+        <Route path="/recipe/:id" element={<RecipeDetail/>}></Route>
+        <Route path="/mypage" element={<Mypage/>}></Route>
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
-      {!isNoHeaderFooter && <Footer />}
+      {isNoHeaderFooter && <Footer />}
     </div>
   );
 }
