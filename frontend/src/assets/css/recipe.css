@@ -320,9 +320,10 @@
     font-family: 'Raleway', sans-serif;
 }
 
-.search__input {
+.search__input__container {
     width: 100%;
     padding: 12px 24px;
+    /* position: relative; */
 
     background-color: transparent;
     transition: transform 250ms ease-in-out;
@@ -333,23 +334,15 @@
     background-color: transparent;
     /*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
 
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: 18px 18px;
-    background-position: 95% center;
+    /* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E"); */
+    /* background-repeat: no-repeat; */
+    /* background-size: 18px 18px; */
+    /* background-position: 95% center; */
     border-radius: 50px;
     border: 3px solid #f4b057;
     transition: all 250ms ease-in-out;
     backface-visibility: hidden;
     transform-style: preserve-3d;
-
-    &::placeholder {
-        color: color(#575756 a(0.8));
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        font-family: 'Pretendard-Regular';
-        font-size: 1.15em;
-    }
 
     &:hover,
     &:focus {
@@ -362,11 +355,24 @@
     }
 }
 
+.search__input{
+    width: 100%;
+    border: none;
+
+    &::placeholder {
+        color: color(#575756 a(0.8));
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-family: 'Pretendard-Regular';
+        font-size: 1.15em;
+    }
+}
+
 .search {
     &::placeholder {
         color: color(#575756 a(0.8));
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 0.5px;
     }
 
     &:hover,
@@ -377,5 +383,353 @@
         border-bottom: 1px solid #575756;
         border-radius: 0;
         background-position: 100% center;
+    }
+}
+
+/* 검색 버튼 */
+.searchBtn{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2em;
+    width: 2em;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+
+    background-color: transparent;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 22px 22px;
+    background-position: 95% center;
+    border-radius: 50px;
+    /* border: 3px solid #f4b057; */
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    /* transition: transform 250ms ease-in-out; */
+}
+
+.searchBtn:hover{
+    background-size: 18.5px 18.5px;
+}
+
+
+
+/* ------------------------------------------------------------- RecipeDetail.jsx 부분 ---------------------------------------------------------------- */
+
+* {
+    font-family: 'Pretendard-Regular';
+    letter-spacing: 0.5px;
+}
+
+#recipe {
+    width: 100%;
+    height: 100%;
+}
+
+.detail-container{
+    width: 100%;
+    margin: 1em 8em;
+}
+
+/* 뒤로 가기 버튼 */
+#recipe-details-title {
+    margin-top: 17px;
+    margin-bottom: 17px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+#recipe-details-goback {
+    height: auto;
+    width: 5em;
+    left: 2px;
+    top: 50%;
+    transform: translate(0%, -50%);
+    z-index: 100;
+    font-size: 2em;
+    text-align: center;
+    line-height: 24px;
+}
+
+
+/* photo */
+.photo {
+    display: flex;
+    width: 100%;
+
+}
+
+.photo img {
+    width: 40vw;
+    height: auto;
+    /* border-radius: 15px; */
+}
+
+
+
+
+/* 요리 제목 */
+#recipe_name {
+    margin-top: 15px;
+    width: 100%;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* content */
+#instruction {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgb(139, 139, 139);
+    padding: 0 7px;
+}
+
+
+
+/* .rowflex 클래스: 플렉스박스를 사용하여 가로로 정렬하고 높이를 200px로 설정 */
+.rowflex {
+    display: flex;
+    /* 플렉스박스로 설정 */
+    flex-direction: row;
+    /* 가로 방향으로 정렬 */
+    height: 50px;
+    /* 높이를 200px로 설정 */
+    margin: 5px 0;
+}
+
+/* .rowflex > div: 각 자식 div가 동일한 너비를 차지하고 텍스트를 가운데 정렬 */
+.rowflex>div {
+    flex: 1;
+    /* 각 자식 div가 동일한 너비를 차지하도록 설정 */
+    display: flex;
+    /* 자식 div를 플렉스박스로 설정 */
+    justify-content: center;
+    /* 자식 div 안의 텍스트를 좌우 가운데 정렬 */
+    align-items: center;
+    /* 자식 div 안의 텍스트를 상하 가운데 정렬 */
+    position: relative;
+    /* 나누는 선을 추가하기 위한 위치 설정 */
+}
+
+/* .rowflex > div:not(:last-child)::after: 마지막 자식이 아닌 모든 자식 div의 오른쪽에 세로선을 추가 */
+.rowflex>div:not(:last-child)::after {
+    content: '';
+    /* 가상 요소 생성 */
+    position: absolute;
+    /* 절대 위치 지정 */
+    right: 0;
+    /* 오른쪽 끝에 위치 */
+    top: 50%;
+    /* 상하 가운데 정렬 */
+    transform: translateY(-50%);
+    /* 상하 가운데 정렬 보정 */
+    height: 50%;
+    /* 세로 선의 높이를 50%로 설정 */
+    width: 1px;
+    /* 세로 선의 너비를 1px로 설정 */
+    background-color: #ccc;
+    /* 나누는 선의 색상을 회색으로 설정 */
+}
+
+/* .rowflex > div:not(:last-child): 마지막 자식이 아닌 모든 자식 div에 오른쪽 패딩 추가 */
+.rowflex>div:not(:last-child) {
+    padding-right: 10px;
+    /* 오른쪽 패딩을 10px로 설정 */
+}
+
+/* .rowflex > div:not(:first-child): 첫 번째 자식이 아닌 모든 자식 div에 왼쪽 패딩 추가 */
+.rowflex>div:not(:first-child) {
+    padding-left: 10px;
+    /* 왼쪽 패딩을 10px로 설정 */
+}
+
+.recipe-detail-rowflex-div {
+    font-size: 22px;
+}
+
+.recipe-detail-rowflex-div div {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#ingredient-wrapper {
+    padding: 0 7px;
+}
+
+#ingredient-wrapper div {
+    padding-left: 3px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#ingredient-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+
+    font-size: 14px;
+}
+
+#ingredient-wrapper th {
+    padding: 5px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    width: 72%;
+}
+
+#ingredient-wrapper td {
+    padding: 5px 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    width: 28%;
+}
+
+#description-title {
+    padding: 0 7px;
+    margin-top: 15px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+#description {
+    padding: 5px 7px;
+    margin-bottom: 10px;
+}
+
+#description p {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+/* 로딩화면 */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 24px;
+    z-index: 9999;
+}
+
+.spinner {
+    -webkit-animation: rotator 1.4s linear infinite;
+    animation: rotator 1.4s linear infinite;
+}
+
+@-webkit-keyframes rotator {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+@keyframes rotator {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+.path {
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+    animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes colors {
+    0% {
+        stroke: #4285F4;
+    }
+
+    25% {
+        stroke: #DE3E35;
+    }
+
+    50% {
+        stroke: #F7C223;
+    }
+
+    75% {
+        stroke: #1B9A59;
+    }
+
+    100% {
+        stroke: #4285F4;
+    }
+}
+
+@keyframes colors {
+    0% {
+        stroke: #4285F4;
+    }
+
+    25% {
+        stroke: #DE3E35;
+    }
+
+    50% {
+        stroke: #F7C223;
+    }
+
+    75% {
+        stroke: #1B9A59;
+    }
+
+    100% {
+        stroke: #4285F4;
+    }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dashoffset: 187;
+    }
+
+    50% {
+        stroke-dashoffset: 46.75;
+        transform: rotate(135deg);
+    }
+
+    100% {
+        stroke-dashoffset: 187;
+        transform: rotate(450deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 187;
+    }
+
+    50% {
+        stroke-dashoffset: 46.75;
+        transform: rotate(135deg);
+    }
+
+    100% {
+        stroke-dashoffset: 187;
+        transform: rotate(450deg);
     }
 }
