@@ -16,7 +16,23 @@ async function getRecipeOwner(rcpIdx) {
   return recipes[0];
 }
 
+function receiptFormatDate(inputDate) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(inputDate)) {
+    // If input is already in yyyy-mm-dd format
+    return inputDate;
+  } else if (/^\d{14}$/.test(inputDate)) {
+    // If input is in yyyymmddhhMMss format
+    const year = inputDate.slice(0, 4);
+    const month = inputDate.slice(4, 6);
+    const day = inputDate.slice(6, 8);
+    return `${year}-${month}-${day}`;
+  } else {
+    return null;
+  }
+}
+
 module.exports = {
   getUserRole,
   getRecipeOwner,
+  receiptFormatDate,
 };
