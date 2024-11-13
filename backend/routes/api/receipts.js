@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../../config/db");
 const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
-const { isValidIdx, isValidURL } = require("../../utils/validation");
+const { isValidURL } = require("../../utils/validation");
 const { receiptFormatDate } = require("../../utils/dbHelpers");
 const {
   findMatchingIngredient,
@@ -63,13 +63,31 @@ router.post("/", authenticateAccessToken, async (req, res) => {
           // 수량과 단위를 추출
           const { quantity, unit } = extractQuantityAndUnit(normalizedText);
 
-          // count 값을 설정: quantity가 0보다 크면 quantity를 사용, 그렇지 않으면 item.count.text 사용
-          const count =
-            quantity > 0
-              ? quantity
-              : item.count?.text
-              ? parseInt(item.count.text, 10)
-              : 1;
+          // count 값을 설정: quantity가 0보다 크면 quantity * count를 사용, 그렇지 않으면 item.count.text 사용
+          let count = 0;
+          // 추출된 수량이 1이상인 경우
+          if (quantity > 0) {
+            // count가 존재할 경우
+            if (item.count?.text && parseInt(item.count.text, 10) > 0) {
+              count = quantity * parseInt(item.count.text, 10);
+            } else {
+              count = quantity;
+            }
+          }
+          // 없는 경우 그냥 수량 사용
+          else {
+            if (item.count?.text && parseInt(item.count.text, 10) > 0) {
+              count = parseInt(item.count.text, 10);
+            } else {
+              count = 1;
+            }
+          }
+          // const count =
+          //   quantity > 0
+          //     ? quantity
+          //     : item.count?.text
+          //     ? parseInt(item.count.text, 10)
+          //     : 1;
 
           return {
             name: matchedName,
@@ -115,11 +133,20 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
         if (ingredient) {
           // 각 영양 성분을 합산
-          totalCalories += (ingredient.calories || 0) * item.count;
-          totalFat += (ingredient.fat || 0) * item.count;
-          totalProtein += (ingredient.protein || 0) * item.count;
-          totalCarbohydrates += (ingredient.carbohydrates || 0) * item.count;
-          totalFiber += (ingredient.fiber || 0) * item.count;
+          if (ingredient.unit === "g" || ingredient.unit === "ml") {
+            totalCalories += (ingredient.calories || 0) * (item.count / 100);
+            totalFat += (ingredient.fat || 0) * (item.count / 100);
+            totalProtein += (ingredient.protein || 0) * (item.count / 100);
+            totalCarbohydrates +=
+              (ingredient.carbohydrates || 0) * (item.count / 100);
+            totalFiber += (ingredient.fiber || 0) * (item.count / 100);
+          } else {
+            totalCalories += (ingredient.calories || 0) * item.count;
+            totalFat += (ingredient.fat || 0) * item.count;
+            totalProtein += (ingredient.protein || 0) * item.count;
+            totalCarbohydrates += (ingredient.carbohydrates || 0) * item.count;
+            totalFiber += (ingredient.fiber || 0) * item.count;
+          }
 
           // expired_date 계산
           const expiredDate = new Date(purchaseDate);
@@ -132,7 +159,6 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
           // 가공된 데이터 생성
           return {
-            userIdx,
             ingreIdx: ingredient.ingre_idx,
             ingreName: ingredient.ingre_name,
             quantity: item.count,

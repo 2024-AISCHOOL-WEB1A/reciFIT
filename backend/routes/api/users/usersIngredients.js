@@ -6,6 +6,7 @@ const {
   isValidDate,
   isStartDateBeforeEndDate,
 } = require("../../../utils/validation");
+const ingredintUtils = require("../../../utils/ingredientsUtils");
 
 // 유저의 전체 식재료 불러오기
 router.get("/", authenticateAccessToken, async (req, res) => {
@@ -311,5 +312,91 @@ router.delete("/:uIngreId", authenticateAccessToken, async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// 유저의 식재료 차감 (patch)
+router.patch("/", authenticateAccessToken, async (req, res) => {
+  const { userIdx } = req.user;
+  const { rcpIdx } = req.body;
+
+  // rcpIdx가 제공되지 않은 경우 에러 반환
+  if (!rcpIdx) {
+    return res.status(400).json({ message: "Recipe ID is required" });
+  }
+
+  try {
+    // 레시피 정보 조회
+    const [recipeRows] = await db.query(
+      `SELECT ck_ingredients
+        FROM TB_RECIPE
+        WHERE rcp_idx = ?`,
+      [rcpIdx]
+    );
+
+    if (recipeRows.length === 0) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    const recipeIngredients = ingredintUtils.parseIngredients(
+      recipeRows[0].ck_ingredients
+    );
+
+    // Promise 배열 생성
+    const updatePromises = recipeIngredients.map(async (ingredient) => {
+      // 파싱한 재료 이름을 사전 매칭 이름으로 변환
+      const matchedIngredientName =
+        ingredintUtils.findMatchingIngredient(ingredient.name) ||
+        ingredient.name;
+
+      // 유저의 재료 정보 조회 (TB_USER_INGREDIENT와 TB_INGREDIENT를 조인)
+      const [userIngredientRows] = await db.query(
+        `SELECT ui.u_ingre_idx, ui.quantity, ui.unit 
+         FROM TB_USER_INGREDIENT ui
+         JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
+         WHERE ui.user_idx = ?
+           AND i.ingre_name = ?
+           AND ui.quantity > 0
+           AND (ui.expired_date IS NULL OR ui.expired_date > CURDATE())`,
+        [userIdx, matchedIngredientName]
+      );
+
+      if (userIngredientRows.length > 0) {
+        const userIngredient = userIngredientRows[0];
+
+        // 수량 변환 및 차감 계산
+        const quantityToDeduct = ingredintUtils.convertQuantity(
+          ingredient.amount,
+          ingredient.unit,
+          userIngredient.unit
+        );
+        const updatedQuantity = Math.max(
+          userIngredient.quantity - quantityToDeduct,
+          0
+        );
+
+        // 차감된 수량 업데이트 쿼리 반환
+        return db.query(
+          `UPDATE TB_USER_INGREDIENT SET quantity = ? WHERE u_ingre_idx = ?`,
+          [updatedQuantity, userIngredient.u_ingre_idx]
+        );
+      }
+    });
+
+    // 모든 업데이트가 완료될 때까지 대기
+    await Promise.all(updatePromises);
+
+    return res
+      .status(200)
+      .json({ message: "Ingredients deducted successfully" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// (() => {
+//   const ingredientsString =
+//     "[재료] 건표고버섯 9개| 오이 1/2개| 당근 1/2| 양파 적당량| 사과 1~2L| 그외의 야채| 과일 [녹말물] 녹말가루 2C| 물 1C| 계란 노른자 1개 [탕수 소스] 물 2C| 설탕 1/2C| 식초 3T| 간장 1T| 녹말물 2T";
+//   console.log(ingredintUtils.parseIngredients(ingredientsString));
+// })();
 
 module.exports = router;

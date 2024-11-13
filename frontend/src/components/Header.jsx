@@ -46,7 +46,7 @@ const Header = () => {
               <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">나의 레시피 조회</Link>
             </li>
             <li className='SiteFamilySelect-item'>
-              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">현재 재고 관리</Link>
+              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">식재료 재고 관리</Link>
             </li>
             <li className='SiteFamilySelect-item'>
               <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">영수증 조회 및 관리</Link>

@@ -11,12 +11,14 @@ import Receipt from "./pages/Receipt";
 import NotFoundPage from "./pages/NotFoundPage";
 import RecipeDetail from "./pages/RecipeDetail";
 import Mypage from "./pages/Mypage";
+import Ingredients from "./pages/Ingredients";
+
 
 function App() {
   const location = useLocation();
 
   const isNoHeaderFooter = 
-    ["/", "/joinInfo", "/receipts", '/recipe', '/mypage'].includes(location.pathname) ||
+    ["/", "/joinInfo", "/receipts", '/recipe', '/mypage', '/ingredients'].includes(location.pathname) ||
     location.pathname.startsWith("/recipe/");
 
   return (
@@ -33,6 +35,7 @@ function App() {
         <Route path="/receipts" element={<Receipt />}></Route>
         <Route path="/recipe/:id" element={<RecipeDetail/>}></Route>
         <Route path="/mypage" element={<Mypage/>}></Route>
+        <Route path="/ingredients" element={<Ingredients/>}></Route>
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFoundPage />} />
