@@ -48,11 +48,11 @@ const RecipeMain = () => {
         <div className='recipeMain-container'>
             {/* 검색 폼 */}
             <div className="search__container">
-                <p className="search__title"></p>
                 <div className='search__input__container'>
                     <input className="search__input" type="text" placeholder="당신만의 재료로 완벽한 요리법을 찾아보세요 🍜" />
                     <button className='searchBtn'></button>
                 </div>
+                <p className="search__title">#집밥 #손님접대 #엄마손맛 #동파육 #백종원레시피</p>
             </div>
 
             <div className='first-listItem'>
@@ -109,32 +109,35 @@ const RecipeMain = () => {
                     <div className="cate_cont">
                         <ul className='category-items'>
                             <li><a href="#">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate1_01.png" alt="전체" />
+                                <img src="/img/recipe_category/all.png" alt="전체" />
                                 <span>전체</span> </a></li>
                             <li><a href="#">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate1_09.png" alt="밑반찬" />
+                                <img src="/img/recipe_category/fried-egg-real.png" alt="밑반찬" />
                                 <span>밑반찬</span></a></li>
                             <li><a href="#">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate1_07.png" alt="메인반찬" />
+                                <img src="/img/recipe_category/pork.png" alt="메인반찬" />
                                 <span>메인반찬</span></a></li>
                             <li><a href="#">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate1_03.png" alt="국/탕" />
+                                <img src="/img/recipe_category/nambi.png" alt="국/탕" />
                                 <span>국/탕</span></a></li>
                             <li><a href="/">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate1_16.png" alt="찌개" />
+                                <img src="/img/recipe_category/zzigae.png" alt="찌개"/>
                                 <span>찌개</span></a></li>
                             <li><a href="#">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate2_12.png" alt="초스피드" />
+                                <img src="/img/recipe_category/clock.png" alt="초스피드" />
                                 <span>초스피드</span> </a></li>
                             <li><a href="/">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate2_05.png" alt="손님접대" />
+                                <img src="/img/recipe_category/cooking.png" alt="손님접대" />
                                 <span>손님접대</span> </a> </li>
                             <li><a href="/">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate1_10.png" alt="밥/죽/떡" />
+                                <img src="/img/recipe_category/rice-bowl.png" alt="밥/죽/떡" />
                                 <span>밥/죽/떡</span></a></li>
                             <li><a href="/">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/cate2_07.png" alt="술안주" />
+                                <img src="/img/recipe_category/beer.png" alt="술안주" />
                                 <span>술안주</span></a></li>
+                            <li><a href="/">
+                                <img src="/img/recipe_category/chinese-food.png" alt="아시안" />
+                                <span>아시안</span></a></li>
                         </ul>
                     </div>
                     {/* <div className="slide_list_right">
