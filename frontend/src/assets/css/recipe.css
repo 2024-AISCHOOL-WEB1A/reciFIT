@@ -12,6 +12,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* -----------------=------------------------- */
 
 /* 검색창 부분 */
@@ -236,6 +243,10 @@
     cursor: pointer;
     padding: 0;
 }
+.slide_btn_prev span:hover,
+.slide_btn_next span:hover {
+    color: #f4b057;
+}
 
 .slide_btn_prev span,
 .slide_btn_next span {
@@ -307,6 +318,21 @@
     font-size: 1.15em;
 }
 
+@media (min-width: 1440px) and (max-width: 1920px) {
+    .recipe-category {
+        width: 71%;
+        height: 16vh;
+    }
+}
+
+/* 태블릿: 768px 이상 1440px 미만 */
+@media (min-width: 768px) and (max-width: 1440px) {
+    
+}
+
+/* 모바일: 768px 미만 */
+@media (max-width: 767px) {
+}
 
 /* 검색창 */
 @use postcss-color-function;
@@ -368,6 +394,12 @@
     }
 }
 
+.search__title{
+    margin-left: 1.3em;
+    margin-top: 0.5em;
+    color: #1c1c1c;
+}
+
 .search {
     &::placeholder {
         color: color(#575756 a(0.8));
@@ -425,19 +457,21 @@
 }
 
 #recipe {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    margin-left: 6.5em;
+    margin-right: 6.5em;
 }
 
 .detail-container{
-    width: 100%;
-    margin: 1em 8em;
+    border: 0.18em solid #131313;
+    padding: 1px 0;
+    display: flex;
 }
+
 
 /* 뒤로 가기 버튼 */
 #recipe-details-title {
     margin-top: 17px;
-    margin-bottom: 17px;
     text-align: center;
     position: relative;
     width: 100%;
@@ -445,97 +479,92 @@
 
 #recipe-details-goback {
     height: auto;
-    width: 5em;
-    left: 2px;
+    width: 0.51em;
     top: 50%;
     transform: translate(0%, -50%);
     z-index: 100;
     font-size: 2em;
     text-align: center;
-    line-height: 24px;
+    margin-top: 1em;
+    cursor: pointer;
+
+    /* display: inline-block; */
+    transition: transform 0.3s ease;
 }
 
+#recipe-details-goback:hover{
+    color: #f4b057;
+}
 
 /* photo */
 .photo {
     display: flex;
-    width: 100%;
-
+    width: fit-content;
+    border-right: 0.18em solid #131313;
 }
 
 .photo img {
     width: 40vw;
     height: auto;
+    padding-right: 1px;
+    padding-left: 1px;
     /* border-radius: 15px; */
 }
 
-
-
+.instruct-container{
+    display: flex;
+    flex-direction: column;
+}
 
 /* 요리 제목 */
 #recipe_name {
-    margin-top: 15px;
+    margin-top: 2em;
     width: 100%;
     font-size: 36px;
     font-weight: 700;
+    text-align: center;
+    font-family: 'SF_HambakSnow';
 }
 
 /* content */
 #instruction {
-    margin-top: 10px;
-    font-size: 12px;
-    color: rgb(139, 139, 139);
-    padding: 0 7px;
+    height: 100%;
+    font-size: 1.2em;
+    color: #8b8383;
+    margin: 4em 3em 0em 3em;
 }
 
-
-
-/* .rowflex 클래스: 플렉스박스를 사용하여 가로로 정렬하고 높이를 200px로 설정 */
 .rowflex {
     display: flex;
-    /* 플렉스박스로 설정 */
     flex-direction: row;
-    /* 가로 방향으로 정렬 */
-    height: 50px;
-    /* 높이를 200px로 설정 */
+    height: 10em;
     margin: 5px 0;
+    color: #685d5d;
+
+    border-top: 0.18em solid #131313;
+    padding-top: 0.5%;
 }
 
-/* .rowflex > div: 각 자식 div가 동일한 너비를 차지하고 텍스트를 가운데 정렬 */
 .rowflex>div {
     flex: 1;
-    /* 각 자식 div가 동일한 너비를 차지하도록 설정 */
     display: flex;
-    /* 자식 div를 플렉스박스로 설정 */
     justify-content: center;
-    /* 자식 div 안의 텍스트를 좌우 가운데 정렬 */
     align-items: center;
-    /* 자식 div 안의 텍스트를 상하 가운데 정렬 */
     position: relative;
-    /* 나누는 선을 추가하기 위한 위치 설정 */
 }
 
 /* .rowflex > div:not(:last-child)::after: 마지막 자식이 아닌 모든 자식 div의 오른쪽에 세로선을 추가 */
 .rowflex>div:not(:last-child)::after {
     content: '';
-    /* 가상 요소 생성 */
     position: absolute;
-    /* 절대 위치 지정 */
     right: 0;
-    /* 오른쪽 끝에 위치 */
     top: 50%;
-    /* 상하 가운데 정렬 */
     transform: translateY(-50%);
-    /* 상하 가운데 정렬 보정 */
     height: 50%;
-    /* 세로 선의 높이를 50%로 설정 */
     width: 1px;
-    /* 세로 선의 너비를 1px로 설정 */
     background-color: #ccc;
-    /* 나누는 선의 색상을 회색으로 설정 */
 }
 
-/* .rowflex > div:not(:last-child): 마지막 자식이 아닌 모든 자식 div에 오른쪽 패딩 추가 */
 .rowflex>div:not(:last-child) {
     padding-right: 10px;
     /* 오른쪽 패딩을 10px로 설정 */
@@ -544,192 +573,333 @@
 /* .rowflex > div:not(:first-child): 첫 번째 자식이 아닌 모든 자식 div에 왼쪽 패딩 추가 */
 .rowflex>div:not(:first-child) {
     padding-left: 10px;
-    /* 왼쪽 패딩을 10px로 설정 */
 }
-
 .recipe-detail-rowflex-div {
     font-size: 22px;
 }
-
 .recipe-detail-rowflex-div div {
-    margin-left: 5px;
-    font-size: 14px;
-    font-weight: 500;
+    margin-left: 1em;
+    font-size: 0.65em;
+    font-weight: bolder;
 }
+
+/* 데스크톱: 1920px 이상 */
+@media (min-width: 1920px) {
+    .photo img {
+        width: 40vw;
+        height: auto;
+        padding-right: 1px;
+        padding-left: 1px;
+        /* border-radius: 15px; */
+    }
+    
+    .instruct-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1440px) and (max-width: 1920px) {
+    .photo {
+        height: fit-content;
+    }
+    .photo img {
+        width: 35vw;
+        height: 40vh;
+    }
+    .instruct-container{
+        display: flex;
+        flex-direction: column;
+    }
+    #recipe_name {
+        margin-top: 1em;
+        padding: 1em 0.5em 0em 0.5em;
+        width: 100%;
+        font-size: 1.8em;
+        font-weight: 700;
+        text-align: center;
+        font-family: 'SF_HambakSnow';
+    }
+    #instruction {
+        font-size: 1.1em;
+        margin: 0em 3em 0em 3em;
+        display: flex;
+        align-items: center;
+    }
+    .rowflex {
+        height: 8em;
+        margin: 5px 0;
+    
+        border-top: 0.18em solid #131313;
+        padding-top: 0.5%;
+    }
+}
+
+/* 태블릿: 768px 이상 1440px 미만 */
+@media (min-width: 768px) and (max-width: 1440px) {
+    .photo {
+        height: fit-content;
+    }
+    .photo img {
+        width: 35vw;
+        height: 40vh;
+    }
+    .instruct-container{
+        display: flex;
+        flex-direction: column;
+    }
+    #recipe_name {
+        margin-top: 1em;
+        padding: 1em 0.5em 0em 0.5em;
+        width: 100%;
+        font-size: 1.5em;
+        font-weight: 700;
+        text-align: center;
+        font-family: 'SF_HambakSnow';
+    }
+    #instruction {
+        font-size: 1.05em;
+        margin: 0em 3em 0em 3em;
+        display: flex;
+        align-items: center;
+    }
+    .rowflex {
+        height: 8em;
+        margin: 5px 0;
+    
+        border-top: 0.18em solid #131313;
+        padding-top: 0.5%;
+    }
+}
+
+/* 모바일: 768px 미만 */
+@media (max-width: 767px) {
+    .photo {
+        height: fit-content;
+    }
+    .photo img {
+        width: 35vw;
+        height: 40vh;
+    }
+    .instruct-container{
+        display: flex;
+        flex-direction: column;
+    }
+    #recipe_name {
+        margin-top: 1em;
+        padding: 1em 0.5em 0em 0.5em;
+        width: 100%;
+        font-size: 1.5em;
+        font-weight: 700;
+        text-align: center;
+        font-family: 'SF_HambakSnow';
+    }
+    #instruction {
+        font-size: 1.05em;
+        margin: 0em 3em 0em 3em;
+        display: flex;
+        align-items: center;
+    }
+    .rowflex {
+        height: 8em;
+        margin: 5px 0;
+    
+        border-top: 0.18em solid #131313;
+        padding-top: 0.5%;
+    }
+}
+
+
+/*  재료 리스트  */
 
 #ingredient-wrapper {
-    padding: 0 7px;
+    width: auto;
+    padding: 3.5em 1em;
+    border-left: 0.18em solid #131313;
+    border-right: 0.18em solid #131313;
+
+    display: flex;
+    justify-content: space-between;
 }
 
-#ingredient-wrapper div {
-    padding-left: 3px;
-    margin-top: 20px;
-    font-size: 20px;
+#ingredient-List{
+    width: 100%;
+    padding: 0em 3em;
+}
+
+#ingredientList{
+    width: 100%;
+}
+
+.ingredientList-Title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    height: 2em;
+
+    padding-left: 2em;
+    margin-bottom: 0.5em;
+    font-size: 1.35em;
     font-weight: 700;
 }
 
+.ingredientList-Title h3 {
+    margin-right: 0.3em;
+}
+
+.ingredientList-Title span {
+    color: #a1a19e4b;
+    font-style: italic;
+    font-size: 1.3em;
+    margin-left: -0.5em;
+
+    padding-bottom: 5%;
+}
+
+/* 리스트 하위 테이블 */
 #ingredient-wrapper table {
     width: 100%;
     border-collapse: collapse;
-    margin: 10px 0;
-
+    margin: 0 2em 3em 2em;
     font-size: 14px;
 }
 
 #ingredient-wrapper th {
-    padding: 5px 12px;
+    padding: 0.7em 0em 0.7em 1em;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-    width: 72%;
+    border-bottom: 0.1em solid #ddd;
+    width: 60%;
+
+    font-size: 1.2em;
 }
 
 #ingredient-wrapper td {
-    padding: 5px 8px;
-    text-align: center;
+    padding: 0.8em 1em;
+    text-align: end;
     border-bottom: 1px solid #ddd;
-    width: 28%;
+    width: 10%;
+
+    font-size: 1.1em;
 }
+
+/* 데스크톱: 1920px 이상 */
+@media (min-width: 1920px) {
+    #ingredient-wrapper {
+        flex-direction: row; /* 기본 방향 유지 */
+    }
+}
+@media (min-width: 1440px) and (max-width: 1920px) {
+    #ingredient-wrapper td {
+        width: 15%;
+    }
+}
+
+/* 태블릿: 768px 이상 1440px 미만 */
+@media (min-width: 768px) and (max-width: 1440px) {
+    #ingredient-wrapper {
+        flex-direction: column; /* 가로 배치 유지 */
+        padding: 2.5em 1em;
+    }
+    #ingredient-List{
+        padding: 0em 5em;
+    }
+
+    /* 리스트 하위 테이블 */
+    #ingredient-wrapper table {
+        width: 95%;
+        border-collapse: collapse;
+        margin: 0 2em 3em 2em;
+        font-size: 14px;
+    }
+
+    #ingredient-wrapper th {
+        padding: 0.7em 0em 0.7em 1em;
+        text-align: left;
+        width: 50%;
+        font-size: 1em;
+    }
+
+    #ingredient-wrapper td {
+        padding: 0.5em 1em;
+        width: 10%;
+        font-size: 1em;
+    }
+}
+
+/* 모바일: 768px 미만 */
+@media (max-width: 767px) {
+    #ingredient-wrapper {
+        flex-direction: column; /* 세로 배치로 변경 */
+        align-items: center;
+        padding: 2em 0.5em;
+    }
+}
+
+/* --------------------- Description 요리 방법 --------------------------- */
+
+#description-wrapper{
+    width: auto;
+    border-left: 0.18em solid #131313;
+    border-right: 0.18em solid #131313;
+    border-bottom: 0.18em solid #131313;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0em 6em;
+}
+
 
 #description-title {
     padding: 0 7px;
-    margin-top: 15px;
+    margin-bottom: 0.5em;
+
+    display: flex;
+}
+
+#description-title h3 {
+    margin-right: 0.3em;
     font-size: 28px;
     font-weight: 700;
 }
 
-#description {
-    padding: 5px 7px;
-    margin-bottom: 10px;
+#description-title span {
+    color: #a1a19e4b;
+    font-style: italic;
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-left: -0.5em;
 }
 
-#description p {
-    margin-top: 10px;
-    font-size: 15px;
-    font-weight: 500;
+.description {
+    padding: 0.5em 0.5em;
+    margin-bottom: 5em;
+
+    font-size: 1.4em;
 }
 
 
-/* 로딩화면 */
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    font-size: 24px;
-    z-index: 9999;
-}
-
-.spinner {
-    -webkit-animation: rotator 1.4s linear infinite;
-    animation: rotator 1.4s linear infinite;
-}
-
-@-webkit-keyframes rotator {
-    0% {
-        transform: rotate(0deg);
+@media (min-width: 1440px) and (max-width: 1920px) {
+    #description-wrapper{
+        padding: 0em 6em;
     }
-
-    100% {
-        transform: rotate(270deg);
+    #description-title {
+        font-size: 1.7em;
     }
 }
 
-@keyframes rotator {
-    0% {
-        transform: rotate(0deg);
+/* 태블릿: 768px 이상 1440px 미만 */
+@media (min-width: 768px) and (max-width: 1440px) {
+    #description-wrapper{
+        padding: 0em 8em;
     }
-
-    100% {
-        transform: rotate(270deg);
-    }
-}
-
-.path {
-    stroke-dasharray: 187;
-    stroke-dashoffset: 0;
-    transform-origin: center;
-    -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-    animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-}
-
-@-webkit-keyframes colors {
-    0% {
-        stroke: #4285F4;
-    }
-
-    25% {
-        stroke: #DE3E35;
-    }
-
-    50% {
-        stroke: #F7C223;
-    }
-
-    75% {
-        stroke: #1B9A59;
-    }
-
-    100% {
-        stroke: #4285F4;
+    #description-title {
+        font-size: 1.7em;
     }
 }
 
-@keyframes colors {
-    0% {
-        stroke: #4285F4;
-    }
-
-    25% {
-        stroke: #DE3E35;
-    }
-
-    50% {
-        stroke: #F7C223;
-    }
-
-    75% {
-        stroke: #1B9A59;
-    }
-
-    100% {
-        stroke: #4285F4;
-    }
+/* 모바일: 768px 미만 */
+@media (max-width: 767px) {
 }
 
-@-webkit-keyframes dash {
-    0% {
-        stroke-dashoffset: 187;
-    }
-
-    50% {
-        stroke-dashoffset: 46.75;
-        transform: rotate(135deg);
-    }
-
-    100% {
-        stroke-dashoffset: 187;
-        transform: rotate(450deg);
-    }
-}
-
-@keyframes dash {
-    0% {
-        stroke-dashoffset: 187;
-    }
-
-    50% {
-        stroke-dashoffset: 46.75;
-        transform: rotate(135deg);
-    }
-
-    100% {
-        stroke-dashoffset: 187;
-        transform: rotate(450deg);
-    }
-}
