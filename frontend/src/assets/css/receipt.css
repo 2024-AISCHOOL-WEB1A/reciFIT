@@ -135,7 +135,8 @@
 .receipt-arrow{
     display: flex;
     height: 100%;
-    ;
+    padding-top: 18%;
+    margin-right: 5%;
 }
 
 .receipt-illustration {
