@@ -1,5 +1,5 @@
 const cron = require("node-cron");
-const db = require("./db");
+const db = require("../config/db");
 
 // 환경 점수 차감 작업 스케줄러
 const startDecrementEnvironmentScoreJob = () => {
