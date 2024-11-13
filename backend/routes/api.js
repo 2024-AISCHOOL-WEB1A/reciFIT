@@ -7,6 +7,7 @@ const userIngredientsRouter = require("./api/users/usersIngredients");
 const recipeRouter = require("./api/recipes");
 const receiptRouter = require("./api/receipts");
 const environmentScoreRouter = require("./api/environmentScore");
+const favoriteRouter = require("./api/favorite");
 
 // api routers
 router.use("/auth", authRouter);
@@ -15,5 +16,6 @@ router.use("/users/ingredients", userIngredientsRouter);
 router.use("/recipes", recipeRouter);
 router.use("/receipts", receiptRouter);
 router.use("/environment-score", environmentScoreRouter);
+router.use("/favorite", favoriteRouter);
 
 module.exports = router;
