@@ -1,6 +1,95 @@
 const ingredientsDict = require("../config/ingredientsDict");
 const { normalizeString } = require("./commonUtils");
 
+// 식재료 단위
+const quantityUnits = [
+  "개",
+  "장",
+  "마리",
+  "스틱",
+  "조각",
+  "덩어리",
+  "봉지",
+  "대",
+  "쪽",
+  "단",
+  "팩",
+  "모",
+  "포기",
+  "알",
+  "인분",
+  "봉",
+  "줄",
+  "통",
+  "등분",
+  "뿌리",
+  "톨",
+  "병",
+  "묶음",
+  "캔",
+];
+const volumeUnits = {
+  ml: 1,
+  mL: 1,
+  ML: 1,
+  cc: 1,
+  CC: 1,
+  L: 1000,
+  l: 1000,
+  C: 240,
+  c: 240,
+  T: 15,
+  t: 5,
+  티스푼: 5,
+  스푼: 15,
+  작은스푼: 5,
+  밥수저: 10,
+  수저: 10,
+  숟가락: 10,
+  컵: 240,
+  종이접: 180,
+  큰술: 15,
+  작은술: 5,
+  Ts: 15,
+  ts: 5,
+  소주잔: 50,
+};
+const weightUnits = {
+  g: 1,
+  G: 1,
+  kg: 1000,
+  Kg: 1000,
+  KG: 1000,
+};
+const approxUnits = {
+  약간: 1,
+  소량: 1,
+  적당량: 5,
+  적당히: 5,
+  넉넉히: 10,
+  줌: 30,
+  꼬집: 0.5,
+  입맛에맞게: 3,
+  조금: 2,
+  톡톡: 0.3,
+  톡톡톡: 0.5,
+  주먹: 60,
+  cm: 5,
+  공기: 200,
+  송송: 20,
+  솔솔: 2,
+};
+
+// 단위 체크 함수
+const isUnit = (word) => {
+  return (
+    quantityUnits.includes(word) ||
+    word in volumeUnits ||
+    word in weightUnits ||
+    word in approxUnits
+  );
+};
+
 // 사전 데이터의 인덱스화 (초기화 단계에서 한 번만 실행)
 const exactMatchMap = new Map(); // 원래 key와 normalization된 key를 매핑
 const partialMatchMap = new Map();
@@ -49,10 +138,13 @@ function findMatchingIngredient(itemName) {
   return null; // 매칭되지 않으면 null 반환
 }
 
-function extractQuantityAndUnit(name) {
+// 영수증에서 수량과 단위 추출
+const extractQuantityAndUnit = (name) => {
   // 수량과 단위가 여러 개 있는 경우도 포함하는 정규식
   const quantityRegex =
-    /(\d+(\.\d+)?)(\s*kg|\s*g|\s*ml|\s*l|\s*L|\s*개|\s*병|\s*팩|\s*봉지|\s*컵)?/gi;
+    /(\d+(\.\d+)?)(\s*kg|\s*g|\s*ml|\s*l|\s*L|\s*개|\s*병|\s*구|\s*단|\s*봉|\s*팩|\s*모|\s*봉지|\s*캔|\s*컵)?/gi;
+  // const quantityRegex =
+  //   /(\d+(\.\d+)?)(kg|g|ml|l|L|개|병|구|단|봉|팩|모|봉지|캔|컵)?/gi;
   const matches = [...name.matchAll(quantityRegex)];
 
   if (matches.length > 0) {
@@ -80,17 +172,146 @@ function extractQuantityAndUnit(name) {
       if (unit in unitConversions && primaryUnit in unitConversions) {
         const convertedQuantity = quantity * unitConversions[unit];
         totalQuantity += convertedQuantity;
-      } else if (!primaryUnit) {
+      } else {
         totalQuantity += quantity;
       }
     });
+
     return { quantity: totalQuantity || 1, unit: primaryUnit };
   }
   return { quantity: 0, unit: null };
-}
+};
+
+// 레시피에서 재료 문자열 파싱 함수
+const parseIngredients = (ingredientsString) => {
+  if (!ingredientsString) return null;
+
+  // 그룹을 구분하기 위해 [그룹명]을 |로 변환
+  const ingredientsArray = ingredientsString
+    .replace(/\[.*?\]/g, "|")
+    .split("|")
+    .map((item) => item.trim())
+    .filter((item) => item); // 빈 문자열 제거
+
+  const parsedIngredients = [];
+
+  ingredientsArray.forEach((ingredient) => {
+    // 재료 이름, 수량, 단위를 각각 추출하는 정규식
+    const match = ingredient.match(
+      /^([\S\s]+?)\s(\d+\/\d+|\d+(\.\d+)?(?:~\d+(\.\d+)?)?)([A-Za-z가-힣]*)$/
+    );
+
+    if (match) {
+      // 수량이 있는 경우
+      const amountString = match[2];
+      let amount = null;
+
+      // 범위가 있을 경우 최소값만 추출
+      if (amountString.includes("~")) {
+        const minAmount = amountString.split("~")[0];
+        amount = minAmount.includes("/")
+          ? eval(minAmount)
+          : parseFloat(minAmount);
+      } else {
+        // 단일 수량 처리
+        amount = amountString.includes("/")
+          ? eval(amountString)
+          : parseFloat(amountString);
+      }
+
+      parsedIngredients.push({
+        name: match[1].trim(),
+        amount,
+        unit: match[5] ? match[5].trim() : "개", // 기본값이 '개'
+      });
+    } else {
+      // 수량과 단위가 없는 경우
+      if (ingredient.includes(" ")) {
+        const lastSpaceIndex = ingredient.lastIndexOf(" ");
+        const firstPart = ingredient.substring(0, lastSpaceIndex);
+        const lastPart = ingredient.substring(lastSpaceIndex + 1);
+
+        if (isUnit(lastPart)) {
+          parsedIngredients.push({
+            name: firstPart,
+            amount: 1, // 수량 기본값 1
+            unit: lastPart,
+          });
+          // 수량도 단위도 없으면 걍 확인하지도 마
+        } /*else {
+          parsedIngredients.push({
+            name: ingredient,
+            amount: null,
+            unit: null,
+          }); 
+        }*/
+      } /*else {
+        parsedIngredients.push({
+          name: ingredient,
+          amount: null,
+          unit: null,
+        });
+      }*/
+    }
+  });
+
+  return parsedIngredients;
+};
+
+// 레피시 재료 단위 변환 함수
+const convertQuantity = (amount, recipeUnit, userUnit) => {
+  const AVERAGE_DENSITY = 1.4;
+
+  // 모든 단위를 소문자로 변환
+  recipeUnit = recipeUnit.toLowerCase();
+  userUnit = userUnit.toLowerCase();
+
+  // 동일한 단위일 경우 변환 필요 없음
+  if (recipeUnit === userUnit) {
+    return amount;
+  }
+
+  // 수량 단위가 동일한 경우 변환 필요 없음
+  if (quantityUnits.includes(recipeUnit) && quantityUnits.includes(userUnit)) {
+    return amount;
+  }
+
+  // '약간' 처리: 무게나 부피 단위와 결합 시 지정된 기본값 사용
+  if (approxUnits[recipeUnit]) {
+    if (volumeUnits[userUnit]) {
+      return amount * (approxUnits[recipeUnit] / volumeUnits[userUnit]);
+    }
+    if (weightUnits[userUnit]) {
+      return amount * (approxUnits[recipeUnit] / weightUnits[userUnit]);
+    }
+  }
+
+  if (volumeUnits[recipeUnit] && volumeUnits[userUnit]) {
+    return amount * (volumeUnits[recipeUnit] / volumeUnits[userUnit]);
+  }
+
+  if (weightUnits[recipeUnit] && weightUnits[userUnit]) {
+    return amount * (weightUnits[recipeUnit] / weightUnits[userUnit]);
+  }
+
+  if (volumeUnits[recipeUnit] && weightUnits[userUnit]) {
+    return (
+      amount *
+      ((volumeUnits[recipeUnit] * AVERAGE_DENSITY) / weightUnits[userUnit])
+    );
+  }
+  if (weightUnits[recipeUnit] && volumeUnits[userUnit]) {
+    return (
+      amount *
+      (weightUnits[recipeUnit] / (volumeUnits[userUnit] * AVERAGE_DENSITY))
+    );
+  }
+
+  return 0;
+};
 
 // (() => {
-//   const itemName = "해찬들 고추장 2kg+450g";
+//   const itemName = "무항생제 신선한 대란, 30구";
 //   const matchedIngredient = findMatchingIngredient(itemName);
 //   const extractedQuantityAndUnit = extractQuantityAndUnit(itemName);
 //   if (matchedIngredient) {
@@ -429,4 +650,10 @@ const testData = {
   ],
 };
 
-module.exports = { findMatchingIngredient, extractQuantityAndUnit, testData };
+module.exports = {
+  findMatchingIngredient,
+  extractQuantityAndUnit,
+  parseIngredients,
+  convertQuantity,
+  testData,
+};
