@@ -48,13 +48,20 @@ const RecipeMain = () => {
         <div className='recipeMain-container'>
             {/* 검색 폼 */}
             <div className="search__container">
-                <div className='search__input__container'>
-                    <input className="search__input" type="text" placeholder="당신만의 재료로 완벽한 요리법을 찾아보세요 🍜" />
-                    <button className='searchBtn'></button>
+                <div>
+                    <div className='search__input__container'>
+                        <input className="search__input" type="text" placeholder="당신만의 재료로 완벽한 요리법을 찾아보세요 🍜" />
+                        <button className='searchBtn'></button>
+                    </div>
+                    <p className="search__title">#집밥 #손님접대 #엄마손맛 #동파육 #백종원레시피</p>
                 </div>
-                <p className="search__title">#집밥 #손님접대 #엄마손맛 #동파육 #백종원레시피</p>
+                <div className='site-camera-img'>
+                    <Link to="/">
+                        <img src="/img/site-camera-img.png" alt="" />
+                    </Link>
+                </div>
             </div>
-
+            
             <div className='first-listItem'>
                 <div className='list_content'>
                     <h3 className='list_content_title'>
@@ -108,36 +115,36 @@ const RecipeMain = () => {
                     </div> */}
                     <div className="cate_cont">
                         <ul className='category-items'>
-                            <li><a href="#">
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/all.png" alt="전체" />
-                                <span>전체</span> </a></li>
-                            <li><a href="#">
+                                <span>전체</span> </Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/fried-egg-real.png" alt="밑반찬" />
-                                <span>밑반찬</span></a></li>
-                            <li><a href="#">
+                                <span>밑반찬</span></Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/pork.png" alt="메인반찬" />
-                                <span>메인반찬</span></a></li>
-                            <li><a href="#">
+                                <span>메인반찬</span></Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/nambi.png" alt="국/탕" />
-                                <span>국/탕</span></a></li>
-                            <li><a href="/">
+                                <span>국/탕</span></Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/zzigae.png" alt="찌개"/>
-                                <span>찌개</span></a></li>
-                            <li><a href="#">
+                                <span>찌개</span></Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/clock.png" alt="초스피드" />
-                                <span>초스피드</span> </a></li>
-                            <li><a href="/">
+                                <span>초스피드</span> </Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/cooking.png" alt="손님접대" />
-                                <span>손님접대</span> </a> </li>
-                            <li><a href="/">
+                                <span>손님접대</span> </Link> </li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/rice-bowl.png" alt="밥/죽/떡" />
-                                <span>밥/죽/떡</span></a></li>
-                            <li><a href="/">
+                                <span>밥/죽/떡</span></Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/beer.png" alt="술안주" />
-                                <span>술안주</span></a></li>
-                            <li><a href="/">
+                                <span>술안주</span></Link></li>
+                            <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/chinese-food.png" alt="아시안" />
-                                <span>아시안</span></a></li>
+                                <span>아시안</span></Link></li>
                         </ul>
                     </div>
                     {/* <div className="slide_list_right">
@@ -185,6 +192,8 @@ const RecipeMain = () => {
                     </div>
                 </div>
             </div>
+
+
         </div>
     );
 }

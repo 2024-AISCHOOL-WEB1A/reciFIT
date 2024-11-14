@@ -183,6 +183,7 @@
 	opacity:0;
 }
 
+
 @keyframes MainTopBannerScrollText {
 	0% {
 		opacity:0;
@@ -201,7 +202,75 @@
 	}
 }
 
-@media screen and (max-width: 1920px) and (min-width: 1025px) {
+@media screen and (max-width: 1920px) and (min-width: 1440px) {
+	.MainTopBanner{
+		min-height:21.8333vw;
+	}
+	
+	.Main-container{
+		max-width:100vw;
+		padding:0 4.1666vw;
+	}
+
+	.MainSwipeTitle{
+		font-size:6.2916vw;
+	}
+
+	.MainSwipeThumb{
+		max-width:35.208vw;
+		padding:0 2.60416vw;
+		margin:0.833vw auto;
+	}
+
+	.MainSwipeThumb:before{
+		width:0.9375vw;
+		height:2.55208vw;
+		background-size:0.9375vw 2.55208vw;
+	}
+
+	.MainSwipeThumb:after{
+		width:0.885416vw;
+		height:2.55208vw;
+		background-size:0.885416vw 2.55208vw;
+	}
+	
+	.MainSwipe{
+		top:calc(50% + 18.6041vw);
+	}
+
+	.MainSwipeThumbSlide{
+		width:24.375vw;
+	}
+	
+	.MainTopBannerScroll{
+		width:2.86458vw;
+		bottom:1.5625vw;
+		right:5.2083vw;
+	}
+
+	.MainTopBannerScroll-ico{
+		width:2.86458vw;
+		height:4.8958vw;
+		background-size:2.86458vw 4.8958vw;
+	}
+
+	.MainTopBannerScroll-text{
+		width:3.6458vw;
+		height:1.04166vw;
+		background-size:3.6458vw 1.04166vw;
+		bottom:0.46875vw;
+		left:-4.16666vw;
+	}
+}
+
+@media screen and (max-width: 1440px) and (min-width: 1024px){
+	.MainSwipe{
+		top:calc(50% + 40vh);
+	}
+	.FlotingCampaign-title{
+		width: 13vw;
+	}
+
 	.MainTopBanner{
 		min-height:21.8333vw;
 	}
@@ -231,10 +300,6 @@
 		width:0.885416vw;
 		height:2.55208vw;
 		background-size:0.885416vw 2.55208vw;
-	}
-	
-	.MainSwipe{
-		/* top:calc(50% + 0.6041vw); */
 	}
 
 	.MainSwipeThumbSlide{
@@ -1050,7 +1115,7 @@
 }
 
 
-@media screen and (max-width: 1920px) and (min-width: 1025px) {
+@media screen and (max-width: 1920px) and (min-width: 1440px) {
 	.FlotingCampaign{
 		bottom: 1.5625vw;
 		left:4.16666vw;
