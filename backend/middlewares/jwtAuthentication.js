@@ -1,7 +1,8 @@
 const jwtUtil = require("../utils/jwtUtils");
 
 const authenticateAccessToken = (req, res, next) => {
-  const accessToken = req.headers["authorization"]?.split(" ")[1];
+  const accessToken =
+    req.headers["authorization"]?.split(" ")[1] || req.cookies?.accessToken;
 
   if (!accessToken) {
     return res.status(401).json({ message: "Unauthorized" });
