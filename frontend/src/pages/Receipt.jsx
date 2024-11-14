@@ -22,16 +22,26 @@ const Receipt = () => {
 
     const handleDelete = (index) => {
         const confirmDelete = window.confirm("삭제하시겠습니까?");
-    if (confirmDelete) {
-        const updatedData = editData.filter((_, i) => i !== index);
-        setEditData(updatedData);
-    }
+        if (confirmDelete) {
+            const updatedData = editData.filter((_, i) => i !== index);
+            setEditData(updatedData);
+        }
     };
 
 
     // 모달 열기/닫기 핸들러
     const handleModalToggle = () => {
         setIsModalOpen(!isModalOpen);
+    };
+
+    const handleAdd = () => {
+        const newItem = {
+            name: "",
+            quantity: "",
+            unit: "",
+            lifedays: ""
+        };
+        setEditData([...editData, newItem]);
     };
 
     return (
@@ -70,9 +80,9 @@ const Receipt = () => {
 
                                 {/* 삭제 버튼 */}
                                 {isEditing && (
-                                    <img src={`${process.env.PUBLIC_URL}/img/receipt_img/delete.png`} 
-                                    onClick={() => handleDelete(index)} 
-                                    className="delete-button" />
+                                    <img src={`${process.env.PUBLIC_URL}/img/receipt_img/delete.png`}
+                                        onClick={() => handleDelete(index)}
+                                        className="delete-button" />
                                 )}
 
                                 {/* 상품명 */}
@@ -116,8 +126,15 @@ const Receipt = () => {
                                 <div className='receipt-lifedays'>{item.lifedays}</div>
 
                             </div>
-
                         ))}
+
+                        {/* 추가 버튼: 편집 모드일 때만 표시 */}
+                        {isEditing && (
+                            <button type="button" onClick={handleAdd} className='receipt-add-button'>
+                                추가
+                            </button>
+                        )}
+
                         <div className='receipt-info' onClick={handleModalToggle}>영양분 정보</div>
                     </div>
                 </div>
