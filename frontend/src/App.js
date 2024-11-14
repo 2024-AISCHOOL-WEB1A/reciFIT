@@ -12,36 +12,43 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RecipeDetail from "./pages/RecipeDetail";
 import Mypage from "./pages/Mypage";
 import Ingredients from "./pages/Ingredients";
+import RecipeList from "./pages/RecipeList";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 function App() {
   const location = useLocation();
 
-  const isNoHeaderFooter = 
-    ["/", "/joinInfo", "/receipts", '/recipe', '/mypage', '/ingredients'].includes(location.pathname) ||
+  const isNoHeaderFooter =
+    ["/", "/joinInfo", "/receipts", '/recipe', '/mypage', '/ingredients', '/recipeList'].includes(location.pathname) ||
     location.pathname.startsWith("/recipe/");
 
   return (
     <div>
-      {console.log(isNoHeaderFooter)}
-      {/* Join 페이지에서는 Header가 보이지 않도록 설정 */}
-      {isNoHeaderFooter && <Header />}
+      <ScrollToTop /> {/*페이지 이동 시 브라우저의 스크롤 위치가 항상 페이지 상단으로 초기화 */}
 
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/join" element={<Join />}></Route>
-        <Route path="/joinInfo" element={<JoinInfo />}></Route>
-        <Route path="/recipe" element={<RecipeMain />}></Route>
-        <Route path="/receipts" element={<Receipt />}></Route>
-        <Route path="/recipe/:id" element={<RecipeDetail/>}></Route>
-        <Route path="/mypage" element={<Mypage/>}></Route>
-        <Route path="/ingredients" element={<Ingredients/>}></Route>
+      <div>
+        {console.log(isNoHeaderFooter)}
+        {/* Join 페이지에서는 Header가 보이지 않도록 설정 */}
+        {isNoHeaderFooter && <Header />}
 
-        {/* 404 Not Found */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/join" element={<Join />}></Route>
+          <Route path="/joinInfo" element={<JoinInfo />}></Route>
+          <Route path="/recipe" element={<RecipeMain />}></Route>
+          <Route path="/receipts" element={<Receipt />}></Route>
+          <Route path="/recipe/:id" element={<RecipeDetail />}></Route>
+          <Route path="/mypage" element={<Mypage />}></Route>
+          <Route path="/ingredients" element={<Ingredients />}></Route>
+          <Route path="/recipeList" element={<RecipeList />}></Route>
 
-      {isNoHeaderFooter && <Footer />}
+          {/* 404 Not Found */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+
+        {isNoHeaderFooter && <Footer />}
+      </div>
     </div>
   );
 }
