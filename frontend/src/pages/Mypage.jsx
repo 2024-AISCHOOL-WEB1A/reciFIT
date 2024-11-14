@@ -91,8 +91,8 @@ const Mypage = () => {
 
     return (
         <div className="mypage">
-            <header className="mypage-header">
-                <h1>마이 페이지</h1>
+            <header className="my-header">
+                <h3>마이 페이지</h3>
             </header>
             <section className="info-section">
                 <h3>회원정보 관리</h3>

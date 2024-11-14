@@ -4,17 +4,40 @@
     font-weight: 400;
     font-style: normal;
 }
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .mypage {
-    font-family: 'Pretendard', sans-serif; /* 프리텐다드 폰트 적용 */
+    font-family: 'Pretendard', sans-serif; /*프리텐다드 폰트 적용*/
     padding: 20px;
     background-color: #f9f9f9;
     max-width: 600px; /* 최대 너비 설정 */
-    margin: 0 auto; /* 중앙 정렬 */
+    margin: 0 auto; /*중앙 정렬*/
+    font-weight: bold;
 }
 
-.mypage-header {
+.my-header {
     text-align: center;
     margin-bottom: 20px;
+    color: inherit;
+    font-family: 'SBAggroB';
+    display: inline-block;
+    font-size: 1.45rem;
+    color: #111111;
+    padding: 0 0.1em;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
 }
 /* h1, h2, h3 가운데 정렬 스타일 추가 */
 .mypage h1,
