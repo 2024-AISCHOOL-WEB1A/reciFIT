@@ -52,7 +52,6 @@ const Header = () => {
             <FontAwesomeIcon icon={faUser} id="userFont" /> 로그인
             <span className="SiteFamily-bar"></span>
           </Link>
-<<<<<<< HEAD
           <ul className="SiteFamilySelect" style={{ display: menuDisplay ? 'none' : 'block' }}>
           <li className='SiteFamilySelect-item'>
             <Link to='/mypage?section=info-section' className='SiteFamilySelect-link'>회원정보 수정</Link>
@@ -69,62 +68,6 @@ const Header = () => {
           <li className='SiteFamilySelect-item'>
             <Link to='/mypage?section=my-receipts' className='SiteFamilySelect-link'>영수증 관리</Link>
           </li>
-=======
-          <ul
-            className="SiteFamilySelect"
-            style={{ display: menuDisplay ? "none" : "block" }}
-          >
-            <li className="SiteFamilySelect-item">
-              <Link
-                to="#"
-                className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                회원정보 수정
-              </Link>
-            </li>
-            <li className="SiteFamilySelect-item">
-              <Link
-                to="#"
-                className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                추가 정보 입력/수정
-              </Link>
-            </li>
-            <li className="SiteFamilySelect-item">
-              <Link
-                to="#"
-                className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                나의 레시피 조회
-              </Link>
-            </li>
-            <li className="SiteFamilySelect-item">
-              <Link
-                to="#"
-                className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                식재료 재고 관리
-              </Link>
-            </li>
-            <li className="SiteFamilySelect-item">
-              <Link
-                to="#"
-                className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                영수증 조회 및 관리
-              </Link>
-            </li>
->>>>>>> 829fe2000ceb9cc10066b5b98fd888fac19799e0
           </ul>
         </div>
 
