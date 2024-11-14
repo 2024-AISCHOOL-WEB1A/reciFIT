@@ -97,7 +97,7 @@ router.get(
           "kakao",
           profile.id,
           profile._json.kakao_account.email,
-          generateRandomNickname(), // 닉네임 랜덤 생성
+          await generateRandomNickname(), // 닉네임 랜덤 생성
           // profile.displayName, // 카카오 닉네임 가져오기
         ]);
         // 새로 생성된 user_idx 가져오기
@@ -168,6 +168,8 @@ router.get(
       let userIdx = 0;
       let userName = "";
 
+      console.log(rows);
+
       if (rows.length > 0) {
         // 회원
         isNewUser = false;
@@ -219,7 +221,7 @@ router.get(
           "google",
           profile.id,
           profile.emails[0].value,
-          generateRandomNickname(), // 닉네임 랜덤 생성
+          await generateRandomNickname(), // 닉네임 랜덤 생성
           // profile.displayName, // 구글 이름 가져오기
         ]);
 
@@ -253,6 +255,7 @@ router.get(
         });
       }
     } catch (err) {
+      // console.error(err);
       return res.status(500).json({ message: "Internal server error" });
     }
   }
