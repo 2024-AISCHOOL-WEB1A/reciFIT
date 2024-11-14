@@ -95,7 +95,7 @@ const Mypage = () => {
                 <h3>마이 페이지</h3>
             </header>
             <section className="info-section">
-                <h3>회원정보 관리</h3>
+                <h3 className="info-title">회원정보 관리</h3>
                 <p>닉네임: 
                     <input type="text" name="nickname" value={userData.nickname || ''} onChange={handleChange} />
                 </p>
