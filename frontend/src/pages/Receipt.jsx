@@ -19,17 +19,6 @@ const Receipt = () => {
         setEditData(updatedData);
     };
 
-    // 수량 증가 및 감소
-    const handleQuantityChange = (index, change) => {
-        const updatedData = [...editData];
-        const newQuantity = updatedData[index].quantity + change;
-        if (newQuantity >= 1) { // 수량이 1 이하로 감소하지 않도록 함
-            updatedData[index] = { ...updatedData[index], quantity: newQuantity };
-            setEditData(updatedData);
-        }
-
-
-    };
 
     // 모달 열기/닫기 핸들러
     const handleModalToggle = () => {
@@ -50,13 +39,13 @@ const Receipt = () => {
                     <div className='receipt-door'></div>
                     <div className='receipt-illustration'>
                         <div className='receipt-title'> <h1>Receipt</h1></div>
-                        
+
                         <div style={{ display: 'flex' }}>
                             <span className='receipt-nick'> 상냥한 고비 님 </span>
                             <span className='receipt-date'>2024 / 11 / 11</span>
                         </div>
-                        <div style={{ width: '100%', margin: '10% 0 1% 0', borderBottom: 'dashed 1px rgb(124, 124, 124)'}}></div>
-                        <div style={{ width: '100%', margin: '1% 0', borderBottom: 'dashed 1px rgb(124, 124, 124)'}}></div>
+                        <div style={{ width: '100%', margin: '10% 0 1% 0', borderBottom: 'dashed 1px rgb(124, 124, 124)' }}></div>
+                        <div style={{ width: '100%', margin: '1% 0', borderBottom: 'dashed 1px rgb(124, 124, 124)' }}></div>
 
                         <div className='receipt-subTitle'>
                             <div className='receipt-subname'><h3>상품명</h3></div>
@@ -69,12 +58,15 @@ const Receipt = () => {
 
                         {editData.map((item, index) => (
                             <div key={index} className='receipt-boxMiddle'>
+                                {/* 체크박스 */}
                                 {isEditing && (
                                     <input
                                         type="checkbox"
                                         className="edit-checkbox"
                                     />
                                 )}
+
+                                {/* 상품명 */}
                                 {isEditing ? (
                                     <input
                                         type="text"
@@ -85,28 +77,36 @@ const Receipt = () => {
                                 ) : (
                                     <div className='receipt-name'>{item.name}</div>
                                 )}
-                                <div className='receipt-quantity-container'>
-                                    {isEditing && (
-                                        <button
-                                            type="button"
-                                            onClick={() => handleQuantityChange(index, -1)}
-                                            className='quantity-button'
-                                        >
-                                            -
-                                        </button>
+
+                                {/* 수량 */}
+                                    {isEditing ? (
+                                        <input
+                                            type="text"
+                                            value={item.quantity}
+                                            onChange={(e) => handleNameChange(index, e.target.value)}
+                                            className='receipt-quantity-input'
+                                        />
+                                    ) : (
+                                        <div className='receipt-quantity'>{item.quantity}</div>
                                     )}
-                                    <div className='receipt-quantity'>{item.quantity}</div>
-                                    {isEditing && (
-                                        <button
-                                            type="button"
-                                            onClick={() => handleQuantityChange(index, 1)}
-                                            className='quantity-button'
-                                        >
-                                            +
-                                        </button>
+
+                                    {/* 단위 */}
+                                    {isEditing ? (
+                                        <input
+                                            type="text"
+                                            value={item.unit}
+                                            onChange={(e) => handleNameChange(index, e.target.value)}
+                                            className='receipt-unit-input'
+                                        />
+                                    ) : (
+                                        <div className='receipt-unit'>{item.unit}</div>
                                     )}
+
+                                    {/* 유통기한 */}
+                                    <div className='receipt-lifedays'>{item.lifedays}</div>
+
                                 </div>
-                            </div>
+
                         ))}
                         <div className='receipt-info' onClick={handleModalToggle}>영양분 정보</div>
                     </div>
