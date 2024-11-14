@@ -110,7 +110,7 @@ const Main = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <Link
-                  to="/recipeMain"
+                  to="/recipe"
                   className="MainBrandBanner-link"
                   target="_self"
                 >
@@ -132,7 +132,7 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(1)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Link to="#" className="MainBrandBanner-link" target="_self">
+                <Link to="/receipts" className="MainBrandBanner-link" target="_self">
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
