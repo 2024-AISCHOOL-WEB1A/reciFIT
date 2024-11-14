@@ -12,14 +12,20 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RecipeDetail from "./pages/RecipeDetail";
 import Mypage from "./pages/Mypage";
 import Ingredients from "./pages/Ingredients";
-
+import LoginRedirect from "./pages/LoginRedirect";
 
 function App() {
   const location = useLocation();
 
-  const isNoHeaderFooter = 
-    ["/", "/joinInfo", "/receipts", '/recipe', '/mypage', '/ingredients'].includes(location.pathname) ||
-    location.pathname.startsWith("/recipe/");
+  const isNoHeaderFooter =
+    [
+      "/",
+      "/join-info",
+      "/receipts",
+      "/recipe",
+      "/mypage",
+      "/ingredients",
+    ].includes(location.pathname) || location.pathname.startsWith("/recipe/");
 
   return (
     <div>
@@ -30,12 +36,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/join" element={<Join />}></Route>
-        <Route path="/joinInfo" element={<JoinInfo />}></Route>
+        <Route path="/join-info" element={<JoinInfo />}></Route>
         <Route path="/recipe" element={<RecipeMain />}></Route>
         <Route path="/receipts" element={<Receipt />}></Route>
-        <Route path="/recipe/:id" element={<RecipeDetail/>}></Route>
-        <Route path="/mypage" element={<Mypage/>}></Route>
-        <Route path="/ingredients" element={<Ingredients/>}></Route>
+        <Route path="/recipe/:id" element={<RecipeDetail />}></Route>
+        <Route path="/mypage" element={<Mypage />}></Route>
+        <Route path="/ingredients" element={<Ingredients />}></Route>
+        <Route path="/login/callback" element={<LoginRedirect />} />
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFoundPage />} />

@@ -20,7 +20,7 @@ const compareToken = async (token, hashedToken) => {
 // Access Token 저장
 const saveAccessToken = async (userIdx, accessToken, expiresIn) => {
   const hashedToken = await hashToken(accessToken);
-  const expiresAt = new Date(Date.now() + ms(expiresIn));
+  const expiresAt = new Date(Date.now() + expiresIn);
   const query = `
       INSERT INTO TB_USER_ACCESS_TOKEN (user_idx, access_token, expires_at)
       VALUES (?, ?, ?)
@@ -36,7 +36,7 @@ const saveAccessToken = async (userIdx, accessToken, expiresIn) => {
 // Refresh Token 저장
 const saveRefreshToken = async (userIdx, refreshToken, expiresIn) => {
   const hashedToken = await hashToken(refreshToken);
-  const expiresAt = new Date(Date.now() + ms(expiresIn));
+  const expiresAt = new Date(Date.now() + expiresIn);
   const query = `
       INSERT INTO TB_USER_REFRESH_TOKEN (user_idx, refresh_token, expires_at)
       VALUES (?, ?, ?)
