@@ -87,7 +87,7 @@ router.get(
       } else {
         // 비회원
         isNewUser = true;
-        userName = profile.displayName;
+        userName = await generateRandomNickname();
 
         // 회원 가입
         const insertUserQuery = `
@@ -97,7 +97,7 @@ router.get(
           "kakao",
           profile.id,
           profile._json.kakao_account.email,
-          await generateRandomNickname(), // 닉네임 랜덤 생성
+          userName, // 닉네임 랜덤 생성
           // profile.displayName, // 카카오 닉네임 가져오기
         ]);
         // 새로 생성된 user_idx 가져오기
@@ -168,8 +168,6 @@ router.get(
       let userIdx = 0;
       let userName = "";
 
-      console.log(rows);
-
       if (rows.length > 0) {
         // 회원
         isNewUser = false;
@@ -211,7 +209,7 @@ router.get(
       } else {
         // 비회원
         isNewUser = true;
-        userName = profile.displayName;
+        userName = await generateRandomNickname();
 
         // 회원 가입
         const insertUserQuery = `
@@ -221,7 +219,7 @@ router.get(
           "google",
           profile.id,
           profile.emails[0].value,
-          await generateRandomNickname(), // 닉네임 랜덤 생성
+          userName, // 닉네임 랜덤 생성
           // profile.displayName, // 구글 이름 가져오기
         ]);
 
