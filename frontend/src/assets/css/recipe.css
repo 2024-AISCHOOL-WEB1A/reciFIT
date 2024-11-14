@@ -194,9 +194,12 @@
     /* 부드럽게 확대 효과 */
 }
 
-.slide_list_li:hover {
+/* .slide_list_li:hover {
     transform: scale(1.1);
-    /* 1.1배 확대 */
+} */
+.slide_list_li:hover {
+    transform: scaleX(1.05) scaleY(1.1); 
+    transition: transform 0.3s ease;
 }
 
 .slide_list_link {
@@ -303,8 +306,13 @@
 }
 
 .recipe-category {
-    width: 64%;
+    width: 100%;
     height: 16vh;
+
+    display: flex;
+    flex-direction: column;
+    padding: 0em 6em;
+    margin-bottom: 3em;
 }
 
 .category-items a {
@@ -320,14 +328,17 @@
 
 @media (min-width: 1440px) and (max-width: 1920px) {
     .recipe-category {
-        width: 71%;
+        /* width: 88%; */
         height: 16vh;
     }
 }
 
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
-    
+    .recipe-category {
+        /* width: 71%; */
+        height: 16vh;
+    }
 }
 
 /* 모바일: 768px 미만 */
@@ -344,12 +355,16 @@
     margin-top: 0;
     margin-bottom: 3em;
     font-family: 'Raleway', sans-serif;
+
+    display: flex;
+    flex-direction: row;
 }
 
 .search__input__container {
-    width: 100%;
+    width: 32em;
     padding: 12px 24px;
     /* position: relative; */
+    margin-left: -0.6em;
 
     background-color: transparent;
     transition: transform 250ms ease-in-out;
@@ -454,7 +469,18 @@
     background-size: 18.5px 18.5px;
 }
 
+.site-camera-img img{
+    width: 4.5em;
+    height: auto;
 
+    margin-top: -0.8em;
+    margin-left: 0.7em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.site-camera-img img:hover {
+    transform: scale(0.9); 
+}
 
 /* ------------------------------------------------------------- RecipeDetail.jsx 부분 ---------------------------------------------------------------- */
 
@@ -909,4 +935,3 @@
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
 }
-
