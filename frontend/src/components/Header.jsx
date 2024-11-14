@@ -1,55 +1,110 @@
-import React, { useState } from 'react';
-import '../assets/css/header.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom'; 
+import React, { useState } from "react";
+import "../assets/css/header.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const [menuDisplay, setMenuDisplay] = useState('true'); 
+  const [menuDisplay, setMenuDisplay] = useState("true");
+
+  const userIdx = useSelector((state) => state.user.userIdx);
+  const userName = useSelector((state) => state.user.userName);
+  const provider = useSelector((state) => state.user.provider);
+
+  console.log(userIdx, userName, provider);
 
   const toggleMenu = () => {
-    setMenuDisplay(prevState => !prevState);
+    setMenuDisplay((prevState) => !prevState);
   };
 
   return (
     <header>
-      <div className='site-header'>
-        <div className='header-container'>
-          <Link to="/"><img src="/img/logo.png" className='headerLogo' /></Link>
+      <div className="site-header">
+        <div className="header-container">
+          <Link to="/">
+            <img src="/img/logo.png" className="headerLogo" />
+          </Link>
 
           {/* Navigation */}
-          <nav id='site-navigation'>
-            <div className='menu-container'>
-              <ul className='menu-list'>
-                <li><Link to="/">홈</Link></li>
-                <li><Link to="/recipe">레시피추천</Link></li> 
-                <li><Link to="/receipts">영수증</Link></li>
-                <li><Link to="/ingredients">재료관리</Link></li>
+          <nav id="site-navigation">
+            <div className="menu-container">
+              <ul className="menu-list">
+                <li>
+                  <Link to="/">홈</Link>
+                </li>
+                <li>
+                  <Link to="/recipe">레시피추천</Link>
+                </li>
+                <li>
+                  <Link to="/receipts">영수증</Link>
+                </li>
+                <li>
+                  <Link to="/ingredients">재료관리</Link>
+                </li>
               </ul>
             </div>
           </nav>
         </div>
 
-        <div className='siteFamily'>
+        <div className="siteFamily">
           <Link to="/mypage" className="SiteFamily-text" onClick={toggleMenu}>
-            <FontAwesomeIcon icon={faUser} id='userFont' /> 로그인
+            <FontAwesomeIcon icon={faUser} id="userFont" /> 로그인
             <span className="SiteFamily-bar"></span>
           </Link>
-          <ul className="SiteFamilySelect" style={{ display: menuDisplay ? 'none' : 'block' }}>
-            <li className='SiteFamilySelect-item'>
-              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">회원정보 수정</Link>
+          <ul
+            className="SiteFamilySelect"
+            style={{ display: menuDisplay ? "none" : "block" }}
+          >
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="#"
+                className="SiteFamilySelect-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                회원정보 수정
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">추가 정보 입력/수정</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="#"
+                className="SiteFamilySelect-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                추가 정보 입력/수정
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">나의 레시피 조회</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="#"
+                className="SiteFamilySelect-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                나의 레시피 조회
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">식재료 재고 관리</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="#"
+                className="SiteFamilySelect-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                식재료 재고 관리
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='#' className='SiteFamilySelect-link' target='_blank' rel="noopener noreferrer">영수증 조회 및 관리</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="#"
+                className="SiteFamilySelect-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                영수증 조회 및 관리
+              </Link>
             </li>
           </ul>
         </div>
