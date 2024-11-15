@@ -32,7 +32,7 @@ const Ingredients = () => {
       <div className='ingre-recipe'>
         <div className='ingre-recipe-list'>
           {/* 보유 식재료로 만들 수 있는 레시피 슬라이드 */}
-          <button onClick={handlePrevious} disabled={currentIndex === 0}>
+          <button onClick={handlePrevious} disabled={currentIndex === 0} className='ingre-left-button'>
             {"<"}
           </button>
 
@@ -47,7 +47,7 @@ const Ingredients = () => {
               ))}
           </div>
 
-          <button onClick={handleNext} disabled={currentIndex >= data.blackRecipes.length - recipesPerPage}>
+          <button onClick={handleNext} disabled={currentIndex >= data.blackRecipes.length - recipesPerPage} className='ingre-right-button'>
             {">"}
           </button>
 
