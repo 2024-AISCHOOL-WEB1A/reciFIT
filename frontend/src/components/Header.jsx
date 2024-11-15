@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
 import { useDispatch } from "react-redux";
 import { userActions } from "../redux/reducers/userSlice";
+import swalModal from "../utils/swalModal";
 
 const Header = ({ user }) => {
   const navigate = useNavigate();
@@ -34,6 +35,16 @@ const Header = ({ user }) => {
   };
 
   const handleLogout = async () => {
+    swalModal.fire({
+      title: "로그아웃",
+      text: "로그아웃 중입니다...",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        swalModal.showLoading();
+      },
+    });
+
     try {
       const res = await apiAxios.post("/auth/logout");
 
@@ -47,6 +58,7 @@ const Header = ({ user }) => {
     } catch (err) {
       // console.error(err);
     }
+    swalModal.close();
   };
 
   return (
@@ -91,6 +103,7 @@ const Header = ({ user }) => {
               <Link
                 to="/mypage?section=info-section"
                 className="SiteFamilySelect-link"
+                onClick={toggleMenu}
               >
                 회원정보 수정
               </Link>
@@ -107,6 +120,7 @@ const Header = ({ user }) => {
               <Link
                 to="/mypage?section=additional-section"
                 className="SiteFamilySelect-link"
+                onClick={toggleMenu}
               >
                 추가 정보 입력/수정
               </Link>
@@ -115,6 +129,7 @@ const Header = ({ user }) => {
               <Link
                 to="/mypage?section=recipes-section"
                 className="SiteFamilySelect-link"
+                onClick={toggleMenu}
               >
                 나의 레시피 조회
               </Link>
@@ -123,13 +138,20 @@ const Header = ({ user }) => {
               <Link
                 to="/mypage?section=receipts-section"
                 className="SiteFamilySelect-link"
+                onClick={toggleMenu}
               >
                 영수증 관리
               </Link>
             </li>
             {user && (
               <li className="SiteFamilySelect-item">
-                <Link className="SiteFamilySelect-link" onClick={handleLogout}>
+                <Link
+                  className="SiteFamilySelect-link"
+                  onClick={() => {
+                    toggleMenu();
+                    handleLogout();
+                  }}
+                >
                   로그아웃
                 </Link>
               </li>
