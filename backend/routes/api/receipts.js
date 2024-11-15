@@ -9,6 +9,7 @@ const {
   extractQuantityAndUnit,
   testData,
 } = require("../../utils/ingredientsUtils");
+const axios = require("axios");
 
 // 레시피 영수증 분석
 router.post("/", authenticateAccessToken, async (req, res) => {
@@ -17,7 +18,9 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
   // 유효성 검사 : photoUrl
   if (!photoUrl) {
-    return res.status(400).json({ message: "Receipts Photo URL is required" });
+    return res.status(400).json({
+      message: "Receipts Photo URL is required",
+    });
   }
 
   // key인지 url인지 구분
@@ -27,9 +30,9 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
   // FastAPI 서버로 사진을 보내서 have 추출
   try {
-    const ocrFastApiSrverUrl = `${process.env.OCR_FASTAPI_SERVER_HOST}:${process.env.OCR_FASTAPI_SERVER_PORT}/api/receipts-ocr`;
+    const ocrFastApiSrverUrl = `${process.env.OCR_FASTAPI_SERVER_HOST}:${process.env.OCR_FASTAPI_SERVER_PORT}/ocr`;
     const response = await axios.post(ocrFastApiSrverUrl, {
-      image_url: photoUrl,
+      photoUrl,
     });
 
     // 영수증 스캔 데이터
@@ -37,8 +40,17 @@ router.post("/", authenticateAccessToken, async (req, res) => {
     // const receiptData = testData.images[0]?.receipt?.result;
     // 유효성 검사 1: 영수증 데이터
     if (!receiptData) {
-      return res.status(400).json({ message: "No valid receipt data found." });
+      return res.status(400).json({
+        message: "No valid receipt data found.",
+      });
     }
+    console.log(receiptData);
+
+    // const fs = require("fs"); // 파일 시스템 모듈
+    // const path = require("path"); // 경로 처리 모듈
+
+    // const jsonFilePath = path.join(__dirname, "receiptData.json");
+    // const receiptData = JSON.parse(fs.readFileSync(jsonFilePath, "utf-8"));
 
     // 가게 데이터
     // const storeData = receiptData?.storeInfo;
@@ -48,12 +60,14 @@ router.post("/", authenticateAccessToken, async (req, res) => {
     const subData = receiptData?.subResults;
 
     // 구매일 및 품목 추출
-    const purchaseDate = paymentData?.date
-      ? receiptFormatDate(paymentData?.date)
+    const purchaseDate = paymentData?.date.text
+      ? receiptFormatDate(paymentData?.date.text)
       : receiptFormatDate(new Date());
 
+    console.log(subData[0]?.items);
+
     // findMatchingIngredient를 통해 식재료 이름 DB의 이름과 매칭, 수량과 unit도 가져오기
-    const items = (subData?.items || [])
+    const items = (subData[0]?.items || [])
       .filter((item) => item.name?.text) // name이 있는 경우만 필터링
       .map((item) => {
         const normalizedText = item.name?.text || ""; // item.name?.text가 없을 때 대비
@@ -82,13 +96,6 @@ router.post("/", authenticateAccessToken, async (req, res) => {
               count = 1;
             }
           }
-          // const count =
-          //   quantity > 0
-          //     ? quantity
-          //     : item.count?.text
-          //     ? parseInt(item.count.text, 10)
-          //     : 1;
-
           return {
             name: matchedName,
             count,
@@ -101,7 +108,9 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
     // 유효성 검사 2: 구매 재료 확인
     if (items.length === 0) {
-      return res.status(400).json({ message: "No valid items found." });
+      return res.status(400).json({
+        message: "No valid items found.",
+      });
     }
 
     // 영양소 계산
@@ -177,6 +186,8 @@ router.post("/", authenticateAccessToken, async (req, res) => {
         }
       })
       .filter((item) => item !== null); // 유효하지 않은 항목 제거
+
+    console.log(processedItems);
 
     // TB_USER_RECEIPT 테이블에 데이터 삽입
     const receiptInsertQuery = `

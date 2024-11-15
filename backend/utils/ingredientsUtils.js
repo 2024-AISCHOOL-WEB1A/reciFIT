@@ -114,6 +114,26 @@ for (const [key, values] of Object.entries(ingredientsDict)) {
 function findMatchingIngredient(itemName) {
   if (!itemName) return null;
 
+  // 완전히 같은 경우 먼저 확인
+  if (exactMatchMap.has(itemName)) {
+    return exactMatchMap.get(itemName); // 원래 key 반환
+  }
+
+  // 포함 여부 확인 (긴 키부터 우선 매칭)
+  const sortedKeysOriginal = Array.from(partialMatchMap.keys()).sort(
+    (a, b) => b.length - a.length
+  );
+  for (const key of sortedKeysOriginal) {
+    const values = partialMatchMap.get(key);
+    if (itemName.includes(key)) {
+      return exactMatchMap.get(key); // 원래 key 반환
+    }
+    if (values.some((value) => itemName.includes(value))) {
+      return exactMatchMap.get(key); // 원래 key 반환
+    }
+  }
+
+  // 공백 제거 후 재검사
   const normalizedItemName = normalizeString(itemName);
 
   // 완전히 같은 경우 먼저 확인
@@ -140,6 +160,9 @@ function findMatchingIngredient(itemName) {
 
 // 영수증에서 수량과 단위 추출
 const extractQuantityAndUnit = (name) => {
+  // '. '을 '.'로 변경
+  name = name.replace(/\. /g, ".");
+
   // 수량과 단위가 여러 개 있는 경우도 포함하는 정규식
   const quantityRegex =
     /(\d+(\.\d+)?)(\s*kg|\s*g|\s*ml|\s*l|\s*L|\s*개|\s*병|\s*구|\s*단|\s*봉|\s*팩|\s*모|\s*봉지|\s*캔|\s*컵)?/gi;
@@ -310,18 +333,18 @@ const convertQuantity = (amount, recipeUnit, userUnit) => {
   return 0;
 };
 
-// (() => {
-//   const itemName = "무항생제 신선한 대란, 30구";
-//   const matchedIngredient = findMatchingIngredient(itemName);
-//   const extractedQuantityAndUnit = extractQuantityAndUnit(itemName);
-//   if (matchedIngredient) {
-//     console.log(
-//       `매칭된 식재료: ${matchedIngredient} ${extractedQuantityAndUnit.quantity}${extractedQuantityAndUnit.unit}`
-//     );
-//   } else {
-//     console.log("매칭되는 식재료가 없습니다.");
-//   }
-// })();
+(() => {
+  const itemName = "해찬들 찹쌀 태양초 고추장 1. 4kg+400g";
+  const matchedIngredient = findMatchingIngredient(itemName);
+  const extractedQuantityAndUnit = extractQuantityAndUnit(itemName);
+  if (matchedIngredient) {
+    console.log(
+      `매칭된 식재료: ${matchedIngredient} ${extractedQuantityAndUnit.quantity}${extractedQuantityAndUnit.unit}`
+    );
+  } else {
+    console.log("매칭되는 식재료가 없습니다.");
+  }
+})();
 
 const testData = {
   version: "V2",
