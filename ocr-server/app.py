@@ -9,6 +9,8 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 from io import BytesIO
 from typing import Optional
+from datetime import datetime, timezone
+from pymongo import MongoClient
 
 # .env 파일 로드
 load_dotenv()
@@ -16,9 +18,18 @@ load_dotenv()
 # 환경 변수에서 API 정보 불러오기
 SECRET_KEY = os.getenv("CLOVA_SECRET_KEY")
 API_URL = os.getenv("CLOVA_ENDPOINT")
-PORT = int(os.getenv("PORT", 8000))  # 기본값으로 8000 설정
+PORT = int(os.getenv("PORT", 8000))
+
+MONGODB_URI = os.getenv("MONGODB_URI")
+MONGODB_DB = os.getenv("MONGODB_DB")
 
 app = FastAPI()
+
+# TODO : 몽고 DB 설정 다시 확인
+# # MongoDB 클라이언트 설정
+# client = MongoClient(MONGODB_URI)
+# db = client[MONGODB_DB]
+# ocr_collection = db["ocr_results"]
 
 # 요청 데이터 모델 정의
 class OCRRequest(BaseModel):
@@ -37,7 +48,7 @@ async def perform_ocr(request: OCRRequest):
             'images': [
                 {
                     'format': 'jpg',
-                    'name': 'my_image'
+                    'name': 'recifit_receipt_image'
                 }
             ],
             'requestId': str(uuid.uuid4()),
@@ -56,6 +67,15 @@ async def perform_ocr(request: OCRRequest):
         # 응답 처리
         if response.status_code == 200:
             ocr_results = response.json()
+            
+            #  # MongoDB에 결과 저장
+            # ocr_record = {
+            #     "photoUrl": request.photoUrl,
+            #     "ocrResults": ocr_results,
+            #     "timestamp": datetime.now(timezone.utc)
+            # }
+            # ocr_collection.insert_one(ocr_record)
+            
             return ocr_results
         else:
             raise HTTPException(status_code=response.status_code, detail="OCR 요청 실패")

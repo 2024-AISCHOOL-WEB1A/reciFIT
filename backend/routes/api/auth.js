@@ -45,6 +45,7 @@ router.get(
       let isNewUser = true;
       let userIdx = 0;
       let userName = "";
+      const provider = "kakao";
 
       if (rows.length > 0) {
         // 회원
@@ -58,36 +59,10 @@ router.get(
           SET last_login = NOW()
           WHERE user_idx = ?`;
         await db.execute(updateLoginQuery, [userIdx]);
-
-        // Access Token 및 Refresh Token 발급
-        const accessToken = jwtUtil.createAccessToken(userIdx);
-        const refreshToken = jwtUtil.createRefreshToken(userIdx);
-
-        // JWT 저장
-        await jwtStoreUtil.saveAccessToken(
-          userIdx,
-          accessToken,
-          jwtUtil.ACCESS_TOKEN_EXPIRATION
-        );
-        await jwtStoreUtil.saveRefreshToken(
-          userIdx,
-          refreshToken,
-          jwtUtil.REFRESH_TOKEN_EXPIRATION
-        );
-
-        // 응답 보내기
-        return res.status(200).json({
-          userIdx,
-          userName,
-          provider: profile.provider,
-          accessToken,
-          refreshToken,
-          isNewUser,
-        });
       } else {
         // 비회원
         isNewUser = true;
-        userName = profile.displayName;
+        userName = await generateRandomNickname();
 
         // 회원 가입
         const insertUserQuery = `
@@ -97,38 +72,37 @@ router.get(
           "kakao",
           profile.id,
           profile._json.kakao_account.email,
-          await generateRandomNickname(), // 닉네임 랜덤 생성
-          // profile.displayName, // 카카오 닉네임 가져오기
+          userName,
         ]);
         // 새로 생성된 user_idx 가져오기
         userIdx = insertResult.insertId;
-
-        // Access Token 및 Refresh Token 발급
-        const accessToken = jwtUtil.createAccessToken(userIdx);
-        const refreshToken = jwtUtil.createRefreshToken(userIdx);
-
-        // JWT 저장
-        await jwtStoreUtil.saveAccessToken(
-          userIdx,
-          accessToken,
-          jwtUtil.ACCESS_TOKEN_EXPIRATION
-        );
-        await jwtStoreUtil.saveRefreshToken(
-          userIdx,
-          refreshToken,
-          jwtUtil.REFRESH_TOKEN_EXPIRATION
-        );
-
-        // 응답 보내기
-        return res.status(200).json({
-          userIdx,
-          userName,
-          provider: profile.provider,
-          accessToken,
-          refreshToken,
-          isNewUser,
-        });
       }
+      // Access Token 및 Refresh Token 발급
+      const accessToken = jwtUtil.createAccessToken(userIdx, res);
+      const refreshToken = jwtUtil.createRefreshToken(userIdx, res);
+
+      // JWT 저장
+      await jwtStoreUtil.saveAccessToken(
+        userIdx,
+        accessToken,
+        jwtUtil.ACCESS_TOKEN_EXPIRATION
+      );
+      await jwtStoreUtil.saveRefreshToken(
+        userIdx,
+        refreshToken,
+        jwtUtil.REFRESH_TOKEN_EXPIRATION
+      );
+
+      // TODO : 응답 보내기 (토큰 형태로)
+      // 응답보내기 (redirect)
+      // if (["localhost:3000", "localhost:3001"].includes(req.headers.host)) {
+      //   return res.redirect(
+      //     `http://${req.headers.host}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+      //   );
+      // }
+      return res.redirect(
+        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+      );
     } catch (err) {
       return res.status(500).json({ message: "Internal server error" });
     }
@@ -167,8 +141,7 @@ router.get(
       let isNewUser = true;
       let userIdx = 0;
       let userName = "";
-
-      console.log(rows);
+      const provider = "google";
 
       if (rows.length > 0) {
         // 회원
@@ -182,36 +155,10 @@ router.get(
           SET last_login = NOW()
           WHERE user_idx = ?`;
         await db.execute(updateLoginQuery, [userIdx]);
-
-        // Access Token 및 Refresh Token 발급
-        const accessToken = jwtUtil.createAccessToken(userIdx);
-        const refreshToken = jwtUtil.createRefreshToken(userIdx);
-
-        // JWT 저장
-        await jwtStoreUtil.saveAccessToken(
-          userIdx,
-          accessToken,
-          jwtUtil.ACCESS_TOKEN_EXPIRATION
-        );
-        await jwtStoreUtil.saveRefreshToken(
-          userIdx,
-          refreshToken,
-          jwtUtil.REFRESH_TOKEN_EXPIRATION
-        );
-
-        // 응답 보내기
-        return res.status(200).json({
-          userIdx,
-          userName,
-          provider: profile.provider,
-          accessToken,
-          refreshToken,
-          isNewUser,
-        });
       } else {
         // 비회원
         isNewUser = true;
-        userName = profile.displayName;
+        userName = await generateRandomNickname();
 
         // 회원 가입
         const insertUserQuery = `
@@ -221,41 +168,41 @@ router.get(
           "google",
           profile.id,
           profile.emails[0].value,
-          await generateRandomNickname(), // 닉네임 랜덤 생성
-          // profile.displayName, // 구글 이름 가져오기
+          userName,
         ]);
 
         // 새로 생성된 user_idx 가져오기
         userIdx = insertResult.insertId;
-
-        // Access Token 및 Refresh Token 발급
-        const accessToken = jwtUtil.createAccessToken(userIdx);
-        const refreshToken = jwtUtil.createRefreshToken(userIdx);
-
-        // JWT 저장
-        await jwtStoreUtil.saveAccessToken(
-          userIdx,
-          accessToken,
-          jwtUtil.ACCESS_TOKEN_EXPIRATION
-        );
-        await jwtStoreUtil.saveRefreshToken(
-          userIdx,
-          refreshToken,
-          jwtUtil.REFRESH_TOKEN_EXPIRATION
-        );
-
-        // 응답 보내기
-        return res.status(200).json({
-          userIdx,
-          userName,
-          provider: profile.provider,
-          accessToken,
-          refreshToken,
-          isNewUser,
-        });
       }
+
+      // Access Token 및 Refresh Token 발급
+      const accessToken = jwtUtil.createAccessToken(userIdx, res);
+      const refreshToken = jwtUtil.createRefreshToken(userIdx, res);
+
+      // JWT 저장
+      await jwtStoreUtil.saveAccessToken(
+        userIdx,
+        accessToken,
+        jwtUtil.ACCESS_TOKEN_EXPIRATION
+      );
+      await jwtStoreUtil.saveRefreshToken(
+        userIdx,
+        refreshToken,
+        jwtUtil.REFRESH_TOKEN_EXPIRATION
+      );
+
+      // TODO : 응답 보내기 (토큰 형태로)
+      // 응답보내기 (redirect)
+      // if (["localhost:3000", "localhost:3001"].includes(req.headers.host)) {
+      //   return res.redirect(
+      //     `http://${req.headers.host}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+      //   );
+      // }
+      return res.redirect(
+        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+      );
     } catch (err) {
-      // console.error(err);
+      console.error(err);
       return res.status(500).json({ message: "Internal server error" });
     }
   }
@@ -263,8 +210,9 @@ router.get(
 
 // 로그아웃
 router.post("/logout", authenticateAccessToken, async (req, res) => {
-  const { refreshToken } = req.body;
+  // const { refreshToken } = req.body;
   const { userIdx, accessToken } = req.user;
+  const refreshToken = req.body.refreshToken || req.cookies?.refreshToken;
 
   // 유효성 검사 : null check (필요할까?)
   // if (!refreshToken) {
@@ -276,12 +224,16 @@ router.post("/logout", authenticateAccessToken, async (req, res) => {
     // access token 삭제
     if (accessToken) {
       await jwtStoreUtil.deleteAccessToken(userIdx, accessToken);
+      res.clearCookie("accessToken"); // 쿠키에서 access token 삭제
     }
 
     // refresh token 삭제
     if (refreshToken) {
       await jwtStoreUtil.deleteRefreshToken(userIdx, refreshToken);
+      res.clearCookie("refreshToken"); // 쿠키에서 refresh token 삭제
     }
+
+    return res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
   }
@@ -289,7 +241,8 @@ router.post("/logout", authenticateAccessToken, async (req, res) => {
 
 // AccessToken 재발급
 router.post("/token", async (req, res) => {
-  const { refreshToken } = req.body;
+  // const { refreshToken } = req.body;
+  const refreshToken = req.body.refreshToken || req.cookies?.refreshToken;
 
   // 유효성 검사 1: null check
   if (!refreshToken) {
@@ -315,7 +268,7 @@ router.post("/token", async (req, res) => {
     }
 
     // 토큰 재발행
-    const accessToken = jwtUtil.createAccessToken(userIdx);
+    const accessToken = jwtUtil.createAccessToken(userIdx, res);
 
     // 토큰 DB 저장
     await jwtStoreUtil.saveAccessToken(
