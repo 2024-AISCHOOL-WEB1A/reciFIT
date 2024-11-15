@@ -1,45 +1,75 @@
-.ingre-container{
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* -----------------=------------------------- */
+
+.ingre-container {
     margin: 3%;
 }
 
-.ingre-recipe{
+.ingre-container h3{
+    font-family: 'SBAggroB';
+}
+
+/* 재료 레시피 추천 슬라이드 */
+.ingre-recipe {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 3em;
 }
 
-.ingre-recipe-list{
+.ingre-recipe-list {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     margin: 1% 0;
-    width: 90%; /* 원하는 너비로 설정 */
+    width: 90%;
 }
 
-  
-  .ingre-recipe-item {
+
+.ingre-recipe-item {
     width: 100%;
     text-align: center;
     margin: 0 2% 2% 0;
-  }
-  
-  .ingre-recipe-image {
+}
+
+.ingre-recipe-image {
     width: 90%;
     height: 9.15em;
-    object-fit:cover;
+    object-fit: cover;
     border-radius: 8px;
     background-size: contain
-  }
-  
-  .ingre-recipe-name {
+}
+
+.ingre-recipe-name {
     margin-top: 10px;
     font-size: 16px;
     font-weight: bold;
-  }
-  
-  .ingre-left-button, .ingre-right-button {
-    background-color: #4CAF50; /* 화살표 버튼 색상 */
+}
+
+.ingre-left-button,
+.ingre-right-button {
+    background-color: rgb(255, 190, 140);
     color: white;
     border: none;
     padding: 10px;
@@ -47,18 +77,64 @@
     font-size: 18px;
     border-radius: 5px;
     margin: 0 10px;
-  }
-  
-  .ingre-left-button:disabled, .ingre-left-button:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
-  }
+}
 
-  /* .ingre-recipe-name {
-    font-size: 1.2em;
-    line-height: 1.2;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-family: 'Pretendard-Regular';
-} */
+.ingre-left-button:disabled,
+.ingre-left-button:disabled {
+    background-color: #ddd;
+}
+
+
+/* 재료 테이블 */
+
+.ingre-my{
+    margin-bottom: 2%;
+}
+
+.ingre-my-list{
+    width: 100%;
+    margin: 1%;
+    align-items: center;
+}
+
+.ingre-table{
+    width: 100%;
+}
+
+.ingre-table-head th{
+    background-color: rgb(235, 235, 235);
+    padding: 2%;
+
+}
+
+.ingre-table-body td{
+    padding: 1%;
+    text-align: center;
+}
+
+
+.ingre-button-container{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.ingre-button{
+    width: 5em;
+    height: 4em;
+    margin-right: 5%;
+    border-radius: 10px;
+    border: solid 3px rgb(255, 190, 140);
+    background-color: white;
+}
+
+.ingre-per-background{
+    background-color: rgb(200, 200, 200);
+    width: 100%;
+    height: 1em;
+    margin: 1% 0;
+}
+
+.ingre-per-bar{
+    background-color: rgb(255, 190, 140);
+    height: 1em;
+}
