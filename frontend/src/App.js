@@ -59,8 +59,6 @@ function App() {
     }
   }, [dispatch, user]);
 
-  // TODO : user.userIdx가 -1인 경우, 정상 정보가 없으므로 accesstoken을 가지고 유저 정보를 서버로부터 가져오기
-
   return (
     <div>
       {/*페이지 이동 시 브라우저의 스크롤 위치가 항상 페이지 상단으로 초기화 */}

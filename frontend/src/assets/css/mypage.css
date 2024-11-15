@@ -22,8 +22,8 @@
 .mypage {
     font-family: 'Pretendard-Regular', sans-serif;
     padding: 1.25em;
-    background-color: #f9f9f9;
-    max-width: 85em;
+    /* background-color: #f9f9f9; */
+    max-width: 80em;
     margin: 0 auto;
     font-weight: normal;
     margin-top: 3em; /* 헤더와 20px 이상의 간격을 추가 */
@@ -33,7 +33,7 @@
     font-family: 'SBAggroB';
     text-align: center;
     margin-bottom: 1.25em;
-    color: #685d5d;
+    color: #111111;
     font-size: 1.70rem;
     padding: 0 0.1em;
     font-weight: bold;
@@ -43,7 +43,7 @@
 
 .shared-title1 {
     font-family: 'Pretendard-Regular';
-    margin-bottom: 1.25em;
+    margin-bottom: 1.5em;
     color: #111111;
     font-size: 1.20rem;
     padding: 0 0.1em;
@@ -62,21 +62,21 @@
     border-radius: 0.5em;
 }
 
-.my-recipes,
-.my-ingredients,
-.my-receipts,
-.additional-info,
+.recipes-section,
+.receipts-section,
+.additional-section,
 .env-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 200px;
+    min-height: 17em;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
     margin: 1.25em 0;
     background-color: #e0e0e0;
     border-radius: 0.5em;
+    position: relative; /* 부모 요소가 기준이 되도록 설정 */
 }
 
 .info-section h2,
@@ -103,11 +103,44 @@
     max-width: 17.1875em;
 }
 
-.env-score-card {
-    background-color: #f9e79f;
-    border: 0.125em solid #d4ac0d;
-    text-align: center;
+.env-score-card { background-color: #f9e79f; 
+    border: 0.125em solid #d4ac0d; 
+    text-align: center; 
+    position: relative; 
+    width: 30em; /* 차트의 너비 설정 */ 
+    height:19em; /* 차트의 높이를 원형 형태에 맞게 조정 */
+    margin: 0 auto; 
 }
+
+.score-label {
+        position: absolute;
+        top: 50%; /* 점수 위치 조정 */
+        left: 50%;
+        transform: translate(-50%, -50%); /* 중앙 정렬 */
+        text-align: center;
+        color: #111; /* 텍스트 색상 조정 */
+}
+
+.score-value {
+        font-size: 32px; /* 점수 크기 */
+        font-weight: bold;
+        color: #36A2EB; /* 점수 색상 */
+}
+.score-text {
+    font-size: 14px; /* 텍스트 크기 */
+    color: #555; /* 텍스트 색상 */
+}
+
+
+
+.stats-card {
+
+    position: relative;
+    width: 20em; /* 차트의 너비 설정 */
+    height: 12em; 
+}
+
+
 
 .mypage-footer {
     text-align: center;
@@ -140,80 +173,3 @@
     line-height: 1.5;
 }
 
-/* 1440px ~ 1920px */
-@media screen and (min-width: 85em) and (max-width: 240em) {
-    .stats-section {
-        justify-content: space-between;
-        gap: 2px;
-    }
-    .stats-card,
-    .info-card {
-        flex: 1 1 calc(50% - 2px);
-        max-width: calc(50% - 2px);
-    }
-    .info-env-container,
-    .additional-recipes-container,
-    .ingredients-receipts-container
-    {
-        display: flex;
-        gap: 1em; /* 섹터간 여백 */
-        flex-wrap: wrap;
-    }
-    .info-section,
-    .env-section,
-    .additional-info,
-    .my-recipes,
-    .my-ingredients,
-    .my-receipts {
-        flex: 1;
-    }
-}
-
-/* 태블릿: 768px 이상 1440px 미만 */
-@media screen and (min-width: 48em) and (max-width: 90em) {
-    .stats-section {
-        justify-content: space-between;
-        gap: 2px;
-    }
-    .stats-card,
-    .info-card {
-        flex: 1 1 calc(50% - 2px);
-        max-width: calc(50% - 2px);
-    }
-    .info-env-container,
-    .additional-recipes-container,
-    .ingredients-receipts-container
-    {
-        display: flex;
-        gap: 1em; /* 섹터간 여백 */
-        flex-wrap: wrap;
-    }
-    .info-section,
-    .env-section,
-    .additional-info,
-    .my-recipes,
-    .my-ingredients,
-    .my-receipts
-    {
-        flex: 1;
-    }
-}
-
-
-/* 모바일: 768px 미만 */
-@media screen and (max-width: 47.9375em) {
-    .stats-section {
-        justify-content: center;
-        gap: 1.25em;
-    }
-    .stats-card,
-    .info-card {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
-    .info-section,
-    .env-section {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
-}
