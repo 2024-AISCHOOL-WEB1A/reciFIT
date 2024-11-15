@@ -22,10 +22,10 @@ const Receipt = () => {
 
     const handleDelete = (index) => {
         const confirmDelete = window.confirm("삭제하시겠습니까?");
-    if (confirmDelete) {
-        const updatedData = editData.filter((_, i) => i !== index);
-        setEditData(updatedData);
-    }
+        if (confirmDelete) {
+            const updatedData = editData.filter((_, i) => i !== index);
+            setEditData(updatedData);
+        }
     };
 
 
@@ -34,8 +34,19 @@ const Receipt = () => {
         setIsModalOpen(!isModalOpen);
     };
 
+    const handleAdd = () => {
+        const newItem = {
+            name: "",
+            quantity: "",
+            unit: "",
+            lifedays: ""
+        };
+        setEditData([...editData, newItem]);
+    };
+
     return (
-        <form className='receipt-container'>
+        <div className='receipt-container'>
+            <h3 className='receipt-result'>영수증 인식 결과</h3>
             <div className='receipt'>
                 <div className='receipt-pic'>
                     <h1 style={{ color: 'white', paddingBottom: '10%' }}>Picture</h1>
@@ -70,9 +81,9 @@ const Receipt = () => {
 
                                 {/* 삭제 버튼 */}
                                 {isEditing && (
-                                    <img src={`${process.env.PUBLIC_URL}/img/receipt_img/delete.png`} 
-                                    onClick={() => handleDelete(index)} 
-                                    className="delete-button" />
+                                    <img src={`${process.env.PUBLIC_URL}/img/receipt_img/delete.png`}
+                                        onClick={() => handleDelete(index)}
+                                        className="delete-button" />
                                 )}
 
                                 {/* 상품명 */}
@@ -116,8 +127,15 @@ const Receipt = () => {
                                 <div className='receipt-lifedays'>{item.lifedays}</div>
 
                             </div>
-
                         ))}
+
+                        {/* 추가 버튼: 편집 모드일 때만 표시 */}
+                        {isEditing && (
+                            <button type="button" onClick={handleAdd} className='receipt-add-button'>
+                                추가
+                            </button>
+                        )}
+
                         <div className='receipt-info' onClick={handleModalToggle}>영양분 정보</div>
                     </div>
                 </div>
@@ -144,7 +162,7 @@ const Receipt = () => {
                     </div>
                 </div>
             )}
-        </form>
+        </div>
     );
 };
 export default Receipt;
