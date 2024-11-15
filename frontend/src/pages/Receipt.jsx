@@ -45,7 +45,8 @@ const Receipt = () => {
     };
 
     return (
-        <form className='receipt-container'>
+        <div className='receipt-container'>
+            <h3 className='receipt-result'>영수증 인식 결과</h3>
             <div className='receipt'>
                 <div className='receipt-pic'>
                     <h1 style={{ color: 'white', paddingBottom: '10%' }}>Picture</h1>
@@ -161,7 +162,7 @@ const Receipt = () => {
                     </div>
                 </div>
             )}
-        </form>
+        </div>
     );
 };
 export default Receipt;
