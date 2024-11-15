@@ -52,6 +52,7 @@ apiAxios.interceptors.response.use(
       isRefreshing = true;
 
       try {
+        console.log("토큰을 다시 요청합니다.");
         await generalAxios.post("/api/auth/token");
         onRefreshed(); // 대기중이던 요청들 재요청
         isRefreshing = false;
