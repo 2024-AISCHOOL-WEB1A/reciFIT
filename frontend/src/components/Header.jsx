@@ -1,21 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { apiAxios } from "../utils/axiosUtils";
+import { useDispatch } from "react-redux";
+import { userActions } from "../redux/reducers/userSlice";
 
-const Header = () => {
+const Header = ({ user }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [menuDisplay, setMenuDisplay] = useState("true");
+  const [loginText, setLoginText] = useState("로그인");
 
-  const userIdx = useSelector((state) => state.user.userIdx);
-  const userName = useSelector((state) => state.user.userName);
-  const provider = useSelector((state) => state.user.provider);
-
-  console.log(userIdx, userName, provider);
+  useEffect(() => {
+    if (user) {
+      setLoginText(user.userName);
+    }
+  }, [user]);
 
   const toggleMenu = () => {
-    setMenuDisplay((prevState) => !prevState);
+    console.log(user);
+
+    // 로그인 여부 확인
+    if (user) {
+      // 로그인이 되어 있다면, 메뉴가 열리도록
+      setMenuDisplay((prevState) => !prevState);
+    } else {
+      // 로그인이 되어 있지 않다면, join으로 이동
+      console.log("??");
+      // navigate("/");
+      navigate("/join");
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const res = await apiAxios.post("/auth/logout");
+
+      if (res.status === 200) {
+        // redux 삭제
+        dispatch(userActions.setUser({ user: null }));
+
+        navigate("/");
+        window.location.reload();
+      }
+    } catch (err) {
+      // console.error(err);
+    }
   };
 
   return (
@@ -47,11 +80,11 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className="siteFamily">
-          <Link to="/mypage" className="SiteFamily-text" onClick={toggleMenu}>
-            <FontAwesomeIcon icon={faUser} id="userFont" /> 로그인
+        <div className="SiteFamily">
+          <div className="SiteFamily-text" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faUser} id="userFont" /> {loginText}
             <span className="SiteFamily-bar"></span>
-          </Link>
+          
           <ul className="SiteFamilySelect" style={{ display: menuDisplay ? 'none' : 'block' }}>
           <li className='SiteFamilySelect-item'>
             <Link to='/mypage?section=info-section' className='SiteFamilySelect-link'>회원정보 수정</Link>

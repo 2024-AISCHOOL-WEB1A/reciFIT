@@ -1,0 +1,64 @@
+.ingre-container{
+    margin: 3%;
+}
+
+.ingre-recipe{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ingre-recipe-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin: 1% 0;
+    width: 90%; /* 원하는 너비로 설정 */
+}
+
+  
+  .ingre-recipe-item {
+    width: 100%;
+    text-align: center;
+    margin: 0 2% 2% 0;
+  }
+  
+  .ingre-recipe-image {
+    width: 90%;
+    height: 9.15em;
+    object-fit:cover;
+    border-radius: 8px;
+    background-size: contain
+  }
+  
+  .ingre-recipe-name {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .ingre-left-button, .ingre-right-button {
+    background-color: #4CAF50; /* 화살표 버튼 색상 */
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 0 10px;
+  }
+  
+  .ingre-left-button:disabled, .ingre-left-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+
+  /* .ingre-recipe-name {
+    font-size: 1.2em;
+    line-height: 1.2;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: 'Pretendard-Regular';
+} */

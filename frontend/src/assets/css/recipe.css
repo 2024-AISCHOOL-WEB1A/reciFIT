@@ -55,6 +55,7 @@
     /* 좌우 여백 제거 */
 }
 
+
 /* ------------ youtube 동영상------------------- */
 .youtubeVideo {
     position: relative;
@@ -210,6 +211,7 @@
 .slide_list_thumb img {
     width: 100%;
     height: 9.15em;
+    border-radius: 8px;
 }
 
 .slide_list_caption {
@@ -312,7 +314,7 @@
     display: flex;
     flex-direction: column;
     padding: 0em 6em;
-    margin-bottom: 3em;
+    margin-bottom: 1.5em;
 }
 
 .category-items a {
@@ -326,9 +328,15 @@
     font-size: 1.15em;
 }
 
+@media (min-width: 1920px) {
+    .recipe-category {
+        width: 97.5em;
+    }
+}
+
 @media (min-width: 1440px) and (max-width: 1920px) {
     .recipe-category {
-        /* width: 88%; */
+        width: 97em;
         height: 16vh;
     }
 }
@@ -336,13 +344,17 @@
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
     .recipe-category {
-        /* width: 71%; */
+        width: 97em;
         height: 16vh;
     }
 }
 
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
+    .recipe-category {
+        width: 97em;
+        height: 16vh;
+    }
 }
 
 /* 검색창 */
@@ -480,6 +492,9 @@
 }
 .site-camera-img img:hover {
     transform: scale(0.9); 
+
+    background-color: #f4b05753;
+    border-radius: 45px;
 }
 
 /* ------------------------------------------------------------- RecipeDetail.jsx 부분 ---------------------------------------------------------------- */
@@ -934,4 +949,70 @@
 
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
+}
+
+
+/* --------------------------- 카메라 모달 부분 ------------------ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards; /* 페이드인 효과 */
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    transform: translateY(-100%); /* 초기 위치 */
+    animation: slideDown 0.5s ease forwards; /* 슬라이드다운 효과 */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+/* 모달 창 닫기 아이콘 */
+.modal-close-icon{
+    /* width: 3em; */
+    font-size: 1.5em;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0.2em;
+    cursor: pointer;
+}
+
+.reference-text{
+    color: #bbbbbb;
+    margin-top: 0.3em;
+    padding-left: 0.3em;
+}
+
+/* 이미지 업로드 버튼 */
+.modal-imgUpload{
+    width: 10em;
+    height: 1.7em;
+
+    font-size: 2.4em;
 }

@@ -19,10 +19,8 @@ const LoginRedirect = () => {
     if (userIdx && userName && provider && isNewUser) {
       // Redux에 유저 정보 저장
       dispatch(
-        userActions.serUser({
-          userIdx,
-          userName,
-          provider,
+        userActions.setUser({
+          user: { userIdx, userName, provider },
         })
       );
 

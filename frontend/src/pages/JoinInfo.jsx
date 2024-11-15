@@ -1,29 +1,76 @@
 import React, { useState } from "react";
 import "../assets/css/joinInfo.css";
-import { apiAxios } from "../utils/axios";
+import { apiAxios } from "../utils/axiosUtils";
+import { useNavigate } from "react-router-dom";
+import swalModal from "../utils/swalModal";
 
 const JoinInfo = () => {
+  const navigate = useNavigate();
+
   const [preferredIngredients, setPreferredIngredient] = useState("");
   const [dislikedIngredients, setDislikedIngredients] = useState("");
   const [nonConsumableIngredients, setNonConsumableIngredients] = useState("");
 
   const postAdditionalUserDate = async () => {
-    console.log(
-      preferredIngredients,
-      dislikedIngredients,
-      nonConsumableIngredients
-    );
+    let isSuccess = false;
 
-    try {
-      const res = await apiAxios.patch("/users", {
-        preferredIngredients,
-        dislikedIngredients,
-        nonConsumableIngredients,
-      });
-      console.log(res);
-    } catch (err) {
-      console.error(err);
+    // 모든 항목이 비어 있는 경우
+    if (
+      !preferredIngredients &&
+      !dislikedIngredients &&
+      !nonConsumableIngredients
+    ) {
+      isSuccess = true;
+    } else {
+      try {
+        const res = await apiAxios.patch("/users", {
+          preferredIngredients,
+          dislikedIngredients,
+          nonConsumableIngredients,
+        });
+
+        if (res.status === 200) {
+          isSuccess = true;
+        } else {
+          // 실패로 이동
+          throw new Error();
+        }
+      } catch (err) {
+        // console.error(err);
+        // 실패
+        await swalModal.fire({
+          title: "추가정보 입력 실패",
+          text: "추가정보 입력에 실패하였습니다. 관리자에게 문의바랍니다.",
+          icon: "error",
+          confirmButtonText: "확인",
+          didClose: () => {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "instant",
+            });
+          },
+        });
+      }
     }
+
+    // 성공
+    if (isSuccess) {
+      await swalModal.fire({
+        title: "회원 가입 성공",
+        text: "회원 가입을 축하드립니다!",
+        icon: "success",
+        confirmButtonText: "확인",
+        didClose: () => {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "instant",
+          });
+        },
+      });
+    }
+    navigate("/");
   };
 
   return (

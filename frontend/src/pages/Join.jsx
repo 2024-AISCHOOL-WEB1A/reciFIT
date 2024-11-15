@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/join.css";
 import { Link } from "react-router-dom";
-import api from "../utils/axios";
-import axios from "axios";
 
 const Join = () => {
   // 페이드인, 아웃 이미지---------------------------------------------------

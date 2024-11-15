@@ -10,6 +10,11 @@
     margin-right: 6%;
 }
 
+.receipt-result{
+    margin: 0 0 2% 10%;
+    padding-bottom: 3%;
+}
+
 /* 영수증 칸 */
 .receipt {
     display: flex;
@@ -18,7 +23,7 @@
 
 /* 영수증 업로드 사진 */
 .receipt-pic {
-    width: 30%;
+    width: 25%;
     height: 100%;
     overflow-y: auto;
     margin: 0 3% 0 10%;
@@ -212,7 +217,7 @@
     flex-direction: row;
     justify-content: center;
     width: 25%;
-
+    max-width: 25%;
 }
 
 .receipt-name{
@@ -241,7 +246,7 @@
 }
 
 /* 모달 창 오버레이 스타일 */
-.modal-overlay {
+.receipt-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -255,7 +260,7 @@
 }
 
 /* 모달 내용 스타일 */
-.modal-content {
+.receipt-modal-content {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -265,11 +270,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.modal-content h2 {
+.receipt-modal-content h2 {
     margin-top: 0;
 }
 
-.modal-content button {
+.receipt-modal-content button {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #333;
@@ -279,7 +284,7 @@
     cursor: pointer;
 }
 
-.modal-content button:hover {
+.receipt-modal-content button:hover {
     background-color: #555;
 }
 
@@ -291,6 +296,9 @@
     width: 10%;
     margin-left: 5%;
     padding: 1%;
+    position: fixed;
+    right: 10%;
+    bottom: 10%;
 }
 
 .receipt-R{
@@ -316,7 +324,7 @@
     background-color: rgb(255, 190, 140);
 }
 
-.delete-button{
+.receipt-delete-button{
     height: 5%;
     width: 5%;
     margin-right: 2%;
