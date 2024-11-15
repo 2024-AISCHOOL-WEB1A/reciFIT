@@ -127,7 +127,7 @@ const Mypage = () => {
             {/* 환경 점수 */}
             <section ref={statsSectionRef} className="env-section">
                 <div className="stats-card env-score-card">
-                    <h3 className="shared-title1">나의 환경점수는?</h3>
+                    <h3 className="shared-title1">나의 환경점수</h3>
                     <p>{userData.envScore || '100'}</p>
                 </div>
             </section>
@@ -184,8 +184,8 @@ const Mypage = () => {
             </section>
             </section>
             <section className="ingredients-receipts-container">
-            {/* 식재료 관리 */}
-            <section ref={ingredientsRef} className="my-ingredients">
+            
+            {/* <section ref={ingredientsRef} className="my-ingredients">
                 <button className="shared-title1" onClick={() => handleSectionClick('ingredients')}>식재료 관리</button>
                 {ingredients.length > 0 ? (
                     ingredients.map(ingredient => (
@@ -199,7 +199,7 @@ const Mypage = () => {
                 ) : (
                     <p>식재료 정보가 없습니다.</p>
                 )}
-            </section>
+            </section> */}
 
             {/* 영수증 관리 */}
             <section ref={receiptsRef} className="my-receipts">
