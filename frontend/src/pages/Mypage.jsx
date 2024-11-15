@@ -1,26 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios'; // axios import
 import "../assets/css/mypage.css";
-import { Doughnut } from 'react-chartjs-2'; // Doughnut 차트 import
-import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'; // 필요한 요소를 import
-// Chart.js에서 필요한 요소 등록
-Chart.register(ArcElement, Tooltip, Legend);
+//import { Doughnut } from 'react-chartjs-2'; // Doughnut 차트 import
+
 
 
 const Mypage = () => {
-    const [userData, setUserData] = useState({
+    const [userData, 
+        setUserData
+    ] = useState
+    ({
         nickname: "찬란한 맛집",
         status: "활성",
         role: "일반 사용자",
         createdAt: new Date(),
         updatedAt: new Date(),
         lastLogin: new Date(),
-        envScore: 85, // 환경 점수
+        envScore: 75, // 환경 점수
         preferredIngredients: "감자, 당근",
         dislikedIngredients: "양파",
         nonConsumableIngredients: "땅콩",
     });
-
+    const dummyData = {
+        envScore: userData.envScore,
+        remainingScore: 100 - userData.envScore,
+    };
     const [recipes, setRecipes] = useState([
         {
             favIdx: 1,
@@ -58,7 +62,7 @@ const Mypage = () => {
     const fetchUserData = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`/api/user/${userIdx}`);
+            const response = await axios.get(`/api/users/${userIdx}`);
             setUserData(response.data);
         } catch (error) {
             console.error("사용자 정보를 가져오는 데 실패했습니다.", error);
@@ -109,35 +113,13 @@ const Mypage = () => {
             [name]: value,
         }));
     };
-    // 반원 차트 데이터
-    const chartData = {
-        labels: ['환경 점수', '나머지 점수'],
-        datasets: [
-            {
-                data: [userData.envScore, 100 - userData.envScore],
-                backgroundColor: ['#36A2EB', '#E0E0E0'], // 환경 점수 색상과 나머지 색상
-                borderWidth: 0,
-                hoverBorderColor: ['#36A2EB', '#E0E0E0'],
-            },
-        ],
-    };
+    const envScore = userData.envScore; // 환경 점수
+    const radius = 90; // 원 반지름
+    const circumference = Math.PI * radius; // 반원의 둘레
+    const scorePercentage = envScore / 100; // 점수 비율
+    const scoreStroke = circumference * scorePercentage; // 점수에 해당하는 stroke 길이
+    const remainingStroke = circumference - scoreStroke; // 남은 영역 stroke 길이
 
-    // 차트 옵션
-    const options = {
-        cutout: '70%', // 중앙 비율 조정
-        rotation: -Math.PI, // 반원 방향 설정
-        circumference: Math.PI, // 반원으로 설정
-        responsive: true,
-        maintainAspectRatio: false, // 비율 유지하지 않음
-        plugins: {
-            legend: {
-                display: false, // 레전드 숨기기
-            },
-            tooltip: {
-                enabled: false, // 툴팁 비활성화
-            },
-        },
-    };
     return (
         <div className="mypage">
             <header className="my-header">
@@ -157,17 +139,7 @@ const Mypage = () => {
                     <p>회원 수정일: {new Date(userData.updatedAt).toLocaleDateString() || '없음'}</p>
                     <p>최종 로그인 일자: {new Date(userData.lastLogin).toLocaleDateString() || '없음'}</p>
                 </section>
-                {/* 환경 점수 */}
-                <section ref={statsSectionRef} className="env-section">
-                    <div className="env-score-card">
-                        <h3 className="shared-title1">나의 환경점수</h3>
-                        <Doughnut data={chartData} options={options} />
-                        <div className="score-label">
-                            <span className="score-value">{userData.envScore}</span>
-                            <span className="score-text">Points</span>
-                        </div>
-                    </div>
-                </section>
+                
                 {/* 추가 정보 입력/수정 */}
                 <section className="additional-section">
                     <div className="info-card">
@@ -212,6 +184,61 @@ const Mypage = () => {
                     ) : (
                         <p>레시피 정보가 없습니다.</p>
                     )}
+                </section>
+                {/* 환경 점수 */}
+                <section ref={statsSectionRef} className="env-section">
+                    <div className="env-score-card">
+                        <h3 className="shared-title1">나의 환경점수</h3>
+                        <svg
+                    width="500"
+                    height="200"
+                    viewBox="0 0 200 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle
+                        cx="100"
+                        cy="100"
+                        r="80"
+                        fill="transparent"
+                        stroke="#E0E0E0"
+                        strokeWidth="30"
+                        strokeDasharray="251.2"
+                        strokeDashoffset="0"
+                    />
+                    <circle
+                        cx="100"
+                        cy="100"
+                        r="80"
+                        fill="transparent"
+                        stroke="#36A2EB"
+                        strokeWidth="30"
+                        strokeDasharray="251.2"
+                        strokeDashoffset={(1 - dummyData.envScore / 100) * 251.2}
+                        transform="rotate(-90 100 100)"
+                    />
+                    <text
+                        x="100"
+                        y="105"
+                        textAnchor="middle"
+                        fill="#36A2EB"
+                        fontSize="20"
+                        fontWeight="bold"
+                    >
+                        {dummyData.envScore}
+                    </text>
+                    <text
+                        x="100"
+                        y="125"
+                        textAnchor="middle"
+                        fill="#888"
+                        fontSize="12"
+                    >
+                        P
+                    </text>
+                </svg>
+                        
+                        
+                    </div>
                 </section>
                 {/* 영수증 관리 */}
                 <section ref={receiptsRef} className="receipts-section">

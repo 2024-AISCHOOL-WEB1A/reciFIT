@@ -22,11 +22,10 @@
 .mypage {
     font-family: 'Pretendard-Regular', sans-serif;
     padding: 1.25em;
-    /* background-color: #f9f9f9; */
     max-width: 80em;
     margin: 0 auto;
     font-weight: normal;
-    margin-top: 3em; /* 헤더와 20px 이상의 간격을 추가 */
+    margin-top: 3em; /* 헤더와 간격 추가 */
 }
 
 .shared-title-h2 {
@@ -58,7 +57,8 @@
 .my-uploads {
     margin: 1.25em 0;
     padding: 1em;
-    background-color: #e0e0e0;
+    background-color: white; /* 배경색 흰색으로 변경 */
+    border: 2px solid #f4b057; /* 테두리 색상 변경 */
     border-radius: 0.5em;
 }
 
@@ -70,13 +70,11 @@
     flex-direction: column;
     align-items: center;
     min-height: 17em;
-    border: 1px solid #ddd;
+    border: 2px solid #f4b057; /* 테두리 색상 변경 */
     border-radius: 10px;
     padding: 20px;
     margin: 1.25em 0;
-    background-color: #e0e0e0;
-    border-radius: 0.5em;
-    position: relative; /* 부모 요소가 기준이 되도록 설정 */
+    background-color: white; /* 배경색 흰색으로 변경 */
 }
 
 .info-section h2,
@@ -92,55 +90,54 @@
     gap: 1.25em;
 }
 
-.stats-card,
 .info-card {
-    background-color: #e0e0e0;
+    background-color: white; /* 배경색 흰색으로 변경 */
     text-align: center;
     padding: 1.25em;
     border-radius: 0.5em;
     box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.1);
+    border: 2px solid #f4b057; /* 테두리 색상 변경 */
     flex: 1;
     max-width: 17.1875em;
 }
 
-.env-score-card { background-color: #f9e79f; 
-    border: 0.125em solid #d4ac0d; 
-    text-align: center; 
-    position: relative; 
-    width: 30em; /* 차트의 너비 설정 */ 
-    height:19em; /* 차트의 높이를 원형 형태에 맞게 조정 */
-    margin: 0 auto; 
+.env-score-card {
+    background-color: white; /* 배경색 흰색으로 변경 */
+    border: 2px solid #f4b057; /* 테두리 색상 변경 */
+    text-align: center;
+    position: relative;
+    width: 50em; /* 차트의 너비 설정 */
+    height: 30em; /* 차트의 높이를 원형 형태에 맞게 조정 */
+    margin: 0 auto;
+}
+
+.stats-card {
+    background-color: white; /* 배경색 흰색으로 변경 */
+    border: 2px solid #f4b057; /* 테두리 색상 변경 */
+    position: relative;
+    width: 20em; /* 차트의 너비 설정 */
+    height: 12em;
 }
 
 .score-label {
-        position: absolute;
-        top: 50%; /* 점수 위치 조정 */
-        left: 50%;
-        transform: translate(-50%, -50%); /* 중앙 정렬 */
-        text-align: center;
-        color: #111; /* 텍스트 색상 조정 */
+    position: absolute;
+    top: 50%; /* 점수 위치 조정 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
+    text-align: center;
+    color: #111; /* 텍스트 색상 조정 */
 }
 
 .score-value {
-        font-size: 32px; /* 점수 크기 */
-        font-weight: bold;
-        color: #36A2EB; /* 점수 색상 */
+    font-size: 32px; /* 점수 크기 */
+    font-weight: bold;
+    color: #36A2EB; /* 점수 색상 */
 }
+
 .score-text {
     font-size: 14px; /* 텍스트 크기 */
     color: #555; /* 텍스트 색상 */
 }
-
-
-
-.stats-card {
-
-    position: relative;
-    width: 20em; /* 차트의 너비 설정 */
-    height: 12em; 
-}
-
-
 
 .mypage-footer {
     text-align: center;
@@ -172,4 +169,3 @@
     letter-spacing: 0.05em;
     line-height: 1.5;
 }
-
