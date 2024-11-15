@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/css/recipe.css';
 
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAnglesLeft, faUsers, faHourglassStart, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faAnglesLeft, faUsers, faHourglassStart, faStar, faAnglesRight, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const RecipeDetail = () => {
@@ -30,12 +31,23 @@ const RecipeDetail = () => {
         .filter(Boolean)
         .map((section) => section.trim());
 
+    // 찜하기 기능
+    const [isHeartClicked, setIsHeartClicked] = useState(false);
+
+    const heartClick = () => {
+        setIsHeartClicked(!isHeartClicked);
+    };
+
     return (
         <div id="recipe">
             <div id="recipe-details-title">
                 <div id="recipe-details-goback" onClick={goBack}>
                     <FontAwesomeIcon icon={faAnglesLeft} />
                 </div>
+                <button className='heart-container' onClick={heartClick}>
+                    <FontAwesomeIcon icon={isHeartClicked ? faHeart : faRegularHeart} id='heartBtn'/>
+                    <span className='heartText'>Favorite</span>
+                </button>
             </div>
 
             <div className='detail-container'>
@@ -131,6 +143,11 @@ const RecipeDetail = () => {
                     <span>Cooking</span>
                 </div>
                 <div className="description">{description}</div>
+            </div>
+
+            <div className='cookingStart'>
+                <FontAwesomeIcon icon={faAnglesRight} id='rightarrowIcon'/>
+                <button className='cookingBtn'>Cooking Start</button>
             </div>
         </div>
     );

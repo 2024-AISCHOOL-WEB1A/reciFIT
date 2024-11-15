@@ -231,31 +231,31 @@
     background-size: 0.9375vw 2.55208vw;
   }
 
-  .MainSwipeThumb:after {
-    width: 0.885416vw;
-    height: 2.55208vw;
-    background-size: 0.885416vw 2.55208vw;
-  }
+	.MainSwipeThumb:after{
+		width:0.885416vw;
+		height:2.55208vw;
+		background-size:0.885416vw 2.55208vw;
+	}
+	
+	.MainSwipe{
+		top:calc(50% + 19.6041vw);
+	}
 
-  .MainSwipe {
-    top: calc(50% + 18.6041vw);
-  }
+	.MainSwipeThumbSlide{
+		width:24.375vw;
+	}
+	
+	.MainTopBannerScroll{
+		width:2.86458vw;
+		bottom:1.5625vw;
+		right:5.2083vw;
+	}
 
-  .MainSwipeThumbSlide {
-    width: 24.375vw;
-  }
-
-  .MainTopBannerScroll {
-    width: 2.86458vw;
-    bottom: 1.5625vw;
-    right: 5.2083vw;
-  }
-
-  .MainTopBannerScroll-ico {
-    width: 2.86458vw;
-    height: 4.8958vw;
-    background-size: 2.86458vw 4.8958vw;
-  }
+	.MainTopBannerScroll-ico{
+		width:2.86458vw;
+		height:4.8958vw;
+		background-size:2.86458vw 4.8958vw;
+	}
 
   .MainTopBannerScroll-text {
     width: 3.6458vw;

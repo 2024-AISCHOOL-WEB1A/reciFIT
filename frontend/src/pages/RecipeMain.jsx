@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../assets/css/recipe.css';
 import data from '../data/recipesData';
 
-import YouTube from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faChevronRight, faChevronLeft, faCamera, faFileExport, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const RecipeMain = () => {
@@ -39,10 +38,51 @@ const RecipeMain = () => {
         }
     };
 
-    // 검색창 이동
-    // const searchClick = () => {
-    //     window.location.href = '/';
-    // }
+    // 카메라 버튼 클릭 후 모달창
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // 모달 열기 함수
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+    // 모달 닫기 함수
+    const closeModal = () => {
+        setIsModalOpen(false);
+        window.scrollTo(0, 0); 
+    };
+
+    // 모달 창 내부의 이미지 업로드 기능
+    const [image, setImage] = useState(null); // 업로드한 이미지 상태
+    const [fileName, setFileName] = useState('선택된 이미지 미리보기');
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0]; // 파일 선택
+        if (file) {
+            setFileName(file.name); // 파일 이름 저장
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result); // 이미지 파일을 base64로 저장
+            };
+            reader.readAsDataURL(file); // 파일을 base64로 변환
+        }
+    };
+
+    const triggerFileInput = () => {
+        document.getElementById('recipe-camera-input').click(); // 파일 선택 창 열기
+    };
+
+    // textarea 수정 기능 추가
+    const [detectionText, setDetectionText] = useState(""); // 기본값 설정
+    const [isEditable, setIsEditable] = useState(false); // 수정 가능 여부
+
+    const handleEditClick = () => {
+        setIsEditable(true); // 수정 가능 상태로 전환
+    };
+
+    const handleTextChange = (event) => {
+        setDetectionText(event.target.value); // 텍스트 업데이트
+    };
+
 
     return (
         <div className='recipeMain-container'>
@@ -56,12 +96,66 @@ const RecipeMain = () => {
                     <p className="search__title">#집밥 #손님접대 #엄마손맛 #동파육 #백종원레시피</p>
                 </div>
                 <div className='site-camera-img'>
-                    <Link to="/">
+                    <Link to="#" onClick={openModal}>
                         <img src="/img/site-camera-img.png" alt="" />
                     </Link>
                 </div>
+
+                {/* 카메라 이미지 모달 창 */}
+                {/* 모달 창 */}
+                {isModalOpen && (
+                    <div className="modal-overlay-main" onClick={closeModal}>
+                        <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+                            <div className='modal-close-icon' onClick={closeModal}>
+                                <FontAwesomeIcon icon={faXmark} />
+                            </div>
+                            <div className="upload-container">
+                                <h2>식재료 이미지 촬영</h2>
+                                <p className='reference-text'>깨끗한 배경에서 촬영해주세요!</p>
+                                <button onClick={triggerFileInput} className="modal-imgUpload">
+                                    <FontAwesomeIcon icon={faCamera} />
+                                </button>
+                                {/* input[type="file"] 요소를 숨기고 label을 클릭하면 파일 선택 창이 열리도록 설정 */}
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    capture="camera"
+                                    onChange={handleImageChange}
+                                    id="recipe-camera-input"
+                                />
+                                {/* 선택된 이미지를 미리보기 */}
+                                <div className='selectImg-container'>
+                                    <span className='selectImg'>
+                                        <FontAwesomeIcon icon={faFileExport} />
+                                        {/* 파일 선택 전 기본 텍스트 표시, 선택 후 파일 이름 표시 */}
+                                        <p className='selectImg-Text'>{fileName}</p>
+                                    </span>
+                                    {image && <img src={image} alt="Uploaded preview" width="300" height="auto" />}
+                                </div>
+                            </div>
+
+                            <div className='detectionList'>
+                                <p>현재 인식된 재료 :</p>
+                                <textarea
+                                    id="detectionFood"
+                                    value={detectionText}
+                                    onChange={handleTextChange}
+                                    readOnly={!isEditable} // 수정 가능 여부에 따라 readOnly 설정
+                                />
+                                <FontAwesomeIcon
+                                    icon={faPen}
+                                    onClick={handleEditClick}
+                                    id='detectionIcon'/>
+                            </div>
+
+                            <div>
+                                <button className="upload-button" onClick={closeModal}>등록하기</button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
-            
+
             <div className='first-listItem'>
                 <div className='list_content'>
                     <h3 className='list_content_title'>
@@ -128,7 +222,7 @@ const RecipeMain = () => {
                                 <img src="/img/recipe_category/nambi.png" alt="국/탕" />
                                 <span>국/탕</span></Link></li>
                             <li><Link to="/recipeList">
-                                <img src="/img/recipe_category/zzigae.png" alt="찌개"/>
+                                <img src="/img/recipe_category/zzigae.png" alt="찌개" />
                                 <span>찌개</span></Link></li>
                             <li><Link to="/recipeList">
                                 <img src="/img/recipe_category/clock.png" alt="초스피드" />
