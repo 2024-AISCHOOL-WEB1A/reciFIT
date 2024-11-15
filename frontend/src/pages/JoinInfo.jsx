@@ -1,26 +1,30 @@
 import React, { useState } from "react";
 import "../assets/css/joinInfo.css";
-import { apiAxios } from "../utils/axios";
+import { apiAxios } from "../utils/axiosUtils";
+import { useNavigate } from "react-router-dom";
 
 const JoinInfo = () => {
+  const navigate = useNavigate();
+
   const [preferredIngredients, setPreferredIngredient] = useState("");
   const [dislikedIngredients, setDislikedIngredients] = useState("");
   const [nonConsumableIngredients, setNonConsumableIngredients] = useState("");
 
   const postAdditionalUserDate = async () => {
-    console.log(
-      preferredIngredients,
-      dislikedIngredients,
-      nonConsumableIngredients
-    );
-
     try {
       const res = await apiAxios.patch("/users", {
         preferredIngredients,
         dislikedIngredients,
         nonConsumableIngredients,
       });
-      console.log(res);
+
+      if (res.status === 200) {
+        // TODO : 성공 모달창
+        // TODO : 확인 누르면 메인 페이지로 이동
+        navigate("/");
+      } else {
+        // TODO : 실패 모달창
+      }
     } catch (err) {
       console.error(err);
     }

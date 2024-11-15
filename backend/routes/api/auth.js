@@ -95,6 +95,11 @@ router.get(
 
       // TODO : 응답 보내기 (토큰 형태로)
       // 응답보내기 (redirect)
+      // if (["localhost:3000", "localhost:3001"].includes(req.headers.host)) {
+      //   return res.redirect(
+      //     `http://${req.headers.host}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+      //   );
+      // }
       return res.redirect(
         `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
@@ -188,6 +193,11 @@ router.get(
 
       // TODO : 응답 보내기 (토큰 형태로)
       // 응답보내기 (redirect)
+      // if (["localhost:3000", "localhost:3001"].includes(req.headers.host)) {
+      //   return res.redirect(
+      //     `http://${req.headers.host}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+      //   );
+      // }
       return res.redirect(
         `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
