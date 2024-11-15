@@ -97,6 +97,14 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
+                to="/mypage?section=env-section"
+                className="SiteFamilySelect-link"
+              >
+                나의 환경점수
+              </Link>
+            </li>
+            <li className="SiteFamilySelect-item">
+              <Link
                 to="/mypage?section=additional-info"
                 className="SiteFamilySelect-link"
               >
@@ -109,14 +117,6 @@ const Header = ({ user }) => {
                 className="SiteFamilySelect-link"
               >
                 나의 레시피 조회
-              </Link>
-            </li>
-            <li className="SiteFamilySelect-item">
-              <Link
-                to="/mypage?section=my-ingredients"
-                className="SiteFamilySelect-link"
-              >
-                식재료 관리
               </Link>
             </li>
             <li className="SiteFamilySelect-item">

@@ -35,18 +35,16 @@ const Mypage = () => {
             cookedYn: "N",
         },
     ]);
-    const [receipts, setReceipts] = useState([
-        {
-            rptIdx: 1,
-            rptPhotoUrl: "https://help.jobis.co/hc/article_attachments/115014257148/c.PNG", // 이미지 URL 변경
-            totalCalories: 350,
-            totalFat: 10, // 예시 데이터
-            totalProtein: 5, // 예시 데이터
-            totalCarbonhydrates: 45, // 예시 데이터
-            totalFiber: 8, // 예시 데이터
-            createdAt: new Date(),
-        }
-    ]);
+    const [receipts, setReceipts] = useState([{
+        rptIdx: 1,
+        rptPhotoUrl: "https://help.jobis.co/hc/article_attachments/115014257148/c.PNG", // 이미지 URL 변경
+        totalCalories: 350,
+        totalFat: 10, // 예시 데이터
+        totalProtein: 5, // 예시 데이터
+        totalCarbonhydrates: 45, // 예시 데이터
+        totalFiber: 8, // 예시 데이터
+        createdAt: new Date(),
+    },]);
     const [isLoading, setIsLoading] = useState(false);
 
     const userIdx = 1; // 요청할 사용자 ID (예시)
@@ -71,19 +69,19 @@ const Mypage = () => {
 
     // 레시피 및 영수증 데이터 가져오기
     const fetchRecipesAndReceipts = async () => {
-        setIsLoading(true);
-        try {
-            const [recipesResponse, receiptsResponse] = await Promise.all([
-                axios.get(`/api/recipes/${userIdx}`),
-                axios.get(`/api/receipts/${userIdx}`)
-            ]);
-            setRecipes(recipesResponse.data);
-            setReceipts(receiptsResponse.data);
-        } catch (error) {
-            console.error("레시피 및 영수증 데이터를 가져오는 데 실패했습니다.", error);
-        } finally {
-            setIsLoading(false);
-        }
+        // setIsLoading(true);
+        // try {
+        //     const [recipesResponse, receiptsResponse] = await Promise.all([
+        //         axios.get(`/api/recipes/${userIdx}`),
+        //         axios.get(`/api/receipts/${userIdx}`)
+        //     ]);
+        //     // setRecipes(recipesResponse.data);
+        //     // setReceipts(receiptsResponse.data);
+        // } catch (error) {
+        //     console.error("레시피 및 영수증 데이터를 가져오는 데 실패했습니다.", error);
+        // } finally {
+        //     setIsLoading(false);
+        // }
     };
 
     // 사용자 정보 저장
