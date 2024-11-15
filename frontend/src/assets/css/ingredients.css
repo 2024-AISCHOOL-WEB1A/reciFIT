@@ -38,7 +38,7 @@
     font-weight: bold;
   }
   
-  button {
+  .ingre-left-button, .ingre-right-button {
     background-color: #4CAF50; /* 화살표 버튼 색상 */
     color: white;
     border: none;
@@ -49,7 +49,7 @@
     margin: 0 10px;
   }
   
-  button:disabled {
+  .ingre-left-button:disabled, .ingre-left-button:disabled {
     background-color: #ddd;
     cursor: not-allowed;
   }
