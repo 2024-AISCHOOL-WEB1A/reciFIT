@@ -11,7 +11,7 @@ const Header = ({ user }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [menuDisplay, setMenuDisplay] = useState(true);
+  const [menuDisplay, setMenuDisplay] = useState("true");
   const [loginText, setLoginText] = useState("로그인");
 
   useEffect(() => {
@@ -21,6 +21,8 @@ const Header = ({ user }) => {
   }, [user]);
 
   const toggleMenu = () => {
+    console.log(user);
+
     // 로그인 여부 확인
     if (user) {
       // 로그인이 되어 있다면, 메뉴가 열리도록
@@ -38,11 +40,12 @@ const Header = ({ user }) => {
       if (res.status === 200) {
         // redux 삭제
         dispatch(userActions.setUser({ user: null }));
+
         navigate("/");
         window.location.reload();
       }
     } catch (err) {
-      // 오류 처리
+      // console.error(err);
     }
   };
 
@@ -51,17 +54,25 @@ const Header = ({ user }) => {
       <div className="site-header">
         <div className="header-container">
           <Link to="/">
-            <img src="/img/logo.png" className="headerLogo" alt="Logo" />
+            <img src="/img/logo.png" className="headerLogo" />
           </Link>
 
           {/* Navigation */}
           <nav id="site-navigation">
             <div className="menu-container">
               <ul className="menu-list">
-                <li><Link to="/">홈</Link></li>
-                <li><Link to="/recipe">레시피추천</Link></li>
-                <li><Link to="/receipts">영수증</Link></li>
-                <li><Link to="/ingredients">재료관리</Link></li>
+                <li>
+                  <Link to="/">홈</Link>
+                </li>
+                <li>
+                  <Link to="/recipe">레시피추천</Link>
+                </li>
+                <li>
+                  <Link to="/receipts">영수증</Link>
+                </li>
+                <li>
+                  <Link to="/ingredients">재료관리</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -72,25 +83,66 @@ const Header = ({ user }) => {
             <FontAwesomeIcon icon={faUser} id="userFont" /> {loginText}
             <span className="SiteFamily-bar"></span>
           </div>
-          
-          <ul className="SiteFamilySelect" style={{ display: menuDisplay ? 'none' : 'block' }}>
-            <li className='SiteFamilySelect-item'>
-              <Link to='/mypage?section=info-section' className='SiteFamilySelect-link'>회원정보 수정</Link>
+          <ul
+            className="SiteFamilySelect"
+            style={{ display: menuDisplay ? "none" : "block" }}
+          >
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="/mypage?section=info-section"
+                className="SiteFamilySelect-link"
+              >
+                회원정보 수정
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='/mypage?section=env-section' className='SiteFamilySelect-link'>나의 환경점수</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="/mypage?section=additional-info"
+                className="SiteFamilySelect-link"
+              >
+                추가 정보 입력/수정
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='/mypage?section=additional-section' className='SiteFamilySelect-link'>추가 정보 입력/수정</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="/mypage?section=my-recipes"
+                className="SiteFamilySelect-link"
+              >
+                나의 레시피 조회
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='/mypage?section=recipes-section' className='SiteFamilySelect-link'>나의 레시피 조회</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="/mypage?section=my-ingredients"
+                className="SiteFamilySelect-link"
+              >
+                식재료 관리
+              </Link>
             </li>
-            <li className='SiteFamilySelect-item'>
-              <Link to='/mypage?section=receipts-section' className='SiteFamilySelect-link'>영수증 관리</Link>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="/mypage?section=my-receipts"
+                className="SiteFamilySelect-link"
+              >
+                영수증 관리
+              </Link>
             </li>
+            {user && (
+              <li className="SiteFamilySelect-item">
+                <Link className="SiteFamilySelect-link" onClick={handleLogout}>
+                  로그아웃
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
+
+        {/* Mobile Btn */}
+        {/* <button className="MobileMenuBtn">
+          <span className="MobileMenuBtn-line"></span>
+          <span className="MobileMenuBtn-line"></span>
+          <span className="MobileMenuBtn-line"></span>
+        </button> */}
       </div>
     </header>
   );
