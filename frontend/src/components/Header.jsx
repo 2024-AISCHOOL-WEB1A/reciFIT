@@ -29,8 +29,6 @@ const Header = ({ user }) => {
       setMenuDisplay((prevState) => !prevState);
     } else {
       // 로그인이 되어 있지 않다면, join으로 이동
-      console.log("??");
-      // navigate("/");
       navigate("/join");
     }
   };
