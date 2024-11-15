@@ -57,17 +57,17 @@ const Header = () => {
             <Link to='/mypage?section=info-section' className='SiteFamilySelect-link'>회원정보 수정</Link>
           </li>
           <li className='SiteFamilySelect-item'>
-            <Link to='/mypage?section=my-ingredients' className='SiteFamilySelect-link'>나의 환경점수</Link>
+            <Link to='/mypage?section=env-section' className='SiteFamilySelect-link'>나의 환경점수</Link>
           </li>
           <li className='SiteFamilySelect-item'>
-            <Link to='/mypage?section=additional-info' className='SiteFamilySelect-link'>추가 정보 입력/수정</Link>
+            <Link to='/mypage?section=additional-section' className='SiteFamilySelect-link'>추가 정보 입력/수정</Link>
           </li>
           <li className='SiteFamilySelect-item'>
-            <Link to='/mypage?section=my-recipes' className='SiteFamilySelect-link'>나의 레시피 조회</Link>
+            <Link to='/mypage?section=recipes-section' className='SiteFamilySelect-link'>나의 레시피 조회</Link>
           </li>
           
           <li className='SiteFamilySelect-item'>
-            <Link to='/mypage?section=my-receipts' className='SiteFamilySelect-link'>영수증 관리</Link>
+            <Link to='/mypage?section=receipts-section' className='SiteFamilySelect-link'>영수증 관리</Link>
           </li>
           </ul>
         </div>
