@@ -48,7 +48,7 @@ const Ingredients = () => {
 
 // 예제 날짜
 const today = new Date().toISOString().split('T')[0]; // 오늘 날짜 (YYYY-MM-DD)
-const pastDate = '2023-12-25'; // 과거 날짜 예제
+const pastDate = '2024-03-11'
 
 // 날짜 차이 계산
 const daysDifference = calculateDateDifference(pastDate, today);
