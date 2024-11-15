@@ -105,7 +105,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=additional-info"
+                to="/mypage?section=additional-section"
                 className="SiteFamilySelect-link"
               >
                 추가 정보 입력/수정
@@ -113,7 +113,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=my-recipes"
+                to="/mypage?section=recipes-section"
                 className="SiteFamilySelect-link"
               >
                 나의 레시피 조회
@@ -121,7 +121,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=my-receipts"
+                to="/mypage?section=receipts-section"
                 className="SiteFamilySelect-link"
               >
                 영수증 관리
