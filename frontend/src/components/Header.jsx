@@ -91,52 +91,42 @@ const Header = ({ user }) => {
           >
             <li className="SiteFamilySelect-item">
               <Link
-                to="#"
+                to="/mypage?section=info-section"
                 className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 회원정보 수정
               </Link>
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="#"
+                to="/mypage?section=additional-info"
                 className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 추가 정보 입력/수정
               </Link>
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="#"
+                to="/mypage?section=my-recipes"
                 className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 나의 레시피 조회
               </Link>
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="#"
+                to="/mypage?section=my-ingredients"
                 className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
-                식재료 재고 관리
+                식재료 관리
               </Link>
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="#"
+                to="/mypage?section=my-receipts"
                 className="SiteFamilySelect-link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
-                영수증 조회 및 관리
+                영수증 관리
               </Link>
             </li>
             {user && (
