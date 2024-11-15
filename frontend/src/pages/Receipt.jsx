@@ -83,7 +83,7 @@ const Receipt = () => {
                                 {isEditing && (
                                     <img src={`${process.env.PUBLIC_URL}/img/receipt_img/delete.png`}
                                         onClick={() => handleDelete(index)}
-                                        className="delete-button" />
+                                        className="receipt-delete-button" />
                                 )}
 
                                 {/* 상품명 */}
@@ -154,8 +154,8 @@ const Receipt = () => {
 
             {/* 모달 창 */}
             {isModalOpen && (
-                <div className="modal-overlay" onClick={handleModalToggle}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <div className="receipt-modal-overlay" onClick={handleModalToggle}>
+                    <div className="receipt-modal-content" onClick={(e) => e.stopPropagation()}>
                         <h2>영양분 정보</h2>
                         <p>여기에 영양분 정보가 표시됩니다.</p>
                         <button onClick={handleModalToggle}>닫기</button>

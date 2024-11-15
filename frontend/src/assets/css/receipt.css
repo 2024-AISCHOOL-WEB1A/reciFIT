@@ -246,7 +246,7 @@
 }
 
 /* 모달 창 오버레이 스타일 */
-.modal-overlay {
+.receipt-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -260,7 +260,7 @@
 }
 
 /* 모달 내용 스타일 */
-.modal-content {
+.receipt-modal-content {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -270,11 +270,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.modal-content h2 {
+.receipt-modal-content h2 {
     margin-top: 0;
 }
 
-.modal-content button {
+.receipt-modal-content button {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #333;
@@ -284,7 +284,7 @@
     cursor: pointer;
 }
 
-.modal-content button:hover {
+.receipt-modal-content button:hover {
     background-color: #555;
 }
 
@@ -324,7 +324,7 @@
     background-color: rgb(255, 190, 140);
 }
 
-.delete-button{
+.receipt-delete-button{
     height: 5%;
     width: 5%;
     margin-right: 2%;
