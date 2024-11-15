@@ -110,7 +110,15 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=additional-info"
+                to="/mypage?section=env-section"
+                className="SiteFamilySelect-link"
+              >
+                나의 환경점수
+              </Link>
+            </li>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="/mypage?section=additional-section"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -119,7 +127,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=my-recipes"
+                to="/mypage?section=recipes-section"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -128,6 +136,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
+<<<<<<< HEAD
                 to="/mypage?section=my-ingredients"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
@@ -138,6 +147,9 @@ const Header = ({ user }) => {
             <li className="SiteFamilySelect-item">
               <Link
                 to="/mypage?section=my-receipts"
+=======
+                to="/mypage?section=receipts-section"
+>>>>>>> 1e9822f54ee03c2698dcbdc777c32c8b7d305a67
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
