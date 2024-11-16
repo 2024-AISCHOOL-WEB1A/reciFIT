@@ -22,7 +22,7 @@
 /* -----------------=------------------------- */
 
 .ingre-container {
-    margin: 3%;
+    margin: 8%;
 }
 
 .ingre-container h3{
@@ -99,6 +99,7 @@
 
 .ingre-table{
     width: 100%;
+    
 }
 
 .ingre-table-head th{
@@ -110,6 +111,7 @@
 .ingre-table-body td{
     padding: 1%;
     text-align: center;
+    /* background-color: antiquewhite; */
 }
 
 
@@ -127,14 +129,45 @@
     background-color: white;
 }
 
-.ingre-per-background{
+.ingre-per-background {
+    /* position: absolute; 배경을 고정된 위치에 배치 */
+    z-index: 0; /* 뒤로 보내기 */
     background-color: rgb(200, 200, 200);
-    width: 100%;
+    width: 90%;
+    height: 1em;
+    margin: 1% 0;
+}
+
+.ingre-per-bar {
+    position: absolute; /* 같은 부모 기준으로 위치 고정 */
+    z-index: 1; /* 배경 위로 올리기 */
+    background-color: rgb(255, 190, 140);
+     /* 원하는 퍼센트로 설정 */
+    height: 1em;
+}
+
+.ingre-per-status {
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+}
+
+/* .ingre-per-background{
+    position: relative;
+    z-index: -1;
+    background-color: rgb(200, 200, 200);
+    width: 90%;
     height: 1em;
     margin: 1% 0;
 }
 
 .ingre-per-bar{
+    position: relative;
+    z-index: 0;
     background-color: rgb(255, 190, 140);
     height: 1em;
 }
+
+.ingre-per-status{
+    width: 10%;
+} */
