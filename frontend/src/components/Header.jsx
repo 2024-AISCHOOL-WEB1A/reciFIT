@@ -108,14 +108,7 @@ const Header = ({ user }) => {
                 회원정보 수정
               </Link>
             </li>
-            <li className="SiteFamilySelect-item">
-              <Link
-                to="/mypage?section=env-section"
-                className="SiteFamilySelect-link"
-              >
-                나의 환경점수
-              </Link>
-            </li>
+            
             <li className="SiteFamilySelect-item">
               <Link
                 to="/mypage?section=additional-section"
@@ -132,6 +125,14 @@ const Header = ({ user }) => {
                 onClick={toggleMenu}
               >
                 나의 레시피 조회
+              </Link>
+            </li>
+            <li className="SiteFamilySelect-item">
+              <Link
+                to="/mypage?section=env-section"
+                className="SiteFamilySelect-link"
+              >
+                나의 환경점수
               </Link>
             </li>
             <li className="SiteFamilySelect-item">

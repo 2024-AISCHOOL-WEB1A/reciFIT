@@ -26,7 +26,7 @@ MONGODB_DB = os.getenv("MONGODB_DB")
 app = FastAPI()
 
 # TODO : 몽고 DB 설정 다시 확인
-# # MongoDB 클라이언트 설정
+# MongoDB 클라이언트 설정
 # client = MongoClient(MONGODB_URI)
 # db = client[MONGODB_DB]
 # ocr_collection = db["ocr_results"]
