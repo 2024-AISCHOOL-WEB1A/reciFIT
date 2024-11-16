@@ -87,3 +87,5 @@ async def perform_ocr(request: OCRRequest):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
+    # uvicorn app:app --reload 로 서버실행
+    # python -m venv venv
