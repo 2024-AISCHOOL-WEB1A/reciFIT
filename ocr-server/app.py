@@ -26,7 +26,7 @@ MONGODB_DB = os.getenv("MONGODB_DB")
 app = FastAPI()
 
 # TODO : 몽고 DB 설정 다시 확인
-# # MongoDB 클라이언트 설정
+# MongoDB 클라이언트 설정
 # client = MongoClient(MONGODB_URI)
 # db = client[MONGODB_DB]
 # ocr_collection = db["ocr_results"]
@@ -87,3 +87,5 @@ async def perform_ocr(request: OCRRequest):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
+    # uvicorn app:app --reload 로 서버실행
+    # python -m venv venv
