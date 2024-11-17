@@ -16,94 +16,94 @@ const Receipt = () => {
   // 유저 정보
   const user = useSelector((state) => state.user.user);
   // 영수증 스캔 데이터
-  // const [receiptData, setReceiptData] = useState({
-  //   rptIdx: 13,
-  //   photoUrl:
-  //     "https://ns-sugarguard.s3.ap-northeast-2.amazonaws.com/images/receipt/561e1e3e-a043-42ce-8b04-5eb623bf7191-receipt.jpg",
-  //   storeName: "광주농협 하나로클럽 매곡점",
-  //   storeAddress: "광주 북구 매곡동 214-19",
-  //   storeTel: "062-574-0515",
-  //   items: [
-  //     {
-  //       calories: "2.00",
-  //       carbohydrates: "0.26",
-  //       expiredDate: "2026-11-02",
-  //       fat: "0.04",
-  //       fiber: "0.00",
-  //       ingreIdx: 109,
-  //       ingreName: "홍차",
-  //       protein: "0.23",
-  //       purchaseDate: "2024-11-02",
-  //       quantity: 500,
-  //       totalQuantity: 500,
-  //       unit: "ml",
-  //     },
-  //     {
-  //       calories: "30.00",
-  //       carbohydrates: "10.54",
-  //       expiredDate: "2024-11-09",
-  //       fat: "0.20",
-  //       fiber: "2.80",
-  //       ingreIdx: 895,
-  //       ingreName: "라임",
-  //       protein: "0.70",
-  //       purchaseDate: "2024-11-02",
-  //       quantity: 500,
-  //       totalQuantity: 500,
-  //       unit: "ml",
-  //     },
-  //     {
-  //       calories: "67.00",
-  //       carbohydrates: "4.86",
-  //       expiredDate: "2024-11-09",
-  //       fat: "3.85",
-  //       fiber: "0.00",
-  //       ingreIdx: 148,
-  //       ingreName: "우유",
-  //       protein: "3.09",
-  //       purchaseDate: "2024-11-02",
-  //       quantity: 235,
-  //       totalQuantity: 235,
-  //       unit: "ml",
-  //     },
-  //     {
-  //       calories: "362.00",
-  //       carbohydrates: "66.33",
-  //       expiredDate: "2026-10-23",
-  //       fat: "5.00",
-  //       fiber: "25.60",
-  //       ingreIdx: 26,
-  //       ingreName: "후추",
-  //       protein: "12.87",
-  //       purchaseDate: "2024-11-02",
-  //       quantity: 20,
-  //       totalQuantity: 20,
-  //       unit: "g",
-  //     },
-  //     {
-  //       calories: "205.00",
-  //       carbohydrates: "51.76",
-  //       expiredDate: "2025-11-02",
-  //       fat: "1.38",
-  //       fiber: "5.20",
-  //       ingreIdx: 82,
-  //       ingreName: "고추장",
-  //       protein: "3.66",
-  //       purchaseDate: "2024-11-02",
-  //       quantity: 1800,
-  //       totalQuantity: 1800,
-  //       unit: "g",
-  //     },
-  //   ],
-  //   totals: {
-  //     totalCalories: 407985,
-  //     totalCarbohydrates: 101036.7,
-  //     totalFat: 3608.75,
-  //     totalFiber: 11272,
-  //     totalProtein: 8036.55,
-  //   },
-  // });
-  const [receiptData, setReceiptData] = useState(null);
+  const [receiptData, setReceiptData] = useState({
+    rptIdx: 13,
+    photoUrl:
+      "https://ns-sugarguard.s3.ap-northeast-2.amazonaws.com/images/receipt/561e1e3e-a043-42ce-8b04-5eb623bf7191-receipt.jpg",
+    storeName: "광주농협 하나로클럽 매곡점",
+    storeAddress: "광주 북구 매곡동 214-19",
+    storeTel: "062-574-0515",
+    items: [
+      {
+        calories: "2.00",
+        carbohydrates: "0.26",
+        expiredDate: "2026-11-02",
+        fat: "0.04",
+        fiber: "0.00",
+        ingreIdx: 109,
+        ingreName: "홍차",
+        protein: "0.23",
+        purchaseDate: "2024-11-02",
+        quantity: 500,
+        totalQuantity: 500,
+        unit: "ml",
+      },
+      {
+        calories: "30.00",
+        carbohydrates: "10.54",
+        expiredDate: "2024-11-09",
+        fat: "0.20",
+        fiber: "2.80",
+        ingreIdx: 895,
+        ingreName: "라임",
+        protein: "0.70",
+        purchaseDate: "2024-11-02",
+        quantity: 500,
+        totalQuantity: 500,
+        unit: "ml",
+      },
+      {
+        calories: "67.00",
+        carbohydrates: "4.86",
+        expiredDate: "2024-11-09",
+        fat: "3.85",
+        fiber: "0.00",
+        ingreIdx: 148,
+        ingreName: "우유",
+        protein: "3.09",
+        purchaseDate: "2024-11-02",
+        quantity: 235,
+        totalQuantity: 235,
+        unit: "ml",
+      },
+      {
+        calories: "362.00",
+        carbohydrates: "66.33",
+        expiredDate: "2026-10-23",
+        fat: "5.00",
+        fiber: "25.60",
+        ingreIdx: 26,
+        ingreName: "후추",
+        protein: "12.87",
+        purchaseDate: "2024-11-02",
+        quantity: 20,
+        totalQuantity: 20,
+        unit: "g",
+      },
+      {
+        calories: "205.00",
+        carbohydrates: "51.76",
+        expiredDate: "2025-11-02",
+        fat: "1.38",
+        fiber: "5.20",
+        ingreIdx: 82,
+        ingreName: "고추장",
+        protein: "3.66",
+        purchaseDate: "2024-11-02",
+        quantity: 1800,
+        totalQuantity: 1800,
+        unit: "g",
+      },
+    ],
+    totals: {
+      totalCalories: 407985,
+      totalCarbohydrates: 101036.7,
+      totalFat: 3608.75,
+      totalFiber: 11272,
+      totalProtein: 8036.55,
+    },
+  });
+  // const [receiptData, setReceiptData] = useState(null);
   // 영수증 원본 데이터 저장
   const [originalData, setOriginalData] = useState(
     () => _.cloneDeep(receiptData) || null
@@ -477,48 +477,6 @@ const Receipt = () => {
     }
   };
 
-  //------- 사용 x
-
-  // 영수증 분석 데이터
-
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [editData, setEditData] = useState(initialReceiptData);
-
-  // // 수정 버튼 클릭 시 편집 모드 토글
-  // const handleEditToggle = () => {
-  //   setIsEditing(!isEditing);
-  // };
-
-  // // 항목의 이름 변경
-  // const handleNameChange = (index, value) => {
-  //   const updatedData = [...editData];
-  //   updatedData[index] = { ...updatedData[index], name: value };
-  //   setEditData(updatedData);
-  // };
-
-  // const handleDelete = (index) => {
-  //   const confirmDelete = window.confirm("삭제하시겠습니까?");
-  //   if (confirmDelete) {
-  //     const updatedData = editData.filter((_, i) => i !== index);
-  //     setEditData(updatedData);
-  //   }
-  // };
-
-  // // 모달 열기/닫기 핸들러
-  // const handleModalToggle = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
-
-  // const handleAdd = () => {
-  //   const newItem = {
-  //     name: "",
-  //     quantity: "",
-  //     unit: "",
-  //     lifedays: "",
-  //   };
-  //   setEditData([...editData, newItem]);
-  // };
-
   return !receiptData ? (
     <div className="receipt-ocr-wrapper">
       <div className="receipt-ocr-container">
@@ -553,73 +511,103 @@ const Receipt = () => {
       />
     </div>
   ) : (
-    <>
-      <div className="receipt-result-container">
-        <span className="receipt-result-title">영수증 인식 결과</span>
-        <div className="receipt-result-wrapper">
-          <div className="receipt-result-section receipt-result-section-receipt">
-            <div className="receipt-result-receipt-img">
-              <img src={receiptData?.photoUrl} alt="receipt-image" />
+    <div className="receipt-result-container">
+      <span className="receipt-result-title">영수증 인식 결과</span>
+      <div className="receipt-result-wrapper">
+        <div className="receipt-result-section receipt-result-section-receipt">
+          <div className="receipt-result-receipt-img">
+            <img src={receiptData?.photoUrl} alt="receipt-image" />
+          </div>
+        </div>
+        <div>
+          <FontAwesomeIcon
+            className="receipt-result-icon"
+            icon={faAnglesRight}
+          />
+        </div>
+        <div
+          className="receipt-result-section receipt-result-section-result"
+          ref={targetRef}
+        >
+          <div className="receipt-result-div">
+            <img src="/img/receipt_logo.png" alt="" />
+            <div>
+              <span></span>
+              <span id="receipt-result-name-span">{`${user?.userName}님`}</span>
             </div>
-          </div>
-          <div>
-            <FontAwesomeIcon
-              icon={faAnglesRight}
-              style={{ fontSize: "5em", color: "darkgray" }}
-            />
-          </div>
-          <div
-            className="receipt-result-section receipt-result-section-result"
-            ref={targetRef}
-          >
-            <div className="receipt-result-div">
-              <img src="/img/receipt_logo.png" alt="" />
-              <div>
-                <span></span>
-                <span style={{ fontSize: "1.1em" }}>
-                  <strong>{`${user?.userName}님`}</strong>
-                </span>
-              </div>
-              <hr />
-              <div>
-                <span>구매처 :</span>
-                <span>{receiptData?.storeName}</span>
-              </div>
-              <div>
-                <span>주소 :</span>
-                <span>{receiptData?.storeAddress}</span>
-              </div>
-              <div>
-                <span>전화번호 :</span>
-                <span>{receiptData?.storeTel}</span>
-              </div>
-              <div>
-                <span>구매일 :</span>
-                <span>{receiptData?.items[0]?.purchaseDate}</span>
-              </div>
-              <hr />
-              <table
-                style={{
-                  width: "100%",
-                  tableLayout: "fixed",
-                  borderCollapse: "collapse",
-                }}
-              >
-                <tbody>
-                  <tr>
-                    <th className={!isEditing ? "col58" : "col55"}>상품명</th>
-                    <th className={!isEditing ? "col15" : "col15"}>수량</th>
-                    <th className={!isEditing ? "col27" : "col25"}>유통기한</th>
-                    {isEditing && <th className="col8">삭제</th>}
-                  </tr>
-                  {receiptData?.items?.map((item, index) => (
-                    <tr key={index}>
-                      <td className={!isEditing ? "col58" : "col55"}>
-                        {isEditing ? (
+            <hr />
+            <div>
+              <span>구매처 :</span>
+              <span>{receiptData?.storeName}</span>
+            </div>
+            <div>
+              <span>주소 :</span>
+              <span>{receiptData?.storeAddress}</span>
+            </div>
+            <div>
+              <span>전화번호 :</span>
+              <span>{receiptData?.storeTel}</span>
+            </div>
+            <div>
+              <span>구매일 :</span>
+              <span>{receiptData?.items[0]?.purchaseDate}</span>
+            </div>
+            <hr />
+            <table
+              style={{
+                width: "100%",
+                tableLayout: "fixed",
+                borderCollapse: "collapse",
+              }}
+            >
+              <tbody>
+                <tr>
+                  <th className={!isEditing ? "col58" : "col55"}>상품명</th>
+                  <th className={!isEditing ? "col15" : "col15"}>수량</th>
+                  <th className={!isEditing ? "col27" : "col25"}>유통기한</th>
+                  {isEditing && <th className="col8">삭제</th>}
+                </tr>
+                {receiptData?.items?.map((item, index) => (
+                  <tr key={index}>
+                    <td className={!isEditing ? "col58" : "col55"}>
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="ingreName"
+                          value={item?.ingreName}
+                          onChange={(e) =>
+                            handleInputChange(
+                              index,
+                              e.target.name,
+                              e.target.value
+                            )
+                          }
+                        />
+                      ) : (
+                        item?.ingreName
+                      )}
+                    </td>
+                    <td className={!isEditing ? "col15" : "col15"}>
+                      {isEditing ? (
+                        <>
                           <input
+                            style={{
+                              textAlign: "right",
+                              width: "65%",
+                              marginRight: "5%",
+                            }}
                             type="text"
-                            name="ingreName"
-                            value={item?.ingreName}
+                            name="quantity"
+                            value={item?.quantity}
+                            onChange={(e) =>
+                              handleQuantityChange(index, e.target.value)
+                            }
+                          />
+                          <input
+                            style={{ textAlign: "right", width: "25%" }}
+                            type="text"
+                            name="unit"
+                            value={item?.unit}
                             onChange={(e) =>
                               handleInputChange(
                                 index,
@@ -628,291 +616,103 @@ const Receipt = () => {
                               )
                             }
                           />
-                        ) : (
-                          item?.ingreName
-                        )}
-                      </td>
-                      <td className={!isEditing ? "col15" : "col15"}>
-                        {isEditing ? (
-                          <>
-                            <input
-                              style={{
-                                textAlign: "right",
-                                width: "65%",
-                                marginRight: "5%",
-                              }}
-                              type="text"
-                              name="quantity"
-                              value={item?.quantity}
-                              onChange={(e) =>
-                                handleQuantityChange(index, e.target.value)
-                              }
-                            />
-                            <input
-                              style={{ textAlign: "right", width: "25%" }}
-                              type="text"
-                              name="unit"
-                              value={item?.unit}
-                              onChange={(e) =>
-                                handleInputChange(
-                                  index,
-                                  e.target.name,
-                                  e.target.value
-                                )
-                              }
-                            />
-                          </>
-                        ) : (
-                          `${item?.quantity}${item?.unit}`
-                        )}
-                      </td>
-                      <td className={!isEditing ? "col27" : "col25"}>
-                        {isEditing ? (
-                          <input
-                            style={{ textAlign: "right" }}
-                            type="text"
-                            name="expiredDate"
-                            value={item?.expiredDate}
-                            onChange={(e) =>
-                              handleDateChange(index, e.target.value)
-                            }
-                          />
-                        ) : (
-                          item?.expiredDate
-                        )}
-                      </td>
-                      {isEditing && (
-                        <td className="col8">
-                          <FontAwesomeIcon
-                            className="receipt-result-delete-icon"
-                            onClick={() => {
-                              handleDeleteItem(index);
-                            }}
-                            icon={faDeleteLeft}
-                          />
-                        </td>
+                        </>
+                      ) : (
+                        `${item?.quantity}${item?.unit}`
                       )}
-                    </tr>
-                  ))}
-                  {isEditing && (
-                    <tr>
-                      <td colSpan={4} style={{ textAlign: "center" }}>
+                    </td>
+                    <td className={!isEditing ? "col27" : "col25"}>
+                      {isEditing ? (
+                        <input
+                          style={{ textAlign: "right" }}
+                          type="text"
+                          name="expiredDate"
+                          value={item?.expiredDate}
+                          onChange={(e) =>
+                            handleDateChange(index, e.target.value)
+                          }
+                        />
+                      ) : (
+                        item?.expiredDate
+                      )}
+                    </td>
+                    {isEditing && (
+                      <td className="col8">
                         <FontAwesomeIcon
-                          className="receipt-result-plus-icon"
-                          onClick={handleAddItem}
-                          icon={faSquarePlus}
+                          className="receipt-result-delete-icon"
+                          onClick={() => {
+                            handleDeleteItem(index);
+                          }}
+                          icon={faDeleteLeft}
                         />
                       </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-              <hr />
-              <div>
-                <span></span>
-                <span style={{ fontSize: "1.1em" }}>
-                  <strong>총 구매 품목: {receiptData?.items?.length}</strong>
-                </span>
-              </div>
-              <hr />
-              <div className="receipt-result-receipt-center-div">
-                <span>
-                  정상적으로 인식되지 않은 품목의 경우에는
-                  <br />
-                  편집 버튼을 통해 수정이 가능합니다.
-                </span>
-                <img src="/img/barcode.png" alt="barcode" />
-                <span style={{ fontSize: "1.3em" }}>* * * reciFIT * * *</span>
-                {/* <span>* * * * * * * * 감 사 합 니 다 * * * * * * * *</span> */}
-              </div>
+                    )}
+                  </tr>
+                ))}
+                {isEditing && (
+                  <tr>
+                    <td colSpan={4} style={{ textAlign: "center" }}>
+                      <FontAwesomeIcon
+                        className="receipt-result-plus-icon"
+                        onClick={handleAddItem}
+                        icon={faSquarePlus}
+                      />
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            <hr />
+            <div>
+              <span></span>
+              <span className="#receipt-result-name-span">
+                총 구매 품목: {receiptData?.items?.length}
+              </span>
             </div>
-            <div className="receipt-result-button-wrapper">
-              {!isEditing && (
-                <button
-                  type="button"
-                  className="receipt-result-button receipt-result-nutrient-button"
-                  onClick={handleNutrientButton}
-                >
-                  영양정보 확인
-                </button>
-              )}
+            <hr />
+            <div className="receipt-result-receipt-center-div">
+              <span>
+                정상적으로 인식되지 않은 품목의 경우에는
+                <br />
+                편집 버튼을 통해 수정이 가능합니다.
+              </span>
+              <img src="/img/barcode.png" alt="barcode" />
+              <span style={{ fontSize: "1.3em" }}>* * * reciFIT * * *</span>
+              {/* <span>* * * * * * * * 감 사 합 니 다 * * * * * * * *</span> */}
+            </div>
+          </div>
+          <div className="receipt-result-button-wrapper">
+            {!isEditing && (
               <button
                 type="button"
-                className={
-                  !isEditing
-                    ? "receipt-result-button receipt-result-edit-button"
-                    : "receipt-result-button receipt-result-cancel-button"
-                }
-                onClick={handleEditButton}
+                className="receipt-result-button receipt-result-nutrient-button"
+                onClick={handleNutrientButton}
               >
-                {!isEditing ? "편집" : "취소"}
+                영양정보 확인
               </button>
-              <button
-                type="button"
-                className="receipt-result-button receipt-result-ok-button"
-                onClick={handleOkButton}
-              >
-                완료
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/*  */}
-      {/* 
-      <div className="receipt-container">
-        <h3 className="receipt-result">영수증 인식 결과</h3>
-        <div className="receipt">
-          <div className="receipt-pic">
-            <h1 style={{ color: "white", paddingBottom: "10%" }}>Picture</h1>
-            <img
-              src={`${process.env.PUBLIC_URL}/img/receipt_img/receipt2.png`}
-              alt=""
-              className="receipt-img"
-            />
-          </div>
-
-          <div className="receipt-arrow">
-            <img
-              src={`${process.env.PUBLIC_URL}/img/receipt_img/arrow.png`}
-              alt=""
-            />
-          </div>
-
-          <div className="receipt-right">
-            <div className="receipt-door"></div>
-            <div className="receipt-illustration">
-              <div className="receipt-title">
-                {" "}
-                <h1>Receipt</h1>
-              </div>
-
-              <div style={{ display: "flex" }}>
-                <span className="receipt-nick"> 상냥한 고비 님 </span>
-                <span className="receipt-date">2024 / 11 / 11</span>
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  margin: "10% 0 1% 0",
-                  borderBottom: "dashed 1px rgb(124, 124, 124)",
-                }}
-              ></div>
-              <div
-                style={{
-                  width: "100%",
-                  margin: "1% 0",
-                  borderBottom: "dashed 1px rgb(124, 124, 124)",
-                }}
-              ></div>
-
-              <div className="receipt-subTitle">
-                <div className="receipt-sub-name">
-                  <h3>상품명</h3>
-                </div>
-                <div className="receipt-sub-quantity">
-                  <h3>수량</h3>
-                </div>
-                <div className="receipt-sub-unit">
-                  <h3>단위</h3>
-                </div>
-                <div className="receipt-sub-lifedays">
-                  <h3>유통기한</h3>
-                </div>
-              </div>
-
-              {editData.map((item, index) => (
-                <div key={index} className="receipt-boxMiddle">
-                  {isEditing && (
-                    <img
-                      src={`${process.env.PUBLIC_URL}/img/receipt_img/delete.png`}
-                      onClick={() => handleDelete(index)}
-                      className="receipt-delete-button"
-                    />
-                  )}
-
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={item.name}
-                      onChange={(e) => handleNameChange(index, e.target.value)}
-                      className="receipt-name-input"
-                    />
-                  ) : (
-                    <div className="receipt-name">{item.name}</div>
-                  )}
-
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={item.quantity}
-                      onChange={(e) => handleNameChange(index, e.target.value)}
-                      className="receipt-quantity-input"
-                    />
-                  ) : (
-                    <div className="receipt-quantity">{item.quantity}</div>
-                  )}
-
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={item.unit}
-                      onChange={(e) => handleNameChange(index, e.target.value)}
-                      className="receipt-unit-input"
-                    />
-                  ) : (
-                    <div className="receipt-unit">{item.unit}</div>
-                  )}
-
-                  <div className="receipt-lifedays">{item.lifedays}</div>
-                </div>
-              ))}
-
-              {isEditing && (
-                <button
-                  type="button"
-                  onClick={handleAdd}
-                  className="receipt-add-button"
-                >
-                  추가
-                </button>
-              )}
-
-              <div className="receipt-info" onClick={handleModalToggle}>
-                영양분 정보
-              </div>
-            </div>
-          </div>
-
-          <div className="receipt-button">
-            <button className="receipt-R">
-              <Link to="/"> 확인 </Link>{" "}
+            )}
+            <button
+              type="button"
+              className={
+                !isEditing
+                  ? "receipt-result-button receipt-result-edit-button"
+                  : "receipt-result-button receipt-result-cancel-button"
+              }
+              onClick={handleEditButton}
+            >
+              {!isEditing ? "편집" : "취소"}
             </button>
             <button
               type="button"
-              onClick={handleEditToggle}
-              className="receipt-U"
+              className="receipt-result-button receipt-result-ok-button"
+              onClick={handleOkButton}
             >
-              {isEditing ? "저장" : "수정"}
+              완료
             </button>
           </div>
         </div>
-
-        {isModalOpen && (
-          <div className="receipt-modal-overlay" onClick={handleModalToggle}>
-            <div
-              className="receipt-modal-content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h2>영양분 정보</h2>
-              <p>여기에 영양분 정보가 표시됩니다.</p>
-              <button onClick={handleModalToggle}>닫기</button>
-            </div>
-          </div>
-        )}
-      </div> */}
-    </>
+      </div>
+    </div>
   );
 };
 export default Receipt;
