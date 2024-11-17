@@ -266,7 +266,7 @@ const Mypage = () => {
 
                 {/* 영수증 목록 */}
                 <section ref={receiptsRef} className="receipts-section" style={{ maxHeight: '300px', overflowY: 'auto' }}>
-    <h3 className="shared-title1">나의 영수증</h3>
+    <h3 className="shared-title1">영수증 관리</h3>
     {receipts.length > 0 ? (
         <table className="receipts-table">
             <thead>
