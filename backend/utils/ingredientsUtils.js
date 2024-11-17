@@ -28,6 +28,7 @@ const quantityUnits = [
   "묶음",
   "캔",
 ];
+
 const volumeUnits = {
   ml: 1,
   mL: 1,
@@ -333,18 +334,46 @@ const convertQuantity = (amount, recipeUnit, userUnit) => {
   return 0;
 };
 
-(() => {
-  const itemName = "해찬들 찹쌀 태양초 고추장 1. 4kg+400g";
-  const matchedIngredient = findMatchingIngredient(itemName);
-  const extractedQuantityAndUnit = extractQuantityAndUnit(itemName);
-  if (matchedIngredient) {
-    console.log(
-      `매칭된 식재료: ${matchedIngredient} ${extractedQuantityAndUnit.quantity}${extractedQuantityAndUnit.unit}`
-    );
-  } else {
-    console.log("매칭되는 식재료가 없습니다.");
+// 수량 변환
+const getValidUnit = (unit) => {
+  // 빈값
+  if (!unit || typeof unit !== 'string') {
+    return '개';
   }
-})();
+
+  // 정해진 수량 단위는 그대로 return
+  if (quantityUnits.includes(unit)) {
+    return unit;
+  }
+
+  // 소문자로 변환
+  const normalizedUnit = unit.toLowerCase();
+
+  if (normalizedUnit === 'cc') {
+    return 'ml';
+  }
+
+  // 표준 단위 확인
+  if (['ml', 'l', 'g', 'kg'].includes(normalizedUnit)) {
+    return normalizedUnit;
+  }
+
+  // 그 이외
+  return '개';
+}
+
+// (() => {
+//   const itemName = "해찬들 찹쌀 태양초 고추장 1. 4kg+400g";
+//   const matchedIngredient = findMatchingIngredient(itemName);
+//   const extractedQuantityAndUnit = extractQuantityAndUnit(itemName);
+//   if (matchedIngredient) {
+//     console.log(
+//       `매칭된 식재료: ${matchedIngredient} ${extractedQuantityAndUnit.quantity}${extractedQuantityAndUnit.unit}`
+//     );
+//   } else {
+//     console.log("매칭되는 식재료가 없습니다.");
+//   }
+// })();
 
 const testData = {
   version: "V2",
@@ -678,5 +707,6 @@ module.exports = {
   extractQuantityAndUnit,
   parseIngredients,
   convertQuantity,
+  getValidUnit,
   testData,
 };

@@ -13,7 +13,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   const { userIdx } = req.user;
 
   try {
-    const [rows] = await db.query(
+    const [rows] = await db.execute(
       `SELECT 
         user_idx, 
         oauth_provider, 
@@ -100,7 +100,7 @@ router.patch("/", authenticateAccessToken, async (req, res) => {
   values.push(userIdx); // WHERE 절의 user_idx 값 추가
 
   try {
-    const [result] = await db.query(query, values);
+    const [result] = await db.execute(query, values);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Not found" });
@@ -116,7 +116,7 @@ router.patch("/", authenticateAccessToken, async (req, res) => {
 router.delete("/", authenticateAccessToken, async (req, res) => {
   // const { userIdx } = req.user;
   // try {
-  //   const [result] = await db.query("DELETE FROM TB_USER WHERE user_idx = ?", [
+  //   const [result] = await db.execute("DELETE FROM TB_USER WHERE user_idx = ?", [
   //     userIdx,
   //   ]);
   //   if (result.affectedRows === 0) {

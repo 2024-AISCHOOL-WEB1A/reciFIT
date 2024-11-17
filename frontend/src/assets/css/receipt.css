@@ -130,6 +130,217 @@
   }
 }
 
+.receipt-result-container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  margin: 3% 0;
+  padding: 0 12%;
+}
+
+.receipt-result-title {
+  font-size: 2.5em;
+  font-weight: 700;
+
+  margin-bottom: 3%;
+}
+
+.receipt-result-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 3%;
+}
+
+.receipt-result-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 20px;
+  background-color: #f6f7f8;
+}
+
+.receipt-result-section-receipt {
+  width: 40%;
+}
+
+.receipt-result-receipt-img {
+  width: 100%;
+  padding: 10% 12.5%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.receipt-result-receipt-img img {
+  width: 100%;
+  height: auto;
+}
+
+.receipt-result-section-result {
+  width: 60%;
+}
+
+.receipt-result-div {
+  background-color: white;
+
+  width: 75%;
+  margin: 10% 0 7% 0;
+  padding: 4% 3%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.receipt-result-div img {
+  width: 40%;
+  filter: grayscale(100%);
+  transition: filter 2s ease;
+
+  margin-top: 4%;
+  margin-bottom: 12%;
+}
+
+.receipt-result-div img:hover {
+  filter: grayscale(0%);
+}
+
+.receipt-result-div hr {
+  width: 100%;
+  border: 1px black dashed;
+  box-shadow: none;
+
+  margin: 3% 0 5% 0;
+}
+.receipt-result-div div {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  font-size: 1em;
+
+  margin-bottom: 2%;
+}
+.receipt-result-div table {
+  width: 100%;
+}
+.receipt-result-div td,
+th {
+  padding-bottom: 1%;
+}
+
+/* 3줄 기준 */
+.receipt-result-div .col58 {
+  width: 58%;
+  text-align: left;
+}
+.receipt-result-div .col15 {
+  width: 15%;
+  text-align: right;
+}
+.receipt-result-div .col27 {
+  width: 27%;
+  text-align: right;
+}
+/* 4줄 기준 */
+.receipt-result-div .col55 {
+  width: 55%;
+  text-align: left;
+}
+.receipt-result-div .col25 {
+  width: 25%;
+  text-align: right;
+}
+.receipt-result-div .col8 {
+  width: 8%;
+  text-align: right;
+}
+
+.receipt-result-div input[type="text"] {
+  background-color: #f6f7f8;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 2px 0;
+  font-size: 1em;
+  width: 96%;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.receipt-result-div input[type="text"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.receipt-result-receipt-center-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.receipt-result-receipt-center-div img {
+  width: 80%;
+  margin-top: 0;
+  margin-bottom: 2%;
+}
+.receipt-result-receipt-center-div span {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 2%;
+}
+
+.receipt-result-delete-icon {
+  font-size: 1.5em;
+  color: #e43a26;
+  cursor: pointer;
+}
+.receipt-result-plus-icon {
+  font-size: 2em;
+  color: #1f46eb;
+  cursor: pointer;
+}
+
+.receipt-result-button-wrapper {
+  margin-bottom: 7%;
+
+  display: flex;
+  gap: 20px;
+}
+
+.receipt-result-button {
+  height: 4em;
+  width: 10em;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 4%;
+  cursor: pointer;
+}
+
+.receipt-result-nutrient-button {
+  background-color: rgb(190, 255, 168);
+}
+.receipt-result-edit-button {
+  background-color: rgb(255, 190, 140);
+}
+.receipt-result-cancel-button {
+  background-color: rgb(253, 150, 134);
+}
+.receipt-result-ok-button {
+  background-color: rgb(203, 203, 203);
+}
+
+.receipt-result-button:hover {
+  background-color: #ff9500;
+  color: white;
+}
+
 /* 전체 화면 */
 .receipt-container {
   display: flex;

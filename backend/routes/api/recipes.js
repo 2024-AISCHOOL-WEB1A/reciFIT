@@ -62,7 +62,7 @@ router.post("/", authenticateAccessToken, async (req, res) => {
   }
 
   try {
-    const result = await db.query(
+    const result = await db.execute(
       `INSERT INTO TB_RECIPE (
               ck_name, ck_method, ck_category, ck_ingredient_category, ck_type, ck_instructions, ck_ingredients, 
               ck_description, ck_photo_url, ck_amount, ck_time, ck_difficulty, user_idx
@@ -147,7 +147,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   // 유저의 개인 정보에서 재료 추가 조회 전에 만료되지 않은 재료와 유효한 수량 확인해서 have에 추가
   if (!have || have.trim() === "") {
     try {
-      const [ingredientRows] = await db.query(
+      const [ingredientRows] = await db.execute(
         `SELECT i.ingre_name
        FROM TB_USER_INGREDIENT ui
        JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
@@ -171,7 +171,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
 
   // 유저의 개인 정보에서 재료 추가 조회
   try {
-    const [rows] = await db.query(
+    const [rows] = await db.execute(
       `SELECT 
         preferred_ingredients, 
         disliked_ingredients, 
@@ -481,7 +481,7 @@ router.get("/:rcpIdx", authenticateAccessToken, async (req, res) => {
   }
 
   try {
-    const [rows] = await db.query(
+    const [rows] = await db.execute(
       `SELECT * 
       FROM TB_RECIPE 
       WHERE rcp_idx = ?`,
@@ -596,7 +596,7 @@ router.patch("/:rcpIdx", authenticateAccessToken, async (req, res) => {
     const values = fields.map((field) => updates[field]);
     values.push(rcpIdx);
 
-    const result = await db.query(
+    const result = await db.execute(
       `UPDATE TB_RECIPE SET ${setClause} WHERE rcp_idx = ?`,
       values
     );
@@ -641,7 +641,7 @@ router.delete("/:rcpIdx", authenticateAccessToken, async (req, res) => {
       return res.status(403).json({ message: "Permission denied" });
     }
 
-    const result = await db.query(`DELETE FROM TB_RECIPE WHERE rcp_idx = ?`, [
+    const result = await db.execute(`DELETE FROM TB_RECIPE WHERE rcp_idx = ?`, [
       rcpIdx,
     ]);
 
@@ -671,7 +671,7 @@ router.patch("/:rcpIdx/approval", authenticateAccessToken, async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    const result = await db.query(
+    const result = await db.execute(
       `UPDATE TB_RECIPE SET approved_yn = 'Y' WHERE rcp_idx = ?`,
       [rcpIdx]
     );
