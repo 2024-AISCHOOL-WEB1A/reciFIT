@@ -14,9 +14,9 @@ const startEnvironmentScoreJob = () => {
 
     try {
       // 모든 유저에게 환경 점수 100점 할당
-      const [users] = await db.query("SELECT user_idx FROM TB_USER");
+      const [users] = await db.execute("SELECT user_idx FROM TB_USER");
       const insertPromises = users.map((user) => {
-        return db.query(
+        return db.execute(
           `INSERT INTO TB_ENVIRONMENT_SCORE (user_idx, env_score, month_year) VALUES (?, 100, ?) 
            ON DUPLICATE KEY UPDATE env_score = 100`,
           [user.user_idx, yearMonth]

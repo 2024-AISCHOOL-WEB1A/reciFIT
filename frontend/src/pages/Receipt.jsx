@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import "../assets/css/receipt.css";
-// import initialReceiptData from "../json/receiptData.json";
-// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swalModal from "../utils/swalModal";
 import { apiAxios, generalAxios } from "../utils/axiosUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,99 +11,102 @@ import { isValidDate } from "../utils/validation";
 import { faDeleteLeft, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
 const Receipt = () => {
+  const navigate = useNavigate();
+
   // 유저 정보
   const user = useSelector((state) => state.user.user);
   // 영수증 스캔 데이터
-  const [receiptData, setReceiptData] = useState({
-    rptIdx: 13,
-    photoUrl:
-      "https://ns-sugarguard.s3.ap-northeast-2.amazonaws.com/images/receipt/561e1e3e-a043-42ce-8b04-5eb623bf7191-receipt.jpg",
-    storeName: "광주농협 하나로클럽 매곡점",
-    storeAddress: "광주 북구 매곡동 214-19",
-    storeTel: "062-574-0515",
-    items: [
-      {
-        calories: "2.00",
-        carbohydrates: "0.26",
-        expiredDate: "2026-11-02",
-        fat: "0.04",
-        fiber: "0.00",
-        ingreIdx: 109,
-        ingreName: "홍차",
-        protein: "0.23",
-        purchaseDate: "2024-11-02",
-        quantity: 500,
-        totalQuantity: 500,
-        unit: "ml",
-      },
-      {
-        calories: "30.00",
-        carbohydrates: "10.54",
-        expiredDate: "2024-11-09",
-        fat: "0.20",
-        fiber: "2.80",
-        ingreIdx: 895,
-        ingreName: "라임",
-        protein: "0.70",
-        purchaseDate: "2024-11-02",
-        quantity: 500,
-        totalQuantity: 500,
-        unit: "ml",
-      },
-      {
-        calories: "67.00",
-        carbohydrates: "4.86",
-        expiredDate: "2024-11-09",
-        fat: "3.85",
-        fiber: "0.00",
-        ingreIdx: 148,
-        ingreName: "우유",
-        protein: "3.09",
-        purchaseDate: "2024-11-02",
-        quantity: 235,
-        totalQuantity: 235,
-        unit: "ml",
-      },
-      {
-        calories: "362.00",
-        carbohydrates: "66.33",
-        expiredDate: "2026-10-23",
-        fat: "5.00",
-        fiber: "25.60",
-        ingreIdx: 26,
-        ingreName: "후추",
-        protein: "12.87",
-        purchaseDate: "2024-11-02",
-        quantity: 20,
-        totalQuantity: 20,
-        unit: "g",
-      },
-      {
-        calories: "205.00",
-        carbohydrates: "51.76",
-        expiredDate: "2025-11-02",
-        fat: "1.38",
-        fiber: "5.20",
-        ingreIdx: 82,
-        ingreName: "고추장",
-        protein: "3.66",
-        purchaseDate: "2024-11-02",
-        quantity: 1800,
-        totalQuantity: 1800,
-        unit: "g",
-      },
-    ],
-    totals: {
-      totalCalories: 407985,
-      totalCarbohydrates: 101036.7,
-      totalFat: 3608.75,
-      totalFiber: 11272,
-      totalProtein: 8036.55,
-    },
-  });
+  // const [receiptData, setReceiptData] = useState({
+  //   rptIdx: 13,
+  //   photoUrl:
+  //     "https://ns-sugarguard.s3.ap-northeast-2.amazonaws.com/images/receipt/561e1e3e-a043-42ce-8b04-5eb623bf7191-receipt.jpg",
+  //   storeName: "광주농협 하나로클럽 매곡점",
+  //   storeAddress: "광주 북구 매곡동 214-19",
+  //   storeTel: "062-574-0515",
+  //   items: [
+  //     {
+  //       calories: "2.00",
+  //       carbohydrates: "0.26",
+  //       expiredDate: "2026-11-02",
+  //       fat: "0.04",
+  //       fiber: "0.00",
+  //       ingreIdx: 109,
+  //       ingreName: "홍차",
+  //       protein: "0.23",
+  //       purchaseDate: "2024-11-02",
+  //       quantity: 500,
+  //       totalQuantity: 500,
+  //       unit: "ml",
+  //     },
+  //     {
+  //       calories: "30.00",
+  //       carbohydrates: "10.54",
+  //       expiredDate: "2024-11-09",
+  //       fat: "0.20",
+  //       fiber: "2.80",
+  //       ingreIdx: 895,
+  //       ingreName: "라임",
+  //       protein: "0.70",
+  //       purchaseDate: "2024-11-02",
+  //       quantity: 500,
+  //       totalQuantity: 500,
+  //       unit: "ml",
+  //     },
+  //     {
+  //       calories: "67.00",
+  //       carbohydrates: "4.86",
+  //       expiredDate: "2024-11-09",
+  //       fat: "3.85",
+  //       fiber: "0.00",
+  //       ingreIdx: 148,
+  //       ingreName: "우유",
+  //       protein: "3.09",
+  //       purchaseDate: "2024-11-02",
+  //       quantity: 235,
+  //       totalQuantity: 235,
+  //       unit: "ml",
+  //     },
+  //     {
+  //       calories: "362.00",
+  //       carbohydrates: "66.33",
+  //       expiredDate: "2026-10-23",
+  //       fat: "5.00",
+  //       fiber: "25.60",
+  //       ingreIdx: 26,
+  //       ingreName: "후추",
+  //       protein: "12.87",
+  //       purchaseDate: "2024-11-02",
+  //       quantity: 20,
+  //       totalQuantity: 20,
+  //       unit: "g",
+  //     },
+  //     {
+  //       calories: "205.00",
+  //       carbohydrates: "51.76",
+  //       expiredDate: "2025-11-02",
+  //       fat: "1.38",
+  //       fiber: "5.20",
+  //       ingreIdx: 82,
+  //       ingreName: "고추장",
+  //       protein: "3.66",
+  //       purchaseDate: "2024-11-02",
+  //       quantity: 1800,
+  //       totalQuantity: 1800,
+  //       unit: "g",
+  //     },
+  //   ],
+  //   totals: {
+  //     totalCalories: 407985,
+  //     totalCarbohydrates: 101036.7,
+  //     totalFat: 3608.75,
+  //     totalFiber: 11272,
+  //     totalProtein: 8036.55,
+  //   },
+  // });
+  const [receiptData, setReceiptData] = useState(null);
   // 영수증 원본 데이터 저장
-  const [originalData, setOriginalData] = useState(() =>
-    _.cloneDeep(receiptData)
+  const [originalData, setOriginalData] = useState(
+    () => _.cloneDeep(receiptData) || null
   );
   // 영수증 편집 토글
   const [isEditing, setIsEditing] = useState(false);
@@ -314,8 +316,8 @@ const Receipt = () => {
     // targetRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  // 확인 버튼
-  const handleOkButton = () => {
+  // 완료 버튼
+  const handleOkButton = async () => {
     if (isEditing) {
       // 유효성 검사 1: 재료 이름 검사 (빈값 있으면 경고)
       const invalidNames = receiptData.items.filter(
@@ -393,8 +395,85 @@ const Receipt = () => {
       console.log("완료되었습니다.");
       setOriginalData(_.cloneDeep(receiptData));
     } else {
+      console.log("??");
       // 편집 모드가 아닌 경우
       // TODO : 서버로 데이터 보내서 재료 재고 저장
+      const ingredients = receiptData?.items?.map((item) => {
+        return {
+          ingreName: item.ingreName,
+          ingreIdex: item.ingreIdx,
+          rptIdx: receiptData?.rptIdx,
+          quantity: item.quantity,
+          totalQuantity: item.totalQuantity,
+          unit: item.unit,
+          purchaseDate: item.purchaseDate,
+          expiredDate: item.expiredDate,
+        };
+      });
+      console.log(ingredients);
+
+      try {
+        const res = await apiAxios.post("/users/ingredients", {
+          ingredients,
+        });
+        // console.log(res);
+
+        await swalModal.fire({
+          title: "재고 등록 성공",
+          text: "재고 등록이 정상적으로 처리되었습니다.",
+          icon: "success",
+          confirmButtonText: "확인",
+          didClose: () => {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "instant",
+            });
+          },
+        });
+
+        // recipeData 초기화
+        setReceiptData(null);
+        setOriginalData(null);
+
+        // 나의 재고 페이지로 이동
+        navigate("/ingredients");
+      } catch (err) {
+        console.error(err);
+
+        if (err.response) {
+          const statusCode = err.response.status;
+          const message = err.response.data?.message || null;
+
+          if (statusCode === 404) {
+            // 재고 이름 오류
+            const ingreName = err.response.data?.ingreName || null;
+            if (ingreName) {
+              return await swalModal.fire({
+                title: "재고 등록 실패",
+                text: `${ingreName}은(는) 지원하지 않는 재료입니다.`,
+                icon: "error",
+                confirmButtonText: "확인",
+              });
+            }
+          } else if (statusCode === 400) {
+            if (message === "Invalid date format. Use YYYY-MM-DD") {
+              return await swalModal.fire({
+                title: "재고 등록 실패",
+                text: "입력하신 날짜의 형식이 잘못되었습니다.",
+                icon: "error",
+                confirmButtonText: "확인",
+              });
+            }
+          }
+        }
+        return await swalModal.fire({
+          title: "재고 등록 실패",
+          text: "재고 등록에 실패했습니다. 관리자에게 문의바랍니다.",
+          icon: "error",
+          confirmButtonText: "확인",
+        });
+      }
     }
   };
 
@@ -648,13 +727,15 @@ const Receipt = () => {
               </div>
             </div>
             <div className="receipt-result-button-wrapper">
-              <button
-                type="button"
-                className="receipt-result-button receipt-result-nutrient-button"
-                onClick={handleNutrientButton}
-              >
-                영양정보 확인
-              </button>
+              {!isEditing && (
+                <button
+                  type="button"
+                  className="receipt-result-button receipt-result-nutrient-button"
+                  onClick={handleNutrientButton}
+                >
+                  영양정보 확인
+                </button>
+              )}
               <button
                 type="button"
                 className={

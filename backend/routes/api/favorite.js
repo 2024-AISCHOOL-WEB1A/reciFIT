@@ -9,7 +9,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   const { userIdx } = req.user;
 
   try {
-    const [favorites] = await db.query(
+    const [favorites] = await db.execute(
       `SELECT *
         FROM TB_FAVORITE
         WHERE user_idx = ?`,
@@ -34,7 +34,7 @@ router.get("/:rcpIdx", authenticateAccessToken, async (req, res) => {
   }
 
   try {
-    const [favorites] = await db.query(
+    const [favorites] = await db.execute(
       `SELECT *
         FROM TB_FAVORITE
         WHERE user_idx = ? AND rcpIdx = ?`,
@@ -58,7 +58,7 @@ router.post("/", authenticateAccessToken, async (req, res) => {
   }
 
   try {
-    await db.query(
+    await db.execute(
       `INSERT INTO TB_FAVORITE (user_idx, rcp_idx) VALUES (?, ?)`,
       [userIdx, rcpIdx]
     );
@@ -92,7 +92,7 @@ router.patch("/:rcpIdx", authenticateAccessToken, async (req, res) => {
   }
 
   try {
-    await db.query(
+    await db.execute(
       `UPDATE TB_FAVORITE
         SET cooked_yn = ?
         WHERE user_idx = ? AND rcp_idx = ?`,
@@ -111,7 +111,7 @@ router.delete("/:rcpIdx", authenticateAccessToken, async (req, res) => {
   const { rcpIdx } = req.params;
 
   try {
-    await db.query(
+    await db.execute(
       `DELETE FROM TB_FAVORITE
         WHERE user_idx = ? AND rcp_idx = ?`,
       [userIdx, rcpIdx]

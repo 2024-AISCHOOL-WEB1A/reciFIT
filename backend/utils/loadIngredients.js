@@ -4,7 +4,7 @@ let ingredientsCache = null;
 
 async function loadIngredients() {
   if (!ingredientsCache) {
-    const [rows] = await db.query("SELECT ingre_name FROM TB_INGREDIENT");
+    const [rows] = await db.execute("SELECT ingre_name FROM TB_INGREDIENT");
     ingredientsCache = rows.map((row) => row.ingre_name);
     // console.log(ingredientsCache);
   }
