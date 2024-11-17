@@ -22,8 +22,6 @@ const Header = ({ user }) => {
   }, [user]);
 
   const toggleMenu = () => {
-    console.log(user);
-
     // 로그인 여부 확인
     if (user) {
       // 로그인이 되어 있다면, 메뉴가 열리도록
@@ -55,9 +53,7 @@ const Header = ({ user }) => {
         navigate("/");
         window.location.reload();
       }
-    } catch (err) {
-      // console.error(err);
-    }
+    } catch (err) {}
     swalModal.close();
   };
 

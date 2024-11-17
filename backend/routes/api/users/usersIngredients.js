@@ -115,108 +115,270 @@ router.get("/:uIngreId", authenticateAccessToken, async (req, res) => {
   }
 });
 
-// 유저의 식재료 추가 (POST /api/users/ingredients)
+// 유저의 식재료 추가 (POST /api/users/ingredients) : 재료 1개
+// router.post("/", authenticateAccessToken, async (req, res) => {
+//   const { userIdx } = req.user;
+//   let {
+//     ingreName,
+//     ingreIdx,
+//     quantity,
+//     totalQuantity,
+//     purchaseDate,
+//     expiredDate,
+//   } = req.body;
+
+//   // 유효성 검사 1: ingreName 또는 ingreIdx 확인
+//   try {
+//     if (ingreName) {
+//       const getIngreQuery = `SELECT ingre_idx, shelf_life_days FROM TB_INGREDIENT WHERE ingre_name = ?`;
+//       const [rows] = await db.query(getIngreQuery, [ingreName]);
+
+//       if (rows.length === 0) {
+//         return res
+//           .status(400)
+//           .json({ message: "Ingredient name not supported." });
+//       }
+
+//       ingreIdx = rows[0].ingre_idx;
+//       const shelfLifeDays = rows[0].shelf_life_days;
+
+//       // 만료 날짜 계산
+//       if (!expiredDate && purchaseDate && shelfLifeDays) {
+//         const purchaseDateObj = new Date(purchaseDate);
+//         purchaseDateObj.setDate(purchaseDateObj.getDate() + shelfLifeDays);
+//         expiredDate = purchaseDateObj.toISOString().split("T")[0];
+//       }
+//     } else if (!ingreIdx) {
+//       return res
+//         .status(400)
+//         .json({ message: "Ingredient name or Idx required." });
+//     }
+//   } catch (err) {
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+
+//   // 유효성 검사 2: 날짜 형식 검증
+//   if (
+//     (purchaseDate && !isValidDate(purchaseDate)) ||
+//     (expiredDate && !isValidDate(expiredDate))
+//   ) {
+//     return res
+//       .status(400)
+//       .json({ message: "Invalid date format. Use YYYY-MM-DD." });
+//   }
+
+//   // 유효성 검사 3: quantity 및 totalQuantity 값 검증
+//   if (
+//     (quantity !== undefined && (isNaN(quantity) || quantity < 0)) ||
+//     (totalQuantity !== undefined && (isNaN(totalQuantity) || totalQuantity < 0))
+//   ) {
+//     return res.status(400).json({
+//       message: "Invalid quantity values",
+//     });
+//   }
+
+//   // 유효성 검사 4: quantity와 totalQuantity가 모두 없는 경우 에러
+//   if (!quantity && !totalQuantity) {
+//     return res
+//       .status(400)
+//       .json({ message: "Either quantity or totalQuantity is required." });
+//   }
+
+//   // 유효성 검사 5: expiredDate와 purchaseDate 중 하나는 필수
+//   if (!purchaseDate && !expiredDate) {
+//     return res
+//       .status(400)
+//       .json({ message: "Either purchaseDate or expiredDate is required." });
+//   }
+
+//   // quantity와 totalQuantity 중 1개가 없는 경우 서로 동일하게
+//   if (!quantity) {
+//     quantity = totalQuantity;
+//   }
+//   if (!totalQuantity) {
+//     totalQuantity = quantity;
+//   }
+
+//   const query = `
+//     INSERT INTO TB_USER_INGREDIENT (user_idx, ingre_idx, quantity, total_quantity, purchase_date, expired_date)
+//     VALUES (?, ?, ?, ?, ?, ?)
+//   `;
+//   try {
+//     const [result] = await db.query(query, [
+//       userIdx,
+//       ingreIdx,
+//       quantity,
+//       totalQuantity,
+//       purchaseDate,
+//       expiredDate,
+//     ]);
+//     return res.status(201).json({
+//       uIngreIdx: result.insertId,
+//     });
+//   } catch (err) {
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+
+// 유저 식재료 추가 : 여러개
 router.post("/", authenticateAccessToken, async (req, res) => {
   const { userIdx } = req.user;
-  let {
-    ingreName,
-    ingreIdx,
-    quantity,
-    totalQuantity,
-    purchaseDate,
-    expiredDate,
-  } = req.body;
+  const { ingredients } = req.body;
 
-  // 유효성 검사 1: ingreName 또는 ingreIdx 확인
-  try {
-    if (ingreName) {
-      const getIngreQuery = `SELECT ingre_idx, shelf_life_days FROM TB_INGREDIENT WHERE ingre_name = ?`;
-      const [rows] = await db.query(getIngreQuery, [ingreName]);
-
-      if (rows.length === 0) {
-        return res
-          .status(400)
-          .json({ message: "Ingredient name not supported." });
-      }
-
-      ingreIdx = rows[0].ingre_idx;
-      const shelfLifeDays = rows[0].shelf_life_days;
-
-      // 만료 날짜 계산
-      if (!expiredDate && purchaseDate && shelfLifeDays) {
-        const purchaseDateObj = new Date(purchaseDate);
-        purchaseDateObj.setDate(purchaseDateObj.getDate() + shelfLifeDays);
-        expiredDate = purchaseDateObj.toISOString().split("T")[0];
-      }
-    } else if (!ingreIdx) {
-      return res
-        .status(400)
-        .json({ message: "Ingredient name or Idx required." });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: "Internal server error" });
+  if (!Array.isArray(ingredients) || ingredients.length === 0) {
+    return res.status(400).json({ message: "Invalid Ingredients" });
   }
 
-  // 유효성 검사 2: 날짜 형식 검증
-  if (
-    (purchaseDate && !isValidDate(purchaseDate)) ||
-    (expiredDate && !isValidDate(expiredDate))
-  ) {
-    return res
-      .status(400)
-      .json({ message: "Invalid date format. Use YYYY-MM-DD." });
-  }
+  const insertValues = [];
+  const errors = [];
 
-  // 유효성 검사 3: quantity 및 totalQuantity 값 검증
-  if (
-    (quantity !== undefined && (isNaN(quantity) || quantity < 0)) ||
-    (totalQuantity !== undefined && (isNaN(totalQuantity) || totalQuantity < 0))
-  ) {
-    return res.status(400).json({
-      message: "Invalid quantity values",
-    });
-  }
-
-  // 유효성 검사 4: quantity와 totalQuantity가 모두 없는 경우 에러
-  if (!quantity && !totalQuantity) {
-    return res
-      .status(400)
-      .json({ message: "Either quantity or totalQuantity is required." });
-  }
-
-  // 유효성 검사 5: expiredDate와 purchaseDate 중 하나는 필수
-  if (!purchaseDate && !expiredDate) {
-    return res
-      .status(400)
-      .json({ message: "Either purchaseDate or expiredDate is required." });
-  }
-
-  // quantity와 totalQuantity 중 1개가 없는 경우 서로 동일하게
-  if (!quantity) {
-    quantity = totalQuantity;
-  }
-  if (!totalQuantity) {
-    totalQuantity = quantity;
-  }
-
-  const query = `
-    INSERT INTO TB_USER_INGREDIENT (user_idx, ingre_idx, quantity, total_quantity, purchase_date, expired_date)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
-  try {
-    const [result] = await db.query(query, [
-      userIdx,
+  for (const ingredient of ingredients) {
+    let {
+      ingreName,
       ingreIdx,
+      rptIdx,
       quantity,
+      unit,
       totalQuantity,
       purchaseDate,
       expiredDate,
+    } = ingredient;
+
+    // 유효성 검사 1: ingreName 또는 ingreIdx 확인
+    try {
+      if (ingreName) {
+        // 검사할 ingreName을 재료 사전에서 가져온다
+        const matchedIngreName = findMatchingIngredient(ingreName);
+
+        const getIngreQuery = `SELECT ingre_idx, shelf_life_days FROM TB_INGREDIENT WHERE ingre_name = ?`;
+        const [rows] = await db.query(getIngreQuery, [matchedIngreName]);
+
+        // 등록하려고 하는 재료가 지원하지 않는 재료일 경우
+        if (rows.length === 0) {
+          return res
+            .status(404)
+            .json({ messsage: `${ingreName} not supported` });
+        }
+
+        ingreIdx = rows[0].ingre_idx;
+        const shelfLifeDays = rows[0].shelf_life_days;
+
+        // 만료 날짜가 없는 경우 추가
+        if (!expiredDate && purchaseDate && shelfLifeDays) {
+          const purchaseDateObj = new Date(purchaseDate);
+          purchaseDateObj.setDate(purchaseDateObj.getDate() + shelfLifeDays);
+          expiredDate = purchaseDateObj.toISOString().split("T")[0];
+        }
+
+        // TODO : ingreName을 receipt에서처럼 딕셔너리를 통해서 매칭시키고, 매칭시킨 값을 통해서
+        // 식재료가 있는지를 검사
+        // 만약 없다고 한다면, return에 정확하게 어떤 재료를 등록할 수 없는지를 알려줄 것
+        // ingreIdx는 덮어 씌워버림 (다른 식재료를 오인했을 수 있으므로)
+
+        // TODO : ingreName이 없는 경우, ingreIdx를 통해서 ingreName을 넣어줄 것
+      } else if (!ingreIdx) {
+        errors.push({ ingreName, message: "Ingredient name or Idx required." });
+        continue;
+      }
+    } catch (err) {
+      errors.push({
+        ingreName,
+        message: "Internal server error during validation",
+      });
+      continue;
+    }
+
+    // 유효성 검사 2: 날짜 형식 검증
+    if (
+      (purchaseDate && !isValidDate(purchaseDate)) ||
+      (expiredDate && !isValidDate(expiredDate))
+    ) {
+      errors.push({
+        ingreName,
+        message: "Invalid date format. Use YYYY-MM-DD.",
+      });
+      continue;
+    }
+
+    // 유효성 검사 3: quantity 및 totalQuantity 값 검증
+    if (
+      (quantity !== undefined && (isNaN(quantity) || quantity < 0)) ||
+      (totalQuantity !== undefined &&
+        (isNaN(totalQuantity) || totalQuantity < 0))
+    ) {
+      errors.push({ ingreName, message: "Invalid quantity values" });
+      continue;
+    }
+
+    // 유효성 검사 4: quantity와 totalQuantity가 모두 없는 경우 에러
+    if (!quantity && !totalQuantity) {
+      errors.push({
+        ingreName,
+        message: "Either quantity or totalQuantity is required.",
+      });
+      continue;
+    }
+
+    // TODO : 유효성 검사: 유닛 유효성 검사
+    // 1. quantityUnits에 있는 것들은 그대로 적을 것
+    // 2. ml, l, g, kg, cc(ml로 변환)은 소문자로 변환해서 적을 것
+    // 3. 그 이외는 전부 '개'로 들어가게끔
+
+    // 유효성 검사 5: expiredDate와 purchaseDate 중 하나는 필수
+    if (!purchaseDate && !expiredDate) {
+      errors.push({
+        ingreName,
+        message: "Either purchaseDate or expiredDate is required.",
+      });
+      continue;
+    }
+
+    // quantity와 totalQuantity 중 1개가 없는 경우 서로 동일하게
+    if (!quantity) {
+      quantity = totalQuantity;
+    }
+    if (!totalQuantity) {
+      totalQuantity = quantity;
+    }
+
+    // INSERT 데이터 준비
+    insertValues.push([
+      userIdx,
+      ingreIdx,
+      rptIdx,
+      ingreName,
+      quantity,
+      totalQuantity,
+      unit,
+      purchaseDate,
+      expiredDate,
     ]);
+  }
+
+  if (insertValues.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "No valid ingredients to insert", errors });
+  }
+
+  // INSERT 쿼리 실행
+  const insertQuery = `
+    INSERT INTO TB_USER_INGREDIENT 
+    (user_idx, ingre_idx, rpt_idx, ingre_name, quantity, total_quantity, unit, purchase_date, expired_date)
+    VALUES ?
+  `;
+
+  try {
+    const [result] = await db.query(insertQuery, [insertValues]);
     return res.status(201).json({
-      uIngreIdx: result.insertId,
+      message: "Ingredients added successfully",
+      insertedRows: result.affectedRows,
+      errors,
     });
   } catch (err) {
-    return res.status(500).json({ message: "Internal server error" });
+    return res
+      .status(500)
+      .json({ message: "Internal server error during insertion" });
   }
 });
 

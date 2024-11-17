@@ -44,7 +44,6 @@ router.post("/", authenticateAccessToken, async (req, res) => {
         message: "No valid receipt data found.",
       });
     }
-    console.log(receiptData);
 
     // const fs = require("fs"); // 파일 시스템 모듈
     // const path = require("path"); // 경로 처리 모듈
@@ -53,18 +52,22 @@ router.post("/", authenticateAccessToken, async (req, res) => {
     // const receiptData = JSON.parse(fs.readFileSync(jsonFilePath, "utf-8"));
 
     // 가게 데이터
-    // const storeData = receiptData?.storeInfo;
+    const storeData = receiptData?.storeInfo;
     // 지불 데이터
     const paymentData = receiptData?.paymentInfo;
     // 품목 데이터
     const subData = receiptData?.subResults;
 
+    // 가게 정보 추출
+    const storeName =
+      `${storeData?.name?.text} ${storeData?.subName?.text}`.trim();
+    const storeAddress = storeData?.addresses[0]?.text;
+    const storeTel = storeData?.tel[0]?.text;
+
     // 구매일 및 품목 추출
     const purchaseDate = paymentData?.date.text
       ? receiptFormatDate(paymentData?.date.text)
       : receiptFormatDate(new Date());
-
-    console.log(subData[0]?.items);
 
     // findMatchingIngredient를 통해 식재료 이름 DB의 이름과 매칭, 수량과 unit도 가져오기
     const items = (subData[0]?.items || [])
@@ -187,8 +190,6 @@ router.post("/", authenticateAccessToken, async (req, res) => {
       })
       .filter((item) => item !== null); // 유효하지 않은 항목 제거
 
-    console.log(processedItems);
-
     // TB_USER_RECEIPT 테이블에 데이터 삽입
     const receiptInsertQuery = `
       INSERT INTO TB_USER_RECEIPT (
@@ -213,6 +214,10 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
     return res.status(200).json({
       rptIdx,
+      photoUrl,
+      storeName,
+      storeAddress,
+      storeTel,
       items: processedItems,
       totals: {
         totalCalories,
