@@ -1,4 +1,3 @@
-# app.py
 import os
 import uuid
 import time
@@ -20,17 +19,25 @@ SECRET_KEY = os.getenv("CLOVA_SECRET_KEY")
 API_URL = os.getenv("CLOVA_ENDPOINT")
 PORT = int(os.getenv("PORT", 8000))
 
+# MONGDO DB 환경 설정 변수
 MONGODB_URL = os.getenv('MONGODB_URL')
 MONGODB_PASSWORD = os.getenv('MONGODB_PASSWORD')
 MONGODB_PORT = os.getenv('MONGODB_PORT')
 MONGODB_USER = os.getenv('MONGODB_USER')
 MONGODB_DATABASENAME = os.getenv('MONGODB_DATABASENAME')
-MONGODB_URI = f"mongodb://{MONGODB_USER}:{MONGODB_PASSWORD}@{MONGODB_URL}:{MONGODB_PORT}/{MONGODB_DATABASENAME}"
+# MONGODB_URI = f"mongodb://{MONGODB_USER}:{MONGODB_PASSWORD}@{MONGODB_URL}:{MONGODB_PORT}/{MONGODB_DATABASENAME}"
 
 app = FastAPI()
 
 # 몽고 DB 연결
-mongodb_client = MongoClient(MONGODB_URI)
+# mongodb_client = MongoClient(MONGODB_URI)
+mongodb_client = MongoClient(
+    host=MONGODB_URL,
+    port=int(MONGODB_PORT),
+    username=MONGODB_USER,
+    password=MONGODB_PASSWORD,
+    authSource=MONGODB_DATABASENAME,
+)
 db = mongodb_client[MONGODB_DATABASENAME]
 collection = db['ocr_results']
 
@@ -89,6 +96,8 @@ async def perform_ocr(request: OCRRequest):
 # Uvicorn을 사용하여 서버 실행
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
+    # uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
+    uvicorn.run(app, host="127.0.0.1", port=PORT, reload=True)
+    
     # uvicorn app:app --reload 로 서버실행
     # python -m venv venv
