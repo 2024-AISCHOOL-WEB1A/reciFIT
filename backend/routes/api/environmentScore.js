@@ -21,7 +21,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   }
 
   try {
-    const [rows] = await db.query(
+    const [rows] = await db.execute(
       `SELECT env_score 
        FROM TB_ENVIRONMENT_SCORE
        WHERE user_idx = ? AND month_year = ?

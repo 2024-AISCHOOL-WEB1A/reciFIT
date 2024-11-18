@@ -12,7 +12,7 @@ const Header = ({ user }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [menuDisplay, setMenuDisplay] = useState("true");
+  const [menuDisplay, setMenuDisplay] = useState(true);
   const [loginText, setLoginText] = useState("로그인");
 
   useEffect(() => {
@@ -21,9 +21,11 @@ const Header = ({ user }) => {
     }
   }, [user]);
 
-  const toggleMenu = () => {
-    console.log(user);
+  const handleShutdownMenu = () => {
+    setMenuDisplay(true);
+  };
 
+  const toggleMenu = () => {
     // 로그인 여부 확인
     if (user) {
       // 로그인이 되어 있다면, 메뉴가 열리도록
@@ -55,9 +57,7 @@ const Header = ({ user }) => {
         navigate("/");
         window.location.reload();
       }
-    } catch (err) {
-      // console.error(err);
-    }
+    } catch (err) {}
     swalModal.close();
   };
 
@@ -65,7 +65,7 @@ const Header = ({ user }) => {
     <header>
       <div className="site-header">
         <div className="header-container">
-          <Link to="/">
+          <Link onClick={handleShutdownMenu} to="/">
             <img src="/img/logo.png" className="headerLogo" />
           </Link>
 
@@ -74,16 +74,24 @@ const Header = ({ user }) => {
             <div className="menu-container">
               <ul className="menu-list">
                 <li>
-                  <Link to="/">홈</Link>
+                  <Link onClick={handleShutdownMenu} to="/">
+                    홈
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/recipe">레시피추천</Link>
+                  <Link onClick={handleShutdownMenu} to="/recipe">
+                    레시피추천
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/receipts">영수증</Link>
+                  <Link onClick={handleShutdownMenu} to="/receipts">
+                    영수증
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/ingredients">재료관리</Link>
+                  <Link onClick={handleShutdownMenu} to="/ingredients">
+                    재료관리
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -108,7 +116,7 @@ const Header = ({ user }) => {
                 회원정보 수정
               </Link>
             </li>
-            
+
             <li className="SiteFamilySelect-item">
               <Link
                 to="/mypage?section=additional-section"

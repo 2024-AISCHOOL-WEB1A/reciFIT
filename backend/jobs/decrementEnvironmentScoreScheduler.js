@@ -21,7 +21,7 @@ const startDecrementEnvironmentScoreJob = () => {
 
     try {
       // 유효한 유저의 만료된 재료를 조회하여 환경 점수 차감
-      const [expiredIngredients] = await db.query(
+      const [expiredIngredients] = await db.execute(
         `SELECT user_idx
          FROM TB_USER_INGREDIENT
          WHERE expired_date = ? AND quantity > 0`,
@@ -32,7 +32,7 @@ const startDecrementEnvironmentScoreJob = () => {
         ...new Set(expiredIngredients.map((item) => item.user_idx)),
       ];
       const updatePromises = affectedUserIds.map((user_idx) => {
-        return db.query(
+        return db.execute(
           `UPDATE TB_ENVIRONMENT_SCORE 
            SET env_score = GREATEST(env_score - 1, 0)
            WHERE user_idx = ? AND month_year = ?`,
