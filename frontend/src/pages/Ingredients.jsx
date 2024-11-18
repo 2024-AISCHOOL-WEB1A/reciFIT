@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../assets/css/ingredients.css';
 import data from '../data/recipesData';
 import initialReceiptData from '../json/receiptData.json';
@@ -27,36 +27,50 @@ const Ingredients = () => {
     }
   };
 
+
   // 리스트용
-  const [editData, setEditData] = useState(initialReceiptData);
+  const [status, setStatus] = useState("🟢");
+
+  // 퍼센트 계산함수
+  const [percentages, setPercentages] = useState([]);
+
+  useEffect(() => {
+    calculatePercentages();
+  }, []); // 컴포넌트가 렌더링될 때 자동 실행
+
+  const calculatePercentages = () => {
+    const today = new Date();
+    const results = initialReceiptData.map((item) => {
+      const purchasedDate = new Date(item.purchaseDate);
+      const expiryDate = new Date(item.expiredDate);
 
 
-  // 날짜 함수
-  const calculateDateDifference = (startDate, endDate) => {
-    // Date 객체로 변환
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+      // 유통기한 계산
+      let percentage;
+      if (purchasedDate >= expiryDate || today > expiryDate) {
+        percentage = 0; // 유통기한이 이미 지났거나 잘못된 입력일 경우
+      } else if (purchasedDate >= today) {
+        percentage = 100; // 구매일이 현재 시간 이후라면 아직 100%
+      } else {
+        const totalDuration = expiryDate - purchasedDate; // 전체 유통기한 기간
+        const remainingDuration = expiryDate - today; // 남은 기간
+        percentage = ((remainingDuration / totalDuration) * 100).toFixed(0); // 소수점 제거
+        console.log(totalDuration);
+      }
 
-    // 밀리초 차이를 계산
-    const differenceInMilliseconds = end - start;
-
-    // 밀리초를 일로 변환
-    const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
-
-    return Math.round(differenceInDays); // 반올림하여 정수로 반환
-};
-
-// 예제 날짜
-const today = new Date().toISOString().split('T')[0]; // 오늘 날짜 (YYYY-MM-DD)
-const pastDate = '2024-03-11'
-
-// 날짜 차이 계산
-const daysDifference = calculateDateDifference(pastDate, today);
+      return { ...item, percentage }; // 기존 데이터에 퍼센티지 추가      
+    });
+    
+    setPercentages(results); // 결과 저장
+  };
 
 
-// -------------------------------------------------------------------------------------
+
+
+
 
   return (
+
     // 전체 컨테이너
     <div className='ingre-container'>
 
@@ -95,23 +109,18 @@ const daysDifference = calculateDateDifference(pastDate, today);
       {/* 재료 관리 */}
       <div className='ingre-my'>
 
-      <div>
-            <p>과거 날짜: {pastDate}</p>
-            <p>오늘 날짜: {today}</p>
-            <p>날짜 차이: {daysDifference}일</p>
-        </div>
-
         <h3> [닉네임]님의 재료 🥩 </h3>
 
         <div className='ingre-button-container'>
           <button onClick={handleButtonClick} className='ingre-button'>
             {isEditing ? '완료' : '수정'}
+            {/* 수정눌렀을 때 걍 뒤로 갈 수 있는 취소 버튼 추가 */}
           </button>
         </div>
 
         {/* 재료 리스트 */}
         <div className='ingre-my-list'>
-          <table className='ingre-table'>
+          <table className='ingre-table' cellSpacing={"0"}>
 
             {/* Head */}
             <thead className='ingre-table-head'>
@@ -120,34 +129,37 @@ const daysDifference = calculateDateDifference(pastDate, today);
                 <th style={{ width: "10%" }}>수량</th>
                 <th style={{ width: "15%" }}>유통기한</th>
                 <th>상태</th>
+                <th style={{ width: "5%" }}></th>
                 <th style={{ width: "10%" }}>삭제</th>
               </tr>
             </thead>
 
             {/* Body */}
-            {editData.map((item, index) => (
-              <tbody key={index} className='ingre-table-body'>
+
+            <tbody className='ingre-table-body'>
+              {percentages.map((item) => (
                 <tr>
                   <td>{item.name}</td>
                   <td>{item.quantity}{item.unit}</td>
-                  <td>{item.lifedays}</td>
-                  <td>
-                    <div className='ingre-per-background'>
-                      <div className='ingre-per-bar'></div>
-                    </div>
+                  <td>{item.expiredDate}</td>
+                  <td style={{ display: "flex", position: "relative", alignItems: "center" }}>
+                    <div className='ingre-per-bar' style={{ width: `${item.percentage}%` }}></div>
+                    <div className='ingre-per-background'></div>
                   </td>
-                  <td>삭제1</td>
+                  <td><div className='ingre-per-status'> {item.percentage}% {status} </div></td>
+                  <td>{item.percentage}</td>
                 </tr>
-              </tbody>
-            ))}
+              ))}
+            </tbody>
 
           </table>
+
+          {/* <button onClick={HandleCheck}> 확인용 </button> */}
         </div>
       </div>
     </div>
   )
 }
-
 
 
 export default Ingredients

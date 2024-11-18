@@ -139,6 +139,7 @@ const Header = ({ user }) => {
               <Link
                 to="/mypage?section=env-section"
                 className="SiteFamilySelect-link"
+                onClick={toggleMenu}
               >
                 나의 환경점수
               </Link>

@@ -3,12 +3,12 @@ const router = express.Router();
 const db = require("../../../config/db");
 const authenticateAccessToken = require("../../../Middlewares/jwtAuthentication");
 const {
+  isValidIdx,
   isValidDate,
   isStartDateBeforeEndDate,
 } = require("../../../utils/validation");
+const { toCamelCase } = require("../../../utils/commonUtils");
 const ingredientsUtils = require("../../../utils/ingredientsUtils");
-
-// TODO : 유저 식재료 테이블 변경으로 인해서 get, patch, delete 라우터 수정이 필요 (post는 수정함)
 
 // 유저의 전체 식재료 불러오기
 router.get("/", authenticateAccessToken, async (req, res) => {
@@ -43,17 +43,24 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   }
 
   // 기본 쿼리와 파라미터 배열
-  let query = `
-    SELECT ui.u_ingre_idx, i.ingre_name, ui.quantity, ui.total_quantity, ui.purchase_date, ui.expired_date
-    FROM TB_USER_INGREDIENT ui
-    JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
-    WHERE ui.user_idx = ?
-  `;
+  const query = `
+    SELECT 
+      u_ingre_idx, 
+      ingre_idx, 
+      rpt_idx,
+      ingre_name,
+      quantity, 
+      total_quantity, 
+      unit,
+      purchase_date, 
+      expired_date
+    FROM TB_USER_INGREDIENT
+    WHERE user_idx = ?`;
   const params = [userIdx];
 
-  // 재료 이름 조건 추가
+  // 재료 이름 조건 추가 (본인이 등록한 재료 이름으로 검색하는 것)
   if (ingreName) {
-    query += ` AND i.ingre_name LIKE ?`;
+    query += ` AND ingre_name LIKE ?`;
     params.push(`%${ingreName}%`);
   }
 
@@ -84,34 +91,47 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   // DB 조회
   try {
     const [rows] = await db.execute(query, params);
-    return res.status(200).json(rows);
+    return res.status(200).json({ ingredients: toCamelCase(rows) });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
 
 // 유저의 특정 식재료 불러오기
-router.get("/:uIngreId", authenticateAccessToken, async (req, res) => {
+router.get("/:uIngreIdx", authenticateAccessToken, async (req, res) => {
   const { userIdx } = req.user;
-  const { uIngreId } = req.params;
+  const { uIngreIdx } = req.params;
 
-  // uIngreId가 숫자인지 확인
-  if (isNaN(uIngreId)) {
-    return res.status(400).json({ message: "Invalid ID format" });
+  // 유효성 검사 1: Idx 존재 유무
+  if (!uIngreIdx) {
+    return res.status(400).json({ message: "Idx required" });
+  }
+
+  // 유효성 검사 2: idx가 숫자인 경우만
+  if (!isValidIdx(uIngreIdx)) {
+    return res.status(400).json({ message: "Invalid idx format" });
   }
 
   const query = `
-    SELECT ui.u_ingre_idx, i.ingre_name, ui.quantity, ui.total_quantity, ui.purchase_date, ui.expired_date
-    FROM TB_USER_INGREDIENT ui
-    JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
-    WHERE ui.user_idx = ? AND ui.u_ingre_idx = ?
-  `;
+    SELECT 
+      u_ingre_idx, 
+      ingre_idx, 
+      rpt_idx,
+      ingre_name,
+      quantity, 
+      total_quantity, 
+      unit,
+      purchase_date, 
+      expired_date
+    FROM TB_USER_INGREDIENT
+    WHERE user_idx = ? AND u_ingre_idx = ?`;
+
   try {
-    const [rows] = await db.execute(query, [userIdx, uIngreId]);
+    const [rows] = await db.execute(query, [userIdx, uIngreIdx]);
     if (rows.length === 0) {
-      return res.status(404).json({ message: "Not found" });
+      return res.status(404).json({ message: "User ingredient not found" });
     }
-    return res.status(200).json(rows[0]);
+    return res.status(200).json({ ingredient: toCamelCase(rows[0]) });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
   }
@@ -249,7 +269,8 @@ router.post("/", authenticateAccessToken, async (req, res) => {
     try {
       if (ingreName) {
         // 검사할 ingreName을 재료 사전에서 가져온다
-        const matchedIngreName = ingredientsUtils.findMatchingIngredient(ingreName);
+        const matchedIngreName =
+          ingredientsUtils.findMatchingIngredient(ingreName);
 
         // 정상적인 재료 이름이 나오지 않은 경우
         if (!matchedIngreName) {
@@ -258,8 +279,7 @@ router.post("/", authenticateAccessToken, async (req, res) => {
             .json({ message: `ingredient not supported`, ingreName });
         }
 
-        const getIngreQuery =
-          `SELECT ingre_idx, shelf_life_days 
+        const getIngreQuery = `SELECT ingre_idx, shelf_life_days 
           FROM TB_INGREDIENT 
           WHERE ingre_name = ?`;
         const [rows] = await db.execute(getIngreQuery, [matchedIngreName]);
@@ -289,27 +309,22 @@ router.post("/", authenticateAccessToken, async (req, res) => {
         }
 
         // 식재료 이름은 없지만, 식재료 id가 있는 경우 : 식재료 테이블에서 이름을 가져다가 넣어준다
-        const getIngreNameQuery =
-          `SELECT ingre_name 
+        const getIngreNameQuery = `SELECT ingre_name 
           FROM TB_INGREDIENT 
           WHERE ingre_idx = ?`;
         const [ingreRows] = await db.execute(getIngreNameQuery, [ingreIdx]);
 
         // 재료의 id가 존재하지 않는 경우
         if (ingreRows.length === 0) {
-          return res
-            .status(404)
-            .json({ message: `${ingreIdx} not found` });
+          return res.status(404).json({ message: `${ingreIdx} not found` });
         }
 
         // 이름 넣어주기
         ingreName = ingreRows[0]?.ingre_name;
       }
     } catch (err) {
-      console.log(err)
-      return res
-        .status(500)
-        .json({ message: "Internal server error" });
+      console.log(err);
+      return res.status(500).json({ message: "Internal server error" });
     }
 
     // 유효성 검사 2: 날짜 형식 검증
@@ -328,9 +343,7 @@ router.post("/", authenticateAccessToken, async (req, res) => {
       (totalQuantity !== undefined &&
         (isNaN(totalQuantity) || totalQuantity < 0))
     ) {
-      return res
-        .status(400)
-        .json({ message: "Invalid quantity values" });
+      return res.status(400).json({ message: "Invalid quantity values" });
     }
 
     // 유효성 검사 4: quantity와 totalQuantity가 모두 없는 경우 에러
@@ -374,15 +387,21 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
   // 들어간 재료가 없는 경우
   if (insertValues.length === 0) {
-    return res
-      .status(400)
-      .json({ message: "No valid ingredients to insert" });
+    return res.status(400).json({ message: "No valid ingredients to insert" });
   }
 
   // INSERT 쿼리 실행
   const insertQuery = `
     INSERT INTO TB_USER_INGREDIENT 
-    (user_idx, ingre_idx, rpt_idx, ingre_name, quantity, total_quantity, unit, purchase_date, expired_date)
+      (user_idx, 
+      ingre_idx, 
+      rpt_idx, 
+      ingre_name, 
+      quantity, 
+      total_quantity, 
+      unit, 
+      purchase_date, 
+      expired_date)
     VALUES ?
   `;
 
@@ -393,27 +412,47 @@ router.post("/", authenticateAccessToken, async (req, res) => {
       // insertedRows: result.affectedRows,
     });
   } catch (err) {
-    console.log(err)
-    return res
-      .status(500)
-      .json({ message: "Internal server error" });
+    console.log(err);
+    return res.status(500).json({ message: "Internal server error" });
   }
 });
 
-// 유저의 식재료 수정 (PATCH /api/users/ingredients/:uIngreId)
-router.patch("/:uIngreId", authenticateAccessToken, async (req, res) => {
+// 유저의 식재료 수정 (PATCH /api/users/ingredients/)
+router.patch("/", authenticateAccessToken, async (req, res) => {
   const { userIdx } = req.user;
-  const { uIngreId } = req.params;
-  const { quantity, totalQuantity, purchaseDate, expiredDate } = req.body;
+  const {
+    uIngreIdx,
+    ingreName,
+    quantity,
+    totalQuantity,
+    unit,
+    purchaseDate,
+    expiredDate,
+  } = req.body;
+  let ingreIdx = -1;
 
-  // 유효성 검사 1: 네 개의 값이 모두 비어있는 경우
-  if (!quantity && !totalQuantity && !purchaseDate && !expiredDate) {
+  // 유효성 검사 1: uIngreIdx 검사
+  if (!uIngreIdx) {
+    return res.status(400).json({ message: "idx is required." });
+  }
+
+  // 유효성 검사 2 : uIngreIdx 검사
+  if (!isValidIdx(uIngreIdx)) {
+    return res.status(400).json({ message: "Invalid idx format" });
+  }
+
+  // 유효성 검사 3: 모든 body 값이 모두 비어있는 경우
+  if (
+    [ingreName, quantity, totalQuantity, unit, purchaseDate, expiredDate].every(
+      (field) => field === undefined || field === null || field === ""
+    )
+  ) {
     return res
       .status(400)
       .json({ message: "At least one field must be provided for update." });
   }
 
-  // 유효성 검사 2: 날짜 형식 검증
+  // 유효성 검사 4: 날짜 형식 검증
   if (
     (purchaseDate && !isValidDate(purchaseDate)) ||
     (expiredDate && !isValidDate(expiredDate))
@@ -423,84 +462,152 @@ router.patch("/:uIngreId", authenticateAccessToken, async (req, res) => {
       .json({ message: "Invalid date format. Use YYYY-MM-DD." });
   }
 
-  // 유효성 검사 3: quantity 및 totalQuantity 값 검증
+  // 유효성 검사 5: quantity 및 totalQuantity 값 검증 (total은 0이 될 수 없다)
   if (
     (quantity !== undefined && (isNaN(quantity) || quantity < 0)) ||
-    (totalQuantity !== undefined && (isNaN(totalQuantity) || totalQuantity < 0))
+    (totalQuantity !== undefined &&
+      (isNaN(totalQuantity) || totalQuantity <= 0))
   ) {
     return res.status(400).json({
       message: "Invalid quantity values",
     });
   }
 
-  // 업데이트 쿼리 (조인 없이 수행)
+  // 유효성 검사 6: 이름을 변경한 경우에 ingre_idx를 바꿔줘야 한다
+  if (ingreName) {
+    // 검사할 ingreName을 재료 사전에서 가져온다
+    const matchedIngreName = ingredientsUtils.findMatchingIngredient(ingreName);
+
+    // 정상적인 재료 이름이 나오지 않은 경우
+    if (!matchedIngreName) {
+      return res
+        .status(404)
+        .json({ message: `ingredient not supported`, ingreName });
+    }
+
+    const getIngreQuery = `SELECT ingre_idx
+      FROM TB_INGREDIENT 
+      WHERE ingre_name = ?`;
+    const [rows] = await db.execute(getIngreQuery, [matchedIngreName]);
+
+    // 등록하려고 하는 재료가 지원하지 않는 재료일 경우
+    if (rows.length === 0) {
+      return res
+        .status(404)
+        .json({ message: `ingredient not supported`, ingreName });
+    }
+    ingreIdx = rows[0].ingre_idx;
+  }
+
+  // 업데이트 쿼리 만들기
+  let setClauses = [];
+  let updateValues = [];
+
+  if (ingreName) {
+    setClauses.push("ingre_name = ?");
+    updateValues.push(ingreName);
+  }
+
+  if (ingreIdx != -1) {
+    setClauses.push("ingre_idx = ?");
+    updateValues.push(ingreIdx);
+  }
+
+  if (quantity !== undefined && quantity !== null && quantity !== "") {
+    setClauses.push("quantity = ?");
+    updateValues.push(quantity);
+  }
+
+  if (totalQuantity) {
+    setClauses.push("total_quantity = ?");
+    updateValues.push(totalQuantity);
+  }
+
+  if (unit) {
+    setClauses.push("unit = ?");
+    updateValues.push(unit);
+  }
+
+  if (purchaseDate) {
+    setClauses.push("purchase_date = ?");
+    updateValues.push(purchaseDate);
+  }
+
+  if (expiredDate) {
+    setClauses.push("expired_date = ?");
+    updateValues.push(expiredDate);
+  }
+
+  // db values값에 추가
+  updateValues.push(uIngreIdx, userIdx);
+
+  // 업데이트할 필드가 하나도 없다면 에러를 반환합니다.
+  if (setClauses.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "At least one field must be provided for update." });
+  }
+
+  // 업데이트 쿼리를 생성합니다.
   const updateQuery = `
     UPDATE TB_USER_INGREDIENT
-    SET quantity = ?, total_quantity = ?, purchase_date = ?, expired_date = ?
-    WHERE u_ingre_idx = ? AND user_idx = ?
-  `;
+    SET ${setClauses.join(", ")}
+    WHERE u_ingre_idx = ? AND user_idx = ?`;
 
   try {
-    const [result] = await db.execute(updateQuery, [
-      quantity,
-      totalQuantity,
-      purchaseDate,
-      expiredDate,
-      uIngreId,
-      userIdx,
-    ]);
+    const [result] = await db.execute(updateQuery, updateValues);
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Not found" });
+      return res.status(404).json({ message: "User Ingredient Not found" });
     }
-
-    // 업데이트 후 ingre_name을 조회하기 위한 쿼리
-    const getIngreNameQuery = `
-      SELECT i.ingre_name 
-      FROM TB_USER_INGREDIENT ui
-      JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
-      WHERE ui.u_ingre_idx = ? AND ui.user_idx = ?
-    `;
-    const [rows] = await db.execute(getIngreNameQuery, [uIngreId, userIdx]);
-
-    // 존재하지 않음
-    if (rows.length === 0) {
-      return res.status(404).json({ message: "Not found" });
-    }
-
-    return res.status(200).json(rows[0]);
+    return res.status(200).json({ message: "Updated successfully" });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
 
-// 유저의 식재료 삭제 (DELETE /api/users/ingredients/:uIngreId)
-router.delete("/:uIngreId", authenticateAccessToken, async (req, res) => {
+// 유저의 식재료 삭제 (DELETE /api/users/ingredients/:uIngreIdx)
+router.delete("/:uIngreIdx", authenticateAccessToken, async (req, res) => {
   const { userIdx } = req.user;
-  const { uIngreId } = req.params;
+  const { uIngreIdx } = req.params;
+
+  // 유효성 검사 1: uIngreIdx 검사
+  if (!uIngreIdx) {
+    return res.status(400).json({ message: "idx is required." });
+  }
+
+  // 유효성 검사 2 : uIngreIdx 검사
+  if (!isValidIdx(uIngreIdx)) {
+    return res.status(400).json({ message: "Invalid idx format" });
+  }
 
   const query = `
-    DELETE FROM TB_USER_INGREDIENT WHERE u_ingre_idx = ? AND user_idx = ?
-  `;
+    DELETE 
+    FROM TB_USER_INGREDIENT 
+    WHERE u_ingre_idx = ? AND user_idx = ?`;
 
   try {
-    const [result] = await db.execute(query, [uIngreId, userIdx]);
+    const [result] = await db.execute(query, [uIngreIdx, userIdx]);
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Not Found" });
+      return res.status(404).json({ message: "User ingredient not found" });
     }
-    return res.status(204).send();
+    return res.status(204).json({ message: "Deleted successfully" });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
 
 // 유저의 식재료 차감 (patch)
-router.patch("/", authenticateAccessToken, async (req, res) => {
+router.patch("/consumption", authenticateAccessToken, async (req, res) => {
   const { userIdx } = req.user;
   const { rcpIdx } = req.body;
 
-  // rcpIdx가 제공되지 않은 경우 에러 반환
+  // 유효성 검사 1 : rcpIdx가 제공되지 않은 경우 에러 반환
   if (!rcpIdx) {
     return res.status(400).json({ message: "Recipe ID is required" });
+  }
+  // 유효성 검사 2 : rcpIdx가 숫자가 아닌 경우
+  if (!isValidIdx(rcpIdx)) {
+    return res.status(400).json({ message: "Invalid idx format" });
   }
 
   try {
@@ -566,7 +673,7 @@ router.patch("/", authenticateAccessToken, async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "Ingredients deducted successfully" });
+      .json({ message: "Ingredients consumed successfully" });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });
