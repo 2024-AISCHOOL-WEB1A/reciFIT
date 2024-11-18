@@ -117,7 +117,7 @@ const Mypage = () => {
                                 <input 
                                     type="text" 
                                     name="nickname" 
-                                    value={userData.nickname || '찬란한 맛집'} 
+                                    value={userData.nickname || '찬란한 도넛'} 
                                     onChange={handleChange} 
                                 />
                             </td>
@@ -136,15 +136,18 @@ const Mypage = () => {
                         </tr>
                         <tr>
                             <td>회원 생성일:</td>
-                            <td>{new Date(userData.createdAt)?.toLocaleDateString() || '2024-11-01'}</td>
+                            <td> {userData.createdAt 
+            ? new Date(userData.createdAt).toLocaleDateString() : '2024-11-15 03:47:12'}</td>
                         </tr>
                         <tr>
                             <td>회원 수정일:</td>
-                            <td>{new Date(userData.updatedAt)?.toLocaleDateString() || '2024-11-02'}</td>
+                            <td>{userData.updatedAt 
+            ? new Date(userData.updatedAt).toLocaleDateString() : '2024-11-15 05:14:02'}</td>
                         </tr>
                         <tr>
                             <td>최종 로그인 일자:</td>
-                            <td>{new Date(userData.lastLogin)?.toLocaleDateString() || '2024-11-03'}</td>
+                            <td>{userData.lastLogin 
+            ? new Date(userData.lastLogin).toLocaleDateString() : '2024-11-15 06:14:02'}</td>
                         </tr>
                     </tbody>
                 </table>
