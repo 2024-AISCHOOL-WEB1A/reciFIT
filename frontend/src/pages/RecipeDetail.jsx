@@ -67,7 +67,7 @@ const RecipeDetail = () => {
     swalModal
       .fire({
         title: "요리를 시작하시겠습니까?",
-        text: "요리를 시작하시면 보유 음식 재료가 자동으로 차감됭ㅂ니다.",
+        text: "요리를 시작하시면 보유 음식 재료가 자동으로 차감됩니다.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "예",
