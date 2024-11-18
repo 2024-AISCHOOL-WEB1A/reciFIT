@@ -1,4 +1,5 @@
 function normalizeString(str) {
+  if (!str) return str;
   return str.replace(/\s+/g, "");
 }
 

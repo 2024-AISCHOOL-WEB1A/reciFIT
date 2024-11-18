@@ -5,6 +5,7 @@ const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
 const recipeValidation = require("../../utils/recipeValidation");
 const { isValidIdx, isValidURL } = require("../../utils/validation");
 const { getUserRole, getRecipeOwner } = require("../../utils/dbHelpers");
+const { normalizeString } = require("../../utils/commonUtils");
 require("dotenv").config();
 
 // 조회수 최대값
@@ -96,6 +97,7 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 // 레시피 추천
 router.get("/", authenticateAccessToken, async (req, res) => {
   let {
+    searchString,
     have,
     prefer,
     dislike,
@@ -421,12 +423,18 @@ router.get("/", authenticateAccessToken, async (req, res) => {
     const exclusionConditions = nonConsumableIngredients
       .map(() => `ck_ingredients NOT LIKE ?`)
       .join(" AND ");
-
     nonConsumableIngredients.forEach((item) => {
       params.push(`%${item}%`);
     });
-
     updates.push(exclusionConditions);
+  }
+
+  // searchString 조건 추가
+  if (searchString && searchString.trim() !== "") {
+    // searchString 정규화
+    searchString = normalizeString(searchString);
+    updates.push(`REPLACE(ck_name, ' ', '') LIKE ?`);
+    params.push(`%${searchString}%`);
   }
 
   // 기본 WHERE 절
