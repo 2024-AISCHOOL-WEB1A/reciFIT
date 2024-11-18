@@ -3,31 +3,31 @@
     "price":"5000",
     "quantity":"500",
     "unit":"ml",
-    "lifedays":"2024-11-12",
-    "per":"50%"
+    "expiredDate":"2024-11-12",
+    "purchaseDate":"2024-11-01"
 },
 {
     "name":"아메리카노",
     "price":"1500",
     "quantity":"500",
     "unit":"ml",
-    "lifedays":"2024-11-12",
-    "per":"47%"
+    "expiredDate":"2024-11-12",
+    "purchaseDate":"2024-11-01"
 },
 {
     "name":"후추",
     "price":"1900",
     "quantity":"20",
     "unit":"g",
-    "lifedays":"2024-11-12",
-    "per":"2%"
+    "expiredDate":"2024-11-12",
+    "purchaseDate":"2024-11-01"
 },
 {
     "name":"고추장",
     "price":"7980",
     "quantity":"1800",
     "unit":"g",
-    "lifedays":"2024-11-12",
-    "per":"5%"
+    "expiredDate":"2024-11-12",
+    "purchaseDate":"2024-11-01"
 }
 ]
