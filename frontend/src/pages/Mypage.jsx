@@ -108,47 +108,50 @@ const Mypage = () => {
             {isLoading ? <p>로딩 중...</p> : (
                 <>
                <section ref={infoSectionRef} className="info-section">
-    <h3 className="shared-title1">회원정보 수정</h3>
-    <table className="info-table">
-        <tbody>
-            <tr>
-                <td>닉네임:</td>
-                <td>
-                    <input 
-                        type="text" 
-                        name="nickname" 
-                        value={userData.nickname || '찬란한 맛집'} 
-                        onChange={handleChange} 
-                    />
-                </td>
-            </tr>
-            <tr>
-                <td>회원 상태:</td>
-                <td>
-                    <span>{userData.status || '활성'}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>회원 역할:</td>
-                <td>
-                    <span>{userData.role || '일반 회원'}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>회원 생성일:</td>
-                <td>{new Date(userData.createdAt).toLocaleDateString() || '2024-11-01'}</td>
-            </tr>
-            <tr>
-                <td>회원 수정일:</td>
-                <td>{new Date(userData.updatedAt).toLocaleDateString() || '2024-11-02'}</td>
-            </tr>
-            <tr>
-                <td>최종 로그인 일자:</td>
-                <td>{new Date(userData.lastLogin).toLocaleDateString() || '2024-11-03'}</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+                <h3 className="shared-title1">회원정보 수정</h3>
+                <table className="info-table">
+                    <tbody>
+                        <tr>
+                            <td>닉네임:</td>
+                            <td>
+                                <input 
+                                    type="text" 
+                                    name="nickname" 
+                                    value={userData.nickname || '찬란한 도넛'} 
+                                    onChange={handleChange} 
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>회원 상태:</td>
+                            <td>
+                                <span>{userData.status || '활성'}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>회원 역할:</td>
+                            <td>
+                                <span>{userData.role || '일반 회원'}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>회원 생성일:</td>
+                            <td> {userData.createdAt 
+            ? new Date(userData.createdAt).toLocaleDateString() : '2024-11-15 03:47:12'}</td>
+                        </tr>
+                        <tr>
+                            <td>회원 수정일:</td>
+                            <td>{userData.updatedAt 
+            ? new Date(userData.updatedAt).toLocaleDateString() : '2024-11-15 05:14:02'}</td>
+                        </tr>
+                        <tr>
+                            <td>최종 로그인 일자:</td>
+                            <td>{userData.lastLogin 
+            ? new Date(userData.lastLogin).toLocaleDateString() : '2024-11-15 06:14:02'}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </section>
 
 <hr style={{ margin: '20px 0', height: '2px', backgroundColor: '#f4b057', border: 'none' }} />
 
@@ -266,7 +269,7 @@ const Mypage = () => {
 
                 {/* 영수증 목록 */}
                 <section ref={receiptsRef} className="receipts-section" style={{ maxHeight: '300px', overflowY: 'auto' }}>
-    <h3 className="shared-title1">나의 영수증</h3>
+    <h3 className="shared-title1">영수증 관리</h3>
     {receipts.length > 0 ? (
         <table className="receipts-table">
             <thead>
