@@ -10,8 +10,20 @@ const Mypage = () => {
         remainingScore: 100 - userData.envScore,
     };
     const [recipes, setRecipes] = useState([ 
-        { favIdx: 1, name: "감자조림", createdAt: new Date(), cookedYn: "Y" },
-        { favIdx: 2, name: "불고기", createdAt: new Date(), cookedYn: "N" }
+        {
+            favIdx: 1,
+            name: "감자조림",
+            imageUrl: "https://recipe1.ezmember.co.kr/cache/recipe/2016/07/12/24fe2fa2309eb17dbe2f60b93eee3be21.jpg",
+            createdAt: new Date(),
+            cookedYn: "Y",
+        },
+        {
+            favIdx: 2,
+            name: "불고기",
+            imageUrl: "https://recipe1.ezmember.co.kr/cache/recipe/2019/03/03/11baafbe81803965b17c3ab42a5992cb1.jpg",
+            createdAt: new Date(),
+            cookedYn: "N",
+        }
     ]);
     const [receipts, setReceipts] = useState([ 
         {
@@ -145,114 +157,140 @@ const Mypage = () => {
             <h2 className="shared-title-h2">마이 페이지</h2>
             {isLoading ? <p>로딩 중...</p> : (
                 <>
-                    <section ref={infoSectionRef} className="info-section">
-                        <h3 className="shared-title1">회원정보 수정</h3>
-                        <table className="info-table">
-                            <tbody>
-                                <tr>
-                                    <td>닉네임 :</td>
-                                    <td>
-                                        <input 
-                                            type="text" 
-                                            name="nickname" 
-                                            value={userData.nickname || '찬란한 도넛'} 
-                                            onChange={handleChange} 
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>회원 상태 :</td>
-                                    <td>
-                                        <span>{userData.status || '활성'}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>회원 역할 :</td>
-                                    <td>
-                                        <span>{userData.role || '일반 회원'}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>회원 생성일 :</td>
-                                    <td> {userData.createdAt 
-                ? new Date(userData.createdAt).toLocaleDateString() : '2024-11-15 03:47:12'}</td>
-                                </tr>
-                                <tr>
-                                    <td>회원 수정일 :</td>
-                                    <td>{userData.updatedAt 
-                ? new Date(userData.updatedAt).toLocaleDateString() : '2024-11-15 05:14:02'}</td>
-                                </tr>
-                                <tr>
-                                    <td>최종 로그인 일자 :</td>
-                                    <td>{userData.lastLogin 
-                ? new Date(userData.lastLogin).toLocaleDateString() : '2024-11-15 06:14:02'}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
+                   <section ref={infoSectionRef} className="info-section">
+    <h3 className="shared-title1">회원정보 수정</h3>
+    <table className="info-table">
+        <tbody>
+            <tr>
+                <td>닉네임 :</td>
+                <td>
+                    <input 
+                        type="text" 
+                        name="nickname" 
+                        value={userData.nickname || '찬란한 도넛'} 
+                        onChange={handleChange} 
+                    />
+                </td>
+            </tr>
+            <tr>
+                <td>회원 상태 :</td>
+                <td>
+                    <span>{userData.status || '활성'}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>회원 역할 :</td>
+                <td>
+                    <span>{userData.role || '일반 회원'}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>회원 생성일 :</td>
+                <td>
+                    {userData.createdAt 
+                        ? new Date(userData.createdAt).toLocaleDateString() 
+                        : '2024-11-15 03:47:12'}
+                </td>
+            </tr>
+            <tr>
+                <td>회원 수정일 :</td>
+                <td>
+                    {userData.updatedAt 
+                        ? new Date(userData.updatedAt).toLocaleDateString() 
+                        : '2024-11-15 05:14:02'}
+                </td>
+            </tr>
+            <tr>
+                <td>최종 로그인 일자 :</td>
+                <td>
+                    {userData.lastLogin 
+                        ? new Date(userData.lastLogin).toLocaleDateString() 
+                        : '2024-11-15 06:14:02'}
+                </td>
+            </tr>
+            <tr>
+                <td>선호 식재료 :</td>
+                <td>
+                    <input 
+                        type="text" 
+                        name="preferredIngredients" 
+                        value={userData.preferredIngredients || '닭가슴살'} 
+                        onChange={handleChange} 
+                    />
+                </td>
+            </tr>
+            <tr>
+                <td>기피 식재료 :</td>
+                <td>
+                    <input 
+                        type="text" 
+                        name="dislikedIngredients" 
+                        value={userData.dislikedIngredients || '홍어'} 
+                        onChange={handleChange} 
+                    />
+                </td>
+            </tr>
+            <tr>
+                <td>섭취불가(알러지) 식재료 :</td>
+                <td>
+                    <input 
+                        type="text" 
+                        name="nonConsumableIngredients" 
+                        value={userData.nonConsumableIngredients || '복숭아'} 
+                        onChange={handleChange} 
+                    />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<div class="save-button-container">
+        <button onClick={handleSave} className="save-button">저장하기</button>
+        </div>
 
-                    <hr style={{ margin: '20px 0', height: '2px', backgroundColor: '#f4b057', border: 'none' }} />
+                    <hr style={{margin: '20px 0', height: '2px', backgroundColor: '#f4b057', border: 'none' }} />
 
-                    <section ref={additionalSectionRef} className="additional-section">
-                        <div className="info-card">
-                            <h3 className="shared-title1">추가 정보 입력/수정</h3>
-                            <p>
-                                선호 식재료:
-                                <input
-                                    type="text"
-                                    name="preferredIngredients"
-                                    value={userData.preferredIngredients || '닭가슴살'}
-                                    onChange={handleChange}
-                                />
-                            </p>
-                            <p>
-                                기피 식재료:
-                                <input
-                                    type="text"
-                                    name="dislikedIngredients"
-                                    value={userData.dislikedIngredients || '홍어'}
-                                    onChange={handleChange}
-                                />
-                            </p>
-                            <p>
-                                섭취불가(알러지) 식재료:
-                                <input
-                                    type="text"
-                                    name="nonConsumableIngredients"
-                                    value={userData.nonConsumableIngredients || '복숭아'}
-                                    onChange={handleChange}
-                                />
-                            </p>
-                        </div>
-                    </section>
+                    <section ref={recipesRef} className="recipes-section" style={{ margin: '20px auto', width: '90%' }}>
+    <h3 className="shared-title1" style={{ fontSize: '24px', marginBottom: '20px', textAlign: 'center', fontWeight: 'bold' }}>
+        나의 레시피 조회
+    </h3>
+    {recipes.length > 0 ? (
+        <table className="recipes-table" style={{ width: '100%', borderCollapse: 'collapse', margin: '0 auto', textAlign: 'center' }}>
+            <thead>
+                <tr style={{ backgroundColor: '#f8f8f8', borderBottom: '2px solid #ddd' }}>
+                    <th style={{ padding: '10px', border: '1px solid #ddd' }}>레시피 이미지</th>
+                    <th style={{ padding: '10px', border: '1px solid #ddd' }}>레시피 이름</th>
+                    <th style={{ padding: '10px', border: '1px solid #ddd' }}>요리 여부</th>
+                </tr>
+            </thead>
+            <tbody>
+                {recipes.map(recipe => (
+                    <tr key={recipe.favIdx} style={{ borderBottom: '1px solid #ddd' }}>
+                        <td style={{ padding: '10px', border: '1px solid #ddd' }}>
+                            <img 
+                                src={recipe.imageUrl} 
+                                alt={`${recipe.name} 이미지`} 
+                                width="243" 
+                                height="150" 
+                                style={{ objectFit: 'cover', borderRadius: '8px' }} 
+                            />
+                        </td>
+                        <td style={{ padding: '10px', border: '1px solid #ddd', fontSize: '16px', fontWeight: 'bold' }}>
+                            {recipe.name}
+                        </td>
+                        <td style={{ padding: '10px', border: '1px solid #ddd', fontSize: '14px', color: recipe.cookedYn === "Y" ? 'green' : 'red' }}>
+                            {recipe.cookedYn === "Y" ? "완료" : "미완료"}
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    ) : (
+        <p style={{ textAlign: 'center', fontSize: '18px', color: '#555' }}>레시피가 없습니다.</p>
+    )}
+</section>
 
-                    <hr style={{ margin: '20px 0', height: '2px', backgroundColor: '#f4b057', border: 'none' }} />
 
-                    <section ref={recipesRef} className="recipes-section">
-                        <h3 className="shared-title1">나의 레시피 조회</h3>
-                        {recipes.length > 0 ? (
-                            <table className="recipes-table">
-                                <thead>
-                                    <tr>
-                                        <th>레시피 이름</th>
-                                        <th>레시피 생성일</th>
-                                        <th>요리 여부</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {recipes.map(recipe => (
-                                        <tr key={recipe.favIdx}>
-                                            <td>{recipe.name}</td>
-                                            <td>{new Date(recipe.createdAt).toLocaleDateString()}</td>
-                                            <td>{recipe.cookedYn === "Y" ? "완료" : "미완료"}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        ) : (
-                            <p>레시피가 없습니다.</p>
-                        )}
-                    </section>
 
                     <hr style={{ margin: '20px 0', height: '2px', backgroundColor: '#f4b057', border: 'none' }} />
 
@@ -322,7 +360,7 @@ const Mypage = () => {
                                                     src={receipt.rptPhotoUrl} 
                                                     alt="영수증" 
                                                     width="50" 
-                                                    height="50" 
+                                                    height="100" 
                                                     onClick={() => handleThumbnailClick(receipt.rptPhotoUrl)} // 썸네일 클릭 시 팝업 열기
                                                     style={{ cursor: 'pointer' }} // 클릭할 수 있도록 스타일 추가
                                                 />
@@ -353,7 +391,7 @@ const Mypage = () => {
                     )}
 </>
 )}
-    
+        
         </div>
     );
 };
