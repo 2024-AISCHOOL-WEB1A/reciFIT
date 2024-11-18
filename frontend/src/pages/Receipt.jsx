@@ -15,6 +15,7 @@ const Receipt = () => {
 
   // 유저 정보
   const user = useSelector((state) => state.user.user);
+
   // 영수증 스캔 데이터
   // const [receiptData, setReceiptData] = useState({
   //   rptIdx: 13,
@@ -117,6 +118,11 @@ const Receipt = () => {
 
   // 영수증 이미지 업로드 작동
   const handleReceiptImageUpload = () => {
+    // 로그인 여부 확인
+    if (!user) {
+      return navigate("/join");
+    }
+
     if (imageInputRef.current) {
       imageInputRef.current.click();
     }
