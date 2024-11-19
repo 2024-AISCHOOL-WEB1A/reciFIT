@@ -926,12 +926,9 @@ textarea#detectionFood[readonly] {
 }
 
 /* 모바일: 768px 미만 */
-@media (max-width: 767px) {
-    .photo {
-        /* height: fit-content; */
-    }
+@media (max-width: 767px){
     .photo img {
-        width: 35vw;
+        width: 40vw;
         height: 100%;
     }
     .instruct-container{
@@ -959,6 +956,13 @@ textarea#detectionFood[readonly] {
     
         border-top: 0.18em solid #131313;
         padding-top: 0.5%;
+    }
+}
+
+@media screen and (max-width: 767px) and (min-width: 1px){
+    .detail-container{
+        display: flex;
+        flex-direction: column;
     }
 }
 

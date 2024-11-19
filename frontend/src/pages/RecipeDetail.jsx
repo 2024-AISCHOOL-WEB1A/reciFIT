@@ -67,7 +67,7 @@ const RecipeDetail = () => {
     swalModal
       .fire({
         title: "요리를 시작하시겠습니까?",
-        text: "요리를 시작하시면 보유 음식 재료가 자동으로 차감됩니다.",
+        text: "' 예 '를 클릭 시 보유 음식 재료가 자동으로 차감됩니다.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "예",
@@ -80,7 +80,7 @@ const RecipeDetail = () => {
           // TODO : 성공했을 경우
           swalModal.fire({
             title: "음식 재료 차감 성공",
-            html: `보유하신 음식 재료가 정상적으로 차감되었습니다<br>즐거운 식사 시간 보내세요~`,
+            html: `재료는 줄었지만, 요리의 기쁨은 늘어납니다!<br><br>오늘도 맛있는 하루 되세요~😊`,
             icon: "success",
             confirmButtonText: "확인",
           });
