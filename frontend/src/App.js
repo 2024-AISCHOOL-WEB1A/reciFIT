@@ -19,7 +19,7 @@ import { apiAxios } from "./utils/axiosUtils";
 import { userActions } from "./redux/reducers/userSlice";
 import { useEffect } from "react";
 import RecipeMore from "./components/RecipeMore";
-import RecipeSignup from "./pages/RecipeSignup";
+// import RecipeSignup from "./pages/RecipeSignup";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -78,7 +78,7 @@ function App() {
         <Route path="/ingredients" element={<Ingredients />}></Route>
         <Route path="/login/callback" element={<LoginRedirect />} />
         <Route path="/recipeList" element={<RecipeMore/>}></Route>
-        <Route path="/recipeSignup" element={<RecipeSignup/>}></Route>
+        {/* <Route path="/recipeSignup" element={<RecipeSignup/>}></Route> */}
         {/* 404 Not Found */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

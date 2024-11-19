@@ -1205,6 +1205,8 @@
   }
   .FlotingCampaign-thumb{
     height: 8em;
+    width: auto;
+    margin-left: 1em;
   }
   .FlotingCampaign-thumb:before {
     width: 10em;
