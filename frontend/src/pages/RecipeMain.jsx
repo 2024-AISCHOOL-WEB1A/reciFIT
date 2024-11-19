@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/recipe.css";
-import data from "../data/recipesData";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,11 +12,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
-import RecipeMore from "../components/RecipeMore";
+import RecipeMoreItem from "../components/RecipeMoreItem";
 
 const RecipeMain = () => {
     const [recipeData, setRecipeData] = useState(null);
-    const [recipeBest, setRecipeBest] = useState(null);
 
     // '흑백 요리사'가 포함된 레시피만 등록
     useEffect(() => {
@@ -49,10 +47,10 @@ const RecipeMain = () => {
         if (firstSlideIndex === 0) {
             setFirstSlideIndex(recipeData.length - visibleItems); // 마지막 항목으로 이동
         } else {
-            setFirstSlideIndex(firstSlideIndex - 1); 
+            setFirstSlideIndex(firstSlideIndex - 1);
         }
     };
-    
+
     const handleNextFirst = () => {
         console.log("next")
 
@@ -122,6 +120,26 @@ const RecipeMain = () => {
         setDetectionText(event.target.value); // 텍스트 업데이트
     };
 
+    // 검색창 내부의 placeholder를 모바일 버전일 때 다른 문구로 적용
+    const [placeholderText, setPlaceholderText] = useState(
+        "당신만의 재료로 완벽한 요리법을 찾아보세요 🍜"
+    );
+    useEffect(() => {
+        const updatePlaceholder = () => {
+            if (window.innerWidth < 768) {
+                setPlaceholderText("이 재료로 뭐 해먹지? 🤔");
+            } else {
+                setPlaceholderText("당신만의 재료로 완벽한 요리법을 찾아보세요 🍜");
+            }
+        };
+        updatePlaceholder();
+        window.addEventListener("resize", updatePlaceholder);
+
+        return () => {
+            window.removeEventListener("resize", updatePlaceholder);
+        };
+    }, []);
+
     return (
         <div className="recipeMain-container">
             {/* 검색 폼 */}
@@ -131,12 +149,12 @@ const RecipeMain = () => {
                         <input
                             className="search__input"
                             type="text"
-                            placeholder="당신만의 재료로 완벽한 요리법을 찾아보세요 🍜"
+                            placeholder={placeholderText}
                         />
                         <button className="searchBtn"></button>
                     </div>
                     <p className="search__title">
-                        #집밥 #손님접대 #엄마손맛 #동파육 #백종원레시피
+                        #집밥 #손님접대 #엄마손맛
                     </p>
                 </div>
                 <div className="site-camera-img">
@@ -224,7 +242,7 @@ const RecipeMain = () => {
                         BEST 레시피👨‍🍳
                     </h3>
                     <div className="list_content_btn_div">
-                        <Link to="/recipeList" className="list_content_btn">
+                        <Link to="/recipe" className="list_content_btn">
                             more
                         </Link>
                     </div>
@@ -235,7 +253,7 @@ const RecipeMain = () => {
                             type="button"
                             className="slide_btn_prev"
                             onClick={handlePrevFirst}
-                            // disabled={firstSlideIndex === 0}
+                        // disabled={firstSlideIndex === 0}
                         >
                             <span>
                                 <FontAwesomeIcon icon={faChevronLeft} />
@@ -243,7 +261,7 @@ const RecipeMain = () => {
                         </button>
                     </div>
                     <ul className="slickList">
-                        {console.log("firstSlideIndex",firstSlideIndex)}
+                        {console.log("firstSlideIndex", firstSlideIndex)}
                         {console.log("visibleItems", visibleItems)}
                         {recipeData && recipeData.length > 0 ? (
                             recipeData
@@ -276,9 +294,9 @@ const RecipeMain = () => {
                             type="button"
                             className="slide_btn_next"
                             onClick={handleNextFirst}
-                            // disabled={
-                            //     firstSlideIndex >= recipeData?.length - visibleItems
-                            // }
+                        // disabled={
+                        //     firstSlideIndex >= recipeData?.length - visibleItems
+                        // }
                         >
                             <span>
                                 <FontAwesomeIcon icon={faChevronRight} />
@@ -295,94 +313,50 @@ const RecipeMain = () => {
                     </h3>
                 </div>
                 <div className="recipeCategory-container">
-                    {/* <div className="slide_list_left">
-                        <button type="button" className="slide_btn_prev" onClick={handlePrevFirst} disabled={firstSlideIndex === 0}>
-                            <span><FontAwesomeIcon icon={faChevronLeft} /></span>
-                        </button>
-                    </div> */}
                     <div className="cate_cont">
                         <ul className="category-items">
-                            <li>
-                                <Link to="/recipeList?category=전체">
-                                    <img src="/img/recipe_category/all.png" alt="전체" />
-                                    <span>전체</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=밑반찬">
-                                    <img
-                                        src="/img/recipe_category/fried-egg-real.png"
-                                        alt="밑반찬"
-                                    />
-                                    <span>밑반찬</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=메인반찬">
-                                    <img src="/img/recipe_category/pork.png" alt="메인반찬" />
-                                    <span>메인반찬</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=국/탕">
-                                    <img src="/img/recipe_category/nambi.png" alt="국/탕" />
-                                    <span>국/탕</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=찌개">
-                                    <img src="/img/recipe_category/zzigae.png" alt="찌개" />
-                                    <span>찌개</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=초스피드">
-                                    <img src="/img/recipe_category/clock.png" alt="초스피드" />
-                                    <span>초스피드</span>{" "}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=손님접대">
-                                    <img src="/img/recipe_category/cooking.png" alt="손님접대" />
-                                    <span>손님접대</span>{" "}
-                                </Link>{" "}
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=밥/죽/떡">
-                                    <img
-                                        src="/img/recipe_category/rice-bowl.png"
-                                        alt="밥/죽/떡"
-                                    />
-                                    <span>밥/죽/떡</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=술안주">
-                                    <img src="/img/recipe_category/beer.png" alt="술안주" />
-                                    <span>술안주</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/recipeList?category=아시안">
-                                    <img
-                                        src="/img/recipe_category/chinese-food.png"
-                                        alt="아시안"
-                                    />
-                                    <span>아시안</span>
-                                </Link>
-                            </li>
+                            {[
+                                { category: "전체", img: "all.png" },
+                                { category: "밑반찬", img: "fried-egg-real.png" },
+                                { category: "메인반찬", img: "pork.png" },
+                                { category: "국/탕", img: "nambi.png" },
+                                { category: "찌개", img: "zzigae.png" },
+                                { category: "초스피드", img: "clock.png" },
+                                { category: "손님접대", img: "cooking.png" },
+                                { category: "밥/죽/떡", img: "rice-bowl.png" },
+                                { category: "술안주", img: "beer.png" },
+                                { category: "아시안", img: "chinese-food.png" },
+                            ].map((item, index) => (
+                                <li key={index}>
+                                    <Link to={`/recipe?category=${item.category}`}>
+                                        <img src={`/img/recipe_category/${item.img}`} alt={item.category} />
+                                        <span>{item.category}</span>
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
-                    {/* <div className="slide_list_right">
-                        <button type="button" className="slide_btn_next" onClick={handleNextFirst} disabled={firstSlideIndex >= data.blackRecipes.length - visibleItems}>
-                            <span><FontAwesomeIcon icon={faChevronRight} /></span>
-                        </button>
-                    </div> */}
                 </div>
             </div>
-            
+
+
+            {/* 여기서부터 레시피 검색결과 및 카테고리 선택결과 목록 */}
             <div>
-                <RecipeMore/>
+                <div className='recipeMoreHeader'>
+                    <h3>총 3,670개의 레시피</h3>
+                </div>
+
+                <div className='recipeMoreContainer'>
+                    {/* 세부 아이템 컴포넌트를 불러옴 */}
+                    <RecipeMoreItem />
+                    <RecipeMoreItem />
+                    <RecipeMoreItem />
+                    <RecipeMoreItem />
+                    <RecipeMoreItem />
+                    <RecipeMoreItem />
+                    <RecipeMoreItem />
+                    <RecipeMoreItem />
+                </div>
             </div>
         </div>
     );

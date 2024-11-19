@@ -22,9 +22,22 @@
 }
 
 @media (max-width: 768px) {
+    .recipeMoreContainer{
+        margin: 1em 5em;
+    }
     .recipeMoreContainer > * {
         flex: 0 1 calc(50% - 1em); 
         max-width: calc(50% - 1em); 
+    }
+
+    .recipeMoreHeader{
+        margin: 3em 5em 0em 5em;
+    }
+
+    .site-camera-img img {
+        width: 3.5em;
+        margin-top: -0.4em;
+        margin-left: 0.5em;
     }
 }
 
@@ -37,11 +50,11 @@
 
 /* RecipeMoreItem ----------------------------------------- */
 .ItemContainer{
-    width: 18em;
+    width: 22em;
     height: auto;
 }
 #ItemPhoto{
-    width: 18em;
+    width: 22em;
     height: 13em;
     margin-bottom: 0.6em;
     border-radius: 10px;
