@@ -167,7 +167,7 @@ const Mypage = () => {
                     <input 
                         type="text" 
                         name="nickname" 
-                        value={userData.nickname || '찬란한 도넛'} 
+                        value={userData.nickname || '해맑은 새우 5664'} 
                         onChange={handleChange} 
                     />
                 </td>
