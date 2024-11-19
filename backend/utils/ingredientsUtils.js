@@ -54,6 +54,8 @@ const volumeUnits = {
   Ts: 15,
   ts: 5,
   소주잔: 50,
+  바퀴: 20,
+  국자: 60,
 };
 const weightUnits = {
   g: 1,
@@ -337,8 +339,8 @@ const convertQuantity = (amount, recipeUnit, userUnit) => {
 // 수량 변환
 const getValidUnit = (unit) => {
   // 빈값
-  if (!unit || typeof unit !== 'string') {
-    return '개';
+  if (!unit || typeof unit !== "string") {
+    return "개";
   }
 
   // 정해진 수량 단위는 그대로 return
@@ -349,18 +351,18 @@ const getValidUnit = (unit) => {
   // 소문자로 변환
   const normalizedUnit = unit.toLowerCase();
 
-  if (normalizedUnit === 'cc') {
-    return 'ml';
+  if (normalizedUnit === "cc") {
+    return "ml";
   }
 
   // 표준 단위 확인
-  if (['ml', 'l', 'g', 'kg'].includes(normalizedUnit)) {
+  if (["ml", "l", "g", "kg"].includes(normalizedUnit)) {
     return normalizedUnit;
   }
 
   // 그 이외
-  return '개';
-}
+  return "개";
+};
 
 // (() => {
 //   const itemName = "해찬들 찹쌀 태양초 고추장 1. 4kg+400g";

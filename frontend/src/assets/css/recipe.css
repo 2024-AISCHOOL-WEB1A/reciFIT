@@ -712,8 +712,6 @@ textarea#detectionFood[readonly] {
     background-color: transparent;
     font-size: 2.7em;
     height: 2em;
-    margin-left: 0.7em;
-    margin-bottom: 0.1em;
     cursor: pointer;
     color: #F05650;
 
@@ -761,11 +759,13 @@ textarea#detectionFood[readonly] {
     padding-right: 1px;
     padding-left: 1px;
     /* border-radius: 15px; */
+    max-height: 32em;
 }
 
 .instruct-container{
     display: flex;
     flex-direction: column;
+
 }
 
 /* 요리 제목 */
@@ -853,11 +853,11 @@ textarea#detectionFood[readonly] {
 
 @media (min-width: 1440px) and (max-width: 1920px) {
     .photo {
-        height: fit-content;
+        /* height: fit-content; */
     }
     .photo img {
         width: 35vw;
-        height: 40vh;
+        height: 100%;
     }
     .instruct-container{
         display: flex;
@@ -881,6 +881,7 @@ textarea#detectionFood[readonly] {
     .rowflex {
         height: 8em;
         margin: 5px 0;
+        width: 63.6em;
     
         border-top: 0.18em solid #131313;
         padding-top: 0.5%;
@@ -890,11 +891,11 @@ textarea#detectionFood[readonly] {
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
     .photo {
-        height: fit-content;
+        /* height: fit-content; */
     }
     .photo img {
         width: 35vw;
-        height: 40vh;
+        height: 100%;
     }
     .instruct-container{
         display: flex;
@@ -927,11 +928,11 @@ textarea#detectionFood[readonly] {
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
     .photo {
-        height: fit-content;
+        /* height: fit-content; */
     }
     .photo img {
         width: 35vw;
-        height: 40vh;
+        height: 100%;
     }
     .instruct-container{
         display: flex;
@@ -1129,6 +1130,11 @@ textarea#detectionFood[readonly] {
     margin-bottom: 5em;
 
     font-size: 1.4em;
+}
+
+#indexItem{
+    margin-bottom: 1em;
+    font-size: 1.1em;
 }
 
 

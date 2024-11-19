@@ -52,6 +52,19 @@
     margin: 0 auto;
     text-align: center;
 }
+.shared-title2 {
+    font-family: 'Pretendard-Regular';
+    margin-bottom: 1.5em;
+    color: #111111;
+    font-size: 1.20rem;
+    padding: 0 0.1em;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 2.5em;
+}
 
 .info-section,
 .my-uploads {
@@ -64,7 +77,18 @@
 
 .recipes-section,
 .receipts-section,
-.additional-section,
+.additional-section
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 17em;
+    border: 2px solid #ffffff; /* 테두리 색상 변경 */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 1.25em 0;
+    background-color: white; /* 배경색 흰색으로 변경 */
+}
 .env-section {
     display: flex;
     flex-direction: column;
@@ -226,4 +250,57 @@
 /* 내부 세로 경계선 제거 */
 .info-table td:not(:last-child) {
     border-right: none; /* 내부 세로 경계선 제거 */
+}
+.save-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; /* 버튼 상하 여백 */
+}
+
+.save-button {
+    background-color: #007BFF; /* 버튼 색상 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+
+.save-button:hover {
+    background-color: #0056b3; /* 호버 시 색상 */
+}
+/* 모달 배경 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 모달 콘텐츠 */
+.modal-content {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+/* 닫기 버튼 스타일 */
+.modal-content button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f4b057;
+    border: none;
+    cursor: pointer;
 }

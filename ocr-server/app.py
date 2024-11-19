@@ -1,4 +1,3 @@
-# app.py
 import os
 import uuid
 import time
@@ -20,16 +19,27 @@ SECRET_KEY = os.getenv("CLOVA_SECRET_KEY")
 API_URL = os.getenv("CLOVA_ENDPOINT")
 PORT = int(os.getenv("PORT", 8000))
 
-MONGODB_URI = os.getenv("MONGODB_URI")
-MONGODB_DB = os.getenv("MONGODB_DB")
+# MONGDO DB 환경 설정 변수
+MONGODB_URL = os.getenv('MONGODB_URL')
+MONGODB_PASSWORD = os.getenv('MONGODB_PASSWORD')
+MONGODB_PORT = os.getenv('MONGODB_PORT')
+MONGODB_USER = os.getenv('MONGODB_USER')
+MONGODB_DATABASENAME = os.getenv('MONGODB_DATABASENAME')
+# MONGODB_URI = f"mongodb://{MONGODB_USER}:{MONGODB_PASSWORD}@{MONGODB_URL}:{MONGODB_PORT}/{MONGODB_DATABASENAME}"
 
 app = FastAPI()
 
-# TODO : 몽고 DB 설정 다시 확인
-# MongoDB 클라이언트 설정
-# client = MongoClient(MONGODB_URI)
-# db = client[MONGODB_DB]
-# ocr_collection = db["ocr_results"]
+# 몽고 DB 연결
+# mongodb_client = MongoClient(MONGODB_URI)
+mongodb_client = MongoClient(
+    host=MONGODB_URL,
+    port=int(MONGODB_PORT),
+    username=MONGODB_USER,
+    password=MONGODB_PASSWORD,
+    authSource=MONGODB_DATABASENAME,
+)
+db = mongodb_client[MONGODB_DATABASENAME]
+collection = db['ocr_results']
 
 # 요청 데이터 모델 정의
 class OCRRequest(BaseModel):
@@ -62,19 +72,19 @@ async def perform_ocr(request: OCRRequest):
         headers = {'X-OCR-SECRET': SECRET_KEY}
 
         # OCR 요청 전송
-        response = requests.post(API_URL, headers=headers, data=payload, files=files)
+        response = requests.post(API_URL, headers=headers, data=payload, files=files, timeout=30)
 
         # 응답 처리
         if response.status_code == 200:
             ocr_results = response.json()
             
-            #  # MongoDB에 결과 저장
-            # ocr_record = {
-            #     "photoUrl": request.photoUrl,
-            #     "ocrResults": ocr_results,
-            #     "timestamp": datetime.now(timezone.utc)
-            # }
-            # ocr_collection.insert_one(ocr_record)
+             # MongoDB에 결과 저장
+            ocr_record = {
+                "photoUrl": request.photoUrl,
+                "ocrResults": ocr_results,
+                "timestamp": datetime.now(timezone.utc)
+            }
+            collection.insert_one(ocr_record)
             
             return ocr_results
         else:
@@ -86,6 +96,8 @@ async def perform_ocr(request: OCRRequest):
 # Uvicorn을 사용하여 서버 실행
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
+    # uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
+    uvicorn.run(app, host="127.0.0.1", port=PORT, reload=True)
+    
     # uvicorn app:app --reload 로 서버실행
     # python -m venv venv

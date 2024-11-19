@@ -1,4 +1,5 @@
 function normalizeString(str) {
+  if (!str) return str;
   return str.replace(/\s+/g, "");
 }
 
@@ -6,9 +7,9 @@ function normalizeString(str) {
 const toCamelCase = (obj) => {
   if (Array.isArray(obj)) {
     return obj.map((item) => toCamelCase(item));
-  } else if (obj !== null && obj.constructor === Object) {
+  } else if (typeof obj === "object" && obj !== null) {
     return Object.keys(obj).reduce((acc, key) => {
-      const camelKey = key.replace(/_([a-z])/g, (_, char) =>
+      const camelKey = key.replace(/_([a-zA-Z])/g, (_, char) =>
         char.toUpperCase()
       );
       acc[camelKey] = toCamelCase(obj[key]);
