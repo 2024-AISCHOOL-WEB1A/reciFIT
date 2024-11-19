@@ -41,12 +41,7 @@ const RecipeMain = () => {
     useEffect(() => {
         const bestRecipe = async () => {
             try {
-                const response = await apiAxios.get("/recipes", {
-                    params: {
-                        searchString: "감자",
-                    },
-                });
-                console.log("Response received:", response.data.recipes);
+                const response = await apiAxios.get("/recipes");
                 setRecipeBest(response.data.recipes);
             } catch (err) {
                 console.error("Error fetching recipe:", err.message);

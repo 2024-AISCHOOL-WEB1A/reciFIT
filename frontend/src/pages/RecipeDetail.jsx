@@ -93,10 +93,8 @@ const RecipeDetail = () => {
 
   return (
     <div id="recipe">
-      <div id="recipe-details-title">
-        <div id="recipe-details-goback" onClick={goBack}>
-          <FontAwesomeIcon icon={faAnglesLeft} />
-        </div>
+      <div id="recipe-details-goback" onClick={goBack}>
+        <FontAwesomeIcon icon={faAnglesLeft} />
       </div>
 
       <div className="detail-container">
@@ -122,7 +120,7 @@ const RecipeDetail = () => {
               <FontAwesomeIcon icon={faStar} />
               <div> {recipe?.ck_difficulty} 난이도</div>
             </div>
-            <div>
+            <div className="heart-div">
               <button className="heart-container" onClick={heartClick}>
                 <FontAwesomeIcon
                   icon={isHeartClicked ? faHeart : faRegularHeart}

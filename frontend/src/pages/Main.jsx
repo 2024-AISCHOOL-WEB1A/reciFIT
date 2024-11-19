@@ -120,7 +120,7 @@ const Main = () => {
                       style={{ backgroundImage: "url(/img/recipe_bg.jpg)" }}
                     ></span>
                   </div>
-                  <div className="MainBrandBannerText">레시피</div>
+                  <div className="MainBrandBannerText">ㅤ레시피</div>
                 </Link>
               </div>
 
