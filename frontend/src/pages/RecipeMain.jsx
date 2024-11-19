@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
+import RecipeMore from "../components/RecipeMore";
 
 const RecipeMain = () => {
     const [recipeData, setRecipeData] = useState(null);
@@ -34,20 +35,6 @@ const RecipeMain = () => {
             }
         };
         fetchRecipe();
-    }, []);
-
-
-    // 두번째 슬라이드 -> 카테고리 선택을 통한 슬라이드 변경
-    useEffect(() => {
-        const bestRecipe = async () => {
-            try {
-                const response = await apiAxios.get("/recipes");
-                setRecipeBest(response.data.recipes);
-            } catch (err) {
-                console.error("Error fetching recipe:", err.message);
-            }
-        };
-        bestRecipe();
     }, []);
 
     // 슬라이드 구현을 위한 부분
@@ -74,29 +61,6 @@ const RecipeMain = () => {
             setFirstSlideIndex(0); // 첫 번째 항목으로 이동
         } else {
             setFirstSlideIndex(firstSlideIndex + 1); // 일반적인 다음 슬라이드
-        }
-    };
-
-    // 두 번째 슬라이드
-    const [secondSlideIndex, setSecondSlideIndex] = useState(0);
-    const handlePrevSecond = () => {
-        console.log("prev")
-
-        // 처음 항목에서 이전 버튼을 누르면 마지막 항목으로 이동
-        if (secondSlideIndex === 0) {
-            setSecondSlideIndex(recipeBest.length - visibleItems); // 마지막 항목으로 이동
-        } else {
-            setSecondSlideIndex(secondSlideIndex - 1); 
-        }
-    };
-    const handleNextSecond = () => {
-        console.log("next")
-
-        // 마지막 항목에서 다음 버튼을 누르면 첫 번째 항목으로 이동
-        if (secondSlideIndex >= recipeBest.length - visibleItems) {
-            setSecondSlideIndex(0); 
-        } else {
-            setSecondSlideIndex(secondSlideIndex + 1); 
         }
     };
 
@@ -416,80 +380,9 @@ const RecipeMain = () => {
                     </div> */}
                 </div>
             </div>
-
-            <div className="second-listItem">
-                <div className="list_content">
-                    <h3 className="list_content_title">
-                        오늘 뭐 먹지? BEST
-                        <span>
-                            <span>요</span>
-                            <span>리</span>
-                            <span>필</span>
-                            <span>살</span>
-                            <span>기</span>
-                        </span>
-                        ✨
-                    </h3>
-                    <div className="list_content_btn_div">
-                        <Link to="recipeList" className="list_content_btn">
-                            more
-                        </Link>
-                    </div>
-                </div>
-                <div className="recipeList-container">
-                    <div className="slide_list_left">
-                        <button
-                            type="button"
-                            className="slide_btn_prev"
-                            onClick={handlePrevSecond}
-                            // disabled={secondSlideIndex === 0}
-                        >
-                            <span>
-                                <FontAwesomeIcon icon={faChevronLeft} />
-                            </span>
-                        </button>
-                    </div>
-                    <ul className="slickList">
-                        {recipeBest && recipeBest.length > 0 ? (
-                            recipeBest
-                                .slice(secondSlideIndex, secondSlideIndex + visibleItems)
-                                .map((recipe) => (
-                                    <li key={recipe.rcp_idx} className="slide_list_li">
-                                        <Link
-                                            to={`/recipe/${recipe.rcp_idx}`}
-                                            className="slide_list_link"
-                                            tabIndex="-1"
-                                        >
-                                            <div className="slide_list_thumb">
-                                                <img src={recipe.ck_photo_url} alt={recipe.ck_name} />
-                                            </div>
-                                            <div className="slide_list_caption">
-                                                <div className="slide_list_caption_tit">
-                                                    {recipe.ck_name}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                ))
-                        ) : (
-                            <p>No recipes available</p>
-                        )}
-                    </ul>
-                    <div className="slide_list_right">
-                        <button
-                            type="button"
-                            className="slide_btn_next"
-                            onClick={handleNextSecond}
-                            // disabled={
-                            //     secondSlideIndex >= recipeBest.length - visibleItems
-                            // }
-                        >
-                            <span>
-                                <FontAwesomeIcon icon={faChevronRight} />
-                            </span>
-                        </button>
-                    </div>
-                </div>
+            
+            <div>
+                <RecipeMore/>
             </div>
         </div>
     );

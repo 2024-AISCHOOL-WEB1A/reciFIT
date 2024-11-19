@@ -48,6 +48,7 @@
 
 /* 레이아웃 설정 */
 .recipeMain-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,25 +56,10 @@
     /* 좌우 여백 제거 */
 }
 
-
-/* ------------ youtube 동영상------------------- */
-.youtubeVideo {
-    position: relative;
-    width: 70%;
-    height: 25em;
-    margin-bottom: 2em;
-    /* 검색창과의 간격 조정 */
+@media (max-width: 767px){
+    .recipeMain-container{
+    }
 }
-
-.youtubeVideo iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-
 
 /* ------------------------ 레시피 슬라이드 부분 시작 -------------------- */
 /* 슬라이드 위 제목 부분 */
