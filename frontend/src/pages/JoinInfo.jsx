@@ -11,7 +11,24 @@ const JoinInfo = () => {
   const [dislikedIngredients, setDislikedIngredients] = useState("");
   const [nonConsumableIngredients, setNonConsumableIngredients] = useState("");
 
-  const postAdditionalUserDate = async () => {
+  const handleSkip = async () => {
+    await swalModal.fire({
+      title: "회원 가입 완료",
+      text: "회원 가입을 축하드립니다!",
+      icon: "success",
+      confirmButtonText: "확인",
+      didClose: () => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "instant",
+        });
+      },
+    });
+    navigate("/");
+  };
+
+  const handleAdditionalData = async () => {
     let isSuccess = false;
 
     // 모든 항목이 비어 있는 경우
@@ -57,7 +74,7 @@ const JoinInfo = () => {
     // 성공
     if (isSuccess) {
       await swalModal.fire({
-        title: "회원 가입 성공",
+        title: "회원 가입 완료",
         text: "회원 가입을 축하드립니다!",
         icon: "success",
         confirmButtonText: "확인",
@@ -74,51 +91,74 @@ const JoinInfo = () => {
   };
 
   return (
-    <div>
+    <div className="info-wrapper">
       <div className="info-container">
         <div className="info-text">추가정보 입력</div>
 
-        <div className="like-box">
-          <span className="like-text">선호</span>
+        <div className="info-box">
+          <span className="info-input-div">선호 재료</span>
           <input
             type="text"
-            className="info-like"
+            className="info-input"
             placeholder="해당 재료가 포함된 레시피를 우선적으로 추천합니다! (ex. 양파, 감자, 당근)"
             onChange={(e) => {
               setPreferredIngredient(e.target.value);
             }}
           />
+          <textarea
+            className="info-textarea-input"
+            placeholder="해당 재료가 포함된 레시피를 우선적으로 추천합니다! (ex. 양파, 감자, 당근)"
+            onChange={(e) => {
+              setPreferredIngredient(e.target.value);
+            }}
+          ></textarea>
         </div>
 
-        <div className="dislike-box">
-          <div className="dislike-text">비선호</div>
+        <div className="info-box">
+          <div className="info-input-div">비선호 재료</div>
           <input
             type="text"
-            className="info-dislike"
+            className="info-input"
             placeholder="해당 재료가 포함된 레시피를 비교적 적게 추천합니다! (ex. 양파, 감자, 당근)"
             onChange={(e) => {
               setDislikedIngredients(e.target.value);
             }}
           />
+          <textarea
+            className="info-textarea-input"
+            placeholder="해당 재료가 포함된 레시피를 비교적 적게 추천합니다! (ex. 양파, 감자, 당근)"
+            onChange={(e) => {
+              setDislikedIngredients(e.target.value);
+            }}
+          ></textarea>
         </div>
 
-        <div className="allergy-box">
-          <div className="allergy-text">제외</div>
+        <div className="info-box">
+          <div className="info-input-div">제외 재료</div>
           <input
             type="text"
-            className="info-allergy"
+            className="info-input"
             placeholder="해당 재료가 포함된 레시피는 추천에서 제외됩니다! (ex. 양파, 감자, 당근)"
             onChange={(e) => {
               setNonConsumableIngredients(e.target.value);
             }}
           />
+          <textarea
+            className="info-textarea-input"
+            placeholder="해당 재료가 포함된 레시피는 추천에서 제외됩니다! (ex. 양파, 감자, 당근)"
+            onChange={(e) => {
+              setDislikedIngredients(e.target.value);
+            }}
+          ></textarea>
         </div>
-      </div>
-
-      <div className="info-submitContainer">
-        <button className="info-submit" onClick={postAdditionalUserDate}>
-          확인
-        </button>
+        <div className="info-submitContainer">
+          <button className="info-submit" onClick={handleAdditionalData}>
+            확인
+          </button>
+          <button className="info-submit" onClick={handleSkip}>
+            건너뛰기
+          </button>
+        </div>
       </div>
     </div>
   );
