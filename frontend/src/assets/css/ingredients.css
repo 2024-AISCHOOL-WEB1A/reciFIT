@@ -25,10 +25,11 @@
     margin: 8%;
 }
 
-.ingre-container span{
+.ingre-container span {
     display: inline-block;
     font-size: 1.45rem;
-    color: #ff9500;;
+    color: #ff9500;
+    ;
     font-family: 'SBAggroB';
     padding: 0 0.1em;
 }
@@ -61,7 +62,7 @@
 .ingre-recipe-item {
     width: 100%;
     text-align: center;
-    margin: 0 2% 2% 0;
+    margin: 2%;
 }
 
 .ingre-recipe-image {
@@ -80,19 +81,27 @@
 
 .ingre-left-button,
 .ingre-right-button {
-    background-color: rgb(255, 190, 140);
-    color: white;
+    background: none;
     border: none;
-    padding: 10px;
     cursor: pointer;
-    font-size: 18px;
-    border-radius: 5px;
-    margin: 0 10px;
+    padding: 0;
 }
 
-.ingre-left-button:disabled,
-.ingre-left-button:disabled {
-    background-color: #ddd;
+.ingre-left-button:hover,
+.ingre-right-button:hover {
+    color: #f4b057;
+}
+
+.ingre-left-button span,
+.ingre-right-button span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em;
+    margin-right: 0.2em;
+    font-size: 5em;
+    color: #685d5d;
+
 }
 
 
@@ -149,7 +158,7 @@
     flex-direction: row;
 }
 
-.ingre-button-container button{
+.ingre-button-container button {
     width: 5em;
     height: 4em;
     border-radius: 10px;
@@ -158,7 +167,7 @@
     margin-left: 1%;
 }
 
-.ingre-button-container button:hover{
+.ingre-button-container button:hover {
     background-color: #ff9500
 }
 
@@ -207,9 +216,48 @@
     flex-direction: row;
 }
 
+.ingre-circle {
+    margin-right: 100%;
+}
 
 @media screen and (max-width: 767px) and (min-width: 1px) {
-    .ingre-button-container button:hover{
-        background-color: #ff9500
+
+    .ingre-left-button span,
+    .ingre-right-button span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10%;
+        width: auto;
+        margin-right: 0.2em;
+        font-size: 5em;
+        color: #685d5d;
+    }
+
+    .ingre-recipe-name {
+        margin-top: 10px;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    .ingre-container h3 {
+        font-family: 'SBAggroB';
+        font-size: 1.3rem;
+        margin-left: 5%;
+        width: 95%;
+    }
+
+    .ingre-container span {
+        display: inline-block;
+        font-size: 1.4rem;
+        color: #ff9500;
+        ;
+        font-family: 'SBAggroB';
+        padding: 0 0.1em;
+    }
+
+    .ingre-button-container button {
+        width: 4em;
+        height: 3em;
     }
 }
