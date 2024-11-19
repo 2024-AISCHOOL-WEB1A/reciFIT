@@ -4,21 +4,38 @@ import data from '../data/recipesData';
 import initialReceiptData from '../json/receiptData.json';
 import swalModal from "../utils/swalModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDeleteLeft, faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faDeleteLeft, faCircle, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { isValidDate } from "../utils/validation";
 import { Navigate } from 'react-router-dom';
 import { apiAxios } from '../utils/axiosUtils';
 import _ from "lodash";
-
-
-
+import { useSelector } from 'react-redux';
 
 
 const Ingredients = () => {
   // 하단 슬라이드 -------------------------------------------------
   const [currentIndex, setCurrentIndex] = useState(0);
-  const recipesPerPage = 4; // 1열로 보여줄 항목의 수
+  const [recipesPerPage, setRecipesPerPage] = useState(4); // 1열로 보여줄 항목의 수
 
+  // width 에 따라 리스트 개수 설정
+  useEffect(() => {
+    const updateRecipesPerPage = () => {
+      if (window.innerWidth <= 767) {
+        setRecipesPerPage(1);
+      } else {
+        setRecipesPerPage(4);
+      }
+    };
+  
+    updateRecipesPerPage(); // 초기 실행
+    window.addEventListener('resize', updateRecipesPerPage);
+  
+    return () => {
+      window.removeEventListener('resize', updateRecipesPerPage);
+    };
+  }, []);
+  
+  // 왼, 오 버튼
   const handleNext = () => {
     if (currentIndex < data.blackRecipes.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -113,6 +130,7 @@ const Ingredients = () => {
 
   // 영수증 페이지에서 가져온 코드
 
+  const user = useSelector((state) => state.user.user);
   const [isEditing, setIsEditing] = useState(false);
   const [receiptData, setReceiptData] = useState(initialReceiptData)
 
@@ -178,31 +196,31 @@ const Ingredients = () => {
       items: updatedItems,
     }));
   };
-  
-    // 1줄 추가 핸들러
-    const handleAddItem = () => {
-      const newItem = {
-        calories: "",
-        carbohydrates: "",
-        expiredDate: "",
-        fat: "",
-        fiber: "",
-        ingreIdx: null,
-        ingreName: "",
-        protein: "",
-        purchaseDate: "",
-        quantity: "",
-        totalQuantity: "",
-        unit: "",
-      };
-  
-      const updatedItems = [...receiptData.items, newItem];
-      setReceiptData((prev) => ({
-        ...prev,
-        items: updatedItems,
-      }));
+
+  // 1줄 추가 핸들러
+  const handleAddItem = () => {
+    const newItem = {
+      calories: "",
+      carbohydrates: "",
+      expiredDate: "",
+      fat: "",
+      fiber: "",
+      ingreIdx: null,
+      ingreName: "",
+      protein: "",
+      purchaseDate: "",
+      quantity: "",
+      totalQuantity: "",
+      unit: "",
     };
-  
+
+    const updatedItems = [...receiptData.items, newItem];
+    setReceiptData((prev) => ({
+      ...prev,
+      items: updatedItems,
+    }));
+  };
+
   // 편집 버튼
   const handleEditButton = () => {
     // 편집모드로 들어간다.
@@ -373,9 +391,9 @@ const Ingredients = () => {
     }
   };
 
-  console.log(receiptData);  
+  console.log(receiptData);
   console.log(receiptData.items);
-  
+
 
   return (
 
@@ -386,19 +404,19 @@ const Ingredients = () => {
       <div className='ingre-my'>
 
         <div className='ingre-button-container'>
-          <h3> [닉네임]님의 <span>재료</span> 🥩 </h3>
+          <h3> {`${user?.userName}님`}의 <span>재료</span> 🥩 </h3>
           <button onClick={handleEditButton} className='ingre-button'>
             {isEditing ? '취소' : '편집'}
           </button>
           {isEditing && (
-    <button
-      type="button"
-      className="ingre-result-ok-button"
-      onClick={handleOkButton}
-    >
-      완료
-    </button>
-  )}
+            <button
+              type="button"
+              className="ingre-result-ok-button"
+              onClick={handleOkButton}
+            >
+              완료
+            </button>
+          )}
         </div>
 
         {/* 재료 리스트 */}
@@ -479,35 +497,35 @@ const Ingredients = () => {
                   </td>
 
                   <td>
-                  {isEditing ? (
-                        <input
-                          style={{ textAlign: "right" }}
-                          type="text"
-                          name="expiredDate"
-                          value={item?.purchaseDate}
-                          onChange={(e) =>
-                            handleDateChange(index, e.target.value)
-                          }
-                        />
-                      ) : (
-                        item?.purchaseDate
-                      )}
+                    {isEditing ? (
+                      <input
+                        style={{ textAlign: "right" }}
+                        type="text"
+                        name="expiredDate"
+                        value={item?.purchaseDate}
+                        onChange={(e) =>
+                          handleDateChange(index, e.target.value)
+                        }
+                      />
+                    ) : (
+                      item?.purchaseDate
+                    )}
                   </td>
 
                   <td>
-                  {isEditing ? (
-                        <input
-                          style={{ textAlign: "right" }}
-                          type="text"
-                          name="expiredDate"
-                          value={item?.expiredDate}
-                          onChange={(e) =>
-                            handleDateChange(index, e.target.value)
-                          }
-                        />
-                      ) : (
-                        item?.expiredDate
-                      )}
+                    {isEditing ? (
+                      <input
+                        style={{ textAlign: "right" }}
+                        type="text"
+                        name="expiredDate"
+                        value={item?.expiredDate}
+                        onChange={(e) =>
+                          handleDateChange(index, e.target.value)
+                        }
+                      />
+                    ) : (
+                      item?.expiredDate
+                    )}
                   </td>
 
                   <td className='ingre-status-td'>
@@ -518,7 +536,8 @@ const Ingredients = () => {
 
                   <td>
                     <div className='ingre-per-status'>
-                      {getStatusIcon(item.percentage)} {String(item.percentage).padStart(2, '0')}%
+                      <div className='ingre-circle'>{getStatusIcon(item.percentage)}</div>
+                      <div>{String(item.percentage).padStart(2, '0')}%</div>
                     </div>
                   </td>
 
@@ -540,12 +559,14 @@ const Ingredients = () => {
       {/* 최상단 슬라이드 */}
       {!isEditing && (
         <div>
-          <h3>이건 어때요? [닉네임]님에게 <span>F</span><span>I</span><span>T</span>한 레시피 👀</h3>
+          <h3>{`${user?.userName}님`}에게 <span>F</span><span>I</span><span>T</span>한 레시피 👀</h3>
           <div className='ingre-recipe'>
             <div className='ingre-recipe-list'>
               {/* 보유 식재료로 만들 수 있는 레시피 슬라이드 */}
               <button onClick={handlePrevious} disabled={currentIndex === 0} className='ingre-left-button'>
-                {"<"}
+                <span>
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </span>
               </button>
 
               <div className="ingre-recipe-list">
@@ -560,7 +581,9 @@ const Ingredients = () => {
               </div>
 
               <button onClick={handleNext} disabled={currentIndex >= data.blackRecipes.length - recipesPerPage} className='ingre-right-button'>
-                {">"}
+                <span>
+                  <FontAwesomeIcon icon={faChevronRight} />
+                </span>
               </button>
 
             </div>
