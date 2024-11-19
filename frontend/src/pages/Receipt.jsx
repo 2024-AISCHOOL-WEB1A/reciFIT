@@ -104,6 +104,7 @@ const Receipt = () => {
   //   },
   // });
   const [receiptData, setReceiptData] = useState(null);
+  
   // 영수증 원본 데이터 저장
   const [originalData, setOriginalData] = useState(
     () => _.cloneDeep(receiptData) || null

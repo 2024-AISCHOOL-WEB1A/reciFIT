@@ -3,7 +3,7 @@
     "price":"5000",
     "quantity":"500",
     "unit":"ml",
-    "expiredDate":"2024-11-12",
+    "expiredDate":"2024-12-14",
     "purchaseDate":"2024-11-01"
 },
 {
@@ -11,7 +11,7 @@
     "price":"1500",
     "quantity":"500",
     "unit":"ml",
-    "expiredDate":"2024-11-12",
+    "expiredDate":"2024-12-01",
     "purchaseDate":"2024-11-01"
 },
 {
@@ -19,7 +19,7 @@
     "price":"1900",
     "quantity":"20",
     "unit":"g",
-    "expiredDate":"2024-11-12",
+    "expiredDate":"2024-11-19",
     "purchaseDate":"2024-11-01"
 },
 {
@@ -27,7 +27,7 @@
     "price":"7980",
     "quantity":"1800",
     "unit":"g",
-    "expiredDate":"2024-11-12",
+    "expiredDate":"2024-12-24",
     "purchaseDate":"2024-11-01"
 }
 ]
