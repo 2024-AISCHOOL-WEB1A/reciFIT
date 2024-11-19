@@ -15,13 +15,7 @@ import _ from "lodash";
 
 
 const Ingredients = () => {
-
-  // 슬라이드용
-  const [isEditing, setIsEditing] = useState(false);
-  // const handleButtonClick = () => {
-  //   setIsEditing(!isEditing);
-  // };
-
+  // 하단 슬라이드 -------------------------------------------------
   const [currentIndex, setCurrentIndex] = useState(0);
   const recipesPerPage = 4; // 1열로 보여줄 항목의 수
 
@@ -38,14 +32,14 @@ const Ingredients = () => {
   };
 
 
+  // 상단 재료리스트 -------------------------------------------------
 
-  // 퍼센트 계산함수
+  // 퍼센트 계산
   const [percentages, setPercentages] = useState([]);
 
   useEffect(() => {
     calculatePercentages();
   }, []); // 컴포넌트가 렌더링될 때 자동 실행
-
 
   // 유통기한 계산
   const calculatePercentages = () => {
@@ -71,7 +65,7 @@ const Ingredients = () => {
   };
 
   // 삭제 핸들
-  const handleDelete = (name) => {
+  const handleDelete = (ingrename) => {
     swalModal.fire({
       title: "항목 삭제",
       text: "삭제하시겠습니까?",
@@ -84,12 +78,11 @@ const Ingredients = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // 승인 버튼을 눌렀을 때만 삭제 실행
-        setPercentages(percentages.filter((item) => item.name !== name));
+        setPercentages(percentages.filter((item) => item.ingreName !== ingrename));
         swalModal.fire('삭제되었습니다.', '', 'success');
       }
     });
   };
-
 
   // 날짜 오름차순
   const [sortOrder, setSortOrder] = useState("asc"); // 정렬 방향
@@ -105,8 +98,7 @@ const Ingredients = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
-
-  // 상태 아이콘 계산 함수
+  // 상태 아이콘
   const getStatusIcon = (percentage) => {
     if (percentage >= 50) {
       return <FontAwesomeIcon icon={faCircle} style={{ color: '#06FF00' }} />; // 50 이상이면 초록색
@@ -117,17 +109,19 @@ const Ingredients = () => {
     }
   };
 
+  //----------------------------------------------------------------------------------------
 
+  // 영수증 페이지에서 가져온 코드
+
+  const [isEditing, setIsEditing] = useState(false);
   const [receiptData, setReceiptData] = useState(initialReceiptData)
+
   // 영수증 원본 데이터 저장
   const [originalData, setOriginalData] = useState(
     () => _.cloneDeep(receiptData) || null
   );
 
-  // 영수증 스크롤 타겟
-  const targetRef = useRef(null);
-
-
+  // 편집 핸들러
   const handleInputChange = (index, name, value) => {
     const updatedItems = [...receiptData.items];
     updatedItems[index][name] = value;
@@ -184,7 +178,31 @@ const Ingredients = () => {
       items: updatedItems,
     }));
   };
-
+  
+    // 1줄 추가 핸들러
+    const handleAddItem = () => {
+      const newItem = {
+        calories: "",
+        carbohydrates: "",
+        expiredDate: "",
+        fat: "",
+        fiber: "",
+        ingreIdx: null,
+        ingreName: "",
+        protein: "",
+        purchaseDate: "",
+        quantity: "",
+        totalQuantity: "",
+        unit: "",
+      };
+  
+      const updatedItems = [...receiptData.items, newItem];
+      setReceiptData((prev) => ({
+        ...prev,
+        items: updatedItems,
+      }));
+    };
+  
   // 편집 버튼
   const handleEditButton = () => {
     // 편집모드로 들어간다.
@@ -200,36 +218,27 @@ const Ingredients = () => {
       // 편집모드로 변경되면서 최상단으로 이동
       // 여긴 아무것도 안적어도 된다
     }
-
-    // 스크롤 이동
-    const offset = 30;
-    const element = targetRef.current;
-
-    const yPosition =
-    element.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top: yPosition, behavior: "smooth" });
-    // targetRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   // 완료 버튼
   const handleOkButton = async () => {
     if (isEditing) {
       // // 유효성 검사 1: 재료 이름 검사 (빈값 있으면 경고)
-      // const invalidNames = receiptData.items.filter(
-      //   (item) => !item.ingreName || item.ingreName.trim() === ""
-      // );
-      // console.log(invalidNames);
+      const invalidNames = receiptData.items.filter(
+        (item) => !item.ingreName || item.ingreName.trim() === ""
+      );
+      console.log(invalidNames);
 
-      // if (invalidNames.length > 0) {
-      //   // 에러 경고창 띄우기
-      //   swalModal.fire({
-      //     title: "상품명 에러",
-      //     text: "상품 이름을 반드시 입력해야 합니다.",
-      //     icon: "error",
-      //     confirmButtonText: "확인",
-      //   });
-      //   return;
-      // }
+      if (invalidNames.length > 0) {
+        // 에러 경고창 띄우기
+        swalModal.fire({
+          title: "상품명 에러",
+          text: "상품 이름을 반드시 입력해야 합니다.",
+          icon: "error",
+          confirmButtonText: "확인",
+        });
+        return;
+      }
 
       // 유효성 검사 2: 수량 검사 (빈값이 있으면 경고)
       const invalidQuantities = receiptData.items.filter(
@@ -279,13 +288,6 @@ const Ingredients = () => {
       // 편집 모드 완료
       setIsEditing(!isEditing);
 
-      // 스크롤 이동
-      const offset = 30;
-      const element = targetRef.current;
-      const yPosition =
-        element.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: yPosition, behavior: "smooth" });
-
       // 편집 모드 완료 기능
       console.log("완료되었습니다.");
       setOriginalData(_.cloneDeep(receiptData));
@@ -311,11 +313,10 @@ const Ingredients = () => {
         const res = await apiAxios.post("/users/ingredients", {
           ingredients,
         });
-        // console.log(res);
 
         await swalModal.fire({
-          title: "재고 등록 성공",
-          text: "재고 등록이 정상적으로 처리되었습니다.",
+          title: "재고 수정 성공",
+          text: "재고 수정이 정상적으로 처리되었습니다.",
           icon: "success",
           confirmButtonText: "확인",
           didClose: () => {
@@ -345,7 +346,7 @@ const Ingredients = () => {
             const ingreName = err.response.data?.ingreName || null;
             if (ingreName) {
               return await swalModal.fire({
-                title: "재고 등록 실패",
+                title: "재고 수정 실패",
                 text: `${ingreName}은(는) 지원하지 않는 재료입니다.`,
                 icon: "error",
                 confirmButtonText: "확인",
@@ -354,7 +355,7 @@ const Ingredients = () => {
           } else if (statusCode === 400) {
             if (message === "Invalid date format. Use YYYY-MM-DD") {
               return await swalModal.fire({
-                title: "재고 등록 실패",
+                title: "재고 수정 실패",
                 text: "입력하신 날짜의 형식이 잘못되었습니다.",
                 icon: "error",
                 confirmButtonText: "확인",
@@ -363,8 +364,8 @@ const Ingredients = () => {
           }
         }
         return await swalModal.fire({
-          title: "재고 등록 실패",
-          text: "재고 등록에 실패했습니다. 관리자에게 문의바랍니다.",
+          title: "재고 수정 실패",
+          text: "재고 수정에 실패했습니다. 관리자에게 문의바랍니다.",
           icon: "error",
           confirmButtonText: "확인",
         });
@@ -372,7 +373,9 @@ const Ingredients = () => {
     }
   };
 
-
+  console.log(receiptData);  
+  console.log(receiptData.items);
+  
 
   return (
 
@@ -383,17 +386,19 @@ const Ingredients = () => {
       <div className='ingre-my'>
 
         <div className='ingre-button-container'>
-          <h3> [닉네임]님의 재료 🥩 </h3>
+          <h3> [닉네임]님의 <span>재료</span> 🥩 </h3>
           <button onClick={handleEditButton} className='ingre-button'>
-            {isEditing ? '취소' : '수정'}
+            {isEditing ? '취소' : '편집'}
           </button>
-          <button
-            type="button"
-            className="ingre-result-ok-button"
-            onClick={handleOkButton}
-          >
-            완료
-          </button>
+          {isEditing && (
+    <button
+      type="button"
+      className="ingre-result-ok-button"
+      onClick={handleOkButton}
+    >
+      완료
+    </button>
+  )}
         </div>
 
         {/* 재료 리스트 */}
@@ -404,7 +409,7 @@ const Ingredients = () => {
             <thead className='ingre-table-head'>
               <tr>
                 <th style={{ width: "15%" }}>상품명</th>
-                <th style={{ width: "8%" }}>수량</th>
+                <th style={{ width: "10%" }}>수량</th>
                 <th style={{ width: "15%" }}>구매일</th>
                 <th style={{ width: "15%", cursor: "pointer" }} onClick={sortByDate}>
                   유통기한 {sortOrder === "asc" ? "▲" : "▼"}
@@ -417,42 +422,125 @@ const Ingredients = () => {
 
             {/* Body */}
             <tbody className='ingre-table-body'>
-              {percentages.map((item) => (
-                <tr key={item.name}>
-                  <td>{item.name}</td>
-                  <td>{item.quantity}{item.unit}</td>
-                  <td>{item.purchaseDate}</td>
-                  <td>{item.expiredDate}</td>
+
+              {percentages.map((item, index) => (
+                <tr key={index}>
+                  <td>{isEditing ? (
+                    <input
+                      type="text"
+                      name="ingreName"
+                      value={item?.ingreName}
+                      onChange={(e) =>
+                        handleInputChange(
+                          index,
+                          e.target.name,
+                          e.target.value
+                        )
+                      }
+                    />
+                  ) : (
+                    item?.ingreName
+                  )}
+                  </td>
+
+                  <td>
+                    {isEditing ? (
+                      <>
+                        <input
+                          style={{
+                            textAlign: "right",
+                            width: "65%",
+                            marginRight: "5%",
+                          }}
+                          type="text"
+                          name="quantity"
+                          value={item?.quantity}
+                          onChange={(e) =>
+                            handleQuantityChange(index, e.target.value)
+                          }
+                        />
+                        <input
+                          style={{ textAlign: "right", width: "25%" }}
+                          type="text"
+                          name="unit"
+                          value={item?.unit}
+                          onChange={(e) =>
+                            handleInputChange(
+                              index,
+                              e.target.name,
+                              e.target.value
+                            )
+                          }
+                        />
+                      </>
+                    ) : (
+                      `${item?.quantity}${item?.unit}`
+                    )}
+                  </td>
+
+                  <td>
+                  {isEditing ? (
+                        <input
+                          style={{ textAlign: "right" }}
+                          type="text"
+                          name="expiredDate"
+                          value={item?.purchaseDate}
+                          onChange={(e) =>
+                            handleDateChange(index, e.target.value)
+                          }
+                        />
+                      ) : (
+                        item?.purchaseDate
+                      )}
+                  </td>
+
+                  <td>
+                  {isEditing ? (
+                        <input
+                          style={{ textAlign: "right" }}
+                          type="text"
+                          name="expiredDate"
+                          value={item?.expiredDate}
+                          onChange={(e) =>
+                            handleDateChange(index, e.target.value)
+                          }
+                        />
+                      ) : (
+                        item?.expiredDate
+                      )}
+                  </td>
+
                   <td className='ingre-status-td'>
                     <div className='ingre-per-background'>
                       <div className='ingre-per-bar' style={{ width: `${item.percentage}%` }}></div>
                     </div>
                   </td>
+
                   <td>
                     <div className='ingre-per-status'>
                       {getStatusIcon(item.percentage)} {String(item.percentage).padStart(2, '0')}%
                     </div>
                   </td>
-                  <td onClick={() => handleDelete(item.name)}
+
+                  <td onClick={() => handleDelete(item.ingreName)}
                     className="ingre-delete">
                     <FontAwesomeIcon
                       icon={faDeleteLeft}
                     />
                   </td>
+
                 </tr>
               ))}
             </tbody>
 
           </table>
-
-          {/* <button onClick={HandleCheck}> 확인용 </button> */}
         </div>
       </div>
 
       {/* 최상단 슬라이드 */}
       {!isEditing && (
         <div>
-          <h3>[닉네임]님에게 FIT한 레시피 👀</h3>
+          <h3>이건 어때요? [닉네임]님에게 <span>F</span><span>I</span><span>T</span>한 레시피 👀</h3>
           <div className='ingre-recipe'>
             <div className='ingre-recipe-list'>
               {/* 보유 식재료로 만들 수 있는 레시피 슬라이드 */}
