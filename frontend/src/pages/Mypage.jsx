@@ -134,11 +134,22 @@ const Mypage = () => {
       }
     };
 
+    const fetchAllData = async () => {
+      try {
+        const [userData, favoriteData, environmentData, receiptData] =
+          await Promise.all([
+            fetchUserData(),
+            fetchFavoriteData(),
+            fetchEnviornmentData(),
+            fetchReceiptData(),
+          ]);
+      } catch (err) {
+        console.error("데이터 가져오기 실패", err);
+      }
+    };
+
     if (isMobile) {
-      fetchUserData();
-      fetchFavoriteData();
-      fetchEnviornmentData();
-      fetchReceiptData();
+      fetchAllData();
     } else if (tab === "user") {
       fetchUserData();
     } else if (tab === "recipe") {
@@ -275,7 +286,7 @@ const Mypage = () => {
           </button>
         </div>
         {/* 회원 정보 */}
-        {tab === "user" && userData && (
+        {(tab === "user" || isMobile) && userData && (
           <div className="my-page-section-container">
             <div className="my-page-section-title">
               <span>회원 정보</span>
@@ -288,7 +299,7 @@ const Mypage = () => {
                     <td>{userData?.oauthEmail}</td>
                   </tr>
                   <tr>
-                    <td>소셜 로그인 서비스</td>
+                    <td>소셜 로그인</td>
                     <td>{userData?.oauthProvider}</td>
                   </tr>
                   <tr>
@@ -380,8 +391,10 @@ const Mypage = () => {
           </div>
         )}
 
+        <hr className="my-page-divided-line" />
+
         {/* 레시피 즐겨찾기 */}
-        {tab === "recipe" && favoriteData && (
+        {(tab === "recipe" || isMobile) && favoriteData && (
           <div className="my-page-section-container">
             <div className="my-page-section-title">
               <span>레시피 즐겨찾기</span>
@@ -394,8 +407,10 @@ const Mypage = () => {
           </div>
         )}
 
+        <hr className="my-page-divided-line" />
+
         {/* 환경점수 */}
-        {tab === "env-score" && envScoreData && (
+        {(tab === "env-score" || isMobile) && envScoreData && (
           <div className="my-page-section-container">
             <div className="my-page-section-title">
               <span>환경 점수</span>
@@ -470,8 +485,10 @@ const Mypage = () => {
           </div>
         )}
 
+        <hr className="my-page-divided-line" />
+
         {/* 영수증 분석 내역 */}
-        {tab === "receipt" && (
+        {(tab === "receipt" || isMobile) && (
           <div className="my-page-section-container">
             <div className="my-page-section-title">
               <span>영수증 분석 내역</span>
@@ -480,7 +497,7 @@ const Mypage = () => {
               <table>
                 <thead>
                   <tr>
-                    <th>영수증 이미지</th>
+                    <th>영수증{isMobile ? <br /> : " "}이미지</th>
                     <th>구매 매장</th>
                     <th>구매일</th>
                   </tr>
