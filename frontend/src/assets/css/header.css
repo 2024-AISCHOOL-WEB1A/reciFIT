@@ -312,8 +312,8 @@
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  width: 186px;
-  z-index: 5;
+  width: 15em;
+  z-index: 10;
   cursor: pointer;
   user-select: none;
 }
@@ -330,7 +330,7 @@
 
 .SiteFamily-bar:after {
   content: "";
-  width: 186px;
+  width: 15em;
   height: 3px;
   background-image: url(../images/bg_underline.png);
   background-size: 100% 3px;
@@ -364,7 +364,7 @@
   font-weight: 500;
   position: relative;
   text-decoration: none;
-  width: 9vw;
+  width: 15em;
 }
 
 .SiteFamily-text:after {
@@ -388,7 +388,7 @@
   right: 0;
   display: none;
   border: 2.5px solid #000;
-  width: 9vw;
+  width: 13.5em;
   list-style-type: none;
   z-index: 99999;
 }
@@ -457,312 +457,112 @@
 
 /* Mobile Menu
 =========================================================*/
-.MobileMenuBtn {
-  width: 20px;
-  height: 18px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-top: -9px;
-  z-index: 5;
-  display: none;
+
+.mobileLogoImg {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5em;
+  /* margin-left: 1em; */
 }
 
-.MobileMenuBtn-line {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #111111;
-  position: absolute;
-  left: 0;
-  transition-property: transform;
-  transition-duration: 0.2s;
+.mobileLogoImg img{
+  width: 3em;
+  height: auto;
 }
 
-.MobileMenuBtn-line:first-child {
+/* 기본적으로 MobileMenu는 숨김 */
+.MobileMenu {
+  position: fixed;
   top: 0;
+  left: -100%; /* 화면 밖으로 숨김 */
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: left 0.3s ease-in-out;
 }
 
-.MobileMenuBtn-line:nth-child(2) {
-  width: 90%;
-  top: 50%;
-  margin-top: -1px;
+/* 메뉴 활성화 시 화면으로 나타남 */
+.MobileMenu.active {
+  left: 0;
 }
 
-.MobileMenuBtn-line:nth-child(3) {
-  bottom: 0;
+/* 메뉴 안 리스트 스타일 */
+.MobileMenu ul {
+  list-style: none;
+  padding: 1.5em;
+  margin: 0;
 }
 
-@media screen and (max-width: 1920px) and (min-width: 1025px) {
-  .header-container {
-    max-width: 84.0625vw;
-    padding: 0 4.1666vw;
-  }
-
-  .Logo-link {
-    width: 5.4166vw;
-    height: 2.2916vw;
-    background-size: 5.4166vw 2.2916vw;
-  }
-
-  .SiteHeaderMenu {
-    padding-left: 8.3333vw;
-  }
-
-  .SiteHeaderMenu .menu-wrapper>.menu-item {
-    margin-right: 1.3541666vw;
-    padding: 1.97916vw 0;
-  }
-
-  .SiteHeaderMenu .menu-item>a {
-    font-size: 0.9375vw;
-  }
-
-  .SiteFamily {
-    width: 9.6875vw;
-  }
-
-  .SiteFamily-bar:after {
-    width: 9.6875vw;
-    height: 3px;
-    background-size: 100% 3px;
-  }
-
-  .SiteFamily-text {
-    padding: 0.4166vw 1.5625vw 0.4166vw 0;
-    font-size: 0.78125vw;
-  }
-
-  .SiteFamily-text:after {
-    width: 0.5208vw;
-    height: 0.2604vw;
-    background-size: 0.5208vw 0.2604vw;
-  }
-
-  .SiteFamilySelect {
-    margin-top: 0.78125vw;
-    padding: 1.04166vw 0.88541vw;
-  }
-
-  .SiteFamilySelect-link {
-    font-size: 0.78125vw;
-  }
-
-  .is-Current .SiteFamilySelect-link {
-    font-size: 1.041666vw;
-  }
-
-  .SiteFamilySelect-item {
-    margin-top: 0.57291vw;
-  }
-
-  .primary-navigation .nav-Center>a {
-    padding-right: 1.30208vw;
-  }
-
-  .primary-navigation .nav-Center>a:after {
-    width: 0.83333vw;
-    height: 0.83333vw;
-    background-size: 0.83333vw 0.83333vw;
-  }
-
-  /*2뎁스*/
-  .site-header .OneDepth-Brand .sub-menu {
-    top: 5.08281vw;
-    padding: 1.97916vw 0 2.0833vw;
-  }
-
-  .MainSubImg-img img {
-    width: 8.22916vw;
-  }
-
-  .MainSubImg-text {
-    font-size: 0.78125vw;
-    margin-top: 0.5208vw;
-  }
-
-  .SiteHeaderMenu .menu-wrapper>.menu-item[class*="current"]>a:before {
-    width: 0.3125vw;
-    height: 0.260416vw;
-    background-size: 0.3125vw 0.260416vw;
-    right: -0.46875vw;
-  }
+.MobileMenu ul li:first-child {
+  margin-top: 0.5em;
+  margin-bottom: 3.5em;
 }
 
-@media screen and (max-width: 1310px) and (min-width: 1025px) {
-  .SiteFamily-text {
-    font-size: 10px;
-  }
+.MobileMenu ul li:not(:first-child) {
+  margin-left: 1.2em;
+  margin-bottom: 1.5em;
+}
+/* .MobileMenu ul li:not(:first-child):not(:last-child) {
+  
+} */
 
-  .SiteFamily-text:after {
-    width: 7px;
-    height: 4px;
-    background-size: 7px 4px;
-  }
-
-  .SiteFamilySelect-link {
-    font-size: 10px;
-  }
-
-  .SiteHeaderMenu .menu-item>a {
-    font-size: 12px;
-  }
-
-  .MainSubImg-text {
-    font-size: 10px;
-  }
+.MobileMenu ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.8em;
+}
+.MobileMenu ul li button {
+  font-size: 1.8em;
+  color: #333;
 }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
-  .site-header {
-    padding: 3.97916vw 0;
+@media (min-width: 1024px){
+  .MobileMenuBtn{
+    display: none;
   }
-
-  .header-container {
-    max-width: 100%;
-    padding: 0 5.20833vw;
+  .mobileLogoImg{
+    display: none;
   }
-
-  .Logo {
-    position: static;
-    margin: 0 auto;
-    width: 7.4285vw;
-    transform: translateY(0);
+}
+@media screen and (max-width: 1024px) and (min-width: 768px),
+       screen and (max-width: 767px) and (min-width: 1px) {
+  
+  .site-header{
+    display: none;
   }
-
-  .Logo-link {
-    width: 8.6666vw;
-    height: 3.66666vw;
-    background-size: 8.6666vw 3.66666vw;
-  }
-
-  .SiteFamily {
-    width: 14.6875vw;
-  }
-
-  .SiteFamily-bar:after {
-    width: 14.6875vw;
-    height: 3px;
-    background-size: 100% 3px;
-  }
-
-  .SiteFamily-text {
-    /* padding:0.6166vw 1.7625vw 0.6166vw 0; */
-    font-size: 1.578125vw;
-  }
-
-  .SiteFamily-text:after {
-    width: 1.5208vw;
-    height: 0.6604vw;
-    background-size: 1.5208vw 0.6604vw;
-  }
-
-  .SiteFamilySelect {
-    margin-top: 1.798125vw;
-    padding: 1.953125vw 1.88541vw;
-  }
-
-  .SiteFamilySelect-link {
-    font-size: 1.578125vw;
-  }
-
-  .is-Current .SiteFamilySelect-link {
-    font-size: 2.041666vw;
-  }
-
-  .SiteFamilySelect-item {
-    margin-top: 0.8604vw;
-  }
-
   .MobileMenuBtn {
     display: block;
-  }
+    /* width: 2.3em; */
+    /* height: 3em; */
+    position: fixed;
+    top: 1.2em;
+    left: 1.3em; /* 화면 왼쪽 여백 */
+    z-index: 1000; /* 버튼이 항상 위로 오도록 */
+    border: none;
+    background: none;
+    cursor: pointer;
 
-  .MobileMenuBtn {
-    width: 2.6041vw;
-    height: 2.34375vw;
-    margin-top: -1.171875vw;
+    font-size: 1.5em;
   }
-}
-
-@media screen and (max-width: 767px) and (min-width: 1px) {
-  .site-header {
-    padding: 5.97916vw 0;
+  
+  .SiteFamily-text{
+    margin: 2em 0em 2em 1em;
   }
-
-  .site-header.is-Hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .header-container {
-    max-width: 100%;
-    padding: 0 6.25vw;
-  }
-
-  .Logo {
-    position: static;
-    margin: 0 auto;
-    width: 13.541vw;
-    transform: translateY(0);
-  }
-
-  .Logo-link {
-    width: 13.541vw;
-    height: 5.7291vw;
-    background-size: 13.541vw 5.7291vw;
-  }
-
-  .SiteFamily {
-    width: 22.6875vw;
-  }
-
-  .SiteFamily-bar:after {
-    width: 22.6875vw;
-    height: 3px;
-    background-size: 100% 3px;
-  }
-
-  .SiteFamily-text {
-    padding: 1.6166vw 3.7625vw 1.6166vw 0;
-    font-size: 3.2578125vw;
-  }
-
   .SiteFamily-text:after {
-    width: 3.0208vw;
-    height: 1.2604vw;
-    background-size: 3.0208vw 1.2604vw;
-  }
-
-  .SiteFamilySelect {
-    margin-top: 4.098125vw;
-    padding: 3.38125vw 3.08541vw;
-    left: auto;
-    width: 28vw;
-  }
-
-  .SiteFamilySelect-link {
-    font-size: 3.2578125vw;
-  }
-
-  .is-Current .SiteFamilySelect-link {
-    font-size: 4.141666vw;
-  }
-
-  .SiteFamilySelect-item {
-    margin-top: 1.5604vw;
-  }
-
-  .MobileMenuBtn {
-    display: block;
-  }
-
-  .MobileMenuBtn {
-    width: 5.333vw;
-    height: 4.8vw;
-    margin-top: -2.4vw;
+    content: "";
+    width: 10px;
+    height: 5px;
+    background-image: none;
+    background-size: 10px 5px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
   }
 }
+
 
 /*=========================================================
 	Mobile Nav
@@ -1156,4 +956,15 @@ body .SiteHeaderMenu-back {
   .admin-bar .SiteHeaderMenu-inner {
     max-height: calc(100vh - 46px);
   }
+}
+
+
+
+/* 모바일버전 모달  */
+
+.ModalCloseBtn{
+  font-size: 1.7em;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0.5em;
 }

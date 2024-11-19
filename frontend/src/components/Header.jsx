@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faX, faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
 import { useDispatch } from "react-redux";
 import { userActions } from "../redux/reducers/userSlice";
 import swalModal from "../utils/swalModal";
+
 
 const Header = ({ user }) => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Header = ({ user }) => {
 
   const [menuDisplay, setMenuDisplay] = useState(true);
   const [loginText, setLoginText] = useState("로그인");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -23,6 +25,10 @@ const Header = ({ user }) => {
 
   const handleShutdownMenu = () => {
     setMenuDisplay(true);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
   const toggleMenu = () => {
@@ -57,7 +63,7 @@ const Header = ({ user }) => {
         navigate("/");
         window.location.reload();
       }
-    } catch (err) {}
+    } catch (err) { }
     swalModal.close();
   };
 
@@ -168,13 +174,60 @@ const Header = ({ user }) => {
             )}
           </ul>
         </div>
+      </div>
 
-        {/* Mobile Btn */}
-        {/* <button className="MobileMenuBtn">
-          <span className="MobileMenuBtn-line"></span>
-          <span className="MobileMenuBtn-line"></span>
-          <span className="MobileMenuBtn-line"></span>
-        </button> */}
+      {/* Mobile Btn */}
+      <div>
+        <button className="MobileMenuBtn" onClick={toggleMobileMenu}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+
+        <div className="mobileLogoImg">
+          <Link onClick={handleShutdownMenu} to="/">
+            <img src="/img/mobileLogoImg.png" alt="" />
+          </Link>
+        </div>
+      </div>
+
+      {/* 모바일 토글 메뉴 */}
+      <div className={`MobileMenu ${isMobileMenuOpen ? "active" : ""}`}>
+        <ul>
+          <li onClick={toggleMobileMenu}>
+            <div className="ModalCloseBtn">
+              <FontAwesomeIcon icon={faX} />
+            </div>
+            <div className="SiteFamily-text" onClick={toggleMenu}>
+              <FontAwesomeIcon icon={faUser} id="userFont" /> {loginText}
+              <span className="SiteFamily-bar"></span>
+            </div>
+          </li>
+          <li>
+            <Link to="/" onClick={toggleMobileMenu}>홈</Link>
+          </li>
+          <li>
+            <Link to="/recipe" onClick={toggleMobileMenu}>레시피추천</Link>
+          </li>
+          <li>
+            <Link to="/receipts" onClick={toggleMobileMenu}>영수증</Link>
+          </li>
+          <li>
+            <Link to="/ingredients" onClick={toggleMobileMenu}>재료관리</Link>
+          </li>
+          {user && (
+            <>
+              <li>
+                <Link to="/mypage?section=info-section" onClick={toggleMobileMenu}>
+                  회원정보 수정
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleLogout} style={{ border: "none", background: "none" }}>
+                  로그아웃
+                </button>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
     </header>
   );

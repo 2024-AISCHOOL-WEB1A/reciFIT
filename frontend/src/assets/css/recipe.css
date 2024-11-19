@@ -48,6 +48,7 @@
 
 /* 레이아웃 설정 */
 .recipeMain-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,25 +56,10 @@
     /* 좌우 여백 제거 */
 }
 
-
-/* ------------ youtube 동영상------------------- */
-.youtubeVideo {
-    position: relative;
-    width: 70%;
-    height: 25em;
-    margin-bottom: 2em;
-    /* 검색창과의 간격 조정 */
+@media (max-width: 767px){
+    .recipeMain-container{
+    }
 }
-
-.youtubeVideo iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-
 
 /* ------------------------ 레시피 슬라이드 부분 시작 -------------------- */
 /* 슬라이드 위 제목 부분 */
@@ -684,7 +670,7 @@ textarea#detectionFood[readonly] {
 }
 
 #recipe {
-    width: auto;
+    width: fit-content;
     margin-left: 6.5em;
     margin-right: 6.5em;
 }
@@ -926,13 +912,30 @@ textarea#detectionFood[readonly] {
 }
 
 /* 모바일: 768px 미만 */
-@media (max-width: 767px) {
-    .photo {
-        /* height: fit-content; */
+@media (max-width: 767px){
+    #recipe{
+        max-width: fit-content;
+        margin: 0em 2em;
+    }
+    #recipe-details-title{
+        padding-bottom: 0em;
+    }
+    #recipe-details-goback{
+        margin-top: 0;
+        transform: translate(0%, -60%);
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .photo{
+        width: auto;
+        border-right: none;
+        border-bottom: 0.18em solid #131313;
     }
     .photo img {
-        width: 35vw;
-        height: 100%;
+        width: 100%;
+        height: 15em;
     }
     .instruct-container{
         display: flex;
@@ -940,7 +943,8 @@ textarea#detectionFood[readonly] {
     }
     #recipe_name {
         margin-top: 1em;
-        padding: 1em 0.5em 0em 0.5em;
+        padding: 0em 1em;
+        /* padding: 1em 0.5em 0em 0.5em; */
         width: 100%;
         font-size: 1.5em;
         font-weight: 700;
@@ -949,16 +953,49 @@ textarea#detectionFood[readonly] {
     }
     #instruction {
         font-size: 1.05em;
-        margin: 0em 3em 0em 3em;
+        margin: 1em 1em 0em 1.3em;
         display: flex;
         align-items: center;
     }
     .rowflex {
-        height: 8em;
-        margin: 5px 0;
+        height: 4.2em;
+        margin-top: 1em;
     
         border-top: 0.18em solid #131313;
         padding-top: 0.5%;
+    }
+    .rowflex div{
+        padding-left: 0.1em;
+    }
+    
+    .rowflex>div:not(:last-child) {
+        padding-right: 1px;
+        /* 오른쪽 패딩을 10px로 설정 */
+    }
+    
+    /* .rowflex > div:not(:first-child): 첫 번째 자식이 아닌 모든 자식 div에 왼쪽 패딩 추가 */
+    .rowflex>div:not(:first-child) {
+        padding-left: 0em;
+    }
+    .recipe-detail-rowflex-div{
+        margin: 0em 0.1em;
+    }
+    .recipe-detail-rowflex-div div {
+        margin-left: 0.2em;
+        font-size: 0.6em;
+        font-weight: bolder;
+        width: fit-content;
+    }
+}
+
+@media screen and (max-width: 767px) and (min-width: 1px){
+    .detail-container{
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+    }
+    .heart-container{
+        font-size: 2em;
     }
 }
 
@@ -1087,6 +1124,13 @@ textarea#detectionFood[readonly] {
         align-items: center;
         padding: 2em 0.5em;
     }
+    #ingredient-List{
+        padding-right: 3em;
+        padding-left: 0;
+    }
+    #ingredient-List td{
+        width: 1em;
+    }
 }
 
 /* --------------------- Description 요리 방법 --------------------------- */
@@ -1159,6 +1203,12 @@ textarea#detectionFood[readonly] {
 
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
+    #description-wrapper{
+        padding: 0em 2em;
+    }
+    .description{
+        font-size: 1em;
+    }
 }
 
 .cookingStart{
@@ -1186,4 +1236,18 @@ textarea#detectionFood[readonly] {
 
 #rightarrowIcon{
     font-size: 3em;
+}
+
+@media (max-width: 767px) {
+    .cookingBtn{
+        padding: 0.5em;
+        margin-left: 0.5em;
+        
+        font-family: 'SF_HambakSnow';
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+    #rightarrowIcon{
+        font-size: 2em;
+    }
 }

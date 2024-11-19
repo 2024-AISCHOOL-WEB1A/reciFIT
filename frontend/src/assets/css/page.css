@@ -404,7 +404,7 @@
   }
 
   .MainSwipeTitle {
-    font-size: 14.2916vw;
+    font-size: 12.2916vw;
   }
 
   .MainSwipeThumb {
@@ -426,7 +426,7 @@
   }
 
   .MainSwipe {
-    top: calc(50% + 35vh);
+    top: calc(50% + 20em);
   }
 
   .MainSwipeThumbSlide {
@@ -434,7 +434,7 @@
   }
 
   .MainTopBanner {
-    height: 83vh;
+    height: 45em;
   }
 
   .MainTopBannerScroll {
@@ -606,18 +606,6 @@
     margin-top: 0.78125vw;
   }
 
-  .MainBrandBannerLogo {
-    left: 2.8125vw;
-  }
-
-  .MainBrandBannerLogo-img {
-    height: 3.59374vw;
-  }
-
-  .MainBrandBannerLogo-text {
-    font-size: 2.60416vw;
-  }
-
   .MainBrandBannerText {
     right: -5vw;
     width: 22.65625vw;
@@ -651,18 +639,6 @@
   .MainBrandBanner {
     height: 22.7916vw;
     margin-top: 0.78125vw;
-  }
-
-  .MainBrandBannerLogo {
-    left: 3.5625vw;
-  }
-
-  .MainBrandBannerLogo-img {
-    height: 5.59374vw;
-  }
-
-  .MainBrandBannerLogo-text {
-    font-size: 2.60416vw;
   }
 
   .MainBrandBannerText {
@@ -700,33 +676,43 @@
     margin-top: 1.58125vw;
   }
 
-  .MainBrandBannerLogo {
-    left: 4.0625vw;
-  }
-
-  .MainBrandBannerLogo-img {
-    height: 9.09374vw;
-  }
-
-  .MainBrandBannerLogo-text {
-    font-size: 4.60416vw;
-  }
-
   .MainBrandBannerText {
-    right: -10vw;
-    width: 32.27083vw;
-    font-size: 4.60416vw;
+    right: -5em;
+    width: 10em;
+    font-size: 3em;
     padding-bottom: 6.44583vw;
+    opacity: 1; 
+
+    transition: none;  /* transition을 비활성화 */
+    transform: none;
   }
 
   .MainBrandBannerText:after {
     width: 4.69583vw;
     height: 4.69583vw;
     background-size: 4.69583vw 4.69583vw;
+    left: 28%;
   }
 
   .none-Mobile {
     display: none;
+  }
+
+  .MainBrandBannerText{
+    transition: none;
+    transform: none;
+    top:30%
+  }
+
+  .MainBrandBannerBg,
+  .is-Action.MainBrandBannerText,
+  .is-Action.MainBrandBannerBg {
+    transition: none;  /* transition을 비활성화 */
+    transform: none;   /* transform을 비활성화 */
+  }
+
+  .is-Action.MainBrandBannerText {
+    transition-delay: 0s;  /* transition-delay를 0으로 설정 */
   }
 }
 
@@ -1201,26 +1187,37 @@
   .FlotingCampaign {
     bottom: 3.0625vw;
     left: 0;
-    width: 44.66666vw;
+    width: 10em;
+    height: 5em;
+  }
+  .FlotingCampaign-img{
+    width: 5em;
+  }
+  .FlotingCampaign-link{
+    height: 4em;
   }
 
   .FlotingCampaign-title {
-    font-size: 2.79375vw;
+    font-size: 1em;
     margin-bottom: 1.729166vw;
     padding-right: 4.04166vw;
     display: none;
   }
-
+  .FlotingCampaign-thumb{
+    height: 8em;
+    width: auto;
+    margin-left: 1em;
+  }
   .FlotingCampaign-thumb:before {
-    width: 6.7109vw;
-    height: 6.7109vw;
-    background-size: 6.7109vw 6.7109vw;
+    width: 10em;
+    height: 5em;
+    background-size: 10em 5em;
   }
 
   .FlotingCampaignIco {
-    width: 12.048vw;
-    height: 10.04vw;
-    background-size: 12.048vw 10.04vw;
+    width: 10em;
+    height: auto;
+    background-size: 12em 10em;
     top: 0.15625vw;
     right: -6.927088vw;
     display: none;

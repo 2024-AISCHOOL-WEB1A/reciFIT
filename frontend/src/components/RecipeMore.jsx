@@ -9,10 +9,6 @@ const RecipeMore = () => {
     <div>
         <div className='recipeMoreHeader'>
             <h3>총 3,670개의 레시피</h3>
-            <div className='arrayBtnList'>
-                <div className='arrayBtn1'>인기순</div>
-                <div className='arrayBtn2'>최신순</div>
-            </div>
         </div>
 
         <div className='recipeMoreContainer'>
