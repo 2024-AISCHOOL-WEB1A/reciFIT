@@ -109,7 +109,7 @@ const Header = ({ user }) => {
           >
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=info-section"
+                to="/mypage?tab=user"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -128,7 +128,7 @@ const Header = ({ user }) => {
             </li> */}
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=recipes-section"
+                to="/mypage?tab=recipe"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -137,7 +137,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=env-section"
+                to="/mypage?tab=env-score"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -146,7 +146,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=receipts-section"
+                to="/mypage?tab=receipt"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >

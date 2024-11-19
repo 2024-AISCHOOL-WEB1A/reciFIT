@@ -91,7 +91,7 @@ const JoinInfo = () => {
   };
 
   return (
-    <div className="info-wrapper">
+    <div>
       <div className="info-container">
         <div className="info-text">추가정보 입력</div>
 
@@ -100,14 +100,14 @@ const JoinInfo = () => {
           <input
             type="text"
             className="info-input"
-            placeholder="해당 재료가 포함된 레시피를 우선적으로 추천합니다! (ex. 양파, 감자, 당근)"
+            placeholder="해당 재료가 포함된 레시피를 우선적으로 추천합니다! (ex. 돼지고기, 감자, 양파)"
             onChange={(e) => {
               setPreferredIngredient(e.target.value);
             }}
           />
           <textarea
             className="info-textarea-input"
-            placeholder="해당 재료가 포함된 레시피를 우선적으로 추천합니다! (ex. 양파, 감자, 당근)"
+            placeholder="해당 재료가 포함된 레시피를 우선적으로 추천합니다! (ex. 돼지고기, 감자, 양파)"
             onChange={(e) => {
               setPreferredIngredient(e.target.value);
             }}
@@ -115,18 +115,18 @@ const JoinInfo = () => {
         </div>
 
         <div className="info-box">
-          <div className="info-input-div">비선호 재료</div>
+          <div className="info-input-div">기피 재료</div>
           <input
             type="text"
             className="info-input"
-            placeholder="해당 재료가 포함된 레시피를 비교적 적게 추천합니다! (ex. 양파, 감자, 당근)"
+            placeholder="해당 재료가 포함된 레시피를 비교적 적게 추천합니다! (ex. 고수, 오이, 샐러리)"
             onChange={(e) => {
               setDislikedIngredients(e.target.value);
             }}
           />
           <textarea
             className="info-textarea-input"
-            placeholder="해당 재료가 포함된 레시피를 비교적 적게 추천합니다! (ex. 양파, 감자, 당근)"
+            placeholder="해당 재료가 포함된 레시피를 비교적 적게 추천합니다! (ex. 고수, 오이, 샐러리)"
             onChange={(e) => {
               setDislikedIngredients(e.target.value);
             }}
@@ -134,25 +134,28 @@ const JoinInfo = () => {
         </div>
 
         <div className="info-box">
-          <div className="info-input-div">제외 재료</div>
+          <div className="info-input-div">섭취 불가 재료</div>
           <input
             type="text"
             className="info-input"
-            placeholder="해당 재료가 포함된 레시피는 추천에서 제외됩니다! (ex. 양파, 감자, 당근)"
+            placeholder="해당 재료가 포함된 레시피는 추천에서 제외됩니다! (ex. 복숭아, 땅콩)"
             onChange={(e) => {
               setNonConsumableIngredients(e.target.value);
             }}
           />
           <textarea
             className="info-textarea-input"
-            placeholder="해당 재료가 포함된 레시피는 추천에서 제외됩니다! (ex. 양파, 감자, 당근)"
+            placeholder="해당 재료가 포함된 레시피는 추천에서 제외됩니다! (ex. 복숭아, 땅콩)"
             onChange={(e) => {
               setDislikedIngredients(e.target.value);
             }}
           ></textarea>
         </div>
         <div className="info-submitContainer">
-          <button className="info-submit" onClick={handleAdditionalData}>
+          <button
+            className="info-submit info-submit-ok"
+            onClick={handleAdditionalData}
+          >
             확인
           </button>
           <button className="info-submit" onClick={handleSkip}>

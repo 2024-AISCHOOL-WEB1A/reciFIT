@@ -77,6 +77,8 @@
 .info-submitContainer {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: end;
+
   gap: 20px;
 }
 
@@ -87,6 +89,10 @@
   border-radius: 10px;
   margin-top: 1%;
   cursor: pointer;
+}
+
+.info-submit-ok {
+  background-color: rgb(210, 214, 255);
 }
 
 .info-submit:hover {
@@ -182,6 +188,7 @@
   .info-submitContainer {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: start;
 
     gap: 0;
   }

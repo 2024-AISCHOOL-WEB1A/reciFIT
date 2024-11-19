@@ -23,7 +23,8 @@ router.get("/", authenticateAccessToken, async (req, res) => {
         role, 
         preferred_ingredients, 
         disliked_ingredients, 
-        non_consumable_ingredients, 
+        non_consumable_ingredients,
+        created_at,
         last_login
       FROM TB_USER
       WHERE user_idx = ?`,

@@ -119,18 +119,27 @@ import axios from "axios";
 // 요청 중인지 상태를 저장할 객체
 const pendingRequests = new Map();
 
+// 이중 요청 금지에서 제외할 요청 키 목록
+const excludeRequests = new Set(["get:/users"]);
+
 // 요청을 등록하는 함수
 const addRequest = (key) => {
+  // 제외 요청이면 등록하지 않음
+  if (excludeRequests.has(key)) return;
   pendingRequests.set(key, true);
 };
 
 // 요청을 제거하는 함수
 const removeRequest = (key) => {
+  if (excludeRequests.has(key)) return;
   pendingRequests.delete(key);
 };
 
 // 요청 중인지 확인하는 함수
-const hasPendingRequest = (key) => pendingRequests.has(key);
+const hasPendingRequest = (key) => {
+  if (excludeRequests.has(key)) return false; // 제외 요청은 항상 false 반환
+  return pendingRequests.has(key);
+};
 
 // 공통 인터셉터 설정
 const addInterceptors = (axiosInstance) => {

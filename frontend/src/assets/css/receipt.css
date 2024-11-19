@@ -187,7 +187,7 @@
 
 .receipt-result-icon {
   font-size: 5em;
-  color: darkgray
+  color: darkgray;
 }
 
 .receipt-result-section-result {
@@ -360,11 +360,11 @@ th {
 }
 
 .receipt-result-cancel-button {
-  background-color: rgb(253, 150, 134);
+  background-color: rgb(255, 192, 182);
 }
 
 .receipt-result-ok-button {
-  background-color: rgb(203, 203, 203);
+  background-color: rgb(210, 214, 255);
 }
 
 .receipt-result-nutrient-button:hover {
@@ -521,7 +521,7 @@ th {
   }
 
   .receipt-result-div td,
-  th {
+  .receipt-result-div th {
     padding-bottom: 1%;
   }
 
@@ -612,7 +612,6 @@ th {
 
     width: 80%;
     flex-direction: column;
-
   }
 
   .receipt-result-button {
