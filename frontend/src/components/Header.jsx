@@ -47,6 +47,7 @@ const Header = ({ user }) => {
       text: "로그아웃 중입니다...",
       allowOutsideClick: false,
       allowEscapeKey: false,
+      allowEnterKey: false,
       didOpen: () => {
         swalModal.showLoading();
       },

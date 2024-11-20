@@ -1,60 +1,62 @@
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'SBAggroB';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "SBAggroB";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'SF_HambakSnow';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "SF_HambakSnow";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* -----------------=------------------------- */
 /* 검색창 부분 */
 .SearchForm {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 1.8em;
-    margin-bottom: 1.8em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8em;
+  margin-bottom: 1.8em;
 }
 
 .searchBox {
-    width: 13.5%;
-    border-bottom: 2px solid #1a1919d5;
-    padding: 0.3em;
+  width: 13.5%;
+  border-bottom: 2px solid #1a1919d5;
+  padding: 0.3em;
 }
 
 .searchBox input {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
 #searchIcon {
-    margin-right: 1em;
-    color: #1a1919d5;
+  margin-right: 1em;
+  color: #1a1919d5;
 }
 
 /* 레이아웃 설정 */
 .recipeMain-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1.8em 0;
-    /* 좌우 여백 제거 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.8em 0;
+  /* 좌우 여백 제거 */
 }
-
 
 /* ------------------------ 레시피 슬라이드 부분 시작 -------------------- */
 /* 슬라이드 위 제목 부분 */
@@ -65,88 +67,87 @@
 */
 
 .first-listItem {
-    margin-bottom: 4em;
+  margin-bottom: 4em;
 }
 
 .list_content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 3.3em;
-    margin-bottom: 1.2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 3.3em;
+  margin-bottom: 1.2em;
 }
 
 .list_content_title {
-    font-size: 1.45rem;
-    color: inherit;
-    font-family: 'SBAggroB';
+  font-size: 1.45rem;
+  color: inherit;
+  font-family: "SBAggroB";
 }
 
 .list_content_title span {
-    display: inline-block;
-    font-size: 1.45rem;
-    color: #685d5d;
-    font-family: 'SBAggroB';
-    padding: 0 0.1em;
+  display: inline-block;
+  font-size: 1.45rem;
+  color: #685d5d;
+  font-family: "SBAggroB";
+  padding: 0 0.1em;
 }
 
 /* 흑백요리사 글자에만 애니메이션 적용하기 */
 .list_content_title span span {
-    display: inline-block;
-    animation: bounce 0.6s ease-in-out infinite;
+  display: inline-block;
+  animation: bounce 0.6s ease-in-out infinite;
 }
 
 .list_content_title span span:nth-child(1) {
-    animation-delay: 0s;
+  animation-delay: 0s;
 }
 
 .list_content_title span span:nth-child(2) {
-    animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 
 .list_content_title span span:nth-child(3) {
-    animation-delay: 0.2s;
+  animation-delay: 0.2s;
 }
 
 .list_content_title span span:nth-child(4) {
-    animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 
 .list_content_title span span:nth-child(5) {
-    animation-delay: 0.4s;
+  animation-delay: 0.4s;
 }
 
 @keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
 
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-5px);
-    }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* 전체보기 버튼 */
 .list_content_btn {
-    color: #685d5d;
-    font-size: 1em;
-    font-weight: 800;
-    font-family: 'Pretendard-Regular';
-    border: 2px solid #685d5d;
-    border-radius: 5px;
-    padding: 0.3em;
-    margin-right: 5em;
+  color: #685d5d;
+  font-size: 1em;
+  font-weight: 800;
+  font-family: "Pretendard-Regular";
+  border: 2px solid #685d5d;
+  border-radius: 5px;
+  padding: 0.3em;
+  margin-right: 5em;
 }
 
 .list_content_btn:hover {
-    background-color: #685d5d95;
-    color: #fff;
+  background-color: #685d5d95;
+  color: #fff;
 }
 
 .list_content_btn_div {
-    padding-top: 1em;
+  padding-top: 1em;
 }
 
 /* 슬라이드 내부 이미지 목록 */
@@ -158,55 +159,55 @@
     * > slide_list_caption_tit : 레시피 타이틀
 */
 .recipeList-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .slickList {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .slide_list_li {
-    width: 18.5em;
-    margin-right: 1em;
-    transition: transform 0.3s ease;
-    /* 부드럽게 확대 효과 */
+  width: 18.5em;
+  margin-right: 1em;
+  transition: transform 0.3s ease;
+  /* 부드럽게 확대 효과 */
 }
 
 /* .slide_list_li:hover {
     transform: scale(1.1);
 } */
 .slide_list_li:hover {
-    transform: scaleX(1.05) scaleY(1.1); 
-    transition: transform 0.3s ease;
+  transform: scaleX(1.05) scaleY(1.1);
+  transition: transform 0.3s ease;
 }
 
 .slide_list_link {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .slide_list_thumb img {
-    width: 100%;
-    height: 9.15em;
-    border-radius: 8px;
+  width: 100%;
+  height: 9.15em;
+  border-radius: 8px;
 }
 
 .slide_list_caption {
-    text-align: center;
-    margin-top: 0.5em;
+  text-align: center;
+  margin-top: 0.5em;
 }
 
 .slide_list_caption_tit {
-    font-size: 1.2em;
-    line-height: 1.2;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-family: 'Pretendard-Regular';
+  font-size: 1.2em;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: "Pretendard-Regular";
 }
 
 /* 슬라이드 화살표 버튼 부분 */
@@ -217,475 +218,508 @@
 
 .slide_list_left,
 .slide_list_right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slide_btn_prev,
 .slide_btn_next {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 .slide_btn_prev span:hover,
 .slide_btn_next span:hover {
-    color: #f4b057;
+  color: #f4b057;
 }
 
 .slide_btn_prev span,
 .slide_btn_next span {
-    width: 3em;
-    height: 3em;
-    margin-right: 0.2em;
-    font-size: 5em;
-    color: #685d5d;
+  width: 3em;
+  height: 3em;
+  margin-right: 0.2em;
+  font-size: 5em;
+  color: #685d5d;
 }
 
 /* 카테고리 분류 부분 */
 .cate_cont {
-    display: flex;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .category-items {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .cate_cont li {
-    display: table-cell;
+  display: table-cell;
 }
+
 .category-items li {
-    flex: 0 0 auto; /* 아이템이 가로로 배치되도록 설정 */
-    width: 8em; /* 각 아이템의 고정 크기 */
-    text-align: center;
-    margin: 0 0.4em;
+  flex: 0 0 auto; /* 아이템이 가로로 배치되도록 설정 */
+  width: 8em; /* 각 아이템의 고정 크기 */
+  text-align: center;
+  margin: 0 0.4em;
+
+  cursor: pointer;
 }
 
 .cate_cont li a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .cate_cont li img {
-    width: auto;
-    height: 7em;
-    margin-bottom: 0.5em;
+  width: auto;
+  height: 7em;
+  margin-bottom: 0.5em;
 }
 
 .s_list_ul_arrow {
-    padding-top: 12px;
+  padding-top: 12px;
 }
 
 .slick-arrow {
-    display: inline-block;
+  display: inline-block;
 }
 
 .recipeCategory-container {
-    overflow-x: auto;
-    margin: 0;
+  overflow-x: auto;
+  margin: 0;
+  width: 100%;
 }
 
 /* 터치 스크롤 바 스타일 제거 
     모바일 상태일 때는 스크롤 바를 생성하고, 웹에서는 제거
 */
 .recipeCategory-container {
-    margin-left: 3%;
-    margin-right: 5%;
+  margin-left: 3%;
+  margin-right: 5%;
 
-    -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 */
-    scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 */
+  scrollbar-width: none; /* Firefox */
 }
 .recipeCategory-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+  display: none; /* Chrome/Safari */
 }
 
 .recipe-category {
-    width: 100%;
-    height: 13em;
+  width: 100%;
+  height: 13em;
 
-    display: flex;
-    flex-direction: column;
-    /* padding: 0em em; */
-    margin-bottom: 1.5em;
+  display: flex;
+  flex-direction: column;
+  /* padding: 0em em; */
+  margin-bottom: 1.5em;
 }
 
 .category-items a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .category-items span {
-    font-family: 'Pretendard-Regular';
-    font-size: 1.15em;
+  font-family: "Pretendard-Regular";
+  font-size: 1.15em;
 }
 
 @media (min-width: 1920px) {
-    .recipe-category {
-        width: 97.5em;
-    }
+  .recipe-category {
+    width: 97.5em;
+  }
 }
 
 @media (min-width: 1440px) and (max-width: 1920px) {
-    .recipe-category {
-        width: 95em;
-        height: 15em;
-    }
+  .recipe-category {
+    width: 95em;
+    height: 15em;
+  }
 }
 
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
-    .recipe-category {
-        width: 95em;
-        height: 15em;
-    }
+  .recipe-category {
+    width: 95em;
+    height: 15em;
+  }
 }
 
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
-    .recipe-category {
-        padding: 0em 1em;
-        margin-bottom: 0.5em;
-        height: 10em;
-        width: 36em;
-    }
-    
-    .category-items li {
-        width: 5.5em;
-        text-align: center;
-    }
+  .recipeCategory-container {
+    padding: 0 15%;
+  }
 
-    .cate_cont li img {
-        width: auto;
-        height: 5em;
-        margin-bottom: 0.5em;
-    }
+  .recipe-category {
+    padding: 0em 1em;
+    margin-bottom: 0.5em;
+    height: 10em;
+    width: 36em;
+  }
 
-    .category-items span {
-        font-size: 1em;
-    }
+  .category-items li {
+    width: 5.5em;
+    text-align: center;
+  }
 
-    .list_content{
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1.2em;
-        margin-left: 0
-    }
+  .cate_cont li img {
+    width: auto;
+    height: 5em;
+    margin-bottom: 0.5em;
+  }
 
-    .list_content_btn_div{
-        display: none;
-    }
+  .category-items span {
+    font-size: 1em;
+  }
 
-    .list_content_title{
-        text-align: center;
-    }
-    .list_content h3{
-        font-size: 1.1em;
-    }
+  .list_content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.2em;
+    margin-left: 0;
+  }
 
-    /* 모바일 버전일 때 슬라이드를 그리드로 변경 _> 화살표 숨김 */
-    .recipeList-container{
-        justify-content: center;
-    }
-    .slide_list_left, .slide_list_right{
-        display: none
-    }
+  .list_content_btn_div {
+    display: none;
+  }
 
-    .slickList{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 */
-        gap: 1em;
-    }
+  .list_content_title {
+    text-align: center;
+  }
+  .list_content h3 {
+    font-size: 1.1em;
+  }
 
-    .slide_list_li{
-        width: 12em;
-        margin-right: 0em;
-    }
-    .slide_list_thumb img{
-        height: 10em;
-        width: 12em;
-    }
+  /* 모바일 버전일 때 슬라이드를 그리드로 변경 _> 화살표 숨김 */
+  .recipeList-container {
+    justify-content: center;
+  }
+  .slide_list_left,
+  .slide_list_right {
+    display: none;
+  }
 
-    .slide_list_caption{
-        text-align: left;
-    }
-    .slide_list_caption_tit{
-        font-size: 0.9em
-    }
+  .slickList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 */
+    gap: 1em;
+  }
+
+  .slide_list_li {
+    width: 12em;
+    margin-right: 0em;
+  }
+  .slide_list_thumb img {
+    height: 10em;
+    width: 12em;
+  }
+
+  .slide_list_caption {
+    text-align: left;
+  }
+  .slide_list_caption_tit {
+    font-size: 0.9em;
+  }
 }
 
 /* 검색창 */
 @use postcss-color-function;
 @use postcss-nested;
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700,900");
 
 .search__container {
-    width: 30em;
-    margin-top: 0;
-    margin-bottom: 3em;
-    font-family: 'Raleway', sans-serif;
+  width: 30em;
+  margin-top: 0;
+  margin-bottom: 3em;
+  font-family: "Raleway", sans-serif;
 
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .search__input__container {
-    width: 32em;
-    padding: 12px 24px;
-    /* position: relative; */
-    margin-left: -0.6em;
+  width: 32em;
+  padding: 12px 24px;
+  /* position: relative; */
+  margin-left: -0.6em;
 
-    background-color: transparent;
-    transition: transform 250ms ease-in-out;
-    font-size: 14px;
-    line-height: 18px;
+  background-color: transparent;
+  transition: transform 250ms ease-in-out;
+  font-size: 14px;
+  line-height: 18px;
 
-    color: #575756;
-    background-color: transparent;
-    /*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
+  color: #575756;
+  background-color: transparent;
+  /*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
 
-    /* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E"); */
-    /* background-repeat: no-repeat; */
-    /* background-size: 18px 18px; */
-    /* background-position: 95% center; */
-    border-radius: 50px;
-    border: 3px solid #f4b057;
-    transition: all 250ms ease-in-out;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
+  /* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E"); */
+  /* background-repeat: no-repeat; */
+  /* background-size: 18px 18px; */
+  /* background-position: 95% center; */
+  border-radius: 50px;
+  border: 3px solid #f4b057;
+  transition: all 250ms ease-in-out;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 
-    &:hover,
-    &:focus {
-        padding: 12px 0;
-        outline: 0;
-        border: 1px solid transparent;
-        border-bottom: 3px solid #f4b057;
-        border-radius: 0;
-        background-position: 100% center;
-    }
+  &:hover,
+  &:focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 3px solid #f4b057;
+    border-radius: 0;
+    background-position: 100% center;
+  }
 }
 
-.search__input{
-    width: 100%;
+.search__input {
+  width: 100%;
+  border: none;
+
+  &::placeholder {
+    color: color(#575756 a(0.8));
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: "Pretendard-Regular";
+    font-size: 1.15em;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
     border: none;
-
-    &::placeholder {
-        color: color(#575756 a(0.8));
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-family: 'Pretendard-Regular';
-        font-size: 1.15em;
-    }
-
-    &:hover,
-    &:focus {
-        outline: none;
-        border: none;
-        box-shadow: none;
-    }
+    box-shadow: none;
+  }
 }
 
-.search__title{
-    margin-left: 1.3em;
-    margin-top: 0.5em;
-    color: #1c1c1c;
+.search__title {
+  margin-left: 1.3em;
+  margin-top: 0.5em;
+  color: #1c1c1c;
+}
+
+.search__title_mobile {
+  margin-left: 1.3em;
+  margin-top: 0.5em;
+  color: #1c1c1c;
+  display: none;
 }
 
 .search {
-    &::placeholder {
-        color: color(#575756 a(0.8));
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
+  &::placeholder {
+    color: color(#575756 a(0.8));
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-    &:hover,
-    &:focus {
-        padding: 12px 0;
-        outline: 0;
-        border: 1px solid transparent;
-        border-bottom: 1px solid #575756;
-        border-radius: 0;
-        background-position: 100% center;
-    }
+  &:hover,
+  &:focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #575756;
+    border-radius: 0;
+    background-position: 100% center;
+  }
 }
 
 /* 검색 버튼 */
-.searchBtn{
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 2em;
-    width: 2em;
-    border: none;
-    cursor: pointer;
-    margin-right: 5px;
+.searchBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2em;
+  width: 2em;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
 
-    background-color: transparent;
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: 22px 22px;
-    background-position: 95% center;
-    border-radius: 50px;
-    /* border: 3px solid #f4b057; */
-    transition: all 250ms ease-in-out;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    /* transition: transform 250ms ease-in-out; */
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 22px 22px;
+  background-position: 95% center;
+  border-radius: 50px;
+  /* border: 3px solid #f4b057; */
+  transition: all 250ms ease-in-out;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  /* transition: transform 250ms ease-in-out; */
 }
 
-.searchBtn:hover{
-    background-size: 18.5px 18.5px;
+.searchBtn:hover {
+  background-size: 18.5px 18.5px;
 }
 
-.site-camera-img img{
-    width: 4.5em;
-    height: auto;
+.site-camera-img img {
+  width: 4.5em;
+  height: auto;
 
-    margin-top: -0.8em;
-    margin-left: 0.7em;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  margin-top: -0.8em;
+  margin-left: 0.7em;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 .site-camera-img img:hover {
-    transform: scale(0.9); 
+  transform: scale(0.9);
 
-    background-color: #f4b05753;
-    border-radius: 45px;
+  background-color: #f4b05753;
+  border-radius: 45px;
 }
 
 @media (max-width: 767px) {
-    .search__container{
-        width: 20em;
-    }
-    .search__input__container{
-        width: 20em;
-        padding: 10px 20px;
-        margin-left: 0em;
-    }
+  .search__container {
+    width: 20em;
+  }
+  .search__input__container {
+    width: 20em;
+    padding: 10px 20px;
+    margin-left: 0em;
+  }
+
+  .search__title {
+    margin-left: 1.3em;
+    margin-top: 0.5em;
+    color: #1c1c1c;
+    display: none;
+  }
+
+  .search__title_mobile {
+    font-size: 0.9em;
+    margin-left: 1.3em;
+    margin-top: 0.5em;
+    color: #1c1c1c;
+    display: block;
+  }
 }
 
 /* --------------------------- 카메라 모달 부분 ------------------ */
 .modal-overlay-main {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    animation: fadeIn 0.5s forwards; /* 페이드인 효과 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards; /* 페이드인 효과 */
 }
 
 .modal-container {
-    position: relative; /* 위치를 부모 요소에 상대적으로 고정 */
-    background: white;
-    padding: 2em;
-    border-radius: 8px;
-    animation: slideDown 0.5s ease forwards; /* 슬라이드다운 효과 */
+  position: relative; /* 위치를 부모 요소에 상대적으로 고정 */
+  background: white;
+  padding: 2em;
+  border-radius: 8px;
+  animation: slideDown 0.5s ease forwards; /* 슬라이드다운 효과 */
 
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 50em; /* 최대 너비 제한 */
-    width: 90%; /* 모바일에서도 중앙에 적절히 맞추기 */
-    max-height: 90vh; /* 모달의 최대 높이를 설정 */
-    overflow-y: auto; /* 콘텐츠가 넘칠 경우 스크롤 추가 */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 50em; /* 최대 너비 제한 */
+  width: 90%; /* 모바일에서도 중앙에 적절히 맞추기 */
+  max-height: 90vh; /* 모달의 최대 높이를 설정 */
+  overflow-y: auto; /* 콘텐츠가 넘칠 경우 스크롤 추가 */
 }
 
 @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-  
+
 @keyframes slideDown {
-    from {
-      transform: translateY(-20px); /* 자연스러운 슬라이드 효과 */
-    }
-    to {
-      transform: translateY(0);
-    }
+  from {
+    transform: translateY(-20px); /* 자연스러운 슬라이드 효과 */
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* 모달 창 닫기 아이콘 */
-.modal-close-icon{
-    /* width: 3em; */
-    font-size: 1.5em;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 0.2em;
-    cursor: pointer;
+.modal-close-icon {
+  /* width: 3em; */
+  font-size: 1.5em;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0.2em;
+  cursor: pointer;
 }
 
-.reference-text{
-    color: #bbbbbb;
-    margin-top: 0.3em;
-    padding-left: 0.3em;
+.reference-text {
+  color: #bbbbbb;
+  margin-top: 0.3em;
+  padding-left: 0.3em;
 }
 
 /* 이미지 업로드 버튼 */
-.modal-imgUpload{
-    width: 13em;
-    height: 1.7em;
-    margin-top: 0.7em;
-    margin-bottom: 0.8em;
-    padding-top: 0.1em;
+.modal-imgUpload {
+  width: 13em;
+  height: 1.7em;
+  margin-top: 0.7em;
+  margin-bottom: 0.8em;
+  padding-top: 0.1em;
 
-    font-size: 2.4em;
-    color: white;
-    background-color: #f4b057;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 2.4em;
+  color: white;
+  background-color: #f4b057;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-.modal-imgUpload:hover{
-    background-color: #d1892a;
+.modal-imgUpload:hover {
+  background-color: #d1892a;
 }
 
 .upload-container {
-    text-align: center;
-}
-  
-#recipe-camera-input {
-display: none; /* file input 요소를 화면에서 숨깁니다 */
+  text-align: center;
 }
 
-.selectImg-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#recipe-camera-input {
+  display: none; /* file input 요소를 화면에서 숨깁니다 */
 }
-.selectImg{
-    font-size: 1em;
-    display: flex;
-    color: #3f3f38;
-    margin-bottom: 0.7em;
+
+.selectImg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.selectImg {
+  font-size: 1em;
+  display: flex;
+  color: #3f3f38;
+  margin-bottom: 0.7em;
 }
 .selectImg p {
-    margin-left: 0.5em;
+  margin-left: 0.5em;
 }
 
 /* 감지된 재료 보여주기 */
-.detectionList{
-    font-size: 1.1em;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
+.detectionList {
+  font-size: 1.1em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* #detectionFood{
@@ -699,6 +733,246 @@ display: none; /* file input 요소를 화면에서 숨깁니다 */
     border-bottom: solid 1px #131313;
 } */
 textarea#detectionFood {
+  width: 50%;
+  font-size: 0.9em;
+  height: 2.6em;
+  color: #1d1c1c;
+  /* padding-right: 2em; */
+  border: none;
+  margin-left: 0.5em;
+  /* margin-right: 0.5em; */
+
+  /* border-bottom: 1px solid #ccc; */
+  resize: none;
+  background-color: #f9f9f9;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+textarea#detectionFood:focus {
+  border-bottom: 2px solid #f4b057;
+  background-color: #f9f9f9;
+}
+
+textarea#detectionFood[readonly] {
+  background-color: #f1f1f1;
+  color: #f9f9f9;
+}
+
+#detectionIcon {
+  margin-right: 2em;
+  margin-left: 0.3em;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+#detectionIcon:hover {
+  color: #555;
+}
+
+/* 등록하기 버튼 */
+.upload-button {
+  margin-top: 1.5em;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.upload-button:hover {
+  background-color: #555;
+}
+
+@media (max-width: 767px) {
+  .modal-imgUpload {
+    width: 8em;
+  }
+
+  .detectionList {
+    font-size: 0.9em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ------------------------------------------------------------- RecipeDetail.jsx 부분 ---------------------------------------------------------------- */
+
+* {
+  font-family: "Pretendard-Regular";
+  letter-spacing: 0.5px;
+}
+
+#recipe {
+  width: fit-content;
+  margin-left: 6.5em;
+  margin-right: 6.5em;
+}
+
+.detail-container {
+  border: 0.18em solid #131313;
+  padding: 1px 0;
+  display: flex;
+}
+
+/* 뒤로 가기 버튼 */
+#recipe-details-title {
+  text-align: center;
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.1em;
+}
+
+.heart-container {
+  border: none;
+  background-color: transparent;
+  font-size: 2.7em;
+  height: 2em;
+  cursor: pointer;
+  color: #f05650;
+
+  display: flex;
+  align-items: center;
+}
+.heart-container:hover {
+  transform: scale(1.1);
+}
+
+.heartText {
+  margin-left: 0.4em;
+  font-size: 0.5em;
+}
+
+#recipe-details-goback {
+  height: auto;
+  width: 0.51em;
+  top: 50%;
+  transform: translate(0%, -50%);
+  z-index: 100;
+  font-size: 2em;
+  text-align: center;
+  margin-top: 1em;
+  cursor: pointer;
+
+  /* display: inline-block; */
+  transition: transform 0.3s ease;
+}
+
+#recipe-details-goback:hover {
+  color: #f4b057;
+}
+
+/* photo */
+.photo {
+  display: flex;
+  width: fit-content;
+  border-right: 0.18em solid #131313;
+}
+
+.photo img {
+  width: 40vw;
+  height: auto;
+  padding-right: 1px;
+  padding-left: 1px;
+  /* border-radius: 15px; */
+  max-height: 32em;
+}
+
+.instruct-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 요리 제목 */
+#recipe_name {
+  margin-top: 2em;
+  width: 100%;
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  font-family: "SF_HambakSnow";
+}
+
+/* content */
+#instruction {
+  height: 100%;
+  font-size: 1.2em;
+  color: #8b8383;
+  margin: 4em 3em 0em 3em;
+}
+
+.rowflex {
+  display: flex;
+  flex-direction: row;
+  height: 10em;
+  margin: 5px 0;
+  color: #685d5d;
+
+  border-top: 0.18em solid #131313;
+  padding-top: 0.5%;
+}
+
+.rowflex > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* .rowflex > div:not(:last-child)::after: 마지막 자식이 아닌 모든 자식 div의 오른쪽에 세로선을 추가 */
+.rowflex > div:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 50%;
+  width: 1px;
+  background-color: #ccc;
+}
+
+.rowflex > div:not(:last-child) {
+  padding-right: 10px;
+  /* 오른쪽 패딩을 10px로 설정 */
+}
+
+/* .rowflex > div:not(:first-child): 첫 번째 자식이 아닌 모든 자식 div에 왼쪽 패딩 추가 */
+.rowflex > div:not(:first-child) {
+  padding-left: 10px;
+}
+.recipe-detail-rowflex-div {
+  font-size: 22px;
+}
+.recipe-detail-rowflex-div div {
+  margin-left: 1em;
+  font-size: 0.65em;
+  font-weight: bolder;
+}
+
+/* 데스크톱: 1920px 이상 */
+@media (min-width: 1920px) {
+  .photo img {
+    width: 40vw;
+    height: auto;
+    padding-right: 1px;
+    padding-left: 1px;
+    /* border-radius: 15px; */
+  }
+
+  .instruct-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  textarea#detectionFood {
+    /* width: 50%; */
     font-size: 0.9em;
     height: 2.6em;
     color: #1d1c1c;
@@ -712,635 +986,539 @@ textarea#detectionFood {
     background-color: #f9f9f9;
     outline: none;
     transition: border-color 0.3s ease;
-}
+  }
 
-textarea#detectionFood:focus {
+  textarea#detectionFood:focus {
     border-bottom: 2px solid #f4b057;
     background-color: #f9f9f9;
-}
+  }
 
-textarea#detectionFood[readonly] {
+  textarea#detectionFood[readonly] {
     background-color: #f1f1f1;
     color: #f9f9f9;
-}
-
-#detectionIcon{
-    margin-right: 2em;
-    margin-left: 0.3em;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-#detectionIcon:hover{
-    color: #555;
-}
-
-/* 등록하기 버튼 */
-.upload-button{
-    margin-top: 1.5em;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.upload-button:hover {
-    background-color: #555;
-}
-
-
-@media (max-width: 767px) {
-    .modal-imgUpload{
-        width: 10em;
-    }
-}
-
-/* ------------------------------------------------------------- RecipeDetail.jsx 부분 ---------------------------------------------------------------- */
-
-* {
-    font-family: 'Pretendard-Regular';
-    letter-spacing: 0.5px;
-}
-
-#recipe {
-    width: fit-content;
-    margin-left: 6.5em;
-    margin-right: 6.5em;
-}
-
-.detail-container{
-    border: 0.18em solid #131313;
-    padding: 1px 0;
-    display: flex;
-}
-
-
-/* 뒤로 가기 버튼 */
-#recipe-details-title {
-    text-align: center;
-    position: relative;
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    padding-bottom: 0.1em;
-}
-
-.heart-container{
-    border: none;
-    background-color: transparent;
-    font-size: 2.7em;
-    height: 2em;
-    cursor: pointer;
-    color: #F05650;
-
-    display: flex;
-    align-items: center;
-}
-.heart-container:hover{
-    transform: scale(1.1);
-}
-
-.heartText{
-    margin-left: 0.4em;
-    font-size: 0.5em;
-}
-
-#recipe-details-goback {
-    height: auto;
-    width: 0.51em;
-    top: 50%;
-    transform: translate(0%, -50%);
-    z-index: 100;
-    font-size: 2em;
-    text-align: center;
-    margin-top: 1em;
-    cursor: pointer;
-
-    /* display: inline-block; */
-    transition: transform 0.3s ease;
-}
-
-#recipe-details-goback:hover{
-    color: #f4b057;
-}
-
-/* photo */
-.photo {
-    display: flex;
-    width: fit-content;
-    border-right: 0.18em solid #131313;
-}
-
-.photo img {
-    width: 40vw;
-    height: auto;
-    padding-right: 1px;
-    padding-left: 1px;
-    /* border-radius: 15px; */
-    max-height: 32em;
-}
-
-.instruct-container{
-    display: flex;
-    flex-direction: column;
-
-}
-
-/* 요리 제목 */
-#recipe_name {
-    margin-top: 2em;
-    width: 100%;
-    font-size: 36px;
-    font-weight: 700;
-    text-align: center;
-    font-family: 'SF_HambakSnow';
-}
-
-/* content */
-#instruction {
-    height: 100%;
-    font-size: 1.2em;
-    color: #8b8383;
-    margin: 4em 3em 0em 3em;
-}
-
-.rowflex {
-    display: flex;
-    flex-direction: row;
-    height: 10em;
-    margin: 5px 0;
-    color: #685d5d;
-
-    border-top: 0.18em solid #131313;
-    padding-top: 0.5%;
-}
-
-.rowflex>div {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-/* .rowflex > div:not(:last-child)::after: 마지막 자식이 아닌 모든 자식 div의 오른쪽에 세로선을 추가 */
-.rowflex>div:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 50%;
-    width: 1px;
-    background-color: #ccc;
-}
-
-.rowflex>div:not(:last-child) {
-    padding-right: 10px;
-    /* 오른쪽 패딩을 10px로 설정 */
-}
-
-/* .rowflex > div:not(:first-child): 첫 번째 자식이 아닌 모든 자식 div에 왼쪽 패딩 추가 */
-.rowflex>div:not(:first-child) {
-    padding-left: 10px;
-}
-.recipe-detail-rowflex-div {
-    font-size: 22px;
-}
-.recipe-detail-rowflex-div div {
-    margin-left: 1em;
-    font-size: 0.65em;
-    font-weight: bolder;
-}
-
-/* 데스크톱: 1920px 이상 */
-@media (min-width: 1920px) {
-    .photo img {
-        width: 40vw;
-        height: auto;
-        padding-right: 1px;
-        padding-left: 1px;
-        /* border-radius: 15px; */
-    }
-    
-    .instruct-container{
-        display: flex;
-        flex-direction: column;
-    }
+  }
 }
 
 @media (min-width: 1440px) and (max-width: 1920px) {
-    .photo {
-        /* height: fit-content; */
-    }
-    .photo img {
-        width: 35vw;
-        height: 100%;
-    }
-    .instruct-container{
-        display: flex;
-        flex-direction: column;
-    }
-    #recipe_name {
-        margin-top: 1em;
-        padding: 1em 0.5em 0em 0.5em;
-        width: 100%;
-        font-size: 1.8em;
-        font-weight: 700;
-        text-align: center;
-        font-family: 'SF_HambakSnow';
-    }
-    #instruction {
-        font-size: 1.1em;
-        margin: 0em 3em 0em 3em;
-        display: flex;
-        align-items: center;
-    }
-    .rowflex {
-        height: 8em;
-        margin: 5px 0;
-        width: 63.6em;
-    
-        border-top: 0.18em solid #131313;
-        padding-top: 0.5%;
-    }
+  .photo {
+    /* height: fit-content; */
+  }
+  .photo img {
+    width: 35vw;
+    height: 100%;
+  }
+  .instruct-container {
+    display: flex;
+    flex-direction: column;
+  }
+  #recipe_name {
+    margin-top: 1em;
+    padding: 1em 0.5em 0em 0.5em;
+    width: 100%;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-align: center;
+    font-family: "SF_HambakSnow";
+  }
+  #instruction {
+    font-size: 1.1em;
+    margin: 0em 3em 0em 3em;
+    display: flex;
+    align-items: center;
+  }
+  .rowflex {
+    height: 8em;
+    margin: 5px 0;
+    width: 63.6em;
+
+    border-top: 0.18em solid #131313;
+    padding-top: 0.5%;
+  }
 }
 
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
-    .photo {
-        /* height: fit-content; */
-    }
-    .photo img {
-        width: 35vw;
-        height: 100%;
-    }
-    .instruct-container{
-        display: flex;
-        flex-direction: column;
-    }
-    #recipe_name {
-        margin-top: 1em;
-        padding: 1em 0.5em 0em 0.5em;
-        width: 100%;
-        font-size: 1.5em;
-        font-weight: 700;
-        text-align: center;
-        font-family: 'SF_HambakSnow';
-    }
-    #instruction {
-        font-size: 1.05em;
-        margin: 0em 3em 0em 3em;
-        display: flex;
-        align-items: center;
-    }
-    .rowflex {
-        height: 8em;
-        margin: 5px 0;
-    
-        border-top: 0.18em solid #131313;
-        padding-top: 0.5%;
-    }
+  .photo {
+    /* height: fit-content; */
+  }
+  .photo img {
+    width: 35vw;
+    height: 100%;
+  }
+  .instruct-container {
+    display: flex;
+    flex-direction: column;
+  }
+  #recipe_name {
+    margin-top: 1em;
+    padding: 1em 0.5em 0em 0.5em;
+    width: 100%;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-align: center;
+    font-family: "SF_HambakSnow";
+  }
+  #instruction {
+    font-size: 1.05em;
+    margin: 0em 3em 0em 3em;
+    display: flex;
+    align-items: center;
+  }
+  .rowflex {
+    height: 8em;
+    margin: 5px 0;
+
+    border-top: 0.18em solid #131313;
+    padding-top: 0.5%;
+  }
 }
 
 /* 모바일: 768px 미만 */
-@media (max-width: 767px){
-    #recipe{
-        max-width: fit-content;
-        margin: 0em 2em;
-    }
-    #recipe-details-title{
-        padding-bottom: 0em;
-    }
-    #recipe-details-goback{
-        margin-top: 0;
-        transform: translate(0%, -60%);
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-    }
+@media (max-width: 767px) {
+  #recipe {
+    max-width: fit-content;
+    margin: 0em 2em;
+  }
+  #recipe-details-title {
+    padding-bottom: 0em;
+  }
+  #recipe-details-goback {
+    margin-top: 0;
+    transform: translate(0%, -60%);
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 
-    .photo{
-        width: auto;
-        border-right: none;
-        border-bottom: 0.18em solid #131313;
-    }
-    .photo img {
-        width: 100%;
-        height: 15em;
-    }
-    .instruct-container{
-        display: flex;
-        flex-direction: column;
-    }
-    #recipe_name {
-        margin-top: 1em;
-        padding: 0em 1em;
-        /* padding: 1em 0.5em 0em 0.5em; */
-        width: 100%;
-        font-size: 1.5em;
-        font-weight: 700;
-        text-align: center;
-        font-family: 'SF_HambakSnow';
-    }
-    #instruction {
-        font-size: 1.05em;
-        margin: 1em 1em 0em 1.3em;
-        display: flex;
-        align-items: center;
-    }
-    .rowflex {
-        height: 4.2em;
-        margin-top: 1em;
-    
-        border-top: 0.18em solid #131313;
-        padding-top: 0.5%;
-    }
-    .rowflex div{
-        padding-left: 0.1em;
-    }
-    
-    .rowflex>div:not(:last-child) {
-        padding-right: 1px;
-        /* 오른쪽 패딩을 10px로 설정 */
-    }
-    
-    /* .rowflex > div:not(:first-child): 첫 번째 자식이 아닌 모든 자식 div에 왼쪽 패딩 추가 */
-    .rowflex>div:not(:first-child) {
-        padding-left: 0em;
-    }
-    .recipe-detail-rowflex-div{
-        margin: 0em 0.1em;
-    }
-    .recipe-detail-rowflex-div div {
-        margin-left: 0.2em;
-        font-size: 0.6em;
-        font-weight: bolder;
-        width: fit-content;
-    }
+  .photo {
+    width: auto;
+    border-right: none;
+    border-bottom: 0.18em solid #131313;
+  }
+  .photo img {
+    width: 100%;
+    height: 15em;
+  }
+  .instruct-container {
+    display: flex;
+    flex-direction: column;
+  }
+  #recipe_name {
+    margin-top: 1em;
+    padding: 0em 1em;
+    /* padding: 1em 0.5em 0em 0.5em; */
+    width: 100%;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-align: center;
+    font-family: "SF_HambakSnow";
+  }
+  #instruction {
+    font-size: 1.05em;
+    margin: 1em 1em 0em 1.3em;
+    display: flex;
+    align-items: center;
+  }
+  .rowflex {
+    height: 4.2em;
+    margin-top: 1em;
+
+    border-top: 0.18em solid #131313;
+    padding-top: 0.5%;
+  }
+  .rowflex div {
+    padding-left: 0.1em;
+  }
+
+  .rowflex > div:not(:last-child) {
+    padding-right: 1px;
+    /* 오른쪽 패딩을 10px로 설정 */
+  }
+
+  /* .rowflex > div:not(:first-child): 첫 번째 자식이 아닌 모든 자식 div에 왼쪽 패딩 추가 */
+  .rowflex > div:not(:first-child) {
+    padding-left: 0em;
+  }
+  .recipe-detail-rowflex-div {
+    margin: 0em 0.1em;
+  }
+  .recipe-detail-rowflex-div div {
+    margin-left: 0.2em;
+    font-size: 0.6em;
+    font-weight: bolder;
+    width: fit-content;
+  }
 }
 
-@media screen and (max-width: 767px) and (min-width: 1px){
-    .detail-container{
-        display: flex;
-        flex-direction: column;
-        margin-top: 0;
-    }
-    .heart-container{
-        font-size: 2em;
-    }
+@media screen and (max-width: 767px) and (min-width: 1px) {
+  .detail-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  .heart-container {
+    font-size: 2em;
+  }
 }
-
 
 /*  재료 리스트  */
 
 #ingredient-wrapper {
-    width: auto;
-    padding: 3.5em 1em;
-    border-left: 0.18em solid #131313;
-    border-right: 0.18em solid #131313;
+  width: auto;
+  padding: 3.5em 1em;
+  border-left: 0.18em solid #131313;
+  border-right: 0.18em solid #131313;
 
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-#ingredient-List{
-    width: 100%;
-    padding: 0em 3em;
+#ingredient-List {
+  width: 100%;
+  padding: 0em 3em;
 }
 
-#ingredientList{
-    width: 100%;
+#ingredientList {
+  width: 100%;
 }
 
 .ingredientList-Title {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: fit-content;
-    height: 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: fit-content;
+  height: 2em;
 
-    padding-left: 2em;
-    margin-bottom: 0.5em;
-    font-size: 1.35em;
-    font-weight: 700;
+  padding-left: 2em;
+  margin-bottom: 0.5em;
+  font-size: 1.35em;
+  font-weight: 700;
 }
 
 .ingredientList-Title h3 {
-    margin-right: 0.3em;
+  margin-right: 0.3em;
 }
 
 .ingredientList-Title span {
-    color: #a1a19e4b;
-    font-style: italic;
-    font-size: 1.3em;
-    margin-left: -0.5em;
+  color: #a1a19e4b;
+  font-style: italic;
+  font-size: 1.3em;
+  margin-left: -0.5em;
 
-    padding-bottom: 5%;
+  padding-bottom: 5%;
 }
 
 /* 리스트 하위 테이블 */
 #ingredient-wrapper table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 2em 3em 2em;
-    font-size: 14px;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 2em 3em 2em;
+  font-size: 14px;
 }
 
 #ingredient-wrapper th {
-    padding: 0.7em 0em 0.7em 1em;
-    text-align: left;
-    border-bottom: 0.1em solid #ddd;
-    width: 60%;
+  padding: 0.7em 0em 0.7em 1em;
+  text-align: left;
+  border-bottom: 0.1em solid #ddd;
+  width: 60%;
 
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 #ingredient-wrapper td {
-    padding: 0.8em 1em;
-    text-align: end;
-    border-bottom: 1px solid #ddd;
-    width: 10%;
+  padding: 0.8em 1em;
+  text-align: end;
+  border-bottom: 1px solid #ddd;
+  width: 10%;
 
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 /* 데스크톱: 1920px 이상 */
 @media (min-width: 1920px) {
-    #ingredient-wrapper {
-        flex-direction: row; /* 기본 방향 유지 */
-    }
+  #ingredient-wrapper {
+    flex-direction: row; /* 기본 방향 유지 */
+  }
 }
 @media (min-width: 1440px) and (max-width: 1920px) {
-    #ingredient-wrapper td {
-        width: 15%;
-    }
+  #ingredient-wrapper td {
+    width: 15%;
+  }
 }
 
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
-    #ingredient-wrapper {
-        flex-direction: column; /* 가로 배치 유지 */
-        padding: 2.5em 1em;
-    }
-    #ingredient-List{
-        padding: 0em 5em;
-    }
+  #ingredient-wrapper {
+    flex-direction: column; /* 가로 배치 유지 */
+    padding: 2.5em 1em;
+  }
+  #ingredient-List {
+    padding: 0em 5em;
+  }
 
-    /* 리스트 하위 테이블 */
-    #ingredient-wrapper table {
-        width: 95%;
-        border-collapse: collapse;
-        margin: 0 2em 3em 2em;
-        font-size: 14px;
-    }
+  /* 리스트 하위 테이블 */
+  #ingredient-wrapper table {
+    width: 95%;
+    border-collapse: collapse;
+    margin: 0 2em 3em 2em;
+    font-size: 14px;
+  }
 
-    #ingredient-wrapper th {
-        padding: 0.7em 0em 0.7em 1em;
-        text-align: left;
-        width: 50%;
-        font-size: 1em;
-    }
+  #ingredient-wrapper th {
+    padding: 0.7em 0em 0.7em 1em;
+    text-align: left;
+    width: 50%;
+    font-size: 1em;
+  }
 
-    #ingredient-wrapper td {
-        padding: 0.5em 1em;
-        width: 10%;
-        font-size: 1em;
-    }
+  #ingredient-wrapper td {
+    padding: 0.5em 1em;
+    width: 10%;
+    font-size: 1em;
+  }
 }
 
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
-    #ingredient-wrapper {
-        flex-direction: column; /* 세로 배치로 변경 */
-        align-items: center;
-        padding: 2em 0.5em;
-    }
-    #ingredient-List{
-        padding-right: 3em;
-        padding-left: 0;
-    }
-    #ingredient-List td{
-        width: 1em;
-    }
+  #ingredient-wrapper {
+    flex-direction: column; /* 세로 배치로 변경 */
+    align-items: center;
+    padding: 2em 0.5em;
+  }
+  #ingredient-List {
+    padding-right: 3em;
+    padding-left: 0;
+  }
+  #ingredient-List td {
+    width: 1em;
+  }
 }
 
 /* --------------------- Description 요리 방법 --------------------------- */
 
-#description-wrapper{
-    width: auto;
-    border-left: 0.18em solid #131313;
-    border-right: 0.18em solid #131313;
-    border-bottom: 0.18em solid #131313;
+#description-wrapper {
+  width: auto;
+  border-left: 0.18em solid #131313;
+  border-right: 0.18em solid #131313;
+  border-bottom: 0.18em solid #131313;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0em 6em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0em 6em;
 }
 
-
 #description-title {
-    padding: 0 7px;
-    margin-bottom: 0.5em;
+  padding: 0 7px;
+  margin-bottom: 0.5em;
 
-    display: flex;
+  display: flex;
 }
 
 #description-title h3 {
-    margin-right: 0.3em;
-    font-size: 28px;
-    font-weight: 700;
+  margin-right: 0.3em;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 #description-title span {
-    color: #a1a19e4b;
-    font-style: italic;
-    font-size: 1.3em;
-    font-weight: 700;
-    margin-left: -0.5em;
+  color: #a1a19e4b;
+  font-style: italic;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-left: -0.5em;
 }
 
 .description {
-    padding: 0.5em 0.5em;
-    margin-bottom: 5em;
+  padding: 0.5em 0.5em;
+  margin-bottom: 5em;
 
-    font-size: 1.4em;
+  font-size: 1.4em;
 }
 
-#indexItem{
-    margin-bottom: 1em;
-    font-size: 1.1em;
+#indexItem {
+  margin-bottom: 1em;
+  font-size: 1.1em;
 }
-
 
 @media (min-width: 1440px) and (max-width: 1920px) {
-    #description-wrapper{
-        padding: 0em 6em;
-    }
-    #description-title {
-        font-size: 1.7em;
-    }
+  #description-wrapper {
+    padding: 0em 6em;
+  }
+  #description-title {
+    font-size: 1.7em;
+  }
 }
 
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
-    #description-wrapper{
-        padding: 0em 8em;
-    }
-    #description-title {
-        font-size: 1.7em;
-    }
+  #description-wrapper {
+    padding: 0em 8em;
+  }
+  #description-title {
+    font-size: 1.7em;
+  }
 }
 
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
-    #description-wrapper{
-        padding: 0em 2em;
-    }
-    .description{
-        font-size: 1em;
-    }
+  #description-wrapper {
+    padding: 0em 2em;
+  }
+  .description {
+    font-size: 1em;
+  }
 }
 
-.cookingStart{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 1.52em;
+.cookingStart {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 1.52em;
 }
-.cookingBtn{
-    border-radius: 5px;
-    border: none;
-    background-color: #f4b057;
-    padding: 0.5em;
-    margin-left: 0.5em;
-    
-    font-family: 'SF_HambakSnow';
-    font-size: 1.8em;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.cookingBtn {
+  border-radius: 5px;
+  border: none;
+  background-color: #f4b057;
+  padding: 0.5em;
+  margin-left: 0.5em;
+
+  font-family: "SF_HambakSnow";
+  font-size: 1.8em;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
-.cookingBtn:hover{
-    background-color: #e79529;
-    transform: scale(1.1);
+.cookingBtn:hover {
+  background-color: #e79529;
+  transform: scale(1.1);
 }
 
-#rightarrowIcon{
-    font-size: 3em;
+#rightarrowIcon {
+  font-size: 3em;
 }
 
 @media (max-width: 767px) {
-    .cookingBtn{
-        padding: 0.5em;
-        margin-left: 0.5em;
-        
-        font-family: 'SF_HambakSnow';
-        font-size: 1.2em;
-        cursor: pointer;
-    }
-    #rightarrowIcon{
-        font-size: 2em;
-    }
+  .cookingBtn {
+    padding: 0.5em;
+    margin-left: 0.5em;
+
+    font-family: "SF_HambakSnow";
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  #rightarrowIcon {
+    font-size: 2em;
+  }
+}
+
+.recipe-main-category-continer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 13%;
+  margin-bottom: 1%;
+}
+
+.recipe-main-category-title-wrapper {
+  width: 100%;
+  display: flex;
+
+  margin-bottom: 1%;
+}
+
+.recipe-main-category-button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  align-items: center;
+
+  overflow-x: auto;
+  white-space: nowrap;
+
+  gap: 1%;
+
+  margin-bottom: 4%;
+}
+
+.recipe-main-category-button-wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.recipe-main-category-button-wrapper img {
+  height: 7em;
+  width: auto;
+  margin-bottom: 5%;
+}
+.recipe-main-category-button-wrapper span {
+  font-size: 1.2em;
+}
+
+@media (max-width: 767px) {
+  .recipe-main-category-continer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 7%;
+    margin-bottom: 1%;
+  }
+
+  .recipe-main-category-title-wrapper {
+    width: 100%;
+    display: flex;
+
+    margin-bottom: 2%;
+  }
+
+  .recipe-main-category-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    gap: 4%;
+
+    margin-bottom: 4%;
+  }
+
+  .recipe-main-category-button-wrapper {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
+  .recipe-main-category-button-wrapper img {
+    height: 5em;
+    width: auto;
+    margin-bottom: 8%;
+  }
+  .recipe-main-category-button-wrapper span {
+    font-size: 1em;
+  }
 }

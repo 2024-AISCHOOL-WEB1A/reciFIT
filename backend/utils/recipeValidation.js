@@ -114,7 +114,20 @@ const isValidDifficulty = (ckDifficulty) => {
   return validDifficulty.includes(ckDifficulty);
 };
 
+const isInCategory = (searchString) => {
+  if (validMethods.includes(searchString)) return "method";
+  if (validCategories.includes(searchString)) return "category";
+  if (validIngredientCategories.includes(searchString))
+    return "ingredient-category";
+  if (validType.includes(searchString)) return "type";
+  if (validAmount.includes(searchString)) return "amount";
+  if (validTime.includes(searchString)) return "time";
+  if (validDifficulty.includes(searchString)) return "difficulty";
+  return "";
+};
+
 module.exports = {
+  isInCategory,
   isValidCkMethod,
   isValidCkCategory,
   isValidCkIngredientCategory,

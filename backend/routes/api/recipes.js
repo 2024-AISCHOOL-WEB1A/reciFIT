@@ -6,10 +6,11 @@ const recipeValidation = require("../../utils/recipeValidation");
 const { isValidIdx, isValidURL } = require("../../utils/validation");
 const { getUserRole, getRecipeOwner } = require("../../utils/dbHelpers");
 const { normalizeString } = require("../../utils/commonUtils");
+const axios = require("axios");
 require("dotenv").config();
 
 // 조회수 최대값
-const MAX_RECIPE_FETCH_LIMIT = 10;
+const MAX_RECIPE_FETCH_LIMIT = 80;
 
 // 레시피 생성
 router.post("/", authenticateAccessToken, async (req, res) => {
@@ -94,6 +95,40 @@ router.post("/", authenticateAccessToken, async (req, res) => {
   }
 });
 
+// 사진만 먼저 가져오기
+router.get(
+  "/ingredient-detection",
+  authenticateAccessToken,
+  async (req, res) => {
+    let { photoUrl } = req.query;
+
+    if (!photoUrl) {
+      return res.status(400).json({
+        message: "Image URL is required",
+      });
+    }
+
+    // key인지 url인지 구분
+    if (!isValidURL(photoUrl)) {
+      photoUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.S3_REGION}.amazonaws.com/${photoUrl}`;
+    }
+
+    // FastAPI 서버로 사진을 보내서 have 추출
+    try {
+      const ingredientFastApiServerUrl = `${process.env.YOLO_FASTAPI_SERVER_HOST}:${process.env.YOLO_FASTAPI_SERVER_PORT}/api/ingredients-detection`;
+      const response = await axios.post(ingredientFastApiServerUrl, {
+        photoUrl: photoUrl,
+      });
+
+      const extractedNames = response.data.ingredients_names;
+      return res.status(200).json({ ingredientNames: extractedNames });
+    } catch (err) {
+      console.error("AI server request Error :", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  }
+);
+
 // 레시피 추천
 router.get("/", authenticateAccessToken, async (req, res) => {
   let {
@@ -110,9 +145,43 @@ router.get("/", authenticateAccessToken, async (req, res) => {
     category,
     ingredientCategory,
     type,
+    random,
     count = MAX_RECIPE_FETCH_LIMIT,
   } = req.query;
   const { userIdx } = req.user;
+
+  // console.log(req.query);
+
+  // 랜덤 오프셋 search
+  // 랜덤 오프셋 검색이 들어오면 그 무엇보다도 우선시된다
+  if (random) {
+    count = Math.min(parseInt(count), MAX_RECIPE_FETCH_LIMIT);
+    const totalRows = 163785;
+
+    let randomOffset = Math.max(
+      0,
+      Math.floor(Math.random() * (totalRows - count))
+    );
+    // 흑백요리사 검색
+    if (normalizeString(searchString) === "흑백요리사") {
+      randomOffset = 163773;
+    }
+
+    try {
+      const [recipes] = await db.query(
+        `SELECT * FROM TB_RECIPE WHERE approved_yn = "Y" LIMIT ?, ?`,
+        [randomOffset, count]
+      );
+
+      return res.status(200).json({
+        count: recipes.length,
+        recipes: recipes,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  }
 
   // photoUrl이 존재하면 FastAPI 서버로 사진을 보내서 확인한다
   if (photoUrl) {
@@ -125,7 +194,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
     try {
       const ingredientFastApiServerUrl = `${process.env.YOLO_FASTAPI_SERVER_HOST}:${process.env.YOLO_FASTAPI_SERVER_PORT}/api/ingredients-detection`;
       const response = await axios.post(ingredientFastApiServerUrl, {
-        image_url: photoUrl,
+        photoUrl: photoUrl,
       });
 
       // have를 사진에서 추출 (have가 있는 경우와 없는 경우로 분리)
@@ -147,77 +216,83 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   count = Math.min(parseInt(count), MAX_RECIPE_FETCH_LIMIT);
 
   // 유저의 개인 정보에서 재료 추가 조회 전에 만료되지 않은 재료와 유효한 수량 확인해서 have에 추가
-  if (!have || have.trim() === "") {
+  // have를 명시적으로 없음으로 보내면 확인을 하지 않음
+  if (have !== "없음") {
+    if (!have || have.trim() === "") {
+      try {
+        const [ingredientRows] = await db.execute(
+          `SELECT i.ingre_name
+         FROM TB_USER_INGREDIENT ui
+         JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
+         WHERE ui.user_idx = ? 
+           AND (ui.expired_date IS NULL OR ui.expired_date > CURDATE())
+           AND ui.quantity > 0`,
+          [userIdx]
+        );
+
+        const validIngredientNames = ingredientRows
+          .map((row) => row.ingre_name)
+          .join(", ");
+        if (validIngredientNames) {
+          have = validIngredientNames;
+        }
+      } catch (err) {
+        console.error("Error fetching valid ingredients:", err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+    }
+
+    // 유저의 개인 정보에서 재료 추가 조회
     try {
-      const [ingredientRows] = await db.execute(
-        `SELECT i.ingre_name
-       FROM TB_USER_INGREDIENT ui
-       JOIN TB_INGREDIENT i ON ui.ingre_idx = i.ingre_idx
-       WHERE ui.user_idx = ? 
-         AND (ui.expired_date IS NULL OR ui.expired_date > CURDATE())
-         AND ui.quantity > 0`,
+      const [rows] = await db.execute(
+        `SELECT 
+          preferred_ingredients, 
+          disliked_ingredients, 
+          non_consumable_ingredients 
+        FROM TB_USER 
+        WHERE user_idx = ?`,
         [userIdx]
       );
+      const user = rows[0];
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
 
-      const validIngredientNames = ingredientRows
-        .map((row) => row.ingre_name)
-        .join(", ");
-      if (validIngredientNames) {
-        have = validIngredientNames;
+      // 선호, 회피, 섭취 불가 재료 가져오기
+      if (
+        user.preferred_ingredients &&
+        user.preferred_ingredients.trim() !== ""
+      ) {
+        if (!prefer || prefer.trim() === "") {
+          prefer = user.preferred_ingredients;
+        } else {
+          prefer += `, ${user.preferred_ingredients}`;
+        }
+      }
+      if (
+        user.disliked_ingredients &&
+        user.disliked_ingredients.trim() !== ""
+      ) {
+        if (!dislike || dislike.trim() === "") {
+          dislike = user.disliked_ingredients;
+        } else {
+          dislike += `, ${user.disliked_ingredients}`;
+        }
+      }
+      if (
+        user.non_consumable_ingredients &&
+        user.non_consumable_ingredients.trim() !== ""
+      ) {
+        if (!nonConsumable || nonConsumable.trim() === "") {
+          nonConsumable = user.non_consumable_ingredients;
+        } else {
+          nonConsumable += `, ${user.non_consumable_ingredients}`;
+        }
       }
     } catch (err) {
-      console.error("Error fetching valid ingredients:", err);
+      console.error(err);
       return res.status(500).json({ message: "Internal server error" });
     }
-  }
-
-  // 유저의 개인 정보에서 재료 추가 조회
-  try {
-    const [rows] = await db.execute(
-      `SELECT 
-        preferred_ingredients, 
-        disliked_ingredients, 
-        non_consumable_ingredients 
-      FROM TB_USER 
-      WHERE user_idx = ?`,
-      [userIdx]
-    );
-    const user = rows[0];
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // 선호, 회피, 섭취 불가 재료 가져오기
-    if (
-      user.preferred_ingredients &&
-      user.preferred_ingredients.trim() !== ""
-    ) {
-      if (!prefer || prefer.trim() === "") {
-        prefer = user.preferred_ingredients;
-      } else {
-        prefer += `, ${user.preferred_ingredients}`;
-      }
-    }
-    if (user.disliked_ingredients && user.disliked_ingredients.trim() !== "") {
-      if (!dislike || dislike.trim() === "") {
-        dislike = user.disliked_ingredients;
-      } else {
-        dislike += `, ${user.disliked_ingredients}`;
-      }
-    }
-    if (
-      user.non_consumable_ingredients &&
-      user.non_consumable_ingredients.trim() !== ""
-    ) {
-      if (!nonConsumable || nonConsumable.trim() === "") {
-        nonConsumable = user.non_consumable_ingredients;
-      } else {
-        nonConsumable += `, ${user.non_consumable_ingredients}`;
-      }
-    }
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Internal server error" });
   }
 
   // 재료를 ,를 기준으로 분리 (공백 제거)
@@ -274,12 +349,72 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   // 추가 정보
   const updates = [];
 
+  // searchString 조건 추가
+  if (searchString && searchString.trim() !== "") {
+    // searchString 정규화
+    searchString = normalizeString(searchString);
+
+    // # 있는지 확인
+    if (searchString.includes("#")) {
+      // 해쉬 검색
+      const hashSearchStrings = searchString.split("#");
+
+      // 각 문자열에 대해서 검색 확인
+      for (const hashSearchString of hashSearchStrings) {
+        const category = recipeValidation.isInCategory(hashSearchString);
+
+        // 겹치는 카테고리가 있다면
+        if (category) {
+          if (category === "method") {
+            if (method) {
+              method += `, ${hashSearchString}`;
+            } else {
+              method = hashSearchString;
+            }
+          } else if (category === "ingredient-category") {
+            if (ingredientCategory) {
+              ingredientCategory += `, ${hashSearchString}`;
+            } else {
+              ingredientCategory = hashSearchString;
+            }
+          } else if (category === "type") {
+            if (type) {
+              type += `, ${hashSearchString}`;
+            } else {
+              type = hashSearchString;
+            }
+          } else if (category === "amount") {
+            if (amount) {
+              amount += `, ${hashSearchString}`;
+            } else {
+              amount = hashSearchString;
+            }
+          } else if (category === "time") {
+            if (time) {
+              time += `, ${hashSearchString}`;
+            } else {
+              time = hashSearchString;
+            }
+          } else if (category === "difficulty") {
+            if (difficulty) {
+              difficulty += `, ${hashSearchString}`;
+            } else {
+              difficulty = hashSearchString;
+            }
+          }
+        }
+      }
+    } else {
+      // 일반 검색
+      updates.push(`REPLACE(ck_name, ' ', '') LIKE ?`);
+      params.push(`%${searchString}%`);
+    }
+  }
+
   // 요리양
   if (amount) {
     // 요리양을 ,를 기준으로 분리
-    const amountList = amount
-      ? amount.split(",").map((item) => item.trim())
-      : [];
+    let amountList = amount ? amount.split(",").map((item) => item.trim()) : [];
 
     // 유효성 검사 1 : 요리양
     amountList = amountList.filter((item) =>
@@ -299,10 +434,10 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   // 시간
   if (time) {
     // 시간을 ,를 기준으로 분리
-    const timeList = time ? time.split(",").map((item) => item.trim()) : [];
+    let timeList = time ? time.split(",").map((item) => item.trim()) : [];
 
     // 유효성 검사 2: 요리 시간
-    timeList = timeList.filter((item) => isValidTime(item));
+    timeList = timeList.filter((item) => recipeValidation.isValidTime(item));
 
     // 시간이 1개인 경우와 여러개인 경우 쿼리가 달라져야 한다.
     if (timeList.length === 1) {
@@ -317,12 +452,14 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   // 난이도
   if (difficulty) {
     // 난이도를 ,를 기준으로 분리
-    const difficultyList = difficulty
+    let difficultyList = difficulty
       ? difficulty.split(",").map((item) => item.trim())
       : [];
 
     // 유효성 검사 3: 요리 난이도
-    difficultyList = difficultyList.filter((item) => isValidDifficulty(item));
+    difficultyList = difficultyList.filter((item) =>
+      recipeValidation.isValidDifficulty(item)
+    );
 
     // 시간이 1개인 경우와 여러개인 경우 쿼리가 달라져야 한다.
     if (difficultyList.length === 1) {
@@ -429,14 +566,6 @@ router.get("/", authenticateAccessToken, async (req, res) => {
     updates.push(exclusionConditions);
   }
 
-  // searchString 조건 추가
-  if (searchString && searchString.trim() !== "") {
-    // searchString 정규화
-    searchString = normalizeString(searchString);
-    updates.push(`REPLACE(ck_name, ' ', '') LIKE ?`);
-    params.push(`%${searchString}%`);
-  }
-
   // 기본 WHERE 절
   let whereClause = "approved_yn = 'Y'";
   // 조건이 있는 경우 추가
@@ -466,6 +595,8 @@ router.get("/", authenticateAccessToken, async (req, res) => {
   WHERE ${whereClause}
   ${orderByQueryString}
   LIMIT ${count};`;
+
+  // console.log(query);
 
   try {
     const [rows] = await db.execute(query, params);
