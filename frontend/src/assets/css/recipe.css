@@ -20,7 +20,6 @@
 }
 
 /* -----------------=------------------------- */
-
 /* 검색창 부분 */
 .SearchForm {
     width: 100%;
@@ -48,31 +47,13 @@
 
 /* 레이아웃 설정 */
 .recipeMain-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 1.8em 0;
     /* 좌우 여백 제거 */
 }
-
-
-/* ------------ youtube 동영상------------------- */
-.youtubeVideo {
-    position: relative;
-    width: 70%;
-    height: 25em;
-    margin-bottom: 2em;
-    /* 검색창과의 간격 조정 */
-}
-
-.youtubeVideo iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 
 
 /* ------------------------ 레시피 슬라이드 부분 시작 -------------------- */
@@ -262,25 +243,27 @@
     color: #685d5d;
 }
 
-/* 오늘 뭐먹지 ? best 슬라이드 부분 */
-.second-listItem {
-    margin-top: 5em;
-}
-
-
 /* 카테고리 분류 부분 */
 .cate_cont {
-    height: auto;
-    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
-.cate_cont ul {
-    display: table;
-    width: 100%;
+.category-items {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .cate_cont li {
     display: table-cell;
+}
+.category-items li {
+    flex: 0 0 auto; /* 아이템이 가로로 배치되도록 설정 */
+    width: 8em; /* 각 아이템의 고정 크기 */
+    text-align: center;
+    margin: 0 0.4em;
 }
 
 .cate_cont li a {
@@ -290,8 +273,8 @@
 
 .cate_cont li img {
     width: auto;
-    height: 6em;
-    margin-bottom: 5px;
+    height: 7em;
+    margin-bottom: 0.5em;
 }
 
 .s_list_ul_arrow {
@@ -303,17 +286,31 @@
 }
 
 .recipeCategory-container {
+    overflow-x: auto;
+    margin: 0;
+}
+
+/* 터치 스크롤 바 스타일 제거 
+    모바일 상태일 때는 스크롤 바를 생성하고, 웹에서는 제거
+*/
+.recipeCategory-container {
     margin-left: 3%;
     margin-right: 5%;
+
+    -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 */
+    scrollbar-width: none; /* Firefox */
+}
+.recipeCategory-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
 }
 
 .recipe-category {
     width: 100%;
-    height: 16vh;
+    height: 13em;
 
     display: flex;
     flex-direction: column;
-    padding: 0em 6em;
+    /* padding: 0em em; */
     margin-bottom: 1.5em;
 }
 
@@ -352,8 +349,72 @@
 /* 모바일: 768px 미만 */
 @media (max-width: 767px) {
     .recipe-category {
-        width: 97em;
-        height: 16vh;
+        padding: 0em 1em;
+        margin-bottom: 0.5em;
+        height: 10em;
+    }
+    
+    .category-items li {
+        width: 5.5em;
+        text-align: center;
+    }
+
+    .cate_cont li img {
+        width: auto;
+        height: 5em;
+        margin-bottom: 0.5em;
+    }
+
+    .category-items span {
+        font-size: 1em;
+    }
+
+    .list_content{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.2em;
+        margin-left: 0
+    }
+
+    .list_content_btn_div{
+        display: none;
+    }
+
+    .list_content_title{
+        text-align: center;
+    }
+    .list_content h3{
+        font-size: 1.1em;
+    }
+
+    /* 모바일 버전일 때 슬라이드를 그리드로 변경 _> 화살표 숨김 */
+    .recipeList-container{
+        justify-content: center;
+    }
+    .slide_list_left, .slide_list_right{
+        display: none
+    }
+
+    .slickList{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 */
+        gap: 1em;
+    }
+
+    .slide_list_li{
+        width: 12em;
+        margin-right: 0em;
+    }
+    .slide_list_thumb img{
+        height: 10em;
+        width: 12em;
+    }
+
+    .slide_list_caption{
+        text-align: left;
+    }
+    .slide_list_caption_tit{
+        font-size: 0.9em
     }
 }
 
@@ -497,6 +558,16 @@
     border-radius: 45px;
 }
 
+@media (max-width: 767px) {
+    .search__container{
+        width: 20em;
+    }
+    .search__input__container{
+        width: 20em;
+        padding: 10px 20px;
+        margin-left: 0em;
+    }
+}
 
 /* --------------------------- 카메라 모달 부분 ------------------ */
 .modal-overlay-main {
@@ -674,6 +745,13 @@ textarea#detectionFood[readonly] {
 }
 .upload-button:hover {
     background-color: #555;
+}
+
+
+@media (max-width: 767px) {
+    .modal-imgUpload{
+        width: 10em;
+    }
 }
 
 /* ------------------------------------------------------------- RecipeDetail.jsx 부분 ---------------------------------------------------------------- */

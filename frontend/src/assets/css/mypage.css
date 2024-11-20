@@ -1,306 +1,607 @@
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Freesentation-9Black";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
 }
 
-@font-face {
-    font-family: 'SBAggroB';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+.my-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 5% 0 0 0;
+  padding: 0 15%;
+
+  width: 100%;
 }
 
-@font-face {
-    font-family: 'SF_HambakSnow';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+.my-page-title {
+  font-family: "Freesentation-9Black";
+  /* font-weight: 700; */
+  display: flex;
+  font-size: 2.5em;
+  width: 100%;
+  justify-content: center;
+  border-bottom: solid 2px;
+  border-color: rgb(133, 133, 133);
+  padding-bottom: 3%;
 }
 
-.mypage {
-    font-family: 'Pretendard-Regular', sans-serif;
-    padding: 1.25em;
-    max-width: 80em;
-    margin: 0 auto;
-    font-weight: normal;
-    margin-top: 3em; /* 헤더와 간격 추가 */
+.my-page-tabbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+
+  gap: 5px;
+
+  padding: 5px 0;
+
+  /* border-bottom: solid 2px;
+  border-color: rgb(133, 133, 133); */
 }
 
-.shared-title-h2 {
-    font-family: 'SBAggroB';
-    text-align: center;
-    margin-bottom: 1.25em;
-    color: #111111;
-    font-size: 1.70rem;
-    padding: 0 0.1em;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    line-height: 1.5;
+.my-page-tab-button {
+  padding: 0.7em 1em;
+
+  background-color: white;
+  border-radius: 7px;
+
+  border: none;
+  cursor: pointer;
+}
+.my-page-tab-button-selected {
+  background-color: #f0f0f0;
+}
+.my-page-tab-button:hover {
+  background-color: #f0f0f0;
 }
 
-.shared-title1 {
-    font-family: 'Pretendard-Regular';
-    margin-bottom: 1.5em;
-    color: #111111;
-    font-size: 1.20rem;
-    padding: 0 0.1em;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    line-height: 1.5;
-    margin: 0 auto;
-    text-align: center;
-}
-.shared-title2 {
-    font-family: 'Pretendard-Regular';
-    margin-bottom: 1.5em;
-    color: #111111;
-    font-size: 1.20rem;
-    padding: 0 0.1em;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    line-height: 1.5;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 2.5em;
+.my-page-section-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 3%;
+  padding: 0 3%;
 }
 
-.info-section,
-.my-uploads {
-    margin: 1.25em 0;
-    padding: 1em;
-    background-color: white; /* 배경색 흰색으로 변경 */
-    border: 2px solid #ffffff; /* 테두리 색상 변경 */
-    border-radius: 0.5em;
+.my-page-section-title {
+  font-size: 1.6em;
+  font-weight: 700;
+
+  margin-bottom: 2%;
 }
 
-.recipes-section,
-.receipts-section,
-.additional-section
-{
+/* 회원 정보 */
+.my-page-user-info-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.my-page-user-info-table {
+  width: 50%;
+  border-collapse: collapse;
+
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+
+  table-layout: fixed;
+}
+
+.my-page-user-info-table input[type="text"] {
+  background-color: #f6f7f8;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 2px 0;
+  font-size: 1em;
+  width: 95%;
+  outline: none;
+  box-sizing: border-box;
+}
+.my-page-user-info-table input[type="text"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-page-user-info-table td {
+  padding: 10px;
+  font-size: 0.9em;
+}
+
+.my-page-user-info-table td:first-child {
+  width: 15%;
+}
+.my-page-user-info-table td:nth-child(2) {
+  width: 35%;
+}
+
+.my-page-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 15px;
+
+  margin-top: 3%;
+}
+
+.my-page-button {
+  height: 4em;
+  width: 10em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  /* background-color: rgb(255, 192, 182); */
+}
+
+.my-page-button-ok {
+  background-color: rgb(210, 214, 255);
+}
+
+.my-page-button:hover {
+  background-color: rgb(255, 190, 140);
+}
+
+/* 레시피 즐겨찾기 */
+.my-page-favorite-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+/* 환경 점수 */
+.my-page-env-score-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.my-page-env-score-wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-page-env-score-month {
+  font-size: 1.5em;
+  font-weight: 700;
+
+  margin-bottom: 1%;
+}
+
+.my-page-env-score-graph {
+  position: relative;
+}
+
+.my-page-env-score-score {
+  position: absolute;
+
+  left: 50%;
+  bottom: 10%;
+
+  transform: translate(-50%, 0); /* 요소의 크기를 고려해 중앙 정렬 */
+
+  font-weight: 700;
+  font-size: 3.3em;
+}
+
+.my-page-env-score-table-content {
+  width: 100%;
+  padding: 0 2%;
+}
+
+.my-page-env-score-table-content table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.my-page-env-score-table-content thead {
+  background-color: #e1e1e1;
+  color: #cc1800;
+}
+
+.my-page-env-score-table-content th {
+  padding: 10px 10px;
+}
+
+.my-page-env-score-table-content td {
+  padding: 6px 10px;
+}
+
+.my-page-env-score-table-content th,
+.my-page-env-score-table-content td {
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.my-page-env-score-table-content th:first-child,
+.my-page-env-score-table-content td:first-child {
+  text-align: left;
+  width: 50%;
+}
+.my-page-env-score-table-content th:nth-child(2),
+.my-page-env-score-table-content td:nth-child(2) {
+  text-align: right;
+  width: 20%;
+}
+.my-page-env-score-table-content th:nth-child(3),
+.my-page-env-score-table-content td:nth-child(3) {
+  text-align: right;
+  width: 30%;
+}
+
+/* 영수증 분석 내역 */
+.my-page-receipt-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.my-page-receipt-content table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.my-page-receipt-content th {
+  background-color: #e1e1e1;
+  padding: 10px 10px;
+}
+
+.my-page-receipt-content td {
+  padding: 6px 10px;
+}
+
+.my-page-receipt-content th,
+td {
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.my-page-receipt-content th:first-child,
+.my-page-receipt-content td:first-child {
+  text-align: left;
+  width: 20%;
+  padding-left: 3%;
+}
+.my-page-receipt-content th:nth-child(2),
+.my-page-receipt-content td:nth-child(2) {
+  text-align: left;
+  width: 50%;
+}
+.my-page-receipt-content th:nth-child(3),
+.my-page-receipt-content td:nth-child(3) {
+  text-align: right;
+  width: 30%;
+  padding-right: 3%;
+}
+
+.my-page-receipt-content img {
+  height: 250px;
+  width: auto;
+}
+
+.my-page-divided-line {
+  display: none;
+}
+
+@media screen and (max-width: 767px) and (min-width: 1px) {
+  .my-page-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    min-height: 17em;
-    border: 2px solid #ffffff; /* 테두리 색상 변경 */
-    border-radius: 10px;
-    padding: 20px;
-    margin: 1.25em 0;
-    background-color: white; /* 배경색 흰색으로 변경 */
-}
-.env-section {
+
+    margin: 5% 0 0 0;
+    padding: 0 10%;
+
+    width: 100%;
+  }
+
+  .my-page-title {
+    font-family: "Freesentation-9Black";
+    /* font-weight: 700; */
+    display: flex;
+    font-size: 2em;
+    width: 100%;
+    justify-content: center;
+    border-bottom: solid 2px;
+    border-color: #ff9500;
+    padding-bottom: 3%;
+  }
+
+  .my-page-tabbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+
+    gap: 5px;
+
+    padding: 5px 0;
+
+    display: none;
+  }
+
+  .my-page-tab-button {
+    padding: 0.7em 1em;
+
+    background-color: white;
+    border-radius: 7px;
+
+    border: none;
+    cursor: pointer;
+  }
+  .my-page-tab-button-selected {
+    background-color: #f0f0f0;
+  }
+  .my-page-tab-button:hover {
+    background-color: #f0f0f0;
+  }
+
+  .my-page-section-container {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    align-items: center;
-    min-height: 17em;
-    border: 2px solid #ffffff; /* 테두리 색상 변경 */
-    border-radius: 10px;
-    padding: 20px;
-    margin: 1.25em 0;
-    background-color: white; /* 배경색 흰색으로 변경 */
-}
 
-.info-section h2,
-.my-uploads h2 {
-    font-size: 1.5em;
-    margin-bottom: 0.625em;
-}
+    margin-top: 10%;
+    padding: 0 3%;
+  }
 
-.stats-section {
+  .my-page-section-title {
+    font-size: 1.3em;
+    font-weight: 700;
+
+    margin-bottom: 2%;
+  }
+
+  /* 회원 정보 */
+  .my-page-user-info-content {
+    width: 100%;
+
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1.25em;
-}
+    flex-direction: column;
+  }
 
-.info-card {
-    background-color: white; /* 배경색 흰색으로 변경 */
-    text-align: center;
-    padding: 1.25em;
-    border-radius: 0.5em;
-    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.1);
-    border: 2px solid #ffffff; /* 테두리 색상 변경 */
-    flex: 1;
-    max-width: 17.1875em;
-}
+  .my-page-user-info-table {
+    width: 100%;
+    border-collapse: collapse;
 
-.env-score-card {
-    background-color: white; /* 배경색 흰색으로 변경 */
-    border: 2px solid #ffffff; /* 테두리 색상 변경 */
-    text-align: center;
-    position: relative;
-    width: 50em; /* 차트의 너비 설정 */
-    height: 30em; /* 차트의 높이를 원형 형태에 맞게 조정 */
-    margin: 0 auto;
-}
-.env-score-title {
-    margin-bottom: 70px; /* 원하는 여백 크기 */
-}
-.stats-card {
-    background-color: white; /* 배경색 흰색으로 변경 */
-    border: 2px solid #ffffff; /* 테두리 색상 변경 */
-    position: relative;
-    width: 20em; /* 차트의 너비 설정 */
-    height: 12em;
-}
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
 
-.score-label {
-    position: absolute;
-    top: 50%; /* 점수 위치 조정 */
-    left: 50%;
-    transform: translate(-50%, -50%); /* 중앙 정렬 */
-    text-align: center;
-    color: #111; /* 텍스트 색상 조정 */
-}
-
-.score-value {
-    font-size: 32px; /* 점수 크기 */
-    font-weight: bold;
-    color: #36A2EB; /* 점수 색상 */
-}
-
-.score-text {
-    font-size: 14px; /* 텍스트 크기 */
-    color: #555; /* 텍스트 색상 */
-}
-
-.mypage-footer {
-    text-align: center;
-    margin-top: 1.25em;
-}
-
-.mypage-footer button {
-    padding: 0.625em 1.25em;
+  .my-page-user-info-table input[type="text"] {
+    background-color: #f6f7f8;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 2px 0;
     font-size: 1em;
-    border: none;
-    border-radius: 0.3125em;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
+    width: 95%;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .my-page-user-info-table input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+  }
 
-.mypage-footer button:hover {
-    background-color: #0056b3;
-}
+  .my-page-user-info-table td {
+    padding: 10px;
+    font-size: 1em;
+  }
 
-.info-title h3 {
-    font-family: 'SBAggroB';
-    text-align: center;
-    margin-bottom: 1.25em;
-    color: #111111;
-    font-size: 1.45rem;
-    padding: 0 0.1em;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    line-height: 1.5;
-}
-.recipes-table,
-.receipts-table {
-    width: 100%;
-    border-collapse: collapse; /* 경계선 겹치지 않게 설정 */
-    margin-top: 20px;
-    border: 1px solid #ddd; /* 테이블 전체 가장자리 경계선 */
-}
+  .my-page-user-info-table td:first-child {
+    width: 30%;
+  }
+  .my-page-user-info-table td:nth-child(2) {
+    width: 70%;
+  }
 
-.recipes-table th, .receipts-table th,
-.recipes-table td, .receipts-table td {
-    border-bottom: 1px solid #ddd; /* 가로 경계선 */
-    padding: 12px;
-    text-align: left;
-    font-size: 14px;
-}
-
-.recipes-table th, .receipts-table th {
-    border-top: 1px solid #ddd; /* 상단 경계선 */
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-/* 내부 세로 경계선 제거 */
-.recipes-table td:not(:last-child), .receipts-table td:not(:last-child) {
-    border-right: none; /* 내부 세로 경계선 제거 */
-}
-
-.recipes-table tr:hover, .receipts-table tr:hover {
-    background-color: #f1f1f1; /* 마우스 오버 시 배경색 변경 */
-}
-
-.receipt-thumbnail {
-    width: 50px;
-    height: 50px;
-    object-fit: cover; /* 이미지 비율 유지 */
-    cursor: pointer; /* 클릭할 수 있음을 나타냄 */
-}
-/* -------------------------------------------------------- */
-.info-table {
-    width: 100%;
-    border-collapse: collapse; /* 경계선 겹치지 않게 설정 */
-    margin-top: 20px;
-    border: 1px solid #ddd; /* 테이블 전체 가장자리 경계선 */
-}
-
-.info-table td {
-    border-bottom: 1px solid #ddd; /* 가로 경계선 */
-    padding: 12px;
-    text-align: left;
-    font-size: 14px;
-}
-
-/* 내부 세로 경계선 제거 */
-.info-table td:not(:last-child) {
-    border-right: none; /* 내부 세로 경계선 제거 */
-}
-.save-button-container {
+  .my-page-button-wrapper {
     display: flex;
-    justify-content: center;
-    margin: 20px 0; /* 버튼 상하 여백 */
-}
+    flex-direction: column;
+    justify-content: end;
+    gap: 10px;
 
-.save-button {
-    background-color: #007BFF; /* 버튼 색상 */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    
-}
+    margin-top: 3%;
+  }
 
-.save-button:hover {
-    background-color: #0056b3; /* 호버 시 색상 */
-}
-/* 모달 배경 */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
+  .my-page-button {
+    height: 3.2em;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    /* background-color: rgb(255, 192, 182); */
+  }
+
+  .my-page-button-ok {
+    background-color: rgb(210, 214, 255);
+  }
+
+  .my-page-button:hover {
+    background-color: rgb(255, 190, 140);
+  }
+
+  /* 레시피 즐겨찾기 */
+  .my-page-favorite-content {
+    width: 100%;
+
     display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+  /* 환경 점수 */
+  .my-page-env-score-content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .my-page-env-score-wrapper {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
 
-/* 모달 콘텐츠 */
-.modal-content {
-    background: white;
-    padding: 20px;
+    margin-top: 5%;
+  }
+
+  .my-page-env-score-month {
+    font-size: 1.5em;
+    font-weight: 700;
+
+    margin-bottom: 10%;
+  }
+
+  .my-page-env-score-graph {
+    position: relative;
+  }
+
+  .my-page-env-score-score {
+    position: absolute;
+
+    left: 50%;
+    bottom: 10%;
+
+    transform: translate(-50%, 0); /* 요소의 크기를 고려해 중앙 정렬 */
+
+    font-weight: 700;
+    font-size: 3.3em;
+  }
+
+  .my-page-env-score-table-content {
+    width: 100%;
+    padding: 0 0;
+    margin-top: 2%;
+  }
+
+  .my-page-env-score-table-content table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  .my-page-env-score-table-content thead {
+    background-color: #e1e1e1;
+    color: #cc1800;
+  }
+
+  .my-page-env-score-table-content th {
+    padding: 10px 8px;
+  }
+
+  .my-page-env-score-table-content td {
+    padding: 6px 8px;
+  }
+
+  .my-page-env-score-table-content th,
+  .my-page-env-score-table-content td {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .my-page-env-score-table-content th:first-child,
+  .my-page-env-score-table-content td:first-child {
+    text-align: left;
+    width: 45%;
+  }
+  .my-page-env-score-table-content th:nth-child(2),
+  .my-page-env-score-table-content td:nth-child(2) {
+    text-align: right;
+    width: 25%;
+  }
+  .my-page-env-score-table-content th:nth-child(3),
+  .my-page-env-score-table-content td:nth-child(3) {
+    text-align: right;
+    width: 30%;
+  }
+
+  /* 영수증 분석 내역 */
+  .my-page-receipt-content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 1%;
+  }
+
+  .my-page-receipt-content table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  .my-page-receipt-content th {
+    background-color: #e1e1e1;
+    padding: 10px 8px;
+  }
+
+  .my-page-receipt-content td {
+    padding: 6px 8px;
+  }
+
+  .my-page-receipt-content th,
+  td {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .my-page-receipt-content th:first-child,
+  .my-page-receipt-content td:first-child {
     text-align: center;
-    border-radius: 10px;
-    max-width: 90%;
-    max-height: 90%;
-}
+    width: 20%;
+    padding-left: 3%;
+  }
+  .my-page-receipt-content th:nth-child(2),
+  .my-page-receipt-content td:nth-child(2) {
+    text-align: left;
+    width: 50%;
+  }
+  .my-page-receipt-content th:nth-child(3),
+  .my-page-receipt-content td:nth-child(3) {
+    text-align: right;
+    width: 30%;
+    padding-right: 3%;
+  }
 
-/* 닫기 버튼 스타일 */
-.modal-content button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #f4b057;
-    border: none;
-    cursor: pointer;
+  .my-page-receipt-content img {
+    height: 150px;
+    width: auto;
+  }
+
+  .my-page-divided-line {
+    display: block;
+    width: 100%;
+
+    margin: 15% 0 5% 0;
+
+    border: 1px solid #ff9500;
+    box-shadow: none;
+  }
 }

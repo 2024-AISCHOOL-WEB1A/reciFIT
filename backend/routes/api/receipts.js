@@ -7,9 +7,9 @@ const { receiptFormatDate } = require("../../utils/dbHelpers");
 const {
   findMatchingIngredient,
   extractQuantityAndUnit,
-  testData,
 } = require("../../utils/ingredientsUtils");
 const axios = require("axios");
+const { toCamelCase } = require("../../utils/commonUtils");
 
 // 레시피 영수증 분석
 router.post("/", authenticateAccessToken, async (req, res) => {
@@ -258,15 +258,24 @@ router.get("/", authenticateAccessToken, async (req, res) => {
       return res.status(404).json({ message: "Not Found" });
     }
 
-    // recognized_text를 json 객체 형태로 변환 후에
-    const formattedRows = rows.map((row) => ({
-      ...row,
-      recognized_text: row.recognized_text
-        ? JSON.parse(row.recognized_text)
-        : null,
-    }));
+    // recognized_text를 JSON 객체 형태로 변환
+    const formattedRows = rows.map((row) => {
+      let recognizedText = null;
+      if (row.recognized_text) {
+        try {
+          recognizedText = JSON.parse(row.recognized_text);
+        } catch (err) {
+          console.error("Error parsing recognized_text:", err);
+          recognizedText = null; // JSON 파싱 오류 발생 시 null 처리
+        }
+      }
+      return {
+        ...row,
+        recognized_text: recognizedText,
+      };
+    });
 
-    return res.status(200).json(formattedRows);
+    return res.status(200).json(toCamelCase(formattedRows));
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
   }

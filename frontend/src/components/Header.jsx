@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../redux/reducers/userSlice";
 import swalModal from "../utils/swalModal";
 
-
 const Header = ({ user }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,7 +62,7 @@ const Header = ({ user }) => {
         navigate("/");
         window.location.reload();
       }
-    } catch (err) { }
+    } catch (err) {}
     swalModal.close();
   };
 
@@ -115,7 +114,7 @@ const Header = ({ user }) => {
           >
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=info-section"
+                to="/mypage?tab=user"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -134,7 +133,7 @@ const Header = ({ user }) => {
             </li> */}
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=recipes-section"
+                to="/mypage?tab=recipe"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -143,7 +142,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=env-section"
+                to="/mypage?tab=env-score"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -152,7 +151,7 @@ const Header = ({ user }) => {
             </li>
             <li className="SiteFamilySelect-item">
               <Link
-                to="/mypage?section=receipts-section"
+                to="/mypage?tab=receipt"
                 className="SiteFamilySelect-link"
                 onClick={toggleMenu}
               >
@@ -202,26 +201,37 @@ const Header = ({ user }) => {
             </div>
           </li>
           <li>
-            <Link to="/" onClick={toggleMobileMenu}>홈</Link>
+            <Link to="/" onClick={toggleMobileMenu}>
+              홈
+            </Link>
           </li>
           <li>
-            <Link to="/recipe" onClick={toggleMobileMenu}>레시피추천</Link>
+            <Link to="/recipe" onClick={toggleMobileMenu}>
+              레시피추천
+            </Link>
           </li>
           <li>
-            <Link to="/receipts" onClick={toggleMobileMenu}>영수증</Link>
+            <Link to="/receipts" onClick={toggleMobileMenu}>
+              영수증
+            </Link>
           </li>
           <li>
-            <Link to="/ingredients" onClick={toggleMobileMenu}>재료관리</Link>
+            <Link to="/ingredients" onClick={toggleMobileMenu}>
+              재료관리
+            </Link>
           </li>
           {user && (
             <>
               <li>
-                <Link to="/mypage?section=info-section" onClick={toggleMobileMenu}>
+                <Link to="/mypage" onClick={toggleMobileMenu}>
                   회원정보 수정
                 </Link>
               </li>
               <li>
-                <button onClick={handleLogout} style={{ border: "none", background: "none" }}>
+                <button
+                  onClick={handleLogout}
+                  style={{ border: "none", background: "none" }}
+                >
                   로그아웃
                 </button>
               </li>

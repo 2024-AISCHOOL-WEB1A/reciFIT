@@ -377,332 +377,332 @@ const getValidUnit = (unit) => {
 //   }
 // })();
 
-const testData = {
-  version: "V2",
-  requestId: "72689379-1d02-44da-ab7e-d8f32b0e699e",
-  timestamp: 1730853112474,
-  images: [
-    {
-      uid: "32054388142543308d974625535aad5b",
-      name: "demo",
-      inferResult: "SUCCESS",
-      message: "SUCCESS",
-      validationResult: { result: "NO_REQUESTED" },
-      receipt: {
-        meta: { estimatedLanguage: "ko" },
-        result: {
-          storeInfo: {
-            name: {
-              text: "매머드익스프레스",
-              formatted: { value: "매머드익스프레스" },
-              keyText: "",
-              confidenceScore: 0.5712,
-              boundingPolys: [
-                {
-                  vertices: [
-                    { x: 1061.0, y: 721.0 },
-                    { x: 1700.0, y: 721.0 },
-                    { x: 1700.0, y: 816.0 },
-                    { x: 1061.0, y: 816.0 },
-                  ],
-                },
-              ],
-              maskingPolys: [],
-            },
-            subName: {
-              text: "광주서석점",
-              keyText: "",
-              confidenceScore: 0.66721,
-              boundingPolys: [
-                {
-                  vertices: [
-                    { x: 608.0, y: 693.0 },
-                    { x: 1024.0, y: 703.0 },
-                    { x: 1021.0, y: 838.0 },
-                    { x: 605.0, y: 828.0 },
-                  ],
-                },
-              ],
-              maskingPolys: [],
-            },
-            bizNum: {
-              text: "4192700818",
-              formatted: { value: "419-27-00818" },
-              keyText: "",
-              confidenceScore: 0.8878,
-              boundingPolys: [
-                {
-                  vertices: [
-                    { x: 605.0, y: 861.0 },
-                    { x: 1039.0, y: 884.0 },
-                    { x: 1034.0, y: 972.0 },
-                    { x: 600.0, y: 950.0 },
-                  ],
-                },
-              ],
-              maskingPolys: [],
-            },
-            addresses: [
-              {
-                text: "광주광역시 동구 제봉로82번길 13, 1층",
-                formatted: { value: "광주광역시 동구 제봉로82번길 13, 1층" },
-                keyText: "",
-                confidenceScore: 0.96695,
-                boundingPolys: [
-                  {
-                    vertices: [
-                      { x: 612.0, y: 764.0 },
-                      { x: 1027.0, y: 792.0 },
-                      { x: 1020.0, y: 898.0 },
-                      { x: 605.0, y: 870.0 },
-                    ],
-                  },
-                  {
-                    vertices: [
-                      { x: 1061.0, y: 816.0 },
-                      { x: 1224.0, y: 816.0 },
-                      { x: 1224.0, y: 904.0 },
-                      { x: 1061.0, y: 904.0 },
-                    ],
-                  },
-                  {
-                    vertices: [
-                      { x: 1261.0, y: 811.0 },
-                      { x: 1733.0, y: 818.0 },
-                      { x: 1732.0, y: 913.0 },
-                      { x: 1260.0, y: 906.0 },
-                    ],
-                  },
-                  {
-                    vertices: [
-                      { x: 1772.0, y: 819.0 },
-                      { x: 1892.0, y: 828.0 },
-                      { x: 1885.0, y: 913.0 },
-                      { x: 1766.0, y: 904.0 },
-                    ],
-                  },
-                  {
-                    vertices: [
-                      { x: 1918.0, y: 821.0 },
-                      { x: 2046.0, y: 821.0 },
-                      { x: 2046.0, y: 914.0 },
-                      { x: 1918.0, y: 914.0 },
-                    ],
-                  },
-                ],
-                maskingPolys: [],
-              },
-            ],
-            tel: [
-              {
-                text: "010-1234-5678",
-                formatted: { value: "01012345678" },
-                keyText: "TEL",
-                confidenceScore: 0.78157,
-                boundingPolys: [
-                  {
-                    vertices: [
-                      { x: 1721.0, y: 900.0 },
-                      { x: 2246.0, y: 900.0 },
-                      { x: 2246.0, y: 989.0 },
-                      { x: 1721.0, y: 989.0 },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          paymentInfo: {
-            date: {
-              text: "20241017105656",
-              formatted: { year: "2024", month: "10", day: "00" },
-              keyText: "",
-              confidenceScore: 0.63591,
-              boundingPolys: [
-                {
-                  vertices: [
-                    { x: 1038.0, y: 2901.0 },
-                    { x: 1653.0, y: 2892.0 },
-                    { x: 1655.0, y: 2991.0 },
-                    { x: 1040.0, y: 3001.0 },
-                  ],
-                },
-              ],
-              maskingPolys: [],
-            },
-            cardInfo: {
-              company: {
-                text: "NH체크카드",
-                formatted: { value: "NH체크카드" },
-                keyText: "",
-                confidenceScore: 0.83985,
-                boundingPolys: [
-                  {
-                    vertices: [
-                      { x: 950.0, y: 3071.0 },
-                      { x: 1389.0, y: 3071.0 },
-                      { x: 1389.0, y: 3171.0 },
-                      { x: 950.0, y: 3171.0 },
-                    ],
-                  },
-                ],
-                maskingPolys: [],
-              },
-              number: {
-                text: "546111**********",
-                formatted: { value: "546111**********" },
-                keyText: "",
-                confidenceScore: 0.69336,
-                boundingPolys: [
-                  {
-                    vertices: [
-                      { x: 1043.0, y: 2989.0 },
-                      { x: 1725.0, y: 2989.0 },
-                      { x: 1725.0, y: 3075.0 },
-                      { x: 1043.0, y: 3075.0 },
-                    ],
-                  },
-                ],
-                maskingPolys: [],
-              },
-            },
-            confirmNum: {
-              text: "63773237",
-              keyText: "",
-              confidenceScore: 0.48389,
-              boundingPolys: [
-                {
-                  vertices: [
-                    { x: 1039.0, y: 2811.0 },
-                    { x: 1396.0, y: 2811.0 },
-                    { x: 1396.0, y: 2907.0 },
-                    { x: 1039.0, y: 2907.0 },
-                  ],
-                },
-              ],
-            },
-          },
-          subResults: [
-            {
-              items: [
-                {
-                  name: {
-                    text: "바닐라 라떼",
-                    formatted: { value: "바닐라 라떼" },
-                    keyText: "",
-                    confidenceScore: 0.94067,
-                    boundingPolys: [
-                      {
-                        vertices: [
-                          { x: 618.0, y: 1354.0 },
-                          { x: 871.0, y: 1354.0 },
-                          { x: 871.0, y: 1450.0 },
-                          { x: 618.0, y: 1450.0 },
-                        ],
-                      },
-                      {
-                        vertices: [
-                          { x: 901.0, y: 1347.0 },
-                          { x: 1071.0, y: 1354.0 },
-                          { x: 1067.0, y: 1453.0 },
-                          { x: 897.0, y: 1446.0 },
-                        ],
-                      },
-                    ],
-                    maskingPolys: [],
-                  },
-                  count: {
-                    text: "1",
-                    formatted: { value: "1" },
-                    keyText: "",
-                    confidenceScore: 0.87442,
-                    boundingPolys: [
-                      {
-                        vertices: [
-                          { x: 2246.0, y: 1361.0 },
-                          { x: 2293.0, y: 1361.0 },
-                          { x: 2293.0, y: 1439.0 },
-                          { x: 2246.0, y: 1439.0 },
-                        ],
-                      },
-                    ],
-                  },
-                },
-                {
-                  name: {
-                    text: "복숭아 아이스티",
-                    formatted: { value: "복숭아 아이스티" },
-                    keyText: "",
-                    confidenceScore: 0.88996,
-                    boundingPolys: [
-                      {
-                        vertices: [
-                          { x: 621.0, y: 1671.0 },
-                          { x: 875.0, y: 1671.0 },
-                          { x: 875.0, y: 1768.0 },
-                          { x: 621.0, y: 1768.0 },
-                        ],
-                      },
-                      {
-                        vertices: [
-                          { x: 904.0, y: 1671.0 },
-                          { x: 1225.0, y: 1671.0 },
-                          { x: 1225.0, y: 1761.0 },
-                          { x: 904.0, y: 1761.0 },
-                        ],
-                      },
-                    ],
-                    maskingPolys: [],
-                  },
-                },
-              ],
-            },
-          ],
-          totalPrice: {
-            price: {
-              text: "7,100",
-              formatted: { value: "7100" },
-              keyText: "결제금액",
-              confidenceScore: 0.91226,
-              boundingPolys: [
-                {
-                  vertices: [
-                    { x: 2100.0, y: 2300.0 },
-                    { x: 2361.0, y: 2300.0 },
-                    { x: 2361.0, y: 2475.0 },
-                    { x: 2100.0, y: 2475.0 },
-                  ],
-                },
-              ],
-            },
-          },
-          subTotal: [
-            {
-              taxPrice: [
-                {
-                  text: "643",
-                  formatted: { value: "643" },
-                  keyText: "부가세",
-                  confidenceScore: 0.95624,
-                  boundingPolys: [
-                    {
-                      vertices: [
-                        { x: 2186.0, y: 2057.0 },
-                        { x: 2332.0, y: 2057.0 },
-                        { x: 2332.0, y: 2146.0 },
-                        { x: 2186.0, y: 2146.0 },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      },
-    },
-  ],
-};
+// const testData = {
+//   version: "V2",
+//   requestId: "72689379-1d02-44da-ab7e-d8f32b0e699e",
+//   timestamp: 1730853112474,
+//   images: [
+//     {
+//       uid: "32054388142543308d974625535aad5b",
+//       name: "demo",
+//       inferResult: "SUCCESS",
+//       message: "SUCCESS",
+//       validationResult: { result: "NO_REQUESTED" },
+//       receipt: {
+//         meta: { estimatedLanguage: "ko" },
+//         result: {
+//           storeInfo: {
+//             name: {
+//               text: "매머드익스프레스",
+//               formatted: { value: "매머드익스프레스" },
+//               keyText: "",
+//               confidenceScore: 0.5712,
+//               boundingPolys: [
+//                 {
+//                   vertices: [
+//                     { x: 1061.0, y: 721.0 },
+//                     { x: 1700.0, y: 721.0 },
+//                     { x: 1700.0, y: 816.0 },
+//                     { x: 1061.0, y: 816.0 },
+//                   ],
+//                 },
+//               ],
+//               maskingPolys: [],
+//             },
+//             subName: {
+//               text: "광주서석점",
+//               keyText: "",
+//               confidenceScore: 0.66721,
+//               boundingPolys: [
+//                 {
+//                   vertices: [
+//                     { x: 608.0, y: 693.0 },
+//                     { x: 1024.0, y: 703.0 },
+//                     { x: 1021.0, y: 838.0 },
+//                     { x: 605.0, y: 828.0 },
+//                   ],
+//                 },
+//               ],
+//               maskingPolys: [],
+//             },
+//             bizNum: {
+//               text: "4192700818",
+//               formatted: { value: "419-27-00818" },
+//               keyText: "",
+//               confidenceScore: 0.8878,
+//               boundingPolys: [
+//                 {
+//                   vertices: [
+//                     { x: 605.0, y: 861.0 },
+//                     { x: 1039.0, y: 884.0 },
+//                     { x: 1034.0, y: 972.0 },
+//                     { x: 600.0, y: 950.0 },
+//                   ],
+//                 },
+//               ],
+//               maskingPolys: [],
+//             },
+//             addresses: [
+//               {
+//                 text: "광주광역시 동구 제봉로82번길 13, 1층",
+//                 formatted: { value: "광주광역시 동구 제봉로82번길 13, 1층" },
+//                 keyText: "",
+//                 confidenceScore: 0.96695,
+//                 boundingPolys: [
+//                   {
+//                     vertices: [
+//                       { x: 612.0, y: 764.0 },
+//                       { x: 1027.0, y: 792.0 },
+//                       { x: 1020.0, y: 898.0 },
+//                       { x: 605.0, y: 870.0 },
+//                     ],
+//                   },
+//                   {
+//                     vertices: [
+//                       { x: 1061.0, y: 816.0 },
+//                       { x: 1224.0, y: 816.0 },
+//                       { x: 1224.0, y: 904.0 },
+//                       { x: 1061.0, y: 904.0 },
+//                     ],
+//                   },
+//                   {
+//                     vertices: [
+//                       { x: 1261.0, y: 811.0 },
+//                       { x: 1733.0, y: 818.0 },
+//                       { x: 1732.0, y: 913.0 },
+//                       { x: 1260.0, y: 906.0 },
+//                     ],
+//                   },
+//                   {
+//                     vertices: [
+//                       { x: 1772.0, y: 819.0 },
+//                       { x: 1892.0, y: 828.0 },
+//                       { x: 1885.0, y: 913.0 },
+//                       { x: 1766.0, y: 904.0 },
+//                     ],
+//                   },
+//                   {
+//                     vertices: [
+//                       { x: 1918.0, y: 821.0 },
+//                       { x: 2046.0, y: 821.0 },
+//                       { x: 2046.0, y: 914.0 },
+//                       { x: 1918.0, y: 914.0 },
+//                     ],
+//                   },
+//                 ],
+//                 maskingPolys: [],
+//               },
+//             ],
+//             tel: [
+//               {
+//                 text: "010-1234-5678",
+//                 formatted: { value: "01012345678" },
+//                 keyText: "TEL",
+//                 confidenceScore: 0.78157,
+//                 boundingPolys: [
+//                   {
+//                     vertices: [
+//                       { x: 1721.0, y: 900.0 },
+//                       { x: 2246.0, y: 900.0 },
+//                       { x: 2246.0, y: 989.0 },
+//                       { x: 1721.0, y: 989.0 },
+//                     ],
+//                   },
+//                 ],
+//               },
+//             ],
+//           },
+//           paymentInfo: {
+//             date: {
+//               text: "20241017105656",
+//               formatted: { year: "2024", month: "10", day: "00" },
+//               keyText: "",
+//               confidenceScore: 0.63591,
+//               boundingPolys: [
+//                 {
+//                   vertices: [
+//                     { x: 1038.0, y: 2901.0 },
+//                     { x: 1653.0, y: 2892.0 },
+//                     { x: 1655.0, y: 2991.0 },
+//                     { x: 1040.0, y: 3001.0 },
+//                   ],
+//                 },
+//               ],
+//               maskingPolys: [],
+//             },
+//             cardInfo: {
+//               company: {
+//                 text: "NH체크카드",
+//                 formatted: { value: "NH체크카드" },
+//                 keyText: "",
+//                 confidenceScore: 0.83985,
+//                 boundingPolys: [
+//                   {
+//                     vertices: [
+//                       { x: 950.0, y: 3071.0 },
+//                       { x: 1389.0, y: 3071.0 },
+//                       { x: 1389.0, y: 3171.0 },
+//                       { x: 950.0, y: 3171.0 },
+//                     ],
+//                   },
+//                 ],
+//                 maskingPolys: [],
+//               },
+//               number: {
+//                 text: "546111**********",
+//                 formatted: { value: "546111**********" },
+//                 keyText: "",
+//                 confidenceScore: 0.69336,
+//                 boundingPolys: [
+//                   {
+//                     vertices: [
+//                       { x: 1043.0, y: 2989.0 },
+//                       { x: 1725.0, y: 2989.0 },
+//                       { x: 1725.0, y: 3075.0 },
+//                       { x: 1043.0, y: 3075.0 },
+//                     ],
+//                   },
+//                 ],
+//                 maskingPolys: [],
+//               },
+//             },
+//             confirmNum: {
+//               text: "63773237",
+//               keyText: "",
+//               confidenceScore: 0.48389,
+//               boundingPolys: [
+//                 {
+//                   vertices: [
+//                     { x: 1039.0, y: 2811.0 },
+//                     { x: 1396.0, y: 2811.0 },
+//                     { x: 1396.0, y: 2907.0 },
+//                     { x: 1039.0, y: 2907.0 },
+//                   ],
+//                 },
+//               ],
+//             },
+//           },
+//           subResults: [
+//             {
+//               items: [
+//                 {
+//                   name: {
+//                     text: "바닐라 라떼",
+//                     formatted: { value: "바닐라 라떼" },
+//                     keyText: "",
+//                     confidenceScore: 0.94067,
+//                     boundingPolys: [
+//                       {
+//                         vertices: [
+//                           { x: 618.0, y: 1354.0 },
+//                           { x: 871.0, y: 1354.0 },
+//                           { x: 871.0, y: 1450.0 },
+//                           { x: 618.0, y: 1450.0 },
+//                         ],
+//                       },
+//                       {
+//                         vertices: [
+//                           { x: 901.0, y: 1347.0 },
+//                           { x: 1071.0, y: 1354.0 },
+//                           { x: 1067.0, y: 1453.0 },
+//                           { x: 897.0, y: 1446.0 },
+//                         ],
+//                       },
+//                     ],
+//                     maskingPolys: [],
+//                   },
+//                   count: {
+//                     text: "1",
+//                     formatted: { value: "1" },
+//                     keyText: "",
+//                     confidenceScore: 0.87442,
+//                     boundingPolys: [
+//                       {
+//                         vertices: [
+//                           { x: 2246.0, y: 1361.0 },
+//                           { x: 2293.0, y: 1361.0 },
+//                           { x: 2293.0, y: 1439.0 },
+//                           { x: 2246.0, y: 1439.0 },
+//                         ],
+//                       },
+//                     ],
+//                   },
+//                 },
+//                 {
+//                   name: {
+//                     text: "복숭아 아이스티",
+//                     formatted: { value: "복숭아 아이스티" },
+//                     keyText: "",
+//                     confidenceScore: 0.88996,
+//                     boundingPolys: [
+//                       {
+//                         vertices: [
+//                           { x: 621.0, y: 1671.0 },
+//                           { x: 875.0, y: 1671.0 },
+//                           { x: 875.0, y: 1768.0 },
+//                           { x: 621.0, y: 1768.0 },
+//                         ],
+//                       },
+//                       {
+//                         vertices: [
+//                           { x: 904.0, y: 1671.0 },
+//                           { x: 1225.0, y: 1671.0 },
+//                           { x: 1225.0, y: 1761.0 },
+//                           { x: 904.0, y: 1761.0 },
+//                         ],
+//                       },
+//                     ],
+//                     maskingPolys: [],
+//                   },
+//                 },
+//               ],
+//             },
+//           ],
+//           totalPrice: {
+//             price: {
+//               text: "7,100",
+//               formatted: { value: "7100" },
+//               keyText: "결제금액",
+//               confidenceScore: 0.91226,
+//               boundingPolys: [
+//                 {
+//                   vertices: [
+//                     { x: 2100.0, y: 2300.0 },
+//                     { x: 2361.0, y: 2300.0 },
+//                     { x: 2361.0, y: 2475.0 },
+//                     { x: 2100.0, y: 2475.0 },
+//                   ],
+//                 },
+//               ],
+//             },
+//           },
+//           subTotal: [
+//             {
+//               taxPrice: [
+//                 {
+//                   text: "643",
+//                   formatted: { value: "643" },
+//                   keyText: "부가세",
+//                   confidenceScore: 0.95624,
+//                   boundingPolys: [
+//                     {
+//                       vertices: [
+//                         { x: 2186.0, y: 2057.0 },
+//                         { x: 2332.0, y: 2057.0 },
+//                         { x: 2332.0, y: 2146.0 },
+//                         { x: 2186.0, y: 2146.0 },
+//                       ],
+//                     },
+//                   ],
+//                 },
+//               ],
+//             },
+//           ],
+//         },
+//       },
+//     },
+//   ],
+// };
 
 module.exports = {
   findMatchingIngredient,
@@ -710,5 +710,5 @@ module.exports = {
   parseIngredients,
   convertQuantity,
   getValidUnit,
-  testData,
+  // testData,
 };

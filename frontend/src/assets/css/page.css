@@ -426,7 +426,7 @@
   }
 
   .MainSwipe {
-    top: calc(50% + 38vh);
+    top: calc(50% + 20em);
   }
 
   .MainSwipeThumbSlide {

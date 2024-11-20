@@ -1,6 +1,6 @@
 //레시피 등록페이지
 import React, { useState } from 'react';
-import '../assets/css/recipeSignup.css'; // CSS 파일 임포트
+// import '../assets/css/recipeSignup.css'; // CSS 파일 임포트
 
 const RecipeSignup = () => {
     const [ingredients, setIngredients] = useState('');
