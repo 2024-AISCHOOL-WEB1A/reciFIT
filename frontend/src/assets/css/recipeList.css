@@ -1,11 +1,11 @@
 .recipeMoreHeader{
-    margin: 5em 20em 0em 20em;
+    margin: 5em 15em 0em 15em;
     display: flex;
     justify-content: space-between;
 }
 
 .recipeMoreContainer {
-    margin: 2em 20em; 
+    margin: 2em 13em; 
     display: flex;
     flex-direction: row; 
     flex-wrap: wrap; 
@@ -23,7 +23,7 @@
 
 @media (max-width: 768px) {
     .recipeMoreContainer{
-        margin: 1em 5em;
+        margin: 1em 3em;
     }
     .recipeMoreContainer > * {
         flex: 0 1 calc(50% - 1em); 
@@ -38,6 +38,10 @@
         width: 3.5em;
         margin-top: -0.4em;
         margin-left: 0.5em;
+    }
+
+    #ItemPhoto{
+        width: 18em;
     }
 }
 
@@ -65,4 +69,17 @@
     font-size: 1.2em;
     word-wrap: break-word; /* 긴 단어가 있으면 줄바꿈 */
     word-break: break-word; /* 글자 단위로 줄바꿈 */
+}
+
+@media (max-width: 768px) {
+    .ItemContainer{
+        width: 20em;
+        height: auto;
+    }
+    #ItemPhoto{
+        width: 20em;
+        height: 13em;
+        margin-bottom: 0.6em;
+        border-radius: 10px;
+    }
 }

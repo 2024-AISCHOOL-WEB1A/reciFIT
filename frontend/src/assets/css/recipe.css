@@ -333,16 +333,16 @@
 
 @media (min-width: 1440px) and (max-width: 1920px) {
     .recipe-category {
-        width: 97em;
-        height: 16vh;
+        width: 95em;
+        height: 15em;
     }
 }
 
 /* 태블릿: 768px 이상 1440px 미만 */
 @media (min-width: 768px) and (max-width: 1440px) {
     .recipe-category {
-        width: 97em;
-        height: 16vh;
+        width: 95em;
+        height: 15em;
     }
 }
 
@@ -352,6 +352,7 @@
         padding: 0em 1em;
         margin-bottom: 0.5em;
         height: 10em;
+        width: 36em;
     }
     
     .category-items li {
