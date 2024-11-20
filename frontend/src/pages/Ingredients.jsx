@@ -440,7 +440,7 @@ const Ingredients = () => {
                 <th className='ingre-name-th' style={{ width: isMobile && isEditing ? '33%' : '15%' }}>상품명</th>
                 <th className='ingre-quantity-th' style={{ width: isMobile && isEditing ? '33%' : '10%' }}>수량</th>
                 <th className='ingre-purchase-th' style={{ display: isMobile && isEditing ? 'none' : '' }}>구매일</th>
-                <th className='ingre-expired-th' style={{ cursor: "pointer", width: isMobile && isEditing ? '33%' : '15%'  }} onClick={sortByDate}>
+                <th className='ingre-expired-th' style={{ cursor: "pointer", width: isMobile && isEditing ? '33%' : '15%' }} onClick={sortByDate}>
                   유통기한 {sortOrder === "asc" ? "▲" : "▼"}
                 </th>
                 <th className='ingre-status-th'
@@ -510,10 +510,10 @@ const Ingredients = () => {
                     )}
                   </td>
 
-                  <td>
+                  <td style={{display: isMobile && isEditing ? 'none' : '' }}>
                     {isEditing ? (
                       <input
-                        style={{ textAlign: "right",  display: isMobile && isEditing ? 'none' : ''}}
+                        style={{ textAlign: "right"}}
                         type="text"
                         name="purchaseDate"
                         value={item?.purchaseDate}
@@ -526,10 +526,10 @@ const Ingredients = () => {
                     )}
                   </td>
 
-                  <td>
+                  <td style={{width: isMobile && isEditing ? '33%' : '15%' }}>
                     {isEditing ? (
                       <input
-                        style={{ textAlign: "right" }}
+                        style={{ textAlign: "right"}}
                         type="text"
                         name="expiredDate"
                         value={item?.expiredDate}
