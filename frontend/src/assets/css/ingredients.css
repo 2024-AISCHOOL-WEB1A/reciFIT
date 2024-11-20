@@ -37,7 +37,7 @@
 .ingre-container h3 {
     font-family: 'SBAggroB';
     font-size: 1.5em;
-    margin: 5% 0 0 5%;
+    margin-left: 5%;
     width: 95%;
 }
 
@@ -127,7 +127,17 @@
 .ingre-table-head th {
     background-color: rgb(243, 243, 243);
     padding: 2%;
+}
 
+.ingre-name-th,
+.ingre-purchase-th,
+.ingre-expired-th {
+    width: 15%;
+}
+
+.ingre-quantity-th,
+.ingre-delete-th {
+    width: 10%;
 }
 
 .ingre-table-body td {
@@ -220,6 +230,11 @@
     margin-right: 100%;
 }
 
+.ingre-per {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 @media screen and (max-width: 767px) and (min-width: 1px) {
 
     .ingre-left-button span,
@@ -243,7 +258,7 @@
     .ingre-container h3 {
         font-family: 'SBAggroB';
         font-size: 1.3rem;
-        margin-left: 5%;
+        margin: 5% 0 0 5%;
         width: 95%;
     }
 
@@ -260,4 +275,5 @@
         width: 4em;
         height: 3em;
     }
+
 }
