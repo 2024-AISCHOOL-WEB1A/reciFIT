@@ -26,15 +26,15 @@ const Ingredients = () => {
         setRecipesPerPage(4);
       }
     };
-  
+
     updateRecipesPerPage(); // 초기 실행
     window.addEventListener('resize', updateRecipesPerPage);
-  
+
     return () => {
       window.removeEventListener('resize', updateRecipesPerPage);
     };
   }, []);
-  
+
   // 왼, 오 버튼
   const handleNext = () => {
     if (currentIndex < data.blackRecipes.length - 1) {
@@ -125,6 +125,17 @@ const Ingredients = () => {
       return <FontAwesomeIcon icon={faCircle} style={{ color: '#FF1700' }} />; // 20 미만이면 빨간색
     }
   };
+
+  // 화면 길이 관리
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 767);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
   //----------------------------------------------------------------------------------------
 
@@ -426,15 +437,18 @@ const Ingredients = () => {
             {/* Head */}
             <thead className='ingre-table-head'>
               <tr>
-                <th style={{ width: "15%" }}>상품명</th>
-                <th style={{ width: "10%" }}>수량</th>
-                <th style={{ width: "15%" }}>구매일</th>
-                <th style={{ width: "15%", cursor: "pointer" }} onClick={sortByDate}>
+                <th className='ingre-name-th' style={{ width: isMobile && isEditing ? '33%' : '15%' }}>상품명</th>
+                <th className='ingre-quantity-th' style={{ width: isMobile && isEditing ? '33%' : '10%' }}>수량</th>
+                <th className='ingre-purchase-th' style={{ display: isMobile && isEditing ? 'none' : '' }}>구매일</th>
+                <th className='ingre-expired-th' style={{ cursor: "pointer", width: isMobile && isEditing ? '33%' : '15%'  }} onClick={sortByDate}>
                   유통기한 {sortOrder === "asc" ? "▲" : "▼"}
                 </th>
-                <th>상태</th>
-                <th style={{ width: "5%" }}></th>
-                <th style={{ width: "10%" }}>삭제</th>
+                <th className='ingre-status-th'
+                  style={{ display: isMobile && isEditing ? 'none' : '' }}>
+                  상태
+                </th>
+                <th className='ingre-substatus-th' style={{ width: "5%", display: isMobile && isEditing ? 'none' : '' }}></th>
+                <th className='ingre-delete-th' style={{ display: isMobile && isEditing ? 'none' : '' }}>삭제</th>
               </tr>
             </thead>
 
@@ -499,9 +513,9 @@ const Ingredients = () => {
                   <td>
                     {isEditing ? (
                       <input
-                        style={{ textAlign: "right" }}
+                        style={{ textAlign: "right",  display: isMobile && isEditing ? 'none' : ''}}
                         type="text"
-                        name="expiredDate"
+                        name="purchaseDate"
                         value={item?.purchaseDate}
                         onChange={(e) =>
                           handleDateChange(index, e.target.value)
@@ -528,16 +542,19 @@ const Ingredients = () => {
                     )}
                   </td>
 
-                  <td className='ingre-status-td'>
-                    <div className='ingre-per-background'>
-                      <div className='ingre-per-bar' style={{ width: `${item.percentage}%` }}></div>
+                  <td
+                    className="ingre-status-td"
+                    style={{ display: isMobile && isEditing ? 'none' : '' }}
+                  >
+                    <div className="ingre-per-background">
+                      <div className="ingre-per-bar" style={{ width: `${item.percentage}%` }}></div>
                     </div>
                   </td>
 
-                  <td>
+                  <td style={{ display: isMobile && isEditing ? 'none' : '' }}>
                     <div className='ingre-per-status'>
                       <div className='ingre-circle'>{getStatusIcon(item.percentage)}</div>
-                      <div>{String(item.percentage).padStart(2, '0')}%</div>
+                      <div className='ingre-per'>{item.percentage === 0 ? '0' : String(item.percentage).padStart(2, '0')}%</div>
                     </div>
                   </td>
 
@@ -545,6 +562,7 @@ const Ingredients = () => {
                     className="ingre-delete">
                     <FontAwesomeIcon
                       icon={faDeleteLeft}
+                      style={{ display: isMobile && isEditing ? 'none' : '' }}
                     />
                   </td>
 
