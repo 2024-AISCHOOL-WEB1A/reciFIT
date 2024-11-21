@@ -9,8 +9,8 @@ const { v4: uuidv4 } = require("uuid");
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
-const getLeven = require("../../config/leven");
-const loadIngredients = require("../../utils/loadIngredients");
+// const getLeven = require("../../config/leven");
+// const loadIngredients = require("../../utils/loadIngredients");
 const generateRandomNickname = require("../../utils/generateRandomNickname");
 
 // 카카오 로그인

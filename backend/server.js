@@ -5,9 +5,19 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("./config/passport");
 const scheduler = require("./jobs/scheduler");
+const webPush = require("web-push");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY;
+const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY;
+
+webPush.setVapidDetails(
+  "mailto:projectrecifit@gmail.com",
+  VAPID_PUBLIC_KEY,
+  VAPID_PRIVATE_KEY
+);
 
 const corsOptions = {
   origin: [
