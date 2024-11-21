@@ -101,7 +101,8 @@ router.get(
       //   );
       // }
       return res.redirect(
-        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `http://localhost:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       return res.status(500).json({ message: "Internal server error" });
@@ -199,7 +200,8 @@ router.get(
       //   );
       // }
       return res.redirect(
-        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `http://localhost:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       console.error(err);

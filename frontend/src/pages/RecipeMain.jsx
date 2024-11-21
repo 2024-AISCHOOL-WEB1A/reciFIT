@@ -341,6 +341,7 @@ const RecipeMain = () => {
       const fileType = file.type;
 
       setFileName(fileName);
+
       try {
         swalModal.fire({
           title: "음식 사진 업로드",
@@ -402,7 +403,9 @@ const RecipeMain = () => {
         };
         reader.readAsDataURL(file); // 파일을 base64로 변환
       } catch (err) {
-        // console.log(err);
+        // setFileName(err.message);
+
+        console.log(err);
         swalModal.fire({
           title: "사진 분석 실패",
           text: "사진 분석에 실패했습니다. 관리자에게 문의바랍니다.",
@@ -800,95 +803,6 @@ const RecipeMain = () => {
           ))}
         </div>
       </div>
-
-      {/* <div className="recipe-category">
-        <div className="list_content">
-          <h3 className="list_content_title">
-            레시피 <span>분류</span>
-          </h3>
-        </div>
-        <div className="recipeCategory-container">
-          <div className="cate_cont">
-            <ul className="category-items">
-              {[
-                {
-                  type: "none",
-                  value: "none",
-                  category: "전체",
-                  img: "all.png",
-                },
-                {
-                  type: "type",
-                  value: "밑반찬",
-                  category: "밑반찬",
-                  img: "fried-egg-real.png",
-                },
-                {
-                  type: "type",
-                  value: "메인반찬",
-                  category: "메인반찬",
-                  img: "pork.png",
-                },
-                {
-                  type: "type",
-                  value: "국/탕",
-                  category: "국/탕",
-                  img: "nambi.png",
-                },
-                {
-                  type: "type",
-                  value: "찌개",
-                  category: "찌개",
-                  img: "zzigae.png",
-                },
-                {
-                  type: "time",
-                  value: "5분이내",
-                  category: "초스피드",
-                  img: "clock.png",
-                },
-                {
-                  type: "category",
-                  value: "손님접대",
-                  category: "손님접대",
-                  img: "cooking.png",
-                },
-                {
-                  type: "type",
-                  value: "밥/죽/떡",
-                  category: "밥/죽/떡",
-                  img: "rice-bowl.png",
-                },
-                {
-                  type: "category",
-                  value: "술안주",
-                  category: "술안주",
-                  img: "beer.png",
-                },
-                {
-                  type: "type",
-                  value: "면/만두",
-                  category: "면/만두",
-                  img: "chinese-food.png",
-                },
-              ].map((item, index) => (
-                <li
-                  key={index}
-                  onClick={() => {
-                    handleChangeRecipes(item);
-                  }}
-                >
-                  <img
-                    src={`/img/recipe_category/${item.img}`}
-                    alt={item.category}
-                  />
-                  <span>{item.category}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div> */}
 
       {/* 여기서부터 레시피 검색결과 및 카테고리 선택결과 목록 */}
       <div className="recipeMoreContainer" ref={recipeResultRef}>

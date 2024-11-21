@@ -10,7 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+  origin: [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    // "http://192.168.100.64:3001",
+  ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true,
 };
