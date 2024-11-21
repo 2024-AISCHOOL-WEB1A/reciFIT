@@ -36,6 +36,14 @@
   padding: 0 0.1em;
 }
 
+.ingre-container-red-span {
+  display: inline-block;
+  font-size: 1.45rem;
+  color: #f72120;
+  font-family: "SBAggroB";
+  padding: 0 0.1em;
+}
+
 .ingre-container h3 {
   font-family: "SBAggroB";
   font-size: 1.5em;

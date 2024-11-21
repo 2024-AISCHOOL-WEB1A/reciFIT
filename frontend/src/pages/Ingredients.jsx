@@ -94,14 +94,6 @@ const Ingredients = () => {
   };
 
   //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
   // 하단 슬라이드 -------------------------------------------------
   const [currentIndex, setCurrentIndex] = useState(0);
   const [recipesPerPage, setRecipesPerPage] = useState(4); // 1열로 보여줄 항목의 수
@@ -164,7 +156,7 @@ const Ingredients = () => {
       .replace(/[^0-9.]/g, "")
       .replace(/\.(?=.*\.)/g, "");
 
-    setModifiedItem({ ...modifiedItem, quantity: e.target.value });
+    setModifiedItem({ ...modifiedItem, quantity: numericValue });
   };
   const handleUnit = (e) => {
     setModifiedItem({ ...modifiedItem, unit: e.target.value });
@@ -496,71 +488,81 @@ const Ingredients = () => {
 
             {/* Body */}
             <tbody className="ingre-table-body">
-              {userIngredientData?.map((item, index) => {
-                if (item?.changed !== "delete")
-                  return (
-                    <tr key={index}>
-                      <td className="ingre-name-td">{item?.ingreName}</td>
-                      <td className="ingre-quantity-td">
-                        {`${item?.quantity}${item?.unit}`}
-                      </td>
-                      <td className="ingre-purchase-td">
-                        {item?.purchaseDate}
-                      </td>
-                      <td className="ingre-expired-td">{item?.expiredDate}</td>
+              {userIngredientData
+                ?.filter((item) => {
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  const dateObj = new Date(item.expiredDate);
+                  dateObj.setHours(0, 0, 0, 0);
+                  return dateObj > today;
+                })
+                .map((item, index) => {
+                  if (item?.changed !== "delete")
+                    return (
+                      <tr key={index}>
+                        <td className="ingre-name-td">{item?.ingreName}</td>
+                        <td className="ingre-quantity-td">
+                          {`${item?.quantity}${item?.unit}`}
+                        </td>
+                        <td className="ingre-purchase-td">
+                          {item?.purchaseDate}
+                        </td>
+                        <td className="ingre-expired-td">
+                          {item?.expiredDate}
+                        </td>
 
-                      <td className="ingre-status-td">
-                        <div className="inger-status-bar-wrapper">
-                          <div className="ingre-per-background">
-                            <div
-                              className="ingre-per-bar"
-                              style={{
-                                width: `${calculatePercentage(
+                        <td className="ingre-status-td">
+                          <div className="inger-status-bar-wrapper">
+                            <div className="ingre-per-background">
+                              <div
+                                className="ingre-per-bar"
+                                style={{
+                                  width: `${calculatePercentage(
+                                    item.purchaseDate,
+                                    item.expiredDate
+                                  )}%`,
+                                }}
+                              ></div>
+                            </div>
+                            <div className="ingre-status-bar-circle-wrapper">
+                              <div>
+                                {getStatusIcon(
+                                  calculatePercentage(
+                                    item.purchaseDate,
+                                    item.expiredDate
+                                  )
+                                )}
+                              </div>
+                              <div>
+                                {calculatePercentage(
                                   item.purchaseDate,
                                   item.expiredDate
-                                )}%`,
-                              }}
-                            ></div>
-                          </div>
-                          <div className="ingre-status-bar-circle-wrapper">
-                            <div>
-                              {getStatusIcon(
-                                calculatePercentage(
-                                  item.purchaseDate,
-                                  item.expiredDate
-                                )
-                              )}
-                            </div>
-                            <div>
-                              {calculatePercentage(
-                                item.purchaseDate,
-                                item.expiredDate
-                              ) === 0
-                                ? "0"
-                                : String(
-                                    calculatePercentage(
-                                      item.purchaseDate,
-                                      item.expiredDate
-                                    )
-                                  ).padStart(2, "0")}
-                              %
+                                ) === 0
+                                  ? "0"
+                                  : String(
+                                      calculatePercentage(
+                                        item.purchaseDate,
+                                        item.expiredDate
+                                      )
+                                    ).padStart(2, "0")}
+                                %
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
+                        </td>
 
-                      <td
-                        className="ingre-delete-td"
-                        onClick={() => handleModify(item, index)}
-                      >
-                        <FontAwesomeIcon
-                          className="ingre-delete-icon"
-                          icon={faPenToSquare}
-                        />
-                      </td>
-                    </tr>
-                  );
-              })}
+                        <td
+                          className="ingre-delete-td"
+                          onClick={() => handleModify(item, index)}
+                        >
+                          <FontAwesomeIcon
+                            className="ingre-delete-icon"
+                            icon={faPenToSquare}
+                          />
+                        </td>
+                      </tr>
+                    );
+                })}
             </tbody>
           </table>
           <div className="ingre-mobile-button-wrapper">
@@ -571,6 +573,113 @@ const Ingredients = () => {
               추가
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* 폐기 재료 관리 */}
+      <div className="ingre-my">
+        <div className="ingre-button-container">
+          <h3>
+            {`${user?.userName}님`}의{" "}
+            <span className="ingre-container-red-span">폐기 재료</span> 💀
+          </h3>
+        </div>
+
+        {/* 재료 리스트 */}
+        <div className="ingre-my-list">
+          <table className="ingre-table" cellSpacing={"0"}>
+            {/* Head */}
+            <thead className="ingre-table-head">
+              <tr>
+                <th className="ingre-name-th">재료 이름</th>
+                <th className="ingre-quantity-th">남은 수량</th>
+                <th className="ingre-purchase-th">구매일</th>
+                <th className="ingre-expired-th">유통기한</th>
+                <th className="ingre-status-th">상태</th>
+                <th className="ingre-delete-th">수정</th>
+              </tr>
+            </thead>
+
+            {/* Body */}
+            <tbody className="ingre-table-body">
+              {userIngredientData
+                ?.filter((item) => {
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  const dateObj = new Date(item.expiredDate);
+                  dateObj.setHours(0, 0, 0, 0);
+                  return dateObj < today;
+                })
+                .map((item, index) => {
+                  if (item?.changed !== "delete")
+                    return (
+                      <tr key={index}>
+                        <td className="ingre-name-td">{item?.ingreName}</td>
+                        <td className="ingre-quantity-td">
+                          {`${item?.quantity}${item?.unit}`}
+                        </td>
+                        <td className="ingre-purchase-td">
+                          {item?.purchaseDate}
+                        </td>
+                        <td className="ingre-expired-td">
+                          {item?.expiredDate}
+                        </td>
+
+                        <td className="ingre-status-td">
+                          <div className="inger-status-bar-wrapper">
+                            <div className="ingre-per-background">
+                              <div
+                                className="ingre-per-bar"
+                                style={{
+                                  width: `${calculatePercentage(
+                                    item.purchaseDate,
+                                    item.expiredDate
+                                  )}%`,
+                                }}
+                              ></div>
+                            </div>
+                            <div className="ingre-status-bar-circle-wrapper">
+                              <div>
+                                {getStatusIcon(
+                                  calculatePercentage(
+                                    item.purchaseDate,
+                                    item.expiredDate
+                                  )
+                                )}
+                              </div>
+                              <div>
+                                {calculatePercentage(
+                                  item.purchaseDate,
+                                  item.expiredDate
+                                ) === 0
+                                  ? "0"
+                                  : String(
+                                      calculatePercentage(
+                                        item.purchaseDate,
+                                        item.expiredDate
+                                      )
+                                    ).padStart(2, "0")}
+                                %
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td
+                          className="ingre-delete-td"
+                          onClick={() => handleModify(item, index)}
+                        >
+                          <FontAwesomeIcon
+                            className="ingre-delete-icon"
+                            icon={faPenToSquare}
+                          />
+                        </td>
+                      </tr>
+                    );
+                })}
+            </tbody>
+          </table>
+          <div className="ingre-mobile-button-wrapper"></div>
         </div>
       </div>
 

@@ -11,6 +11,9 @@ const {
 const axios = require("axios");
 const { toCamelCase } = require("../../utils/commonUtils");
 
+const fs = require("fs");
+const path = require("path");
+
 // 레시피 영수증 분석
 router.post("/", authenticateAccessToken, async (req, res) => {
   let { photoUrl } = req.body;
@@ -45,6 +48,10 @@ router.post("/", authenticateAccessToken, async (req, res) => {
       });
     }
 
+    // const dataToSave = JSON.stringify(receiptData, null, 2);
+    // const filePath = path.join(__dirname, "receiptData.json");
+    // fs.writeFileSync(filePath, dataToSave);
+
     // const fs = require("fs"); // 파일 시스템 모듈
     // const path = require("path"); // 경로 처리 모듈
 
@@ -60,14 +67,31 @@ router.post("/", authenticateAccessToken, async (req, res) => {
 
     // 가게 정보 추출
     const storeName =
-      `${storeData?.name?.text} ${storeData?.subName?.text}`.trim();
+      storeData?.name?.text +
+      (storeData?.subName?.text ? ` ${storeData?.subName?.text}` : "").trim();
     const storeAddress = storeData?.addresses[0]?.text;
     const storeTel = storeData?.tel[0]?.text;
 
     // 구매일 및 품목 추출
-    const purchaseDate = paymentData?.date.text
-      ? receiptFormatDate(paymentData?.date.text)
+    const purchaseDate = paymentData?.date
+      ? receiptFormatDate(paymentData?.date?.text)
       : receiptFormatDate(new Date());
+    // let purchaseDate = paymentData?.date
+    //   ? receiptFormatDate(
+    //       `${paymentData?.date?.formatted?.year}-${paymentData?.date?.formatted?.month}-${paymentData?.date?.formatted?.day}`
+    //     )
+    //   : receiptFormatDate(new Date());
+    // if (!purchaseDate) purchaseDate = receiptFormatDate(new Date());
+
+    // const purchaseDate =
+    //   paymentData?.date ??
+    //   receiptFormatDate(
+    //     `${paymentData?.date?.formatted?.year}-${paymentData?.date?.formatted?.month}-${paymentData?.date?.formatted?.day}`
+    //   ) ??
+    //   receiptFormatDate(new Date());
+
+    // console.log(paymentData?.date);
+    // console.log(purchaseDate);
 
     // findMatchingIngredient를 통해 식재료 이름 DB의 이름과 매칭, 수량과 unit도 가져오기
     const items = (subData[0]?.items || [])
@@ -102,7 +126,7 @@ router.post("/", authenticateAccessToken, async (req, res) => {
           return {
             name: matchedName,
             count,
-            unit,
+            unit: unit ?? "개",
           };
         }
         return null; // 매칭되지 않으면 null 반환

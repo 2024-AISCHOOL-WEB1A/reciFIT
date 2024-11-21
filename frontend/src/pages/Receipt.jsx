@@ -187,6 +187,8 @@ const Receipt = () => {
         setReceiptData(responseReceipt.data);
         setOriginalData(_.cloneDeep(responseReceipt.data));
 
+        // console.log(responseReceipt.data);
+
         // 모달 닫기
         swalModal.close();
       } catch (err) {
@@ -219,7 +221,6 @@ const Receipt = () => {
   const handleQuantityChange = (index, value) => {
     const numericValue = value
       .replace(/[^0-9.]/g, "")
-      .replace(/^./, "")
       .replace(/\.(?=.*\.)/g, "");
 
     // 값 업데이트
@@ -423,7 +424,7 @@ const Receipt = () => {
       // console.log(ingredients);
 
       try {
-        const res = await apiAxios.post("/users/ingredients", {
+        const res = await apiAxios.post("/users/ingredients/batch", {
           ingredients,
         });
         // console.log(res);
