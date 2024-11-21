@@ -17,6 +17,10 @@ import swalModal from "../utils/swalModal";
 import { throttle } from "lodash";
 
 const RecipeMain = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const recommend = queryParams.get("recommend");
+
   const CATEGORY_ITEM_LOAD_STEP = 8;
   const MAX_CATEGORY_LENGTH = 80;
 
@@ -99,7 +103,7 @@ const RecipeMain = () => {
 
   // '흑백 요리사'가 포함된 레시피만 등록
   useEffect(() => {
-    const fetchRecipe = async () => {
+    const fetchRecipe = async (recommend) => {
       try {
         const response = await apiAxios.get("/recipes", {
           params: {
@@ -116,14 +120,30 @@ const RecipeMain = () => {
 
     const fetchCategoryRecipe = async () => {
       try {
+        let params = {
+          random: true,
+          count: MAX_CATEGORY_LENGTH,
+        };
+
+        if (recommend === "true") {
+          params = {};
+        }
+
         const response = await apiAxios.get("/recipes", {
-          params: {
-            random: true,
-            count: MAX_CATEGORY_LENGTH,
-          },
+          params,
         });
         console.log(response.data);
         setCategoryRecipeData(response.data?.recipes);
+
+        // 로딩 되면 스크롤
+        if (recommend === "true") {
+          if (recipeResultRef.current) {
+            recipeResultRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
       } catch (err) {
         // console.log(err);
       }
@@ -131,7 +151,7 @@ const RecipeMain = () => {
 
     const fetchAllRecipeData = async () => {
       try {
-        await Promise.all([fetchRecipe(), fetchCategoryRecipe()]);
+        await Promise.all([fetchRecipe(recommend), fetchCategoryRecipe()]);
         // console.log("All recipes fetched successfully");
       } catch (err) {
         // console.log(err);
@@ -145,7 +165,7 @@ const RecipeMain = () => {
     };
 
     fetchAllRecipeData();
-  }, []);
+  }, [recommend]);
 
   // 스크롤 인식
   const handleScroll = throttle(() => {
@@ -558,12 +578,6 @@ const RecipeMain = () => {
     };
   }, []);
 
-  // // 이미지 로딩 방지
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const handleImageLoad = () => {
-  //   setIsLoaded(true); // 이미지 로딩 완료 상태 설정
-  // };
-
   return (
     <div className="recipeMain-container">
       {/* 검색 폼 */}
@@ -593,7 +607,7 @@ const RecipeMain = () => {
           </p>
         </div>
         <div className="site-camera-img">
-          <Link to="#" onClick={openModal}>
+          <Link onClick={openModal}>
             <img src="/img/site-camera-img.png" alt="" />
           </Link>
         </div>

@@ -66,6 +66,7 @@
   height: 13em;
   margin-bottom: 2%;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .recipe-item-container span {
@@ -88,7 +89,7 @@
   }
 
   .recipe-item-container {
-    width: 24%;
+    width: 100%;
     height: auto;
     cursor: pointer;
     box-sizing: border-box;

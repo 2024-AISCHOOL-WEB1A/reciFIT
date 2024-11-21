@@ -217,8 +217,10 @@ const Receipt = () => {
 
   // 편집 핸들러 (수량)
   const handleQuantityChange = (index, value) => {
-    // 숫자만 허용
-    const numericValue = value.replace(/\D/g, ""); // 숫자가 아닌 값 제거
+    const numericValue = value
+      .replace(/[^0-9.]/g, "")
+      .replace(/^./, "")
+      .replace(/\.(?=.*\.)/g, "");
 
     // 값 업데이트
     const updatedItems = [...receiptData.items];
@@ -690,7 +692,7 @@ const Receipt = () => {
             </div>
           </div>
           <div className="receipt-result-button-wrapper">
-            {!isEditing && (
+            {/* {!isEditing && (
               <button
                 type="button"
                 className="receipt-result-button receipt-result-nutrient-button"
@@ -698,7 +700,7 @@ const Receipt = () => {
               >
                 영양정보 확인
               </button>
-            )}
+            )} */}
             <button
               type="button"
               className={

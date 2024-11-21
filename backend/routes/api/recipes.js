@@ -162,9 +162,10 @@ router.get("/", authenticateAccessToken, async (req, res) => {
       0,
       Math.floor(Math.random() * (totalRows - count))
     );
+
     // 흑백요리사 검색
     if (normalizeString(searchString) === "흑백요리사") {
-      randomOffset = 163773;
+      randomOffset = 163772;
     }
 
     try {

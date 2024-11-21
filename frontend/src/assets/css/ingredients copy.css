@@ -25,10 +25,10 @@
 /* -----------------=------------------------- */
 
 .ingre-container {
-  margin: 6% 10% 0 10%;
+  margin: 6% 10%;
 }
 
-.ingre-container-span {
+.ingre-container span {
   display: inline-block;
   font-size: 1.45rem;
   color: #ff9500;
@@ -107,8 +107,9 @@
 /* 재료 테이블 */
 
 .ingre-my {
+  padding-bottom: 4%;
   border-bottom: solid 5px rgb(255, 233, 192);
-  margin-bottom: 8%;
+  margin-bottom: 7%;
 }
 
 .ingre-my-list {
@@ -139,27 +140,22 @@
 
 .ingre-purchase-th,
 .ingre-purchase-td {
-  width: 14%;
+  width: 15%;
 }
 
 .ingre-expired-th,
 .ingre-expired-td {
-  width: 14%;
+  width: 15%;
 }
 
 .ingre-status-th,
 .ingre-status-td {
-  width: 34%;
+  width: 35%;
 }
 
 .ingre-delete-th,
 .ingre-delete-td {
-  width: 8%;
-}
-
-.ingre-delete-icon {
-  font-size: 1.35em;
-  cursor: pointer;
+  width: 5%;
 }
 
 .inger-status-bar-wrapper {
@@ -231,178 +227,6 @@
 
 .ingre-button:hover {
   background-color: rgb(255, 190, 140);
-}
-
-/* 모달 */
-.ingre-modal-container {
-  position: relative; /* 위치를 부모 요소에 상대적으로 고정 */
-  background: white;
-  padding: 2em;
-  border-radius: 8px;
-  animation: slideDown 0.5s ease forwards; /* 슬라이드다운 효과 */
-
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 50em;
-  width: 25%;
-  max-height: 90vh; /* 모달의 최대 높이를 설정 */
-  overflow-y: auto; /* 콘텐츠가 넘칠 경우 스크롤 추가 */
-}
-
-.modal-close-icon:hover {
-  color: #f72120;
-}
-
-.ingre-modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.ingre-modal-content img {
-  width: 64px;
-  height: auto;
-  margin-bottom: 1%;
-}
-
-.ingre-modal-content h2 {
-  font-size: 2em;
-  font-weight: 700;
-}
-
-.ingre-modal-content table {
-  table-layout: fixed;
-  border-collapse: collapse;
-
-  border: none;
-
-  width: 90%;
-  margin: 10% 0;
-}
-
-.ingre-modal-content td {
-  border: none;
-  font-size: 1em;
-  padding: 2% 0;
-}
-
-.ingre-modal-content td:first-child {
-  width: 30%;
-  text-align: left;
-}
-.ingre-modal-content td:nth-child(2) {
-  width: 70%;
-  text-align: right;
-}
-
-.ingre-modal-content input[type="text"] {
-  width: 100%;
-  text-align: right;
-
-  padding: 2% 2%;
-  font-size: 1em;
-  border: 1px solid black;
-  box-shadow: none;
-
-  border-radius: 5px;
-}
-.ingre-model-quantity-input {
-  flex: 2;
-}
-.ingre-model-unit-input {
-  flex: 1;
-}
-
-.ingre-modal-content input[type="text"]:focus {
-  border-color: #ff9500;
-  outline: none;
-}
-
-.ingre-modal-quantity-wrapper {
-  display: flex;
-  gap: 3%;
-  width: 100%;
-}
-
-.ingre-modal-button-wrapper {
-  display: flex;
-  margin-bottom: 5%;
-  gap: 5%;
-}
-
-.ingre-delete-icon:hover {
-  color: #1e44e4;
-}
-
-/* 하단 레시피 */
-.ingre-recipe-container {
-  margin: 2% 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1%;
-  justify-content: flex-start;
-  box-sizing: border-box;
-}
-
-.ingre-recipe-button-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ingre-recipe-button {
-  height: 3.5em;
-  width: 20em;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-
-  font-size: 1.5em;
-  font-weight: 700;
-
-  background-color: #ffd292;
-}
-
-.ingre-recipe-button:hover {
-  background-color: #dcdcdc;
-}
-
-@media (max-width: 480px) {
-  .ingre-recipe-container > * {
-    flex: 0 1 100%;
-    max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 767px) and (min-width: 1px) {
-  .ingre-recipe-container {
-    margin: 10% 2%;
-    flex-direction: column;
-  }
-
-  .ingre-modal-container {
-    width: 90%;
-  }
-
-  .ingre-modal-content td {
-    border: none;
-    font-size: 1.5em;
-    padding: 2% 0;
-  }
-
-  .ingre-modal-content input[type="text"] {
-    width: 100%;
-    text-align: right;
-
-    padding: 2% 2%;
-    font-size: 1em;
-    border: 1px solid black;
-    box-shadow: none;
-
-    border-radius: 5px;
-  }
 }
 
 /* .ingre-button-container button {
@@ -609,7 +433,7 @@
     width: 95%;
   }
 
-  .ingre-container-span {
+  .ingre-container span {
     display: inline-block;
     font-size: 1rem;
     color: #ff9500;
@@ -617,11 +441,7 @@
     padding: 0 0;
   }
 
-  /* .ingre-button {
-    display: none;
-  } */
-
-  .ingre-desktop-button {
+  .ingre-button {
     display: none;
   }
 
@@ -653,12 +473,6 @@
   /* .ingre-mobile-button:hover {
     background-color: rgb(255, 190, 140);
   } */
-
-  .ingre-my {
-    padding-bottom: 4%;
-    border-bottom: solid 5px rgb(255, 233, 192);
-    margin-bottom: 12%;
-  }
 }
 
 .ingre-mobile-button-wrapper {
