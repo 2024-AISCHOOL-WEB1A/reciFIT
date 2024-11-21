@@ -244,7 +244,7 @@ import axios from "axios";
 const pendingRequests = new Map();
 
 // 이중 요청 금지에서 제외할 요청 키 목록
-const excludeRequests = new Set(["get:/users"]);
+const excludeRequests = new Set(["get:/users", "get:/recipes"]);
 
 // 요청을 등록하는 함수
 const addRequest = (key) => {

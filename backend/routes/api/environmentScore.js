@@ -30,9 +30,25 @@ router.get("/", authenticateAccessToken, async (req, res) => {
 
   try {
     // 환경 점수 및 차감된 이유와 재료 정보를 가져오는 쿼리
+    // const [rows] = await db.execute(
+    //   `SELECT
+    //     es.env_score,
+    //     dl.reason,
+    //     dl.decrement_date,
+    //     ui.ingre_idx,
+    //     ui.ingre_name,
+    //     ui.quantity,
+    //     ui.total_quantity,
+    //     ui.unit,
+    //     ui.expired_date
+    //   FROM TB_ENVIRONMENT_SCORE es
+    //   LEFT JOIN TB_SCORE_DECREMENT_LOG dl ON es.env_idx = dl.env_idx
+    //   LEFT JOIN TB_USER_INGREDIENT ui ON dl.u_ingre_idx = ui.u_ingre_idx
+    //   WHERE es.user_idx = ? AND es.month_year = ?`,
+    //   [userIdx, normalizedMonthYear]
+    // );
     const [rows] = await db.execute(
-      `
-      SELECT 
+      `SELECT 
         es.env_score,
         dl.reason,
         dl.decrement_date,
@@ -45,8 +61,9 @@ router.get("/", authenticateAccessToken, async (req, res) => {
       FROM TB_ENVIRONMENT_SCORE es
       LEFT JOIN TB_SCORE_DECREMENT_LOG dl ON es.env_idx = dl.env_idx
       LEFT JOIN TB_USER_INGREDIENT ui ON dl.u_ingre_idx = ui.u_ingre_idx
-      WHERE es.user_idx = ? AND es.month_year = ?
-      `,
+      WHERE es.user_idx = ? 
+        AND es.month_year = ? 
+        AND dl.u_ingre_idx IS NOT NULL`,
       [userIdx, normalizedMonthYear]
     );
 

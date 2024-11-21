@@ -105,7 +105,7 @@ const Receipt = () => {
   //   },
   // });
   const [receiptData, setReceiptData] = useState(null);
-  
+
   // 영수증 원본 데이터 저장
   const [originalData, setOriginalData] = useState(
     () => _.cloneDeep(receiptData) || null
@@ -142,6 +142,7 @@ const Receipt = () => {
           text: "영수증을 업로드 중입니다...",
           allowOutsideClick: false,
           allowEscapeKey: false,
+          allowEnterKey: false,
           didOpen: () => {
             swalModal.showLoading();
           },
@@ -172,6 +173,7 @@ const Receipt = () => {
           text: "영수증을 OCR 스캔 중입니다...",
           allowOutsideClick: false,
           allowEscapeKey: false,
+          allowEnterKey: false,
           didOpen: () => {
             swalModal.showLoading();
           },
@@ -184,6 +186,8 @@ const Receipt = () => {
         // 분석 완료 (데이터 넣어주기)
         setReceiptData(responseReceipt.data);
         setOriginalData(_.cloneDeep(responseReceipt.data));
+
+        // console.log(responseReceipt.data);
 
         // 모달 닫기
         swalModal.close();
@@ -215,8 +219,9 @@ const Receipt = () => {
 
   // 편집 핸들러 (수량)
   const handleQuantityChange = (index, value) => {
-    // 숫자만 허용
-    const numericValue = value.replace(/\D/g, ""); // 숫자가 아닌 값 제거
+    const numericValue = value
+      .replace(/[^0-9.]/g, "")
+      .replace(/\.(?=.*\.)/g, "");
 
     // 값 업데이트
     const updatedItems = [...receiptData.items];
@@ -399,12 +404,11 @@ const Receipt = () => {
       window.scrollTo({ top: yPosition, behavior: "smooth" });
 
       // 편집 모드 완료 기능
-      console.log("완료되었습니다.");
+      // console.log("완료되었습니다.");
       setOriginalData(_.cloneDeep(receiptData));
     } else {
-      console.log("??");
       // 편집 모드가 아닌 경우
-      // TODO : 서버로 데이터 보내서 재료 재고 저장
+      // 서버로 데이터 보내서 재료 재고 저장
       const ingredients = receiptData?.items?.map((item) => {
         return {
           ingreName: item.ingreName,
@@ -417,10 +421,10 @@ const Receipt = () => {
           expiredDate: item.expiredDate,
         };
       });
-      console.log(ingredients);
+      // console.log(ingredients);
 
       try {
-        const res = await apiAxios.post("/users/ingredients", {
+        const res = await apiAxios.post("/users/ingredients/batch", {
           ingredients,
         });
         // console.log(res);
@@ -689,7 +693,7 @@ const Receipt = () => {
             </div>
           </div>
           <div className="receipt-result-button-wrapper">
-            {!isEditing && (
+            {/* {!isEditing && (
               <button
                 type="button"
                 className="receipt-result-button receipt-result-nutrient-button"
@@ -697,7 +701,7 @@ const Receipt = () => {
               >
                 영양정보 확인
               </button>
-            )}
+            )} */}
             <button
               type="button"
               className={

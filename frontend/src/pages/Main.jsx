@@ -84,7 +84,7 @@ const Main = () => {
                   <span className="ab-text"></span>
                 </span>
               </span>
-              <a href="#" className="FlotingCampaign-link">
+              <Link to="/receipts" className="FlotingCampaign-link">
                 <div className="FlotingCampaign-title">영수증 등록하기</div>
                 <div className="FlotingCampaign-thumb">
                   <img
@@ -93,7 +93,7 @@ const Main = () => {
                     alt=""
                   />
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -132,7 +132,11 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(1)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Link to="/receipts" className="MainBrandBanner-link" target="_self">
+                <Link
+                  to="/receipts"
+                  className="MainBrandBanner-link"
+                  target="_self"
+                >
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
@@ -151,7 +155,11 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Link to="#" className="MainBrandBanner-link" target="_self">
+                <Link
+                  to="/ingredients"
+                  className="MainBrandBanner-link"
+                  target="_self"
+                >
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
@@ -170,7 +178,11 @@ const Main = () => {
                 onMouseEnter={() => handleMouseEnter(3)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Link to="#" className="MainBrandBanner-link" target="_self">
+                <Link
+                  to="/mypage?tab=env-score"
+                  className="MainBrandBanner-link"
+                  target="_self"
+                >
                   <div className="MainBrandBannerBg">
                     <span
                       className="MainBrandBannerBg-img a-BgUp"
