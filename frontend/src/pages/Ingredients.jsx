@@ -12,7 +12,7 @@ import { isValidDate } from "../utils/validation";
 import { apiAxios } from "../utils/axiosUtils";
 import _ from "lodash";
 import { useSelector } from "react-redux";
-import { formatDateToYyyyMmDd } from "../utils/commonUtils";
+import { formatDateToYyyyMmDd, formatNumber } from "../utils/commonUtils";
 import RecipeMoreItem from "../components/RecipeMoreItem";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -95,39 +95,39 @@ const Ingredients = () => {
 
   //
   // 하단 슬라이드 -------------------------------------------------
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [recipesPerPage, setRecipesPerPage] = useState(4); // 1열로 보여줄 항목의 수
+  // const [currentIndex, setCurrentIndex] = useState(0);
+  // const [recipesPerPage, setRecipesPerPage] = useState(4); // 1열로 보여줄 항목의 수
 
   // width 에 따라 리스트 개수 설정
-  useEffect(() => {
-    const updateRecipesPerPage = () => {
-      if (window.innerWidth <= 767) {
-        setRecipesPerPage(1);
-      } else {
-        setRecipesPerPage(4);
-      }
-    };
+  // useEffect(() => {
+  //   const updateRecipesPerPage = () => {
+  //     if (window.innerWidth <= 767) {
+  //       setRecipesPerPage(1);
+  //     } else {
+  //       setRecipesPerPage(4);
+  //     }
+  //   };
 
-    updateRecipesPerPage(); // 초기 실행
-    window.addEventListener("resize", updateRecipesPerPage);
+  //   updateRecipesPerPage(); // 초기 실행
+  //   window.addEventListener("resize", updateRecipesPerPage);
 
-    return () => {
-      window.removeEventListener("resize", updateRecipesPerPage);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", updateRecipesPerPage);
+  //   };
+  // }, []);
 
-  // 왼, 오 버튼
-  const handleNext = () => {
-    if (currentIndex < data.blackRecipes.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
+  // // 왼, 오 버튼
+  // const handleNext = () => {
+  //   if (currentIndex < data.blackRecipes.length - 1) {
+  //     setCurrentIndex(currentIndex + 1);
+  //   }
+  // };
 
-  const handlePrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
+  // const handlePrevious = () => {
+  //   if (currentIndex > 0) {
+  //     setCurrentIndex(currentIndex - 1);
+  //   }
+  // };
 
   // 상단 재료리스트 -------------------------------------------------
   // 수정 모달창
@@ -190,6 +190,43 @@ const Ingredients = () => {
 
   // 수정 모달창 확인
   const handleModifiedItemModify = async () => {
+    // 유효성 검사
+    if (!modifiedItem?.ingreName) {
+      return swalModal.fire({
+        title: "재료 수정 실패",
+        text: "재료 이름은 반드시 적혀야합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+    if (!modifiedItem?.quantity || modifiedItem?.quantity <= 0) {
+      return swalModal.fire({
+        title: "재료 수정 실패",
+        text: "남은 수량은 반드시 0보다 커야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+    if (
+      !modifiedItem?.purchaseDate ||
+      !isValidDate(modifiedItem?.purchaseDate)
+    ) {
+      return swalModal.fire({
+        title: "재료 수정 실패",
+        text: "구매일의 날짜 형식은 YYYY-MM-DD여야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+    if (!modifiedItem?.expiredDate || !isValidDate(modifiedItem?.expiredDate)) {
+      return swalModal.fire({
+        title: "재료 수정 실패",
+        text: "유통기한의 날짜 형식은 YYYY-MM-DD여야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+
     try {
       const response = await apiAxios.patch("/users/ingredients", {
         uIngreIdx: modifiedItem?.uIngreIdx,
@@ -294,6 +331,42 @@ const Ingredients = () => {
 
   // 추가 모달창 확인
   const handleModifiedItemAdd = async () => {
+    // 유효성 검사
+    if (!modifiedItem?.ingreName) {
+      return swalModal.fire({
+        title: "재료 추가 실패",
+        text: "재료 이름은 반드시 적혀야합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+    if (!modifiedItem?.quantity || modifiedItem?.quantity <= 0) {
+      return swalModal.fire({
+        title: "재료 추가 실패",
+        text: "남은 수량은 반드시 0보다 커야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+    if (
+      !modifiedItem?.purchaseDate ||
+      !isValidDate(modifiedItem?.purchaseDate)
+    ) {
+      return swalModal.fire({
+        title: "재료 추가 실패",
+        text: "구매일의 날짜 형식은 YYYY-MM-DD여야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+    if (!modifiedItem?.expiredDate || !isValidDate(modifiedItem?.expiredDate)) {
+      return swalModal.fire({
+        title: "재료 추가 실패",
+        text: "유통기한의 날짜 형식은 YYYY-MM-DD여야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
     try {
       const response = await apiAxios.post("/users/ingredients", {
         ingreName: modifiedItem?.ingreName,
@@ -505,7 +578,7 @@ const Ingredients = () => {
                       <tr key={index}>
                         <td className="ingre-name-td">{item?.ingreName}</td>
                         <td className="ingre-quantity-td">
-                          {`${item?.quantity}${item?.unit}`}
+                          {`${formatNumber(item?.quantity)}${item?.unit}`}
                         </td>
                         <td className="ingre-purchase-td">
                           {item?.purchaseDate}
@@ -619,7 +692,7 @@ const Ingredients = () => {
                       <tr key={index}>
                         <td className="ingre-name-td">{item?.ingreName}</td>
                         <td className="ingre-quantity-td">
-                          {`${item?.quantity}${item?.unit}`}
+                          {`${formatNumber(item?.quantity)}${item?.unit}`}
                         </td>
                         <td className="ingre-purchase-td">
                           {item?.purchaseDate}

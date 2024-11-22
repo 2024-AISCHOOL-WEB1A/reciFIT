@@ -28,8 +28,8 @@ const RecipeDetail = () => {
   // 서버에서 rcpIdx 값 가져오기
   const { rcpIdx } = useParams();
   const [recipe, setRecipe] = useState(null);
-  const [error, setError] = useState(null);
   const [sections, setSections] = useState(null);
+  const [favoriteData, setFavoriteData] = useState(null);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -49,19 +49,51 @@ const RecipeDetail = () => {
         console.log(err);
       }
     };
-    fetchRecipe();
+
+    const fetchFavorite = async () => {
+      try {
+        const response = await apiAxios.get(`/favorite/${rcpIdx}`);
+        console.log(response.data);
+        setFavoriteData(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const fetchRecipeAndFavorite = async () => {
+      try {
+        const [recipeData, favoriteData] = await Promise.all([
+          fetchRecipe(),
+          fetchFavorite(),
+        ]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchRecipeAndFavorite();
   }, [rcpIdx]);
 
-  // const sections = "[재료] 당근 10개| 소금 1T"
-  //     .split("[")
-  //     .filter(Boolean)
-  //     .map((section) => section.trim());
+  // 즐겨찾기 클릭
+  const heartClick = async () => {
+    let favoriteYn = "Y";
+    if (favoriteData?.favoriteYn === "Y") {
+      favoriteYn = "N";
+    } else {
+      favoriteYn = "Y";
+    }
+    setFavoriteData({ ...favoriteData, favoriteYn });
 
-  // 찜하기 기능
-  const [isHeartClicked, setIsHeartClicked] = useState(false);
-
-  const heartClick = () => {
-    setIsHeartClicked(!isHeartClicked);
+    try {
+      const response = await apiAxios.post("/favorite", {
+        rcpIdx,
+        favoriteYn,
+        cookedYn: favoriteData?.cookedYn,
+      });
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleCookingStart = () => {
@@ -74,20 +106,32 @@ const RecipeDetail = () => {
         confirmButtonText: "예",
         cancelButtonText: "아니오",
       })
-      .then((result) => {
+      .then(async (result) => {
         if (result.isConfirmed) {
           // 예를 클릭했을 때 실행되는 코드
-          // TODO : 재료 차감 axios
-          // TODO : 성공했을 경우
-          swalModal.fire({
-            title: "음식 재료 차감 성공",
-            html: `재료는 줄었지만, 요리의 기쁨은 늘어납니다!<br><br>오늘도 맛있는 하루 되세요~😊`,
-            icon: "success",
-            confirmButtonText: "확인",
-          });
-        } else {
-          // 아니오를 클릭했을 때 실행되는 코드
-          console.log("아니오");
+          try {
+            const response = await apiAxios.patch(
+              "/users/ingredients/consumption",
+              {
+                rcpIdx,
+              }
+            );
+
+            swalModal.fire({
+              title: "음식 재료 차감 성공",
+              html: `재료는 줄었지만, 요리의 기쁨은 늘어납니다!<br><br>오늘도 맛있는 하루 되세요~😊`,
+              icon: "success",
+              confirmButtonText: "확인",
+            });
+          } catch (err) {
+            console.log(err);
+            swalModal.fire({
+              title: "음식 재료 차감 실패",
+              text: `요리 시작에 실패했습니다. 관리자에게 문의바랍니다.`,
+              icon: "error",
+              confirmButtonText: "확인",
+            });
+          }
         }
       });
   };
@@ -127,7 +171,9 @@ const RecipeDetail = () => {
             <div className="heart-div">
               <button className="heart-container" onClick={heartClick}>
                 <FontAwesomeIcon
-                  icon={isHeartClicked ? faHeart : faRegularHeart}
+                  icon={
+                    favoriteData?.favoriteYn === "Y" ? faHeart : faRegularHeart
+                  }
                   id="heartBtn"
                 />
               </button>

@@ -88,20 +88,20 @@ const Header = ({ user }) => {
     swalModal.close();
   };
 
-  const handleTestAlarm = async () => {
-    try {
-      const res = await apiAxios.post("/subscription/test");
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const handleTestAlarm = async () => {
+  //   try {
+  //     const res = await apiAxios.post("/subscription/test");
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <header>
       <div className="site-header">
         <div className="header-container">
-          <Link onClick={handleTestAlarm} to="/">
+          <Link onClick={handleShutdownMenu} to="/">
             <img src="/img/logo.png" className="headerLogo" />
           </Link>
 

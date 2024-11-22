@@ -46,11 +46,17 @@ export const formatDateToString = (dateString) => {
   return `${yyyy}-${mm}-${dd} ${hh}:${MM}:${ss}`;
 };
 
-export function formatDateToKorMonth(dateString) {
+export const formatDateToKorMonth = (dateString) => {
   const date = new Date(dateString);
 
   const year = date.getFullYear(); // 연도
   const month = (date.getMonth() + 1).toString().padStart(2, "0"); // 월 (0부터 시작하므로 +1 해주고, 2자리로 패딩)
 
   return `${year}년 ${month}월`;
-}
+};
+
+export const formatNumber = (num) => {
+  if (num == null || isNaN(num)) return null;
+  const number = parseFloat(num);
+  return Number.isInteger(number) ? number : parseFloat(number.toFixed(2));
+};
