@@ -102,7 +102,7 @@ router.get(
       // }
       return res.redirect(
         // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
-        `http://localhost:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       return res.status(500).json({ message: "Internal server error" });
@@ -201,7 +201,7 @@ router.get(
       // }
       return res.redirect(
         // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
-        `http://localhost:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       console.error(err);
@@ -283,6 +283,11 @@ router.post("/token", async (req, res) => {
   } catch (err) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
+});
+
+// 로그인 여부 확인
+router.get("/status", authenticateAccessToken, async (req, res) => {
+  return res.status(200).json({ message: "Authentication successful" });
 });
 
 // S3 업로드 요청

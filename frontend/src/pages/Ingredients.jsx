@@ -53,7 +53,7 @@ const Ingredients = () => {
 
   // 보유 재료 불러오기
   useEffect(() => {
-    fetchUserIngredientData();
+    if (user) fetchUserIngredientData();
   }, []);
 
   useEffect(() => {

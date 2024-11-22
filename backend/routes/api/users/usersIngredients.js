@@ -827,6 +827,7 @@ router.patch("/consumption", authenticateAccessToken, async (req, res) => {
           userIngredient.quantity - quantityToDeduct,
           0
         );
+        console.log(updatedQuantity);
 
         // 차감된 수량 업데이트 쿼리 반환
         return db.execute(

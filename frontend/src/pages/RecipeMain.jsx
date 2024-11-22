@@ -40,7 +40,6 @@ const RecipeMain = () => {
 
   // 카테고리 검색 정보
   // 기본 랜덤 검색 값
-
   const categoryItem = [
     {
       type: "none",
