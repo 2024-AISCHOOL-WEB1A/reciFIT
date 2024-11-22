@@ -51,6 +51,7 @@ function App() {
         }
       } catch (err) {
         console.error(err);
+        userActions.setUser({ user: null });
       }
     };
 

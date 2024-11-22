@@ -295,6 +295,7 @@ td {
 .my-page-receipt-content img {
   height: 250px;
   width: auto;
+  max-width: 100%;
 }
 
 .my-page-divided-line {
@@ -593,6 +594,7 @@ td {
   .my-page-receipt-content img {
     height: 150px;
     width: auto;
+    max-width: 100%;
   }
 
   .my-page-divided-line {

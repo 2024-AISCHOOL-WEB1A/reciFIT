@@ -70,8 +70,9 @@ router.get("/", authenticateAccessToken, async (req, res) => {
     // 데이터가 없을 경우: 점수 기본값 100, 로그는 빈 배열
     if (rows.length === 0) {
       return res.status(200).json({
-        env_score: 100,
-        decrement_logs: [],
+        envScore: 100,
+        monthYear: normalizedMonthYear,
+        decrementLogs: [],
       });
     }
 

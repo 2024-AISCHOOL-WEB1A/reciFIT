@@ -8,6 +8,7 @@ import {
   formatDateToYyyyMmDd,
   formatDateToString,
   formatDateToKorMonth,
+  receiptFormatDate,
 } from "../utils/commonUtils";
 import FavoriteContent from "../components/FavoriteContent";
 import { Doughnut } from "react-chartjs-2";
@@ -415,6 +416,7 @@ const Mypage = () => {
         <hr className="my-page-divided-line" />
 
         {/* 환경점수 */}
+        {console.log(envScoreData)}
         {(tab === "env-score" || isMobile) && envScoreData && (
           <div className="my-page-section-container">
             <div className="my-page-section-title">
@@ -514,10 +516,16 @@ const Mypage = () => {
                         <img src={item?.rptPhotoUrl} alt="receipt image" />
                       </td>
                       <td>
-                        {`${item?.recognizedText?.images[0]?.receipt?.result?.storeInfo?.name?.text} ${item?.recognizedText?.images[0]?.receipt?.result?.storeInfo?.subName?.text}`}
+                        {`${
+                          item?.recognizedText?.images[0]?.receipt?.result
+                            ?.storeInfo?.name?.text ?? ""
+                        } ${
+                          item?.recognizedText?.images[0]?.receipt?.result
+                            ?.storeInfo?.subName?.text ?? ""
+                        }`}
                       </td>
                       <td>
-                        {formatDateToYyyyMmDd(
+                        {receiptFormatDate(
                           item?.recognizedText?.images[0]?.receipt?.result
                             ?.paymentInfo?.date?.text
                         )}

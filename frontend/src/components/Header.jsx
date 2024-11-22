@@ -38,7 +38,7 @@ const Header = ({ user }) => {
   }, []);
 
   useEffect(() => {
-    if (user) {
+    if (user && user?.userIdx != 0) {
       setLoginText(user.userName);
     }
   }, [user]);
@@ -53,7 +53,7 @@ const Header = ({ user }) => {
 
   const toggleMenu = () => {
     // 로그인 여부 확인
-    if (user) {
+    if (user && user?.userIdx != 0) {
       // 로그인이 되어 있다면, 메뉴가 열리도록
       setMenuDisplay((prevState) => !prevState);
     } else {
@@ -88,20 +88,20 @@ const Header = ({ user }) => {
     swalModal.close();
   };
 
-  const handleTestAlarm = async () => {
-    try {
-      const res = await apiAxios.post("/subscription/test");
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const handleTestAlarm = async () => {
+  //   try {
+  //     const res = await apiAxios.post("/subscription/test");
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <header>
       <div className="site-header">
         <div className="header-container">
-          <Link onClick={handleTestAlarm} to="/">
+          <Link onClick={handleShutdownMenu} to="/">
             <img src="/img/logo.png" className="headerLogo" />
           </Link>
 
@@ -189,7 +189,7 @@ const Header = ({ user }) => {
                 영수증 관리
               </Link>
             </li>
-            {user && (
+            {user && user?.userIdx != 0 && (
               <li className="SiteFamilySelect-item">
                 <Link
                   className="SiteFamilySelect-link"
@@ -251,7 +251,7 @@ const Header = ({ user }) => {
               재료관리
             </Link>
           </li>
-          {user && (
+          {user && user?.userIdx != 0 && (
             <>
               <li>
                 <Link to="/mypage" onClick={toggleMobileMenu}>

@@ -76,22 +76,6 @@ router.post("/", authenticateAccessToken, async (req, res) => {
     const purchaseDate = paymentData?.date
       ? receiptFormatDate(paymentData?.date?.text)
       : receiptFormatDate(new Date());
-    // let purchaseDate = paymentData?.date
-    //   ? receiptFormatDate(
-    //       `${paymentData?.date?.formatted?.year}-${paymentData?.date?.formatted?.month}-${paymentData?.date?.formatted?.day}`
-    //     )
-    //   : receiptFormatDate(new Date());
-    // if (!purchaseDate) purchaseDate = receiptFormatDate(new Date());
-
-    // const purchaseDate =
-    //   paymentData?.date ??
-    //   receiptFormatDate(
-    //     `${paymentData?.date?.formatted?.year}-${paymentData?.date?.formatted?.month}-${paymentData?.date?.formatted?.day}`
-    //   ) ??
-    //   receiptFormatDate(new Date());
-
-    // console.log(paymentData?.date);
-    // console.log(purchaseDate);
 
     // findMatchingIngredient를 통해 식재료 이름 DB의 이름과 매칭, 수량과 unit도 가져오기
     const items = (subData[0]?.items || [])
@@ -150,10 +134,17 @@ router.post("/", authenticateAccessToken, async (req, res) => {
     // items의 name을 이용해 TB_INGREDIENT에서 해당 재료 정보 가져오기
     const placeholders = items.map(() => "?").join(", ");
     const query = `
-      SELECT ingre_idx, ingre_name, calories, protein, fat, carbohydrates, fiber, shelf_life_days
+      SELECT 
+        ingre_idx, 
+        ingre_name, 
+        calories, 
+        protein, 
+        fat, 
+        carbohydrates, 
+        fiber, 
+        shelf_life_days
       FROM TB_INGREDIENT
-      WHERE ingre_name IN (${placeholders})
-    `;
+      WHERE ingre_name IN (${placeholders})`;
 
     const [ingredientRows] = await db.execute(
       query,
