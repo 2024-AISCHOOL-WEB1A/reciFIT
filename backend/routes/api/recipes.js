@@ -362,6 +362,9 @@ router.get("/", authenticateAccessToken, async (req, res) => {
 
       // 각 문자열에 대해서 검색 확인
       for (const hashSearchString of hashSearchStrings) {
+        // 빈 문자열이면 패스
+        if (!hashSearchString) continue;
+
         const category = recipeValidation.isInCategory(hashSearchString);
 
         // 겹치는 카테고리가 있다면

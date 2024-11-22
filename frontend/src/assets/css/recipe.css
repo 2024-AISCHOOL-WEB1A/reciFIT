@@ -509,6 +509,10 @@
   color: #1c1c1c;
 }
 
+.search__title span {
+  cursor: pointer;
+}
+
 .search__title_mobile {
   margin-left: 1.3em;
   margin-top: 0.5em;
@@ -1079,6 +1083,7 @@ textarea#detectionFood[readonly] {
   #recipe {
     max-width: fit-content;
     margin: 0em 2em;
+    margin-top: 8%;
   }
   #recipe-details-title {
     padding-bottom: 0em;
@@ -1207,6 +1212,7 @@ textarea#detectionFood[readonly] {
   margin-left: -0.5em;
 
   padding-bottom: 5%;
+  user-select: none;
 }
 
 /* 리스트 하위 테이블 */

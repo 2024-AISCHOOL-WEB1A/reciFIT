@@ -62,10 +62,7 @@ const RecipeDetail = () => {
 
     const fetchRecipeAndFavorite = async () => {
       try {
-        const [recipeData, favoriteData] = await Promise.all([
-          fetchRecipe(),
-          fetchFavorite(),
-        ]);
+        await Promise.all([fetchRecipe(), fetchFavorite()]);
       } catch (err) {
         console.log(err);
       }
@@ -116,6 +113,7 @@ const RecipeDetail = () => {
                 rcpIdx,
               }
             );
+            console.log(response.data);
 
             swalModal.fire({
               title: "음식 재료 차감 성공",
@@ -162,11 +160,11 @@ const RecipeDetail = () => {
             </div>
             <div className="recipe-detail-rowflex-div">
               <FontAwesomeIcon icon={faHourglassStart} />
-              <div> {recipe?.ck_time} 소요시간</div>
+              <div> {recipe?.ck_time}</div>
             </div>
             <div className="recipe-detail-rowflex-div">
               <FontAwesomeIcon icon={faStar} />
-              <div> {recipe?.ck_difficulty} 난이도</div>
+              <div> {recipe?.ck_difficulty}</div>
             </div>
             <div className="heart-div">
               <button className="heart-container" onClick={heartClick}>

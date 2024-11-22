@@ -675,7 +675,7 @@ router.patch("/", authenticateAccessToken, async (req, res) => {
     updateValues.push(ingreName);
   }
 
-  if (ingreIdx != -1) {
+  if (ingreIdx !== -1) {
     setClauses.push("ingre_idx = ?");
     updateValues.push(ingreIdx);
   }
