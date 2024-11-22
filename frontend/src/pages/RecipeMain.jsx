@@ -10,14 +10,17 @@ import {
   faFileExport,
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { apiAxios, generalAxios } from "../utils/axiosUtils";
 import RecipeMoreItem from "../components/RecipeMoreItem";
 import swalModal from "../utils/swalModal";
 import { throttle } from "lodash";
+import { useSelector } from "react-redux";
 
 const RecipeMain = () => {
   const location = useLocation();
+  const user = useSelector((state) => state.user.user);
+
   const queryParams = new URLSearchParams(location.search);
   const recommend = queryParams.get("recommend");
 
@@ -581,6 +584,9 @@ const RecipeMain = () => {
     };
   }, []);
 
+  if (!user) {
+    return <Navigate to="/join" replace />;
+  }
   return (
     <div className="recipeMain-container">
       {/* 검색 폼 */}

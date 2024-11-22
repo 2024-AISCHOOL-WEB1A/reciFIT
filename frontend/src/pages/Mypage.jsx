@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
 import "../assets/css/mypage.css";
 import swalModal from "../utils/swalModal";
@@ -19,10 +19,12 @@ import {
   ArcElement,
   CategoryScale,
 } from "chart.js";
+import { useSelector } from "react-redux";
 
 const Mypage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const user = useSelector((state) => state.user.user);
 
   // 모바일
   const [isMobile, setIsMobile] = useState(false);
@@ -243,6 +245,9 @@ const Mypage = () => {
     }
   }, [location]);
 
+  if (!user) {
+    return <Navigate to="/join" replace />;
+  }
   return (
     <>
       <div className="my-page-container">

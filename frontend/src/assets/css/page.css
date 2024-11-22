@@ -231,31 +231,31 @@
     background-size: 0.9375vw 2.55208vw;
   }
 
-	.MainSwipeThumb:after{
-		width:0.885416vw;
-		height:2.55208vw;
-		background-size:0.885416vw 2.55208vw;
-	}
-	
-	.MainSwipe{
-		top:calc(50% + 19.6041vw);
-	}
+  .MainSwipeThumb:after {
+    width: 0.885416vw;
+    height: 2.55208vw;
+    background-size: 0.885416vw 2.55208vw;
+  }
 
-	.MainSwipeThumbSlide{
-		width:24.375vw;
-	}
-	
-	.MainTopBannerScroll{
-		width:2.86458vw;
-		bottom:1.5625vw;
-		right:5.2083vw;
-	}
+  .MainSwipe {
+    top: calc(50% + 19.6041vw);
+  }
 
-	.MainTopBannerScroll-ico{
-		width:2.86458vw;
-		height:4.8958vw;
-		background-size:2.86458vw 4.8958vw;
-	}
+  .MainSwipeThumbSlide {
+    width: 24.375vw;
+  }
+
+  .MainTopBannerScroll {
+    width: 2.86458vw;
+    bottom: 1.5625vw;
+    right: 5.2083vw;
+  }
+
+  .MainTopBannerScroll-ico {
+    width: 2.86458vw;
+    height: 4.8958vw;
+    background-size: 2.86458vw 4.8958vw;
+  }
 
   .MainTopBannerScroll-text {
     width: 3.6458vw;
@@ -681,9 +681,9 @@
     width: 10em;
     font-size: 3em;
     padding-bottom: 6.44583vw;
-    opacity: 1; 
+    opacity: 1;
 
-    transition: none;  /* transition을 비활성화 */
+    transition: none; /* transition을 비활성화 */
     transform: none;
   }
 
@@ -698,21 +698,21 @@
     display: none;
   }
 
-  .MainBrandBannerText{
+  .MainBrandBannerText {
     transition: none;
     transform: none;
-    top:30%
+    top: 30%;
   }
 
   .MainBrandBannerBg,
   .is-Action.MainBrandBannerText,
   .is-Action.MainBrandBannerBg {
-    transition: none;  /* transition을 비활성화 */
-    transform: none;   /* transform을 비활성화 */
+    transition: none; /* transition을 비활성화 */
+    transform: none; /* transform을 비활성화 */
   }
 
   .is-Action.MainBrandBannerText {
-    transition-delay: 0s;  /* transition-delay를 0으로 설정 */
+    transition-delay: 0s; /* transition-delay를 0으로 설정 */
   }
 }
 
@@ -1190,10 +1190,10 @@
     width: 10em;
     height: 5em;
   }
-  .FlotingCampaign-img{
+  .FlotingCampaign-img {
     width: 5em;
   }
-  .FlotingCampaign-link{
+  .FlotingCampaign-link {
     height: 4em;
   }
 
@@ -1203,7 +1203,7 @@
     padding-right: 4.04166vw;
     display: none;
   }
-  .FlotingCampaign-thumb{
+  .FlotingCampaign-thumb {
     height: 8em;
     width: auto;
     margin-left: 1em;
