@@ -63,7 +63,7 @@ router.get("/", authenticateAccessToken, async (req, res) => {
       LEFT JOIN TB_USER_INGREDIENT ui ON dl.u_ingre_idx = ui.u_ingre_idx
       WHERE es.user_idx = ? 
         AND es.month_year = ? 
-        AND dl.u_ingre_idx IS NOT NULL`,
+        AND ui.u_ingre_idx IS NOT NULL`,
       [userIdx, normalizedMonthYear]
     );
 

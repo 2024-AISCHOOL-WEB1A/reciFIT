@@ -14,7 +14,7 @@ import _ from "lodash";
 import { useSelector } from "react-redux";
 import { formatDateToYyyyMmDd } from "../utils/commonUtils";
 import RecipeMoreItem from "../components/RecipeMoreItem";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Ingredients = () => {
   const user = useSelector((state) => state.user.user);
@@ -345,6 +345,9 @@ const Ingredients = () => {
     navigate("/recipe?recommend=true");
   };
 
+  if (!user) {
+    return <Navigate to="/join" replace />;
+  }
   return (
     // 전체 컨테이너
     <div className="ingre-container">

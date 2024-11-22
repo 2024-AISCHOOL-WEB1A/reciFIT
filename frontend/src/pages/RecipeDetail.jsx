@@ -12,12 +12,13 @@ import {
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faRegularHeart } from "@fortawesome/free-regular-svg-icons";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
 import swalModal from "../utils/swalModal";
 
 const RecipeDetail = () => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
 
   // 아이콘 클릭 시 이전 페이지로 되돌아가기
   const goBack = () => {
@@ -91,6 +92,9 @@ const RecipeDetail = () => {
       });
   };
 
+  if (!user) {
+    return <Navigate to="/join" replace />;
+  }
   return (
     <div id="recipe">
       <div id="recipe-details-goback" onClick={goBack}>

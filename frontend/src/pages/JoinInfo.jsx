@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "../assets/css/joinInfo.css";
 import { apiAxios } from "../utils/axiosUtils";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import swalModal from "../utils/swalModal";
+import { useSelector } from "react-redux";
 
 const JoinInfo = () => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
 
   const [preferredIngredients, setPreferredIngredient] = useState("");
   const [dislikedIngredients, setDislikedIngredients] = useState("");
@@ -90,6 +92,9 @@ const JoinInfo = () => {
     navigate("/");
   };
 
+  if (!user) {
+    return <Navigate to="/join" replace />;
+  }
   return (
     <div>
       <div className="info-container">

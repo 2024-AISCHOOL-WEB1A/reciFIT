@@ -18,7 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { apiAxios } from "./utils/axiosUtils";
 import { userActions } from "./redux/reducers/userSlice";
 import { useEffect } from "react";
-//import RecipeSignup from "./pages/RecipeSignup";
+// import Mail from "./pages/Mail";
+// import RecipeSignup from "./pages/RecipeSignup";
+
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -75,6 +77,7 @@ function App() {
         <Route path="/mypage" element={<Mypage />}></Route>
         <Route path="/ingredients" element={<Ingredients />}></Route>
         <Route path="/login/callback" element={<LoginRedirect />} />
+        {/* <Route path="/mail" element={<Mail />} /> */}
         {/* <Route path="/recipeSignup" element={<RecipeSignup/>}></Route> */}
         {/* 404 Not Found */}
         <Route path="*" element={<NotFoundPage />} />

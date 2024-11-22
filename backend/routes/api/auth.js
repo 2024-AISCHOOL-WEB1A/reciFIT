@@ -9,8 +9,8 @@ const { v4: uuidv4 } = require("uuid");
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
-const getLeven = require("../../config/leven");
-const loadIngredients = require("../../utils/loadIngredients");
+// const getLeven = require("../../config/leven");
+// const loadIngredients = require("../../utils/loadIngredients");
 const generateRandomNickname = require("../../utils/generateRandomNickname");
 
 // 카카오 로그인
@@ -101,7 +101,8 @@ router.get(
       //   );
       // }
       return res.redirect(
-        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `http://localhost:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       return res.status(500).json({ message: "Internal server error" });
@@ -199,7 +200,8 @@ router.get(
       //   );
       // }
       return res.redirect(
-        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `http://localhost:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       console.error(err);
@@ -326,36 +328,5 @@ router.post("/upload/:type", authenticateAccessToken, async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
-// router.get("/test", async (req, res) => {
-//   const ingredientName = "풋사과";
-//   console.log(ingredientName);
-
-//   try {
-//     // 캐시된 재료 데이터와 leven 모듈 불러오기
-//     const ingredients = await loadIngredients();
-//     const leven = await getLeven();
-
-//     // 유사한 재료 찾기
-//     const similarIngredients = ingredients
-//       .map((name) => ({
-//         name,
-//         distance: leven(ingredientName, name),
-//       }))
-//       .filter((item) => item.distance < 3) // Levenshtein 거리 3 이하인 것만 추천
-//       .sort((a, b) => a.distance - b.distance) // 거리순으로 정렬
-//       .slice(0, 5); // 최대 5개만 반환
-
-//     console.log("?", {
-//       similarIngredients: similarIngredients.map((item) => item.name),
-//     });
-
-//     for (let i = 0; i < 1; i++) {
-//       console.log(await generateRandomNickname());
-//     }
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
 
 module.exports = router;

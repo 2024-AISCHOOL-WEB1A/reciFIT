@@ -30,6 +30,7 @@ const Join = () => {
 
   // 로그인
   const loginHandler = async (provider) => {
+    // window.location.href = `http://192.168.100.64:3001/api/auth/${provider}`;
     window.location.href = `http://localhost:3001/api/auth/${provider}`;
   };
 

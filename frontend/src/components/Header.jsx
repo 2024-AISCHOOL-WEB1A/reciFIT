@@ -7,6 +7,10 @@ import { apiAxios } from "../utils/axiosUtils";
 import { useDispatch } from "react-redux";
 import { userActions } from "../redux/reducers/userSlice";
 import swalModal from "../utils/swalModal";
+import {
+  requestNotificationPermission,
+  subscribeToPush,
+} from "../utils/notification";
 
 const Header = ({ user }) => {
   const navigate = useNavigate();
@@ -15,6 +19,23 @@ const Header = ({ user }) => {
   const [menuDisplay, setMenuDisplay] = useState(true);
   const [loginText, setLoginText] = useState("로그인");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleSubscribe = async () => {
+      // const registration = await navigator.serviceWorker.ready;
+      // const subscription = await registration.pushManager.getSubscription();
+      // if (!subscription) {
+      //   await requestNotificationPermission();
+      //   await subscribeToPush();
+      // } else {
+      //   console.log("Already subscribed:", subscription);
+      // }
+      await requestNotificationPermission();
+      await subscribeToPush();
+    };
+
+    handleSubscribe();
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -67,11 +88,20 @@ const Header = ({ user }) => {
     swalModal.close();
   };
 
+  const handleTestAlarm = async () => {
+    try {
+      const res = await apiAxios.post("/subscription/test");
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <header>
       <div className="site-header">
         <div className="header-container">
-          <Link onClick={handleShutdownMenu} to="/">
+          <Link onClick={handleTestAlarm} to="/">
             <img src="/img/logo.png" className="headerLogo" />
           </Link>
 
