@@ -8,14 +8,14 @@ import {
   faChevronLeft,
   faCamera,
   faFileExport,
-  faPen,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, Navigate, useLocation, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { apiAxios, generalAxios } from "../utils/axiosUtils";
 import RecipeMoreItem from "../components/RecipeMoreItem";
 import swalModal from "../utils/swalModal";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
+import RECIPE_CATEGORIES from "../config/recipeCategories";
 
 const RecipeMain = () => {
   const location = useLocation();
@@ -33,6 +33,8 @@ const RecipeMain = () => {
   const [categoryRecipeData, setCategoryRecipeData] = useState(null);
   const [categoryLength, setCategoryLength] = useState(CATEGORY_ITEM_LOAD_STEP);
   const [isAtBottom, setIsAtBottom] = useState(false);
+
+  const [randomHashSearch, setRandomHashSearch] = useState([]);
 
   const fileInputRef = useRef(null);
   const recipeResultRef = useRef(null);
@@ -103,6 +105,10 @@ const RecipeMain = () => {
     },
   ];
 
+  useEffect(() => {
+    setRandomHashSearch(["FIT", ...getRandomCategories(RECIPE_CATEGORIES, 5)]);
+  }, []);
+
   // '흑백 요리사'가 포함된 레시피만 등록
   useEffect(() => {
     const fetchRecipe = async (recommend) => {
@@ -122,13 +128,39 @@ const RecipeMain = () => {
 
     const fetchCategoryRecipe = async () => {
       try {
+        let isRecommend = false;
         let params = {
           random: true,
           count: MAX_CATEGORY_LENGTH,
         };
 
         if (recommend === "true") {
+          isRecommend = true;
           params = {};
+
+          swalModal.fire({
+            title: "당신에게 맞는 레시피를 가져옵니다...",
+            text: "레시피 가져오는 중...",
+            imageUrl: "/logo192.png", // 여기에서 아이콘 이미지 URL을 설정
+            imageWidth: 100,
+            imageHeight: 100,
+            imageAlt: "reciFIT",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            didOpen: () => {
+              swalModal.showLoading();
+            },
+            didClose: () => {
+              // 끝나고 스크롤
+              if (recipeResultRef.current) {
+                recipeResultRef.current.scrollIntoView({
+                  behavior: "smooth", // 부드럽게 스크롤
+                  block: "start", // 상단으로 스크롤
+                });
+              }
+            },
+          });
         }
 
         const response = await apiAxios.get("/recipes", {
@@ -137,15 +169,18 @@ const RecipeMain = () => {
         console.log(response.data);
         setCategoryRecipeData(response.data?.recipes);
 
-        // 로딩 되면 스크롤
-        if (recommend === "true") {
-          if (recipeResultRef.current) {
-            recipeResultRef.current.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        }
+        // 모달 닫기
+        if (isRecommend) swalModal.close();
+
+        // // 로딩 되면 스크롤
+        // if (recommend === "true") {
+        //   if (recipeResultRef.current) {
+        //     recipeResultRef.current.scrollIntoView({
+        //       behavior: "smooth",
+        //       block: "start",
+        //     });
+        //   }
+        // }
       } catch (err) {
         // console.log(err);
       }
@@ -194,7 +229,7 @@ const RecipeMain = () => {
         return prevLength;
       });
     }
-  }, [isAtBottom]);
+  }, [isAtBottom, categoryRecipeData]);
 
   useEffect(() => {
     // 스크롤 이벤트 리스너 추가
@@ -393,7 +428,11 @@ const RecipeMain = () => {
         });
         console.log(response.data);
         console.log(response.data?.ingredientNames);
-        setDetectionText(response.data?.ingredientNames);
+
+        const ingredientNames = Array.isArray(response.data?.ingredientNames)
+          ? response.data.ingredientNames.join(", ")
+          : "";
+        setDetectionText(ingredientNames);
 
         // 모달 닫기
         swalModal.close();
@@ -466,6 +505,8 @@ const RecipeMain = () => {
       setCategoryRecipeData(undefined);
 
       // have 기반 추천으로 변경
+      console.log(detectionText);
+
       const response = await apiAxios.get("/recipes", {
         params: {
           have: detectionText,
@@ -493,12 +534,15 @@ const RecipeMain = () => {
 
   // 검색창 검색
   const [searchText, setSearchText] = useState("");
-  const handleSearch = async () => {
-    // console.log(searchText);
+  const handleSearch = async (searchText) => {
+    console.log(searchText);
 
     try {
       swalModal.fire({
-        title: "검색한 레시피를 가져옵니다...",
+        title:
+          searchText === "#FIT"
+            ? "당신에게 맞는 레시피를 가져옵니다..."
+            : "검색한 레시피를 가져옵니다...",
         text: "레시피 가져오는 중...",
         imageUrl: "/logo192.png", // 여기에서 아이콘 이미지 URL을 설정
         imageWidth: 100,
@@ -567,6 +611,14 @@ const RecipeMain = () => {
     "당신만의 재료로 완벽한 요리법을 찾아보세요 🍜"
   );
 
+  // 랜덤 카테고리 함수
+  function getRandomCategories(categories, count) {
+    // 배열을 셔플 (Fisher-Yates 알고리즘)
+    const shuffled = [...categories].sort(() => 0.5 - Math.random());
+    // 원하는 개수만큼 선택
+    return shuffled.slice(0, count);
+  }
+
   useEffect(() => {
     const updatePlaceholder = () => {
       if (window.innerWidth < 768) {
@@ -583,6 +635,11 @@ const RecipeMain = () => {
     };
   }, []);
 
+  const handleHashSearch = (searchString) => {
+    setSearchText(`#${searchString}`);
+    handleSearch(`#${searchString}`);
+  };
+
   if (!user) {
     return <Navigate to="/join" replace />;
   }
@@ -596,22 +653,39 @@ const RecipeMain = () => {
               className="search__input"
               type="text"
               placeholder={placeholderText}
+              value={searchText}
               onChange={(e) => {
                 setSearchText(e.target.value);
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleSearch();
+                  handleSearch(e.target.value);
                 }
               }}
             />
-            <button className="searchBtn" onClick={handleSearch}></button>
+            <button
+              className="searchBtn"
+              onClick={() => handleSearch(searchText)}
+            ></button>
           </div>
           <p className="search__title">
-            #집밥 #초스피드 #1인분 #도시락 #영양식 #명절 #야식
+            {randomHashSearch?.map((item, key) => (
+              <>
+                <span key={key} onClick={() => handleHashSearch(item)}>
+                  #{item}
+                </span>{" "}
+              </>
+            ))}
+            {/* #FIT #집밥 #초스피드 #1인분 #도시락 #명절 #야식 */}
           </p>
           <p className="search__title_mobile">
-            #집밥 #초스피드 #1인분 #도시락 #영양식
+            {randomHashSearch?.slice(0, 4).map((item, key) => (
+              <>
+                <span key={key} onClick={() => handleHashSearch(item)}>
+                  #{item}
+                </span>{" "}
+              </>
+            ))}
           </p>
         </div>
         <div className="site-camera-img">

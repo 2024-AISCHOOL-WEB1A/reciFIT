@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "../assets/css/ingredients.css";
-import data from "../data/recipesData";
 import swalModal from "../utils/swalModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { isValidDate } from "../utils/validation";
 import { apiAxios } from "../utils/axiosUtils";
-import _ from "lodash";
+// import _ from "lodash";
 import { useSelector } from "react-redux";
 import { formatDateToYyyyMmDd, formatNumber } from "../utils/commonUtils";
 import RecipeMoreItem from "../components/RecipeMoreItem";
@@ -25,8 +24,8 @@ const Ingredients = () => {
 
   // 보유 재료
   const [userIngredientData, setUserIngredientData] = useState(null);
-  const [originalUserIngredientData, setOriginalUserIngredientData] =
-    useState(null);
+  // const [originalUserIngredientData, setOriginalUserIngredientData] =
+  //   useState(null);
 
   const fetchUserIngredientData = useCallback(async () => {
     try {
@@ -38,7 +37,7 @@ const Ingredients = () => {
       }));
 
       setUserIngredientData(userIngredients);
-      setOriginalUserIngredientData(_.cloneDeep(userIngredients) || null);
+      // setOriginalUserIngredientData(_.cloneDeep(userIngredients) || null);
 
       console.log(response.data?.ingredients);
     } catch (err) {
@@ -54,7 +53,7 @@ const Ingredients = () => {
   // 보유 재료 불러오기
   useEffect(() => {
     if (user) fetchUserIngredientData();
-  }, []);
+  }, [user, fetchUserIngredientData]);
 
   useEffect(() => {
     const fetchCategoryRecipe = async () => {
@@ -207,6 +206,14 @@ const Ingredients = () => {
         confirmButtonText: "확인",
       });
     }
+    if (!modifiedItem?.unit) {
+      return swalModal.fire({
+        title: "재료 수정 실패",
+        text: "단위는 반드시 입력하여야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
     if (
       !modifiedItem?.purchaseDate ||
       !isValidDate(modifiedItem?.purchaseDate)
@@ -344,6 +351,14 @@ const Ingredients = () => {
       return swalModal.fire({
         title: "재료 추가 실패",
         text: "남은 수량은 반드시 0보다 커야 합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
+    }
+    if (!modifiedItem?.unit) {
+      return swalModal.fire({
+        title: "재료 추가 실패",
+        text: "단위는 반드시 입력하여야 합니다.",
         icon: "error",
         confirmButtonText: "확인",
       });
@@ -638,6 +653,9 @@ const Ingredients = () => {
                         </td>
                       </tr>
                     );
+                  else {
+                    return <></>;
+                  }
                 })}
             </tbody>
           </table>
@@ -752,6 +770,9 @@ const Ingredients = () => {
                         </td>
                       </tr>
                     );
+                  else {
+                    return <></>;
+                  }
                 })}
             </tbody>
           </table>
