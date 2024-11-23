@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../assets/css/recipe.css";
-
+import imageCompression from "browser-image-compression";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faXmark,
@@ -401,7 +401,12 @@ const RecipeMain = () => {
         const { key, url } = res.data;
 
         // S3에 파일 업로드
-        await generalAxios.put(url, file, {
+        const resizedFile = await imageCompression(file, {
+          maxWidthOrHeight: 640,
+          useWebWorker: true,
+        });
+
+        await generalAxios.put(url, resizedFile, {
           headers: {
             "Content-Type": file.type,
           },

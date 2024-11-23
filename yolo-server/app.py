@@ -31,7 +31,7 @@ MONGODB_DATABASENAME = os.getenv('MONGODB_DATABASENAME')
 # FastAPI 앱 초기화
 app = FastAPI()
 
-# YOLO 모델 로드
+# YOLO 모델 로드 (pt)
 model = YOLO("best.pt") 
 
 # 몽고 DB 연결
@@ -149,7 +149,7 @@ async def api_ingredients(request: Request, body: IngredientsRequest):
     except Exception as e:
         print(str(e))
         raise HTTPException(status_code=500, detail=f"Unexpected server error: {str(e)}")
-
+    
 # @app.post("/api/ingredients-detection")
 # async def api_ingredients(request: Request, body: IngredientsRequest):
 #   # OpenAI API 요청
