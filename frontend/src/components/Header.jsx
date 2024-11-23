@@ -88,14 +88,14 @@ const Header = ({ user }) => {
     swalModal.close();
   };
 
-  const handleTestAlarm = async () => {
-    try {
-      const res = await apiAxios.post("/subscription/test");
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const handleTestAlarm = async () => {
+  //   try {
+  //     const res = await apiAxios.post("/subscription/test");
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <header>
@@ -104,7 +104,7 @@ const Header = ({ user }) => {
           <Link
             onClick={() => {
               handleShutdownMenu();
-              handleTestAlarm();
+              // handleTestAlarm();
             }}
             to="/"
           >
