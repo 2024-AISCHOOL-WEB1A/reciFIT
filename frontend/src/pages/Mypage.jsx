@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
 import "../assets/css/mypage.css";
@@ -26,6 +26,7 @@ const Mypage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = useSelector((state) => state.user.user);
+  const stableNavigate = useCallback((path) => navigate(path), [navigate]);
 
   // 모바일
   const [isMobile, setIsMobile] = useState(false);
@@ -82,7 +83,7 @@ const Mypage = () => {
           icon: "error",
           confirmButtonText: "확인",
         });
-        navigate("/");
+        stableNavigate("/");
       }
     };
 
@@ -99,7 +100,7 @@ const Mypage = () => {
           icon: "error",
           confirmButtonText: "확인",
         });
-        navigate("/");
+        stableNavigate("/");
       }
     };
 
@@ -116,7 +117,7 @@ const Mypage = () => {
           icon: "error",
           confirmButtonText: "확인",
         });
-        navigate("/");
+        stableNavigate("/");
       }
     };
 
@@ -133,19 +134,18 @@ const Mypage = () => {
           icon: "error",
           confirmButtonText: "확인",
         });
-        navigate("/");
+        stableNavigate("/");
       }
     };
 
     const fetchAllData = async () => {
       try {
-        const [userData, favoriteData, environmentData, receiptData] =
-          await Promise.all([
-            fetchUserData(),
-            fetchFavoriteData(),
-            fetchEnviornmentData(),
-            fetchReceiptData(),
-          ]);
+        await Promise.all([
+          fetchUserData(),
+          fetchFavoriteData(),
+          fetchEnviornmentData(),
+          fetchReceiptData(),
+        ]);
       } catch (err) {
         console.error("데이터 가져오기 실패", err);
       }
@@ -162,7 +162,7 @@ const Mypage = () => {
     } else if (tab === "receipt") {
       fetchReceiptData();
     }
-  }, [tab, isMobile]);
+  }, [tab, isMobile, stableNavigate]);
 
   // 유저 정보 수정하기
   const handleModifyUserData = async () => {
@@ -238,7 +238,7 @@ const Mypage = () => {
       tab === "user" ||
       tab === "recipe" ||
       tab === "env-score" ||
-      tab == "receipt"
+      tab === "receipt"
     ) {
       setTab(tab);
     } else {
@@ -513,7 +513,7 @@ const Mypage = () => {
                   {receiptData?.map((item) => (
                     <tr key={item?.rptIdx}>
                       <td>
-                        <img src={item?.rptPhotoUrl} alt="receipt image" />
+                        <img src={item?.rptPhotoUrl} alt="receipt-image" />
                       </td>
                       <td>
                         {`${

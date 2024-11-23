@@ -80,6 +80,30 @@ def download_image(photo_url: str) -> Image.Image:
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"이미지 다운로드 실패: {str(e)}")
 
+def resize_with_padding(image: Image.Image, target_size: int = 640) -> Image.Image:
+    """
+    이미지를 비율 유지하며 리사이즈하고 정사각형으로 패딩 추가
+    :param image: PIL Image 객체
+    :param target_size: YOLO 입력 크기 (정사각형)
+    :return: 패딩된 정사각형 PIL Image
+    """
+    # 원본 이미지 크기
+    original_width, original_height = image.size
+
+    # 비율 유지하며 새 크기 계산
+    ratio = min(target_size / original_width, target_size / original_height)
+    new_width = int(original_width * ratio)
+    new_height = int(original_height * ratio)
+
+    # 이미지 리사이즈
+    resized_image = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+
+    # 패딩 추가하여 정사각형으로 만들기
+    padded_image = Image.new("RGB", (target_size, target_size), (0, 0, 0))  # 검은색 배경
+    paste_position = ((target_size - new_width) // 2, (target_size - new_height) // 2)
+    padded_image.paste(resized_image, paste_position)
+
+    return padded_image
 
 # 요청 데이터 모델 정의
 class IngredientsRequest(BaseModel):
@@ -90,6 +114,9 @@ async def api_ingredients(request: Request, body: IngredientsRequest):
     try:
         # 이미지 다운로드
         image = download_image(body.photoUrl)
+
+        # YOLO 모델 입력 크기에 맞게 리사이즈 및 패딩 처리 (리사이즈는 사용자보고 하라고 하자)
+        # image = resize_with_padding(image, target_size=640)
 
         # YOLO 추론 실행
         results = model.predict(image)
@@ -120,6 +147,7 @@ async def api_ingredients(request: Request, body: IngredientsRequest):
         return {"ingredients_names": detected_ingredients}
 
     except Exception as e:
+        print(str(e))
         raise HTTPException(status_code=500, detail=f"Unexpected server error: {str(e)}")
 
 # @app.post("/api/ingredients-detection")
@@ -186,5 +214,7 @@ if __name__ == "__main__":
   # uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
   uvicorn.run(app, host="127.0.0.1", port=PORT, reload=True)
   
+  # pip install -r requirements.txt로 필요 패키지 설치 후,
+  # python -m venv venv 로 가상환경 실행,
   # uvicorn app:app --reload --host 127.0.0.1 --port 8001 로 서버실행
-  # python -m venv venv
+  

@@ -211,7 +211,7 @@ const Receipt = () => {
   };
 
   // 영양정보 확인 버튼
-  const handleNutrientButton = () => {};
+  // const handleNutrientButton = () => {};
 
   // 편집 버튼
   const handleEditButton = () => {
@@ -338,7 +338,7 @@ const Receipt = () => {
         const res = await apiAxios.post("/users/ingredients/batch", {
           ingredients,
         });
-        // console.log(res);
+        console.log(res);
 
         await swalModal.fire({
           title: "재고 등록 성공",
@@ -422,7 +422,7 @@ const Receipt = () => {
           className="receipt-ocr-upload-section"
           onClick={handleReceiptImageUpload}
         >
-          <img src="/img/image_upload.png" alt="image upload" />
+          <img src="/img/image_upload.png" alt="image-upload" />
           <span>영수증 이미지 업로드</span>
         </div>
       </div>

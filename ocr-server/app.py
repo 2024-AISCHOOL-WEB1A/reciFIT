@@ -99,5 +99,6 @@ if __name__ == "__main__":
     # uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
     uvicorn.run(app, host="127.0.0.1", port=PORT, reload=True)
     
-    # uvicorn app:app --reload 로 서버실행
     # python -m venv venv
+    # uvicorn app:app --reload 로 서버실행
+    

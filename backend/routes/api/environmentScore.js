@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../config/db");
-const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
+const authenticateAccessToken = require("../../middlewares/jwtAuthentication");
 const { isValidDate } = require("../../utils/validation");
 
 router.get("/", authenticateAccessToken, async (req, res) => {
