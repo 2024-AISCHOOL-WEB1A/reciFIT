@@ -32,9 +32,9 @@
     "sweetalert2-react-content": "^5.0.7",
     "web-vitals": "^2.1.4"
   },
-  "options": {
+"options": {
     "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "https://localhost:3001/"
+      "proxy": "https://localhost:3001/"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -61,7 +61,5 @@
     ]
   },
   "devDependencies": {
-    "react-app-rewired": "^2.2.1",
-    "webpack-dev-server": "^5.1.0"
   }
 }
