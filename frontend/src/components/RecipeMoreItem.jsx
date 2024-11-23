@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../assets/css/recipeList.css";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const RecipeMoreItem = ({ item }) => {
 
   return (
     <div className="recipe-item-container" onClick={handleRecipeDetail}>
-      <img src={item?.ck_photo_url} alt="Recipe Photo" />
+      <img src={item?.ck_photo_url} alt="recipe-photo" />
       <span>{item?.ck_name}</span>
     </div>
   );

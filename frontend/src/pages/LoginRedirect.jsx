@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { userActions } from "../redux/reducers/userSlice";
@@ -7,6 +7,7 @@ const LoginRedirect = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const stableNavigate = useCallback((path) => navigate(path), [navigate]);
 
   useEffect(() => {
     // query string에서 정보 추출
@@ -24,21 +25,20 @@ const LoginRedirect = () => {
         })
       );
 
-      if (isNewUser == "true") {
+      if (isNewUser === "true") {
         // 비회원의 경우
-        navigate("/join-info");
+        stableNavigate("/join-info");
         // console.log("비회원");
       } else {
         // 회원의 경우
-        navigate("/");
+        stableNavigate("/");
         // console.log("회원");
       }
-      // console.log(isNewUser);
     } else {
       // 쿼리 스트링에 필요한 정보가 없으면 로그인 페이지로 리다이렉트
-      navigate("/join");
+      stableNavigate("/join");
     }
-  }, [location, navigate]);
+  }, [location, stableNavigate, dispatch]);
 
   return <div>Redirecting...</div>;
 };

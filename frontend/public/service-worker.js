@@ -1,13 +1,13 @@
-const CACHE_NAME = 'pwa-cache-v1';
-const urlsToCache = ['/', '/index.html', '/favicon.ico'];
+const CACHE_NAME = "pwa-cache-v1";
+const urlsToCache = ["/", "/index.html", "/favicon.ico"];
 
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);
@@ -25,7 +25,7 @@ self.addEventListener("push", (event) => {
     body: data.body,
     icon: "logo192.png",
     badge: "logo192.png",
-    data: "http://localhost:3001/ingredients",
+    data: "/ingredients",
   };
 
   event.waitUntil(

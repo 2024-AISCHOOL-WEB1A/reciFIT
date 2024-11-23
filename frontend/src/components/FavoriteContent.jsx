@@ -15,7 +15,7 @@ const FavoriteContent = ({ item }) => {
       }}
     >
       <div className="favorite-image-wrapper">
-        <img src={item?.ckPhotoUrl} alt="recipe image" />
+        <img src={item?.ckPhotoUrl} alt="recipe-image" />
       </div>
       <div className="favorite-description-content">
         <span>{item?.ckName}</span>

@@ -32,10 +32,7 @@
     "sweetalert2-react-content": "^5.0.7",
     "web-vitals": "^2.1.4"
   },
-  "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "https://localhost:3001/"
-  },
+  "proxy": "http://localhost:3001/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

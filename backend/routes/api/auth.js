@@ -13,6 +13,8 @@ const authenticateAccessToken = require("../../Middlewares/jwtAuthentication");
 // const loadIngredients = require("../../utils/loadIngredients");
 const generateRandomNickname = require("../../utils/generateRandomNickname");
 
+const appURL = process.env.REACT_APP_URL || "http://localhost:3001";
+
 // 카카오 로그인
 router.get(
   "/kakao",
@@ -93,16 +95,8 @@ router.get(
         jwtUtil.REFRESH_TOKEN_EXPIRATION
       );
 
-      // TODO : 응답 보내기 (토큰 형태로)
-      // 응답보내기 (redirect)
-      // if (["localhost:3000", "localhost:3001"].includes(req.headers.host)) {
-      //   return res.redirect(
-      //     `http://${req.headers.host}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
-      //   );
-      // }
       return res.redirect(
-        // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
-        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `${appURL}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       return res.status(500).json({ message: "Internal server error" });
@@ -192,16 +186,8 @@ router.get(
         jwtUtil.REFRESH_TOKEN_EXPIRATION
       );
 
-      // TODO : 응답 보내기 (토큰 형태로)
-      // 응답보내기 (redirect)
-      // if (["localhost:3000", "localhost:3001"].includes(req.headers.host)) {
-      //   return res.redirect(
-      //     `http://${req.headers.host}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
-      //   );
-      // }
       return res.redirect(
-        // `http://192.168.100.64:3001/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
-        `http://localhost:3000/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
+        `${appURL}/login/callback?userIdx=${userIdx}&userName=${userName}&provider=${provider}&isNewUser=${isNewUser}`
       );
     } catch (err) {
       console.error(err);
@@ -216,6 +202,8 @@ router.post("/logout", authenticateAccessToken, async (req, res) => {
   const { userIdx, accessToken } = req.user;
   const refreshToken = req.body.refreshToken || req.cookies?.refreshToken;
 
+  // console.log(userIdx, accessToken, refreshToken);
+
   // 유효성 검사 : null check (필요할까?)
   // if (!refreshToken) {
   //   return res.status(400).json({ message: "Refresh token is required" });
@@ -225,13 +213,13 @@ router.post("/logout", authenticateAccessToken, async (req, res) => {
   try {
     // access token 삭제
     if (accessToken) {
-      await jwtStoreUtil.deleteAccessToken(userIdx, accessToken);
+      // await jwtStoreUtil.deleteAccessToken(userIdx, accessToken);
       res.clearCookie("accessToken"); // 쿠키에서 access token 삭제
     }
 
     // refresh token 삭제
     if (refreshToken) {
-      await jwtStoreUtil.deleteRefreshToken(userIdx, refreshToken);
+      // await jwtStoreUtil.deleteRefreshToken(userIdx, refreshToken);
       res.clearCookie("refreshToken"); // 쿠키에서 refresh token 삭제
     }
 
@@ -305,7 +293,7 @@ router.post("/upload/:type", authenticateAccessToken, async (req, res) => {
     return res.status(400).json({ message: "Invalid fileName or fileType" });
   }
 
-  // 유효성 검사 3 : 파일 타입 확인
+  // 유효성 검사 3 : 파일 타입 확인recommend=true
   if (!["image/jpeg", "image/png"].includes(fileType)) {
     return res.status(400).json({ message: "Unsupported file type" });
   }
