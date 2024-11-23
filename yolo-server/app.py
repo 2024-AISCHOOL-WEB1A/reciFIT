@@ -186,5 +186,7 @@ if __name__ == "__main__":
   # uvicorn.run(app, host="0.0.0.0", port=PORT, reload=True)
   uvicorn.run(app, host="127.0.0.1", port=PORT, reload=True)
   
+  # pip install -r requirements.txt로 필요 패키지 설치 후,
+  # python -m venv venv 로 가상환경 실행,
   # uvicorn app:app --reload --host 127.0.0.1 --port 8001 로 서버실행
-  # python -m venv venv
+  
