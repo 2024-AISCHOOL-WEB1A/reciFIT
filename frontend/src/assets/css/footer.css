@@ -1,37 +1,37 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
+	font-family: 'Pretendard-Regular';
+	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
 }
 
 /*=========================================================
 	Footer
 =========================================================*/
-.site-footer{
-	padding:55px 0 90px;
-	text-align:center;
-	border-top:solid  1px #E0E0E0;
-	margin-top:180px;
-	position:relative;
+.site-footer {
+	padding: 55px 0 90px;
+	text-align: center;
+	border-top: solid 1px #E0E0E0;
+	margin-top: 180px;
+	position: relative;
 	background-color: #f2f2f28a;
 }
 
-.home .site-footer{
-	border-top:none;
-	margin-top:0;
+.home .site-footer {
+	border-top: none;
+	margin-top: 0;
 }
 
-.footer-container{
+.footer-container {
 	max-width: 1614px;
-	margin:0 auto;
+	margin: 0 auto;
 	position: relative;
-	padding:0 80px;
+	padding: 0 80px;
 }
 
-.footer-container:after{
+.footer-container:after {
 	content: "";
 	display: table;
 	clear: both;
@@ -41,190 +41,194 @@
 
 /* FooterLogo
 =========================================================*/
-.FooterLogo{
-	display:block;
-	width:104px;
-	height:44px;
-	background-size:104px 44px;
-	margin:0 auto 20px;
+.FooterLogo {
+	display: block;
+	width: 104px;
+	height: 44px;
+	background-size: 104px 44px;
+	margin: 0 auto 20px;
 	font-size: 2em;
 	font-weight: 600;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* FooterInfo
 =========================================================*/
-.FooterInfo{
-	font-size:0;
-	line-height:0;
-	overflow:hidden;
-	margin:-1px -12px;
+.FooterInfo {
+	font-size: 0;
+	line-height: 0;
+	overflow: hidden;
+	margin: -1px -12px;
 }
 
-.FooterInfo-item{
-	font-size:1em;
-	line-height:1.4em;
-	color:#474646;
-	padding:1px 12px;
-	display:inline-block;
-	position:relative;
+.FooterInfo-item {
+	font-size: 1em;
+	line-height: 1.4em;
+	color: #474646;
+	padding: 1px 12px;
+	display: inline-block;
+	position: relative;
 	font-family: 'Pretendard-Regular'
 }
 
-.FooterInfo-item:after{
-	content:"";
-	width:1px;
-	height:14px;
-	background-color:#000;
-	position:absolute;
-	top:50%;
-	right:0;
-	transform:translateY(-50%);
+.FooterInfo-item:after {
+	content: "";
+	width: 1px;
+	height: 14px;
+	background-color: #000;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
 }
 
-.FooterInfo-item.no-Bullet:after{
-	display:none;
+.FooterInfo-item.no-Bullet:after {
+	display: none;
 }
 
-.FooterInfo-link{
-	color:#000;
+.FooterInfo-link {
+	color: #000;
 }
 
 
 /* FooterCopy
 =========================================================*/
-.FooterCopy{
-	margin-top:34px;
-	font-size:14px;
-	line-height:1.4em;
-	color:#000;
-	font-weight:300;
+.FooterCopy {
+	margin-top: 34px;
+	font-size: 14px;
+	line-height: 1.4em;
+	color: #000;
+	font-weight: 300;
 }
 
 @media screen and (max-width: 1920px) and (min-width: 1025px) {
-	.site-footer{
-		padding:1.8645vw 0 2.6875vw;
-		margin-top:9.375vw;
+	.site-footer {
+		padding: 1.8645vw 0 2.6875vw;
+		margin-top: 9.375vw;
 	}
 
-	.footer-container{
+	.footer-container {
 		max-width: 84.0625vw;
-		padding:0 4.16666vw;
+		padding: 0 4.16666vw;
 	}
 
-	
-	.FooterLogo{
-		width:5.41666vw;
-		height:2.29166vw;
-		background-size:5.41666vw 2.29166vw;
-		margin:0 auto 1.04166vw;
-	}
-	
-	.FooterInfo{
-		margin:-1px -0.625vw;
+
+	.FooterLogo {
+		width: 5.41666vw;
+		height: 2.29166vw;
+		background-size: 5.41666vw 2.29166vw;
+		margin: 0 auto 1.04166vw;
 	}
 
-	.FooterInfo-item{
-		font-size:0.8333vw;
-		padding:1px 0.625vw;
+	.FooterInfo {
+		margin: -1px -0.625vw;
 	}
 
-	.FooterInfo-item:after{
-		height:0.7291vw;
+	.FooterInfo-item {
+		font-size: 0.8333vw;
+		padding: 1px 0.625vw;
 	}
-	
-	.FooterCopy{
-		margin-top:1.770833vw;
-		font-size:0.7291vw;
+
+	.FooterInfo-item:after {
+		height: 0.7291vw;
+	}
+
+	.FooterCopy {
+		margin-top: 1.770833vw;
+		font-size: 0.7291vw;
 	}
 }
 
 @media screen and (max-width: 1420px) and (min-width: 1025px) {
-	.FooterCopy{
-		font-size:10px;
+	.FooterCopy {
+		font-size: 10px;
 	}
 }
 
 @media screen and (max-width: 1210px) and (min-width: 1025px) {
-	.FooterInfo-item{
-		font-size:10px;
+	.FooterInfo-item {
+		font-size: 10px;
 	}
-	
-	.FooterInfo-item:after{
-		height:9px;
+
+	.FooterInfo-item:after {
+		height: 9px;
 	}
-	
+
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
-	.site-footer{
-		padding:4.8645vw 0 6.6875vw;
-		margin-top:12.375vw;
+	.site-footer {
+		padding: 4.8645vw 0 6.6875vw;
+		margin-top: 12.375vw;
 	}
 
-	.footer-container{
+	.footer-container {
 		max-width: 100%;
 		padding: 0 5.20833vw;
 	}
-	
-	.FooterLogo{
+
+	.FooterLogo {
 		width: 8.6666vw;
 		height: 3.66666vw;
 		background-size: 8.6666vw 3.66666vw;
-		margin:0 auto 2.34166vw;
-	}
-	
-	.FooterInfo{
-		margin:-1px -1.225vw;
+		margin: 0 auto 2.34166vw;
 	}
 
-	.FooterInfo-item{
-		font-size:1.36333vw;
-		padding:1px 1.225vw;
+	.FooterInfo {
+		margin: -1px -1.225vw;
 	}
 
-	.FooterInfo-item:after{
-		height:1.22291vw;
+	.FooterInfo-item {
+		font-size: 1.36333vw;
+		padding: 1px 1.225vw;
 	}
-	
-	.FooterCopy{
-		margin-top:2.770833vw;
-		font-size:1.3291vw;
+
+	.FooterInfo-item:after {
+		height: 1.22291vw;
+	}
+
+	.FooterCopy {
+		margin-top: 2.770833vw;
+		font-size: 1.3291vw;
 	}
 }
 
 @media screen and (max-width: 767px) and (min-width: 1px) {
-	.site-footer{
-		padding:10.8645vw 0 13.6875vw;
-		margin-top:25.375vw;
+	.site-footer {
+		padding: 10.8645vw 0 13.6875vw;
+		margin-top: 25.375vw;
 	}
 
-	.footer-container{
+	.footer-container {
 		max-width: 100%;
 		padding: 0 6.25vw;
 	}
 
-	.FooterLogo{
+	.FooterLogo {
 		width: 13.541vw;
 		height: 5.7291vw;
 		background-size: 13.541vw 5.7291vw;
-		margin:0 auto 4.34166vw;
-	}
-	
-	.FooterInfo{
-		margin:-1px -1.225vw;
+		margin: 0 auto 4.34166vw;
 	}
 
-	.FooterInfo-item{
-		font-size:3.26333vw;
-		padding:1px 1.225vw;
+	.FooterInfo {
+		margin: -1px -1.225vw;
 	}
 
-	.FooterInfo-item:after{
-		height:1.22291vw;
+	.FooterInfo-item {
+		font-size: 3.26333vw;
+		padding: 1px 1.225vw;
 	}
-	
-	.FooterCopy{
-		margin-top:18.770833vw;
-		font-size:3.2291vw;
+
+	.FooterInfo-item:after {
+		height: 1.22291vw;
+	}
+
+	.FooterCopy {
+		margin-top: 18.770833vw;
+		font-size: 3.2291vw;
 	}
 }

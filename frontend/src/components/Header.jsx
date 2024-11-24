@@ -219,7 +219,13 @@ const Header = ({ user }) => {
       {/* Mobile Btn */}
       <div>
         <div className="mobile-menu-button-div">
-          <img src="logo192.png" alt="" />
+          <img
+            src="https://ns-sugarguard.s3.ap-northeast-2.amazonaws.com/images/recifit/logo.png"
+            alt="logo-image"
+            onClick={() => {
+              navigate("/");
+            }}
+          />
           <button className="MobileMenuBtn" onClick={toggleMobileMenu}>
             <FontAwesomeIcon icon={faBars} />
           </button>

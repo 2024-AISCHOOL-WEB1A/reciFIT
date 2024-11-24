@@ -54,3 +54,26 @@ self.addEventListener("notificationclick", (event) => {
     event.waitUntil(clients.openWindow(event.notification.data));
   }
 });
+
+// 새로 배포했을 때 캐쉬 삭제
+// self.addEventListener('install', (event) => {
+//   console.log('[Service Worker] Installing new service worker...');
+
+//   event.waitUntil(
+//     caches.keys().then((cacheNames) => {
+//       return Promise.all(
+//         cacheNames.map((cacheName) => {
+//           // 이전 캐시 제거
+//           if (cacheName !== 'reciFIT-cache') {
+//             console.log('[Service Worker] Removing old cache:', cacheName);
+//             return caches.delete(cacheName);
+//           }
+//         })
+//       );
+//     })
+//   );
+// });
+// self.addEventListener('activate', (event) => {
+//   console.log('[Service Worker] Activating new service worker...');
+//   return self.clients.claim();
+// });

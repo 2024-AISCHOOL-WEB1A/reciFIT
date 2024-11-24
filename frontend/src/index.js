@@ -34,3 +34,26 @@ if ("serviceWorker" in navigator) {
       console.error("Service Worker registration failed:", error);
     });
 }
+
+// 캐쉬 삭제 포함 서비스 워커 등록 (아직 미적용)
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+//     console.log('Service Worker registered with scope:', registration.scope);
+
+//     registration.onupdatefound = () => {
+//       const installingWorker = registration.installing;
+
+//       if (installingWorker) {
+//         installingWorker.onstatechange = () => {
+//           if (installingWorker.state === 'installed') {
+//             if (navigator.serviceWorker.controller) {
+//               // 새로운 콘텐츠가 있을 때
+//               console.log('New content is available; please refresh.');
+//               window.location.reload(); // 자동 새로고침
+//             }
+//           }
+//         };
+//       }
+//     };
+//   });
+// }
