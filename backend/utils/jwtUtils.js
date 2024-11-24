@@ -3,7 +3,8 @@ require("dotenv").config();
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
-const ACCESS_TOKEN_EXPIRATION = 30 * 60 * 1000; // 30분
+// const ACCESS_TOKEN_EXPIRATION = 30 * 60 * 1000; // 30분
+const ACCESS_TOKEN_EXPIRATION = 1 * 24 * 60 * 60 * 1000; // 1일
 const REFRESH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000; // 7일
 
 // Access Token 생성

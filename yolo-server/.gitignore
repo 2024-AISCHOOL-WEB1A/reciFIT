@@ -6,6 +6,7 @@ venv/
 
 # model
 *.pt
+*.onnx
 
 # Log files
 *.log

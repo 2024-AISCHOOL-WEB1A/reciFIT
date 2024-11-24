@@ -77,13 +77,13 @@ const Mypage = () => {
         console.log(response);
       } catch (err) {
         // console.log(err);
-        await swalModal.fire({
-          title: "회원 정보 가져오기 실패",
-          text: "회원 정보를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
-          icon: "error",
-          confirmButtonText: "확인",
-        });
-        stableNavigate("/");
+        // await swalModal.fire({
+        //   title: "회원 정보 가져오기 실패",
+        //   text: "회원 정보를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
+        //   icon: "error",
+        //   confirmButtonText: "확인",
+        // });
+        // stableNavigate("/");
       }
     };
 
@@ -94,13 +94,13 @@ const Mypage = () => {
         setFavoriteData(response.data?.recipes);
       } catch (err) {
         // console.log(err);
-        await swalModal.fire({
-          title: "즐겨찾기 정보 가져오기 실패",
-          text: "즐겨찾기 정보를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
-          icon: "error",
-          confirmButtonText: "확인",
-        });
-        stableNavigate("/");
+        // await swalModal.fire({
+        //   title: "즐겨찾기 정보 가져오기 실패",
+        //   text: "즐겨찾기 정보를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
+        //   icon: "error",
+        //   confirmButtonText: "확인",
+        // });
+        // stableNavigate("/");
       }
     };
 
@@ -111,13 +111,13 @@ const Mypage = () => {
       console.log(response.data);
       try {
       } catch (err) {
-        await swalModal.fire({
-          title: "환경점수 가져오기 실패",
-          text: "환경점수를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
-          icon: "error",
-          confirmButtonText: "확인",
-        });
-        stableNavigate("/");
+        // await swalModal.fire({
+        //   title: "환경점수 가져오기 실패",
+        //   text: "환경점수를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
+        //   icon: "error",
+        //   confirmButtonText: "확인",
+        // });
+        // stableNavigate("/");
       }
     };
 
@@ -128,13 +128,13 @@ const Mypage = () => {
         setReceiptData(response.data);
         console.log(response.data);
       } catch (err) {
-        await swalModal.fire({
-          title: "영수증 분석 내역 가져오기 실패",
-          text: "영수증 분석 내역를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
-          icon: "error",
-          confirmButtonText: "확인",
-        });
-        stableNavigate("/");
+        // await swalModal.fire({
+        //   title: "영수증 분석 내역 가져오기 실패",
+        //   text: "영수증 분석 내역를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
+        //   icon: "error",
+        //   confirmButtonText: "확인",
+        // });
+        // stableNavigate("/");
       }
     };
 
@@ -147,7 +147,13 @@ const Mypage = () => {
           fetchReceiptData(),
         ]);
       } catch (err) {
-        console.error("데이터 가져오기 실패", err);
+        // console.error("데이터 가져오기 실패", err);
+        await swalModal.fire({
+          title: "회원 정보 가져오기 실패",
+          text: "회원 정보를 가져오는데 실패했습니다. 관리자에게 문의바랍니다.",
+          icon: "error",
+          confirmButtonText: "확인",
+        });
       }
     };
 
