@@ -1,0 +1,214 @@
+@font-face {
+  font-family: "Freesentation-9Black";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* 전체 컨테이너 */
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5% 0 0 0;
+  padding: 0 15%;
+
+  width: 100%;
+}
+
+/* 상단 텍스트 */
+.info-text {
+  font-family: "Freesentation-9Black";
+  /* font-weight: 700; */
+  display: flex;
+  font-size: 2.5em;
+  width: 100%;
+  justify-content: center;
+  border-bottom: solid 2px;
+  border-color: rgb(133, 133, 133);
+  padding-bottom: 3%;
+  margin-bottom: 5%;
+}
+
+/* 항목 컨테이너 */
+.info-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 왼쪽 텍스트 */
+.info-input-div {
+  /* font-family: "Freesentation-9Black"; */
+  font-weight: 700;
+  width: 12%;
+  font-size: 1.3em;
+  text-align: left;
+}
+
+/* 텍스트박스 */
+.info-input {
+  width: 88%;
+  height: 2.5em;
+  margin-bottom: 1%;
+  /* margin: 1%; */
+  padding: 1%;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
+.info-textarea-input {
+  /* 수정함 */
+  width: 100%;
+  height: 3em;
+  margin-bottom: 1%;
+  /* margin: 1%; */
+  padding: 1%;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: 2px solid black;
+  display: none;
+}
+
+/* 확인버튼 */
+.info-submitContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: end;
+
+  gap: 20px;
+}
+
+.info-submit {
+  height: 4em;
+  width: 10em;
+  border: none;
+  border-radius: 10px;
+  margin-top: 1%;
+  cursor: pointer;
+}
+
+.info-submit-ok {
+  background-color: rgb(210, 214, 255);
+}
+
+.info-submit:hover {
+  background-color: rgb(255, 190, 140);
+}
+
+/* 텍스트박스 테두리색 */
+.info-input:focus {
+  border-color: #ff9500;
+  outline: none;
+}
+
+@media screen and (max-width: 767px) and (min-width: 1px) {
+  /* 전체 컨테이너 */
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5% 0 0 0;
+    /* 수정함 */
+    padding: 0 7%;
+
+    width: 100%;
+  }
+
+  /* 상단 텍스트 */
+  .info-text {
+    font-family: "Freesentation-9Black";
+    /* font-weight: 700; */
+    display: flex;
+    /* 수정함 */
+    font-size: 2em;
+    width: 100%;
+    justify-content: center;
+    border-bottom: solid 2px;
+    border-color: rgb(133, 133, 133);
+    padding-bottom: 3%;
+
+    /* 수정함 */
+    margin-bottom: 10%;
+  }
+
+  /* 항목 컨테이너 */
+  .info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    margin-bottom: 5%;
+  }
+
+  /* 왼쪽 텍스트 */
+  .info-input-div {
+    /* font-family: "Freesentation-9Black"; */
+    font-weight: 700;
+    /* 수정함 */
+    width: 100%;
+    font-size: 1.1em;
+    text-align: left;
+
+    margin-bottom: 1%;
+  }
+
+  .info-textarea-input {
+    /* 수정함 */
+    width: 100%;
+    height: 3.05em;
+    margin-bottom: 1%;
+    /* margin: 1%; */
+    padding: 1% 2%;
+    font-size: 1.1em;
+    border-radius: 10px;
+    border: 2px solid black;
+    display: block;
+  }
+
+  /* 텍스트박스 */
+  .info-input {
+    /* 수정함 */
+    width: 100%;
+    height: 3em;
+    margin-bottom: 1%;
+    /* margin: 1%; */
+    padding: 1%;
+    font-size: 1.1em;
+    border-radius: 10px;
+    border: 2px solid black;
+    display: none;
+  }
+
+  /* 확인버튼 */
+  .info-submitContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: start;
+
+    gap: 0;
+  }
+
+  .info-submit {
+    height: 4em;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    margin-top: 7%;
+    cursor: pointer;
+  }
+
+  .info-submit:hover {
+    background-color: rgb(255, 190, 140);
+  }
+
+  /* 텍스트박스 테두리색 */
+  .info-input:focus {
+    border-color: #ff9500;
+    outline: none;
+  }
+}

@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.join-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* 음식사진_____________________ */
+
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 이미지 기본 스타일 */
+.slider-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+
+/* Fade-in 효과 */
+.fade-in {
+  opacity: 1;
+}
+
+/* Fade-out 효과 */
+.fade-out {
+  opacity: 0;
+}
+
+.mediaQuery-slider {
+  width: 100%;
+  display: none;
+}
+
+/* 로그인_____________________ */
+.join-login {
+  display: flex;
+  width: 40%;
+  height: fit-content;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  padding: 3% 0;
+  margin: 0 3%;
+  border-radius: 20px;
+  margin-top: 10%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.join-login:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.login a {
+  margin-top: 5%;
+  margin-bottom: 8%;
+  width: 30%;
+  height: auto;
+  text-align: center;
+}
+
+.login-text {
+  font-family: "Pretendard-Regular";
+  font-size: 2em;
+  text-align: center;
+  margin-top: 15%;
+}
+
+.login-small-text {
+  font-family: "Pretendard-Regular";
+  font-size: 1em;
+  margin: 3%;
+}
+
+.kakao-button,
+.google-button {
+  width: 100%;
+  max-width: 300px;
+  padding: 3%;
+  cursor: pointer;
+}
+
+/* 미디어쿼리_____________________ */
+
+@media screen and (max-width: 700px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .slider-container {
+    display: none;
+  }
+
+  .login {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .query-slider-image {
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .mediaQuery-slider {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/2;
+  }
+
+  .Query-container {
+    width: 100%;
+    display: flex;
+  }
+
+  .join-login {
+    margin-top: 10%;
+    width: 100%;
+  }
+
+  .login-text {
+    margin-top: 20%;
+  }
+}

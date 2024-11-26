@@ -1,0 +1,697 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SBAggroB";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF_HambakSnow";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* -----------------=------------------------- */
+
+.ingre-container {
+  margin: 6% 10% 0 10%;
+}
+
+.ingre-container-span {
+  display: inline-block;
+  font-size: 1.45rem;
+  color: #ff9500;
+  font-family: "SBAggroB";
+  padding: 0 0.1em;
+}
+
+.ingre-container-red-span {
+  display: inline-block;
+  font-size: 1.45rem;
+  color: #f72120;
+  font-family: "SBAggroB";
+  padding: 0 0.1em;
+}
+
+.ingre-container h3 {
+  font-family: "SBAggroB";
+  font-size: 1.5em;
+  /* margin-left: 5%; */
+  width: 95%;
+}
+
+/* 재료 레시피 추천 슬라이드 */
+.ingre-recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3em;
+}
+
+.ingre-recipe-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 1% 0;
+  width: 100%;
+}
+
+.ingre-recipe-item {
+  width: 100%;
+  text-align: center;
+  margin: 2%;
+}
+
+.ingre-recipe-image {
+  width: 90%;
+  height: 9.15em;
+  object-fit: cover;
+  border-radius: 8px;
+  background-size: contain;
+}
+
+.ingre-recipe-name {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.ingre-left-button,
+.ingre-right-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ingre-left-button:hover,
+.ingre-right-button:hover {
+  color: #f4b057;
+}
+
+.ingre-left-button span,
+.ingre-right-button span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  margin-right: 0.2em;
+  font-size: 5em;
+  color: #685d5d;
+}
+
+/* 재료 테이블 */
+
+.ingre-my {
+  border-bottom: solid 5px rgb(255, 233, 192);
+  margin-bottom: 8%;
+}
+
+.ingre-my-list {
+  width: 100%;
+  margin: 1%;
+  align-items: center;
+}
+
+.ingre-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.ingre-table-head th {
+  background-color: rgb(243, 243, 243);
+  padding: 1.25% 1%;
+}
+
+.ingre-name-th,
+.ingre-name-td {
+  width: 20%;
+}
+
+.ingre-quantity-th,
+.ingre-quantity-td {
+  width: 10%;
+}
+
+.ingre-purchase-th,
+.ingre-purchase-td {
+  width: 14%;
+}
+
+.ingre-expired-th,
+.ingre-expired-td {
+  width: 14%;
+}
+
+.ingre-status-th,
+.ingre-status-td {
+  width: 34%;
+}
+
+.ingre-delete-th,
+.ingre-delete-td {
+  width: 8%;
+}
+
+.ingre-delete-icon {
+  font-size: 1.35em;
+  cursor: pointer;
+}
+
+.inger-status-bar-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.ingre-status-bar-circle-wrapper {
+  margin: 0 4%;
+
+  display: flex;
+  align-items: center;
+  gap: 7%;
+}
+
+.ingre-table-body td {
+  padding: 1% 0;
+  text-align: center;
+  /* border-bottom: dashed 1px gray; */
+}
+
+.ingre-table-body input {
+  width: 80%;
+  margin-bottom: 1%;
+  /* margin: 1%; */
+  padding: 2%;
+  font-size: 1em;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: none;
+  background-color: #f3f3f3;
+}
+
+.ingre-table-body input:focus {
+  border-color: #ff9500;
+  outline: none;
+}
+
+.ingre-button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.ingre-button {
+  display: block;
+
+  height: 3.5em;
+  width: 10em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  margin-left: 0.5%;
+
+  /* background-color: rgb(210, 214, 255); */
+}
+
+.ingre-cancel-button {
+  background-color: rgb(255, 192, 182);
+}
+
+.ingre-edit-button {
+  background-color: #f0f0f0;
+}
+
+.ingre-add-button {
+  background-color: rgb(210, 214, 255);
+}
+
+.ingre-button:hover {
+  background-color: rgb(255, 190, 140);
+}
+
+/* 모달 */
+.ingre-modal-container {
+  position: relative;
+  /* 위치를 부모 요소에 상대적으로 고정 */
+  background: white;
+  padding: 2em;
+  border-radius: 8px;
+  animation: slideDown 0.5s ease forwards;
+  /* 슬라이드다운 효과 */
+
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 50em;
+  width: 25%;
+  max-height: 90vh;
+  /* 모달의 최대 높이를 설정 */
+  overflow-y: auto;
+  /* 콘텐츠가 넘칠 경우 스크롤 추가 */
+}
+
+.modal-close-icon:hover {
+  color: #f72120;
+}
+
+.ingre-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingre-modal-content img {
+  width: 64px;
+  height: auto;
+  margin-bottom: 1%;
+}
+
+.ingre-modal-content h2 {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.ingre-modal-content table {
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  border: none;
+
+  width: 90%;
+  margin: 10% 0;
+}
+
+.ingre-modal-content td {
+  border: none;
+  font-size: 1em;
+  padding: 2% 0;
+}
+
+.ingre-modal-content td:first-child {
+  width: 30%;
+  text-align: left;
+}
+
+.ingre-modal-content td:nth-child(2) {
+  width: 70%;
+  text-align: right;
+}
+
+.ingre-modal-content input[type="text"] {
+  width: 100%;
+  text-align: right;
+
+  padding: 2% 2%;
+  font-size: 1em;
+  border: 1px solid black;
+  box-shadow: none;
+
+  border-radius: 5px;
+}
+
+.ingre-model-quantity-input {
+  flex: 2;
+}
+
+.ingre-model-unit-input {
+  flex: 1;
+}
+
+.ingre-modal-content input[type="text"]:focus {
+  border-color: #ff9500;
+  outline: none;
+}
+
+.ingre-modal-quantity-wrapper {
+  display: flex;
+  gap: 3%;
+  width: 100%;
+}
+
+.ingre-modal-button-wrapper {
+  display: flex;
+  margin-bottom: 5%;
+  gap: 5%;
+}
+
+.ingre-delete-icon:hover {
+  color: #1e44e4;
+}
+
+/* 하단 레시피 */
+.ingre-recipe-container {
+  margin: 2% 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1%;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.ingre-recipe-button-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ingre-recipe-button {
+  height: 3.5em;
+  width: 20em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  font-size: 1.5em;
+  font-weight: 700;
+
+  background-color: #ffd292;
+}
+
+.ingre-recipe-button:hover {
+  background-color: #dcdcdc;
+}
+
+@media (max-width: 480px) {
+  .ingre-recipe-container>* {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 1px) {
+  .ingre-recipe-button {
+    height: 3.5em;
+    width: 20em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-size: 1.2em;
+    font-weight: 700;
+
+    background-color: #ffd292;
+  }
+
+  .ingre-recipe-container {
+    margin: 10% 2%;
+    flex-direction: column;
+  }
+
+  .ingre-modal-container {
+    width: 90%;
+  }
+
+  .ingre-modal-content td {
+    border: none;
+    font-size: 1.5em;
+    padding: 2% 0;
+  }
+
+  .ingre-modal-content input[type="text"] {
+    width: 100%;
+    text-align: right;
+
+    padding: 2% 2%;
+    font-size: 1em;
+    border: 1px solid black;
+    box-shadow: none;
+
+    border-radius: 5px;
+  }
+}
+
+/* .ingre-button-container button {
+  width: 5em;
+  height: 4em;
+  border-radius: 10px;
+  border: solid 3px rgb(255, 190, 140);
+  background-color: white;
+  margin-left: 1%;
+}
+
+.ingre-button-container button:hover {
+  background-color: #ff9500;
+} */
+
+/* .ingre-status-td {
+  display: "flex";
+  position: "relative";
+  align-items: "center";
+} */
+
+.ingre-per-background {
+  z-index: 0;
+  /* 뒤로 보내기 */
+  background-color: rgb(229, 229, 229);
+  width: 80%;
+  height: 1em;
+  margin: 1% 0;
+  border-radius: 10px;
+  position: relative;
+}
+
+.ingre-per-bar {
+  z-index: 1;
+  /* 배경 위로 올리기 */
+  background-color: rgb(255, 190, 140);
+  /* 원하는 퍼센트로 설정 */
+  height: 1em;
+  border-radius: 10px;
+
+  /* animation-name: heropy;
+    animation-duration: 2s;
+    animation-iteration-count:1; */
+}
+
+/* @keyframes heropy {
+    0% {
+        width: 0px;
+    }
+    100% {
+        width: 30%;
+    }
+} */
+
+.ingre-per-status {
+  width: 10%;
+  display: flex;
+  flex-direction: row;
+}
+
+.ingre-circle {
+  margin-right: 100%;
+}
+
+.ingre-per {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.ingre-mobile-button {
+  display: none;
+}
+
+@media screen and (max-width: 767px) and (min-width: 1px) {
+
+  .ingre-left-button span,
+  .ingre-right-button span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: auto;
+    margin-right: 0.2em;
+    font-size: 5em;
+    color: #685d5d;
+  }
+
+  .ingre-recipe-name {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  /* .ingre-container h3 {
+    font-family: "SBAggroB";
+    font-size: 1.3rem;
+    margin: 5% 0 0 5%;
+    width: 95%;
+  } */
+
+  /* .ingre-container span {
+    display: inline-block;
+    font-size: 1.4rem;
+    color: #ff9500;
+    font-family: "SBAggroB";
+    padding: 0 0.1em;
+  } */
+
+  /* .ingre-button-container button {
+    width: 4em;
+    height: 3em;
+  } */
+
+  .ingre-table-head th {
+    background-color: rgb(243, 243, 243);
+    padding: 1.25% 1%;
+  }
+
+  .ingre-name-th,
+  .ingre-name-td {
+    width: 30%;
+  }
+
+  .ingre-quantity-th,
+  .ingre-quantity-td {
+    width: 30%;
+  }
+
+  .ingre-purchase-th,
+  .ingre-purchase-td {
+    width: 15%;
+    display: none;
+  }
+
+  .ingre-expired-th,
+  .ingre-expired-td {
+    width: 30%;
+  }
+
+  .ingre-status-th,
+  .ingre-status-td {
+    width: 35%;
+    display: none;
+  }
+
+  .ingre-delete-th,
+  .ingre-delete-td {
+    width: 10%;
+  }
+
+  .inger-status-bar-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .ingre-status-bar-circle-wrapper {
+    margin: 0 4%;
+
+    display: flex;
+    align-items: center;
+    gap: 7%;
+  }
+
+  .ingre-table-body td {
+    padding: 1% 0;
+    text-align: center;
+    /* border-bottom: dashed 1px gray; */
+  }
+
+  .ingre-table-body input {
+    width: 80%;
+    margin-bottom: 1%;
+    /* margin: 1%; */
+    padding: 2%;
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid black;
+    box-shadow: none;
+    background-color: #f3f3f3;
+  }
+
+  .ingre-table-body input:focus {
+    border-color: #ff9500;
+    outline: none;
+  }
+
+  .ingre-button-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  /* .ingre-button-container button {
+    width: 4em;
+    height: 3em;
+  } */
+
+  /* .ingre-button-container button:hover {
+    background-color: #ff9500;
+  } */
+
+  .ingre-container h3 {
+    font-family: "SBAggroB";
+    font-size: 1em;
+    margin: 0 0 2% 1%;
+    width: 95%;
+  }
+
+  .ingre-container-span {
+    display: inline-block;
+    font-size: 1rem;
+    color: #ff9500;
+    font-family: "SBAggroB";
+    padding: 0 0;
+  }
+
+  /* .ingre-button {
+    display: none;
+  } */
+
+  .ingre-desktop-button {
+    display: none;
+  }
+
+  .ingre-mobile-button {
+    display: block;
+
+    height: 3.5em;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    margin-top: 1%;
+    cursor: pointer;
+
+    /* background-color: rgb(210, 214, 255); */
+  }
+
+  .ingre-cancel-button {
+    background-color: rgb(255, 192, 182);
+  }
+
+  .ingre-edit-button {
+    background-color: #f0f0f0;
+  }
+
+  .ingre-add-button {
+    background-color: rgb(210, 214, 255);
+  }
+
+  /* .ingre-mobile-button:hover {
+    background-color: rgb(255, 190, 140);
+  } */
+
+  .ingre-my {
+    padding-bottom: 4%;
+    border-bottom: solid 5px rgb(255, 233, 192);
+    margin-bottom: 12%;
+  }
+}
+
+.ingre-mobile-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+  margin: 3% 0;
+}

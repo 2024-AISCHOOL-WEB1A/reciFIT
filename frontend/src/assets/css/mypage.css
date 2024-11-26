@@ -1,0 +1,609 @@
+@font-face {
+  font-family: "Freesentation-9Black";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
+.my-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 5% 0 0 0;
+  padding: 0 15%;
+
+  width: 100%;
+}
+
+.my-page-title {
+  font-family: "Freesentation-9Black";
+  /* font-weight: 700; */
+  display: flex;
+  font-size: 2.5em;
+  width: 100%;
+  justify-content: center;
+  border-bottom: solid 2px;
+  border-color: rgb(133, 133, 133);
+  padding-bottom: 3%;
+}
+
+.my-page-tabbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+
+  gap: 5px;
+
+  padding: 5px 0;
+
+  /* border-bottom: solid 2px;
+  border-color: rgb(133, 133, 133); */
+}
+
+.my-page-tab-button {
+  padding: 0.7em 1em;
+
+  background-color: white;
+  border-radius: 7px;
+
+  border: none;
+  cursor: pointer;
+}
+.my-page-tab-button-selected {
+  background-color: #f0f0f0;
+}
+.my-page-tab-button:hover {
+  background-color: #f0f0f0;
+}
+
+.my-page-section-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 3%;
+  padding: 0 3%;
+}
+
+.my-page-section-title {
+  font-size: 1.6em;
+  font-weight: 700;
+
+  margin-bottom: 2%;
+}
+
+/* 회원 정보 */
+.my-page-user-info-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.my-page-user-info-table {
+  width: 50%;
+  border-collapse: collapse;
+
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+
+  table-layout: fixed;
+}
+
+.my-page-user-info-table input[type="text"] {
+  background-color: #f6f7f8;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 2px 0;
+  font-size: 1em;
+  width: 95%;
+  outline: none;
+  box-sizing: border-box;
+}
+.my-page-user-info-table input[type="text"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-page-user-info-table td {
+  padding: 10px;
+  font-size: 0.9em;
+}
+
+.my-page-user-info-table td:first-child {
+  width: 15%;
+}
+.my-page-user-info-table td:nth-child(2) {
+  width: 35%;
+}
+
+.my-page-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 15px;
+
+  margin-top: 3%;
+}
+
+.my-page-button {
+  height: 4em;
+  width: 10em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  /* background-color: rgb(255, 192, 182); */
+}
+
+.my-page-button-ok {
+  background-color: rgb(210, 214, 255);
+}
+
+.my-page-button:hover {
+  background-color: rgb(255, 190, 140);
+}
+
+/* 레시피 즐겨찾기 */
+.my-page-favorite-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+/* 환경 점수 */
+.my-page-env-score-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.my-page-env-score-wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-page-env-score-month {
+  font-size: 1.5em;
+  font-weight: 700;
+
+  margin-bottom: 1%;
+}
+
+.my-page-env-score-graph {
+  position: relative;
+}
+
+.my-page-env-score-score {
+  position: absolute;
+
+  left: 50%;
+  bottom: 10%;
+
+  transform: translate(-50%, 0); /* 요소의 크기를 고려해 중앙 정렬 */
+
+  font-weight: 700;
+  font-size: 3.3em;
+}
+
+.my-page-env-score-table-content {
+  width: 100%;
+  padding: 0 2%;
+}
+
+.my-page-env-score-table-content table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.my-page-env-score-table-content thead {
+  background-color: #e1e1e1;
+  color: #cc1800;
+}
+
+.my-page-env-score-table-content th {
+  padding: 10px 10px;
+}
+
+.my-page-env-score-table-content td {
+  padding: 6px 10px;
+}
+
+.my-page-env-score-table-content th,
+.my-page-env-score-table-content td {
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.my-page-env-score-table-content th:first-child,
+.my-page-env-score-table-content td:first-child {
+  text-align: left;
+  width: 50%;
+}
+.my-page-env-score-table-content th:nth-child(2),
+.my-page-env-score-table-content td:nth-child(2) {
+  text-align: right;
+  width: 20%;
+}
+.my-page-env-score-table-content th:nth-child(3),
+.my-page-env-score-table-content td:nth-child(3) {
+  text-align: right;
+  width: 30%;
+}
+
+/* 영수증 분석 내역 */
+.my-page-receipt-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.my-page-receipt-content table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.my-page-receipt-content th {
+  background-color: #e1e1e1;
+  padding: 10px 10px;
+}
+
+.my-page-receipt-content td {
+  padding: 6px 10px;
+}
+
+.my-page-receipt-content th,
+.my-page-receipt-content td {
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.my-page-receipt-content th:first-child,
+.my-page-receipt-content td:first-child {
+  text-align: left;
+  width: 20%;
+  padding-left: 3%;
+}
+.my-page-receipt-content th:nth-child(2),
+.my-page-receipt-content td:nth-child(2) {
+  text-align: left;
+  width: 50%;
+}
+.my-page-receipt-content th:nth-child(3),
+.my-page-receipt-content td:nth-child(3) {
+  text-align: right;
+  width: 30%;
+  padding-right: 3%;
+}
+
+.my-page-receipt-content img {
+  height: 250px;
+  width: auto;
+  max-width: 100%;
+}
+
+.my-page-divided-line {
+  display: none;
+}
+
+@media screen and (max-width: 767px) and (min-width: 1px) {
+  .my-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 5% 0 0 0;
+    padding: 0 10%;
+
+    width: 100%;
+  }
+
+  .my-page-title {
+    font-family: "Freesentation-9Black";
+    /* font-weight: 700; */
+    display: flex;
+    font-size: 2em;
+    width: 100%;
+    justify-content: center;
+    border-bottom: solid 2px;
+    border-color: #ff9500;
+    padding-bottom: 3%;
+  }
+
+  .my-page-tabbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+
+    gap: 5px;
+
+    padding: 5px 0;
+
+    display: none;
+  }
+
+  .my-page-tab-button {
+    padding: 0.7em 1em;
+
+    background-color: white;
+    border-radius: 7px;
+
+    border: none;
+    cursor: pointer;
+  }
+  .my-page-tab-button-selected {
+    background-color: #f0f0f0;
+  }
+  .my-page-tab-button:hover {
+    background-color: #f0f0f0;
+  }
+
+  .my-page-section-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 10%;
+    padding: 0 3%;
+  }
+
+  .my-page-section-title {
+    font-size: 1.3em;
+    font-weight: 700;
+
+    margin-bottom: 2%;
+  }
+
+  /* 회원 정보 */
+  .my-page-user-info-content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .my-page-user-info-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .my-page-user-info-table input[type="text"] {
+    background-color: #f6f7f8;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 2px 0;
+    font-size: 1em;
+    width: 95%;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .my-page-user-info-table input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .my-page-user-info-table td {
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .my-page-user-info-table td:first-child {
+    width: 30%;
+  }
+  .my-page-user-info-table td:nth-child(2) {
+    width: 70%;
+  }
+
+  .my-page-button-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 10px;
+
+    margin-top: 3%;
+  }
+
+  .my-page-button {
+    height: 3.2em;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    /* background-color: rgb(255, 192, 182); */
+  }
+
+  .my-page-button-ok {
+    background-color: rgb(210, 214, 255);
+  }
+
+  .my-page-button:hover {
+    background-color: rgb(255, 190, 140);
+  }
+
+  /* 레시피 즐겨찾기 */
+  .my-page-favorite-content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+  /* 환경 점수 */
+  .my-page-env-score-content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .my-page-env-score-wrapper {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 5%;
+  }
+
+  .my-page-env-score-month {
+    font-size: 1.5em;
+    font-weight: 700;
+
+    margin-bottom: 10%;
+  }
+
+  .my-page-env-score-graph {
+    position: relative;
+  }
+
+  .my-page-env-score-score {
+    position: absolute;
+
+    left: 50%;
+    bottom: 10%;
+
+    transform: translate(-50%, 0); /* 요소의 크기를 고려해 중앙 정렬 */
+
+    font-weight: 700;
+    font-size: 3.3em;
+  }
+
+  .my-page-env-score-table-content {
+    width: 100%;
+    padding: 0 0;
+    margin-top: 2%;
+  }
+
+  .my-page-env-score-table-content table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  .my-page-env-score-table-content thead {
+    background-color: #e1e1e1;
+    color: #cc1800;
+  }
+
+  .my-page-env-score-table-content th {
+    padding: 10px 8px;
+  }
+
+  .my-page-env-score-table-content td {
+    padding: 6px 8px;
+  }
+
+  .my-page-env-score-table-content th,
+  .my-page-env-score-table-content td {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .my-page-env-score-table-content th:first-child,
+  .my-page-env-score-table-content td:first-child {
+    text-align: left;
+    width: 45%;
+  }
+  .my-page-env-score-table-content th:nth-child(2),
+  .my-page-env-score-table-content td:nth-child(2) {
+    text-align: right;
+    width: 25%;
+  }
+  .my-page-env-score-table-content th:nth-child(3),
+  .my-page-env-score-table-content td:nth-child(3) {
+    text-align: right;
+    width: 30%;
+  }
+
+  /* 영수증 분석 내역 */
+  .my-page-receipt-content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 1%;
+  }
+
+  .my-page-receipt-content table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  .my-page-receipt-content th {
+    background-color: #e1e1e1;
+    padding: 10px 8px;
+  }
+
+  .my-page-receipt-content td {
+    padding: 6px 8px;
+  }
+
+  .my-page-receipt-content th,
+  .my-page-receipt-content td {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .my-page-receipt-content th:first-child,
+  .my-page-receipt-content td:first-child {
+    text-align: center;
+    width: 20%;
+    padding-left: 3%;
+  }
+  .my-page-receipt-content th:nth-child(2),
+  .my-page-receipt-content td:nth-child(2) {
+    text-align: left;
+    width: 50%;
+  }
+  .my-page-receipt-content th:nth-child(3),
+  .my-page-receipt-content td:nth-child(3) {
+    text-align: right;
+    width: 30%;
+    padding-right: 3%;
+  }
+
+  .my-page-receipt-content img {
+    height: 150px;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .my-page-divided-line {
+    display: block;
+    width: 100%;
+
+    margin: 15% 0 5% 0;
+
+    border: 1px solid #ff9500;
+    box-shadow: none;
+  }
+}

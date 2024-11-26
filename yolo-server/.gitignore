@@ -1,0 +1,16 @@
+# Python virtual environment
+venv/
+
+# Environment and configuration files
+.env
+
+# model
+*.pt
+*.onnx
+
+# Log files
+*.log
+
+# Ignore other sensitive or temporary files
+__pycache__/
+*.pyc
