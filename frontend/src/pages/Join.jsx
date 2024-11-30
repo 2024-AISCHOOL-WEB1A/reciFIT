@@ -47,12 +47,12 @@ const Join = () => {
 
       <div className="join-login">
         <Link to="/">
-          <img src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="로고" />
+          <img src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="logo" />
         </Link>
 
         <h3 className="login-small-text">
           {" "}
-          sns 로그인으로 간편하게
+          SNS 로그인으로 간편하게
           <br />
           레시핏 서비스를 즐겨보세요
         </h3>
