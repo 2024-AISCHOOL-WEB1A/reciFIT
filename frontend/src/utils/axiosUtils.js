@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleAuthFailure } from "./axiosFailureUtils";
 
 // 요청 중인지 상태를 저장할 객체
 const pendingRequests = new Map();
@@ -116,6 +117,10 @@ apiAxios.interceptors.response.use(
         return apiAxios(originalRequest);
       } catch (err) {
         isRefreshing = false;
+
+        // 실패한 경우 로직
+        handleAuthFailure();
+
         return Promise.reject(err);
       }
     }

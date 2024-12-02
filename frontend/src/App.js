@@ -17,7 +17,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { useDispatch, useSelector } from "react-redux";
 import { apiAxios } from "./utils/axiosUtils";
 import { userActions } from "./redux/reducers/userSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import Mail from "./pages/Mail";
 // import RecipeSignup from "./pages/RecipeSignup";
 
@@ -34,6 +34,8 @@ function App() {
       "/ingredients",
     ].includes(location.pathname) || location.pathname.startsWith("/recipe/");
   const user = useSelector((state) => state.user.user);
+
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -56,17 +58,18 @@ function App() {
     };
 
     // 유저 정보가 없을 때만 fetchUser 호출
+    // if (!isLoggedOut)
     if (!user) {
       fetchUser();
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, isLoggedOut]);
 
   return (
     <div>
       {/*페이지 이동 시 브라우저의 스크롤 위치가 항상 페이지 상단으로 초기화 */}
       <ScrollToTop />
       {/* Join 페이지에서는 Header가 보이지 않도록 설정 */}
-      {isNoHeaderFooter && <Header user={user} />}
+      {isNoHeaderFooter && <Header setIsLoggedOut={setIsLoggedOut} />}
 
       <Routes>
         <Route path="/" element={<Main />}></Route>

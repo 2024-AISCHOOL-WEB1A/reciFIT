@@ -30,6 +30,10 @@ router.post("/", authenticateAccessToken, async (req, res) => {
     );
     return res.status(201).json({ message: "subscription added successfully" });
   } catch (err) {
+    // 중복된 항목 처리
+    if (err.code === "ER_DUP_ENTRY") {
+      return res.status(409).json({ message: "Subscription already exists" });
+    }
     return res.status(500).json({ message: "Internal server error" });
   }
 });

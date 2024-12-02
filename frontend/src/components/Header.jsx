@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faX, faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { apiAxios } from "../utils/axiosUtils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/reducers/userSlice";
 import swalModal from "../utils/swalModal";
 import {
@@ -12,7 +12,8 @@ import {
   subscribeToPush,
 } from "../utils/notification";
 
-const Header = ({ user }) => {
+const Header = ({ setIsLoggedOut }) => {
+  const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -40,6 +41,8 @@ const Header = ({ user }) => {
   useEffect(() => {
     if (user && user?.userIdx !== 0) {
       setLoginText(user.userName);
+    } else {
+      setLoginText("로그인");
     }
   }, [user]);
 
@@ -74,6 +77,10 @@ const Header = ({ user }) => {
       },
     });
 
+    // 로그아웃 중...
+    setIsLoggedOut(true);
+    // setLoginText("로그인");
+
     try {
       const res = await apiAxios.post("/auth/logout");
 
@@ -81,10 +88,13 @@ const Header = ({ user }) => {
         // redux 삭제
         dispatch(userActions.setUser({ user: null }));
 
-        navigate("/");
-        window.location.reload();
+        // navigate("/");
+        // window.location.reload();
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
+
     swalModal.close();
   };
 

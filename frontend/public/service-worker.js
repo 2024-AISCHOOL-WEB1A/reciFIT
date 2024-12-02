@@ -1,4 +1,4 @@
-const CACHE_NAME = "pwa-cache-v1";
+const CACHE_NAME = "recifit-pwa-cache-v1.01";
 const urlsToCache = ["/", "/index.html", "/favicon.ico"];
 
 self.addEventListener("install", (event) => {
@@ -32,21 +32,64 @@ self.addEventListener("install", (event) => {
 // });
 
 // 네트워크 정보를 백그라운드에서 캐싱하도록 변경 (캐싱된 내용이 먼저 보여지고, 차후 갱신 때 변경된 내용이 보여짐)
+// self.addEventListener("fetch", (event) => {
+//   // GET 요청이 아닌 경우 캐싱 처리하지 않음
+//   if (event.request.method !== "GET") {
+//     return;
+//   }
+
+//   event.respondWith(
+//     caches.match(event.request).then((cachedResponse) => {
+//       const fetchPromise = fetch(event.request).then((networkResponse) => {
+//         // 최신 데이터를 가져오면 캐시 갱신
+//         return caches.open(CACHE_NAME).then((cache) => {
+//           cache.put(event.request, networkResponse.clone());
+//           return networkResponse;
+//         });
+//       });
+//       // 캐시된 파일을 반환하고 네트워크 요청은 백그라운드에서 처리
+//       return cachedResponse || fetchPromise;
+//     })
+//   );
+// });
+
+// API 주소에서는 캐싱하지 않도록 변경
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request).then((networkResponse) => {
-        // 최신 데이터를 가져오면 캐시 갱신
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-      });
-      // 캐시된 파일을 반환하고 네트워크 요청은 백그라운드에서 처리
-      return cachedResponse || fetchPromise;
-    })
-  );
+  // GET 요청이 아닌 경우 캐싱 처리하지 않음
+  if (event.request.method !== "GET") {
+    return;
+  }
+
+  if (event.request.url.includes("/api/")) {
+    // API 요청에 Network First 적용
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, response.clone());
+            return response;
+          });
+        })
+        .catch(() => caches.match(event.request))
+    );
+  } else {
+    // 정적 파일에 Cache First 적용
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        return (
+          cachedResponse ||
+          fetch(event.request).then((networkResponse) => {
+            return caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, networkResponse.clone());
+              return networkResponse;
+            });
+          })
+        );
+      })
+    );
+  }
 });
+
 
 // 푸시 메시지 수신
 self.addEventListener("push", (event) => {
@@ -69,6 +112,7 @@ self.addEventListener("push", (event) => {
 // 설치
 self.addEventListener("install", (event) => {
   console.log("Service Worker installing...");
+  self.skipWaiting(); // 설치된 서비스 워커를 즉시 활성화
 });
 
 // 활성화
@@ -91,6 +135,9 @@ self.addEventListener("activate", (event) => {
       );
     })
   );
+
+  // 활성화된 서비스 워커가 페이지를 제어하도록 설정
+  return self.clients.claim();
 });
 
 // 알림 이벤트
